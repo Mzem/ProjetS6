@@ -1,0 +1,19 @@
+\documentclass{beamer}
+\usetheme{Warsaw}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[ddmmyyyy]{datetime}
+%\usepackage{beamerthemebars}
+
+%Plan/Sommaire automatique avant chaque section
+\AtBeginSection[]{
+  \begin{frame}
+  \frametitle{Plan}
+  \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\author{Sonny Klotz - Jean-Didier Pailleux - Malek Zemni}
+\institute{UVSQ}
+\date{\today}
