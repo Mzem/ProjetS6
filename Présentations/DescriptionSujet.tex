@@ -8,9 +8,14 @@
 		\titlepage
 	\end{frame}
 	
+	\begin{frame}
+		\frametitle{Plan général}
+		\tableofcontents
+	\end{frame}
+	
 	\section{Introduction}
 	\begin{frame}
-		DCbrain est un logiciel qui permet de visualiser ce qui ce passe sur les \textbf{réseaux physiques (de fluide)} pour pouvoir trouver/prédire les problèmes et optimiser ces réseaux.\\~\\
+		DCbrain est un logiciel qui permet de visualiser ce qui ce passe sur les \textbf{réseaux physiques (de fluide)} afin de trouver/prédire les problèmes et optimiser ces réseaux.\\~\\
 		\pause
 		Cette visualisation provient de données collectées à partir des réseaux physiques (à l'aide de mesures, de capteurs IOT, etc.) puis analysées grâce aux technologies du \textbf{Big Data}.\\~\\
 		\pause
@@ -81,13 +86,16 @@
 		\end{block}
 		~\\
 		\pause
-		Le Machine Learning est composé de plusieurs types d'algorithmes d’apprentissage (Supervisé, non supervisé, semi-supervisé, par renforcement).
+		Le Machine Learning est composé de plusieurs types d'algorithmes d’apprentissage (supervisé, non supervisé, semi-supervisé, par renforcement).
 	\end{frame}
 	
 	\section{Graphe de flux et Graph Mining}
 	\subsection{Graphe de flux}
 	\begin{frame}
-		DCbrain emploie une approche basée sur une représentation des réseaux physiques en graphes de flux.\\~\\
+		Les graphes sont un outil très efficace pour la représentation de structures complexes comme les réseaux physiques dans notre cas. 
+		\\~\\
+		\pause
+		DCbrain emploie une approche basée sur une représentation de ces réseaux physiques en \textbf{graphes de flux}.\\~\\
 		\pause
 		Cette représentation en graphe permet de prendre en compte les spécifités des flux du réseau, c'est-à-dire :
 		\begin{itemize}
@@ -96,8 +104,9 @@
 		\pause
 		\item analyser (calculer) et représenter les données liées au flux du réseau
 		\end{itemize}
-		~\\
-		\pause
+	\end{frame}
+	
+	\begin{frame}
 		La représentation du réseau en graphe de flux a pour avantage de : 
 		\begin{itemize}
 		\pause
@@ -105,9 +114,8 @@
 		\pause
 		\item simuler des évolutions du réseau
 		\end{itemize}
-	\end{frame}
-	
-	\begin{frame}
+		~\\
+		\pause
 		Ce genre de graphe peut être utilisé pour tout réseau physique de fluide, par exemple les réseaux électriques :
 		\pause
 		\begin{exampleblock}{Graphe de flux : d'un réseau électrique :}
@@ -116,25 +124,58 @@
 		\item Arcs : canaux pour acheminer l'électricité (câbles)
 		\end{itemize}
 		\end{exampleblock}
-		~\\
-		\pause
-		L'analyse des données à partir d'un graphe de flux est réalisée grâce à la méthode de \textbf{graph mining}.
 	\end{frame}	
 	
 	\subsection{Graph Mining}
 	\begin{frame}
-		Les graphes sont un outil très efficace pour la représentation de structures complexes comme les réseaux physiques dans notre cas.\\~\\
+		Les méthodes d'analyse de données classiques sont limitées au \textbf{données structurées}.
+		\\~\\
 		\pause
-		Le graph mining est une méthode d'analyse de données représentées par un graphe.\\ 
+		\begin{block}{Données structurées}
+		Données organisées et représentées dans un format prédéfini, selon une structure permettant de les traiter selon diverses combinaisons, afin de mieux exploiter les informations. Exemple : les bases de données relationnelles.
+		\end{block}
+		~\\	
 		\pause
-		Il s'agit d'extraire des sous-graphes qui décrivent l'information recherchée du graphe. Ces informations peuvent ensuite être utilisées pour caractériser et classifier le graphe et effectuer des regroupement, des analyses de fréquence et des recherches de similarités de graphes (dans une base de données de graphes par exemple).
+		\begin{block}{Données non-structurées}
+		Données brutes non-organisées selon un format prédéfini qui permet d'y accéder et de les traiter plus facilement. Exemple : du texte brut.
+		\end{block}
 	\end{frame}
 	\begin{frame}
-		Cette méthode est utilisée dans plusieurs domaines comme les données web (graphes de réseaux sociaux), la chimie (réseaux bilogiques), etc.
+		Il est nécessaire d'employer une méthode d'analyse qui convient à la structure des données représentées par les graphes.
 		\\~\\
 		\pause
-		Le graph mining est une forme d'analyse de donnée structurée (\textit{structured data mining} dont le processus consiste à trouver et extraire des informations utiles à partir d'une masse de \textbf{données semi-structurées}).
+		L'analyse des données à partir d'un graphe (de flux dans notre cas) est réalisée grâce à la méthode de \textbf{graph mining}.
 		\\~\\
+		\pause
+		Le graph mining est donc une forme d'analyse de données semi-structurée dont le processus consiste à trouver et extraire des informations utiles à partir d'une masse de \textbf{données semi-structurées}.
+		\\
+		\pause
+		\begin{block}{Données semi-structurées}
+		Forme intermédiaire entre données structurées et non-structurées, elles ne sont pas organisées selon une format prédéfini, mais comportent néanmoins des informations associées (telles que des balises de métadonnées) qui les rendent plus faciles à traiter (en permettent l'adressage des éléments qu'elles renferment). Ce genre de données peut être représentée par un \textbf{graphe}. Exemple : des données XML ou HTML.
+		\end{block}
+	\end{frame}
+	\begin{frame}
+		Il s'agit d'extraire des sous-graphes (miner des sous graphes fréquent, répétitifs dans le graphe en entrée) qui décrivent l'information recherchée du graphe. Ces informations peuvent ensuite être utilisées pour :
+		\begin{itemize}
+			\pause\item classification et catégorisation du graphe (par l'analyse de la fréquence des sous graphes)
+			\pause\item effectuer des regroupement : trouver des relations entre différents éléments du graphe (par exemple trouver un groupe d'amis inter-connectés dans un graphe de réseau social)
+			\pause\item prédire le comportement des éléments d'un graphe (prédire les préférence des utilisateurs dans un graphe de réseaux sociaux, prédire les évolutions dans un graphe de réseau physique)
+		\end{itemize}
+	\end{frame}
+	\begin{frame}
+		Domaines d'utilisation :
+		\begin{itemize}
+			\pause \item Social network analysis (analyse des groupes d'amis dans les réseaux sociaux)
+			\pause \item Applications chimiques et biologiques (développement de médicaments par l'analyse du graphe moléculaire et de ses évolutions)
+			\pause \item Réseaux physiques (prédire les évolutions)
+		\end{itemize}
+		~\\
+		\pause
+		Principaux algorithmes :
+		\begin{itemize}
+			\pause \item Apriori-based Approach
+			\pause \item Pattern-Growth Approach
+		\end{itemize}
 	\end{frame}
 	
 	\section{Conclusion}
