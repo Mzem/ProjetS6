@@ -15,24 +15,29 @@
 	
 	\section{Introduction}
 	\begin{frame}
-		DCbrain est un logiciel qui permet de visualiser ce qui ce passe sur les \textbf{réseaux physiques (de fluide)} afin de trouver/prédire les problèmes et optimiser ces réseaux.\\~\\
+		DCbrain développe des outils qui permettent de visualiser ce qui ce passe sur les \textbf{réseaux physiques} afin de :
+		\begin{itemize}
+		\item trouver et prédire les problèmes sur ces réseaux
+		\item optimiser ces réseaux
+		\end{itemize}
+		~\\
 		\pause
-		Cette visualisation provient de données collectées à partir des réseaux physiques (à l'aide de mesures, de capteurs IOT, etc.) puis analysées grâce aux technologies du \textbf{Big Data}.\\~\\
+		Les données sont collectées à partir des réseaux physiques puis analysées grâce aux technologies du \textbf{Big Data}.\\~\\
 		\pause
 		\begin{block}{Réseaux physiques}
-		Les réseaux qu'on va traiter dans le cadre de ce logiciel sont des réseaux industriels physiques (des réseaux de fluide, de distribution). Il s'agit des réseaux industriels tels les réseaux de distribution pétrolière, gazière, électrique, etc.
+		Réseaux industriels, de fluide, de distribution. Exemple : distribution pétrolière, gazière, électrique...
 		\end{block}
 	\end{frame}
 	
 	\begin{frame} 
 		\begin{block}{Big Data}
-		Décrit des ensembles de très gros volumes de données, à la fois structurées, semi-structurées ou non structurées, qui peuvent être traitées et exploitées dans le but d’en tirer des informations intelligibles et pertinentes.
+		Ensembles de très gros volumes de données, à la fois structurées, semi-structurées ou non structurées, qui peuvent être traitées et exploitées dans le but d’en tirer des informations intelligibles et pertinentes.
 		\end{block}
 		\pause
 		~\\
-		Exemple de sources: 
+		Exemple de sources : 
 		\begin{itemize}
-			\pause\item Capteurs utilisés pour collecter les informations climatiques, de trafic, consommation (Smart cities, Internet des Objets).
+			\pause\item Capteurs pour collecter les informations climatiques, de trafic, consommation (Smart cities, Internet des Objets)
 			\pause\item Messages sur les réseaux sociaux 
 			\pause\item Enregistrements transactionnels d’achat en ligne 
 			\pause\item Signaux GPS de téléphones mobile
@@ -65,15 +70,15 @@
 		\end{block}
 		~\\
 		\pause
-		Le Big Data est caractérisé par les 3V : 
+		Les traitements de cette quantité importante de données est massivement "parallélisé" avec MapReduce/Hadoop.
+		\\~\\
+		\pause
+		Le Big Data est caractérisé par les 3V :
 		\begin{itemize}
 			\pause\item le Volume de données considérable à traiter.
 			\pause\item la Variété de ces données qui peuvent être brutes, non structurées ou semi-structurées
 			\pause\item la Vélocité qui désigne le fait que ces données sont produites, récoltées et analysées en temps réel.
-		\end{itemize}
-		~\\
-		\pause
-		Les traitements de cette quantité importante de données est massivement "parallélisé" avec MapReduce/Hadoop. 
+		\end{itemize} 
 	\end{frame}
 	\subsection{Machine Learning}
 	\begin{frame}
@@ -92,31 +97,22 @@
 	\section{Graphe de flux et Graph Mining}
 	\subsection{Graphe de flux}
 	\begin{frame}
-		Les graphes sont un outil très efficace pour la représentation de structures complexes comme les réseaux physiques dans notre cas. 
+		DCbrain emploie une approche basée sur une représentation des réseaux physiques en \textbf{graphes de flux}.
 		\\~\\
 		\pause
-		DCbrain emploie une approche basée sur une représentation de ces réseaux physiques en \textbf{graphes de flux}.\\~\\
+		Cette représentation permet de représenter les données liées au flux du réseau et de les analyser.
+		\\~\\
 		\pause
-		Cette représentation en graphe permet de prendre en compte les spécifités des flux du réseau, c'est-à-dire :
-		\begin{itemize}
-		\pause
-		\item retranscrire les données du réseau sous forme de flux
-		\pause
-		\item analyser (calculer) et représenter les données liées au flux du réseau
-		\end{itemize}
-	\end{frame}
-	
-	\begin{frame}
-		La représentation du réseau en graphe de flux a pour avantage de : 
+		Avantages :
 		\begin{itemize}
 		\pause
 		\item repérer beaucoup plus facilement des anomalies dans le réseau
 		\pause
 		\item simuler des évolutions du réseau
 		\end{itemize}
-		~\\
-		\pause
-		Ce genre de graphe peut être utilisé pour tout réseau physique de fluide, par exemple les réseaux électriques :
+	\end{frame}
+	\begin{frame}
+		Les graphes de flux peuvent être utilisé pour tout réseau physique de fluide, par exemple les réseaux électriques :
 		\pause
 		\begin{exampleblock}{Graphe de flux : d'un réseau électrique :}
 		\begin{itemize}
@@ -131,47 +127,35 @@
 		Les méthodes d'analyse de données classiques sont limitées au \textbf{données structurées}.
 		\\~\\
 		\pause
-		\begin{block}{Données structurées}
-		Données organisées et représentées dans un format prédéfini, selon une structure permettant de les traiter selon diverses combinaisons, afin de mieux exploiter les informations. Exemple : les bases de données relationnelles.
-		\end{block}
-		~\\	
-		\pause
-		\begin{block}{Données non-structurées}
-		Données brutes non-organisées selon un format prédéfini qui permet d'y accéder et de les traiter plus facilement. Exemple : du texte brut.
-		\end{block}
-	\end{frame}
-	\begin{frame}
-		Il est nécessaire d'employer une méthode d'analyse qui convient à la structure des données représentées par les graphes.
+		Les données représentées par des graphes sont dites \textbf{semi-structurées}.
 		\\~\\
 		\pause
-		L'analyse des données à partir d'un graphe (de flux dans notre cas) est réalisée grâce à la méthode de \textbf{graph mining}.
+		Il est nécessaire d'employer une méthode d'analyse qui convient à ce genre de données : le \textbf{graph mining}.
 		\\~\\
 		\pause
-		Le graph mining est donc une forme d'analyse de données semi-structurée dont le processus consiste à trouver et extraire des informations utiles à partir d'une masse de \textbf{données semi-structurées}.
-		\\
-		\pause
-		\begin{block}{Données semi-structurées}
-		Forme intermédiaire entre données structurées et non-structurées, elles ne sont pas organisées selon une format prédéfini, mais comportent néanmoins des informations associées (telles que des balises de métadonnées) qui les rendent plus faciles à traiter (en permettent l'adressage des éléments qu'elles renferment). Ce genre de données peut être représentée par un \textbf{graphe}. Exemple : des données XML ou HTML.
-		\end{block}
-	\end{frame}
-	\begin{frame}
-		Il s'agit d'extraire des sous-graphes (miner des sous graphes fréquent, répétitifs dans le graphe en entrée) qui décrivent l'information recherchée du graphe. Ces informations peuvent ensuite être utilisées pour :
-		\begin{itemize}
-			\pause\item classification et catégorisation du graphe (par l'analyse de la fréquence des sous graphes)
-			\pause\item effectuer des regroupement : trouver des relations entre différents éléments du graphe (par exemple trouver un groupe d'amis inter-connectés dans un graphe de réseau social)
-			\pause\item prédire le comportement des éléments d'un graphe (prédire les préférence des utilisateurs dans un graphe de réseaux sociaux, prédire les évolutions dans un graphe de réseau physique)
+		Principe du graph mining :
+		\begin{itemize} 
+		\pause \item extraire des informations utiles à partir d'une masse de données semi-structurées
+		\pause \item càd miner des sous-graphes fréquents qui décrivent l'information recherchée
 		\end{itemize}
 	\end{frame}
 	\begin{frame}
-		Domaines d'utilisation :
+		Utilisation des informations extraites :
 		\begin{itemize}
-			\pause \item Social network analysis (analyse des groupes d'amis dans les réseaux sociaux)
-			\pause \item Applications chimiques et biologiques (développement de médicaments par l'analyse du graphe moléculaire et de ses évolutions)
-			\pause \item Réseaux physiques (prédire les évolutions)
+			\pause \item Trouver des relations entre différents éléments du graphe
+			\pause \item Prédire le comportement des éléments d'un graphe
 		\end{itemize}
 		~\\
 		\pause
-		Principaux algorithmes :
+		Domaines d'application :
+		\begin{itemize}
+			\pause \item Réseaux sociaux
+			\pause \item Chimie et biologie
+			\pause \item Réseaux physiques
+		\end{itemize}
+		~\\
+		\pause
+		Quelques algorithmes :
 		\begin{itemize}
 			\pause \item Apriori-based Approach
 			\pause \item Pattern-Growth Approach
