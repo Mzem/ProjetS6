@@ -1,107 +1,103 @@
-\input{preambule} %Chemin relatif à adapter
+\input{../tex/preambule}
 
-\title{\textbf{\Huge Cahier des Charges}\vspace{-4ex}}
+\title{\textbf{\Huge Cahier des Charges}\vspace{-2ex}}
 
 \begin{document}
 \maketitle
+\vspace{4ex}
 \tableofcontents
+\newpage
 
-	\section{Motivation du projet}
-	\subsection{But du projet}
-		\subsubsection{Contexte du projet}
-		Courte description du contexte du travail et de la situation qui a déclenché l’effort de
-développement. Cette section peut aussi décrire le travail que les utilisateurs veulent faire
-avec le produit.
-Sans cette indication, le projet manque de justifications et de ligne directrice. \newline
-A prendre en compte :
-Vous devez évaluer si le problème des utilisateurs est sérieux ou pas, s’il doit être résolu, et
-pourquoi.
-		\subsubsection{Objectifs du projet}
-		Expliquer très brièvement pourquoi on veut ce produit, autrement dit, la vraie raison pour
-laquelle le produit va être développé.
-		\subsection{Personnes et organismes impliqués dans les enjeux du projet}
+	\section{Motivations du projet}
+		\subsection{But du projet}
+		
+			\subsubsection{Contexte du projet}
+			Courte description du contexte du travail et de la situation qui a déclenché l’effort de développement. Cette section peut aussi décrire le travail que les utilisateurs veulent faire avec le produit.
+			Sans cette indication, le projet manque de justifications et de ligne directrice.\\
+			A prendre en compte :
+			Vous devez évaluer si le problème des utilisateurs est sérieux ou pas, s’il doit être résolu, et pourquoi.
+		
+			\subsubsection{Objectifs du projet}
+			Expliquer très brièvement pourquoi on veut ce produit, autrement dit, la vraie raison pour laquelle le produit va être développé.
+		
+		\subsection{Maître d'ouvrage, client et autres parties prenantes}
+			Personnes et organismes impliqués dans les enjeux du projet
+			
 		\subsection{Utilisateurs du produit}
+		
 	\section{Contraintes sur le Projet}
-	
-		\subsection{Contraintes obligatoires}
+		\subsection{Contraintes imposées}
+		Cette section décrit les contraintes sur la manière de satisfaire les exigences qui influencent la conception finale du produit. Remarquez que les contraintes sont un type d’exigences, elles seront donc rédigées de la même manière que les exigences fonctionnelles et non-fonctionnelles, avec entre autres une description, une justification et un critère de satisfaction.
 		
-		Cette section décrit les contraintes sur la manière de satisfaire les exigences qui influencent
-la conception finale du produit. Remarquez que les contraintes sont un type d’exigences,
-elles seront donc rédigées de la même manière que les exigences fonctionnelles et non-fonctionnelles, avec entre autres une description, une justification et un critère de
-satisfaction.
-		\subsection{Glossaire, convention de normes}
+		\subsection{Glossaire et conventions de dénomination}
+		Cette section donne les définitions de tous les termes et acronymes utilisés dans le projet.
 		
-Cette section donne les définitions de tous les termes et acronymes utilisés dans le projet.
 		\subsection{Faits et hypothèses déterminants}
-		a. Facteurs influençant le produit, mais qui ne sont pas des contraintes imposées sur les
-exigences.\newline
-b. Hypothèses que l’équipe fait sur le projet.
-	\section{Exigences Fonctionnelles}
-	
-Contexte du projet (diagramme de contexte métier) :\newline		 
-Ce diagramme a pour objet d’identifier les flux d’informations entre les différents acteurs (prescripteurs, pharmaciens, préparateurs, infirmières) et le système d’information.
-Il s’agit là d’une description des frontières du système d’information, dont le périmètre peut être plus large que le système informatique que l’on veut mettre en place.
+		a. Facteurs influençant le produit, mais qui ne sont pas des contraintes imposées sur les exigences.\\
+		b. Hypothèses que l’équipe fait sur le projet.
+		
+	\section{Exigences fonctionnelles}
+		Contexte du projet (diagramme de contexte métier) :\\	 
+		Ce diagramme a pour objet d’identifier les flux d’informations entre les différents acteurs (prescripteurs, pharmaciens, préparateurs, infirmières) et le système d’information.
+		Il s’agit là d’une description des frontières du système d’information, dont le périmètre peut être plus large que le système informatique que l’on veut mettre en place.
 
 		\subsection{Périmètre de l'œuvre}
+		
 		\subsection{Périmètre de l'ouvrage}
 
-		\subsection{Exigences fonctionnelles et exigences sur les données}
+		\subsection{Exigences fonctionnelles et exigences sur les données}		
+		Données: Spécification des principaux éléments ou objets métiers ou entités ou classes relatifs au système. Cela peut prendre la forme d’un premier jet de modèle des données, un modèle objet ou un modèle du domaine. Il peut aussi suffire de remplir correctement le glossaire du paragraphe 5. Rédiger un glossaire et faire un diagramme de donnée sont deux façons de modéliser des objets métiers. Il y en a bien d’autres.\\
+		Objectif de la section :
+	
+	\section{Exigences non fonctionnelles}
+		\subsection{Apparence et interface utilisateur}
+		Les exigences de ce chapitre concernent l’apparence du produit, et la perception par ses utilisateurs potentiels. \\
+		Quelle est la langue souhaitée ?\\
+		Désire-t-on des touches de type raccourci ?\\
+		Quelles sont les contraintes graphiques dues à la nécessité éventuelle d’une aide en ligne ? D’une aide contextuelle ?
 		
-Données: Spécification des principaux éléments ou objets métiers ou entités ou classes relatifs au
-système. Cela peut prendre la forme d’un premier jet de modèle des données, un modèle
-objet ou un modèle du domaine. Il peut aussi suffire de remplir correctement le glossaire du
-paragraphe 5. Rédiger un glossaire et faire un diagramme de donnée sont deux façons de
-modéliser des objets métiers. Il y en a bien d’autres. \newline
-Objectif de la section:
-	\section{Exigences Non Fonctionnelles}
-		\subsection{Interface utilisateur du projet}
+			\subsubsection{Exigences d’apparence} 
+			On donne ici un exemple, mais il doit être retravaillé.\\
+			Attention : cette exigence peut être très difficile à mettre en œuvre dans le cas d’un progiciel sur étagère.
+			Les codes couleurs utilisés par le système devront être cohérents avec les codes couleurs en vigueur pour les différentes catégories d’utilisateur.
+			Une exigence probablement plus simple à mettre en œuvre :\\
+			L’administrateur du système doit pouvoir afficher le logo de l’établissement à chaque page.
 		
-		Les exigences de ce chapitre concernent l’apparence du produit, et la perception par ses utilisateurs potentiels. \newline
-		Quelle est la langue souhaitée ?\newline
-		Désire-t-on des touches de type raccourci ?\newline
-		Quelles sont les contraintes graphiques dues à la nécessité éventuelle d’une aide en
-ligne ? D’une aide contextuelle ?\newline
-		\subsubsection{Exigences d’apparence} 
-On donne ici un exemple, mais il doit être retravaillé.\newline
-Attention : cette exigence peut être très difficile à mettre en œuvre dans le cas d’un progiciel sur étagère.
-Les codes couleurs utilisés par le système devront être cohérents avec les codes couleurs en vigueur pour les différentes catégories d’utilisateur.
-Une exigence probablement plus simple à mettre en œuvre :
-L’administrateur du système doit pouvoir afficher le logo de l’établissement à chaque page.\newline
-		\subsubsection{Exigences de style}
-REMARQUE IMPORTANTE :
-Ce paragraphe est important mais difficile à manier. On peut le laisser vide en mentionnant « Sans objet » (Rappel : afin de conserver la maintenabilité de ce document, ne pas supprimer de paragraphes).
-Sans objet.
+			\subsubsection{Exigences de style}
+			REMARQUE IMPORTANTE :\\
+			Ce paragraphe est important mais difficile à manier. On peut le laisser vide en mentionnant « Sans objet » (Rappel : afin de conserver la maintenabilité de ce document, ne pas supprimer de paragraphes).
+			Sans objet.
 
 		\subsection{Utilisabilité}
-		.
+		
 		\subsection{Exigences de performance}
-		.
+		
 		\subsection{Fonctionnement du projet}
-		.
+			hello
 		\subsection{Maintenabilité du projet}
-		.
+		
 		\subsection{Sécurité}
-		.
-	\section{Autres Aspects du Projet}
+		
+	\section{Autres aspects du projet}
 		\subsection{Question ouvertes}
-		.
+		
 		\subsection{Solution étagère}
-		.
+		
 		\subsection{Problèmes nouveaux}
-		.
+		
 		\subsection{Tâche à faire}
-		.
+		
 		\subsection{Contrôle de la finalisation}
-		.
+			hello
 		\subsection{Risques liés au projet}
-		.
+		
 		\subsection{Estimation des coûts}
-		.
+		
 		\subsection{Documentation utilisateur et formation}
-		.
+		
 		\subsection{Question mise en attente}
-		.
+		
 		\subsection{Idées de solutions}
-		.
+		
 
 \end{document}
