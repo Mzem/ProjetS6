@@ -10,63 +10,77 @@
 
 	\section{Motivations du projet}
 		\subsection{But du projet}
-		
 			\subsubsection{Contexte du projet}
-			Courte description du contexte du travail et de la situation qui a déclenché l’effort de développement. Cette section peut aussi décrire le travail que les utilisateurs veulent faire avec le produit.
-			Sans cette indication, le projet manque de justifications et de ligne directrice.\\
-			A prendre en compte :
-			Vous devez évaluer si le problème des utilisateurs est sérieux ou pas, s’il doit être résolu, et pourquoi.
+			De nos jours, les masses de données collectées sont de plus en plus importantes. L'objectif principal de cette collecte de données est d'en extraire une valeur ajoutée. Or ces données à l'état brut sont difficilement exploitables du à leur volume et complexité.\\
+			Notre produit correspond au travail indispensable d'analyse de ces données, afin de faciliter leur exploitation.
+			\subsubsection{Objectif du projet}
+			Ce projet a pour but de fournir aux utilisateurs une application qui se chargera d'une part de structurer les données, les analyser et les visualiser, et d'autre part de préparer ces données pour un chargement via des API.
 		
-			\subsubsection{Objectifs du projet}
-			Expliquer très brièvement pourquoi on veut ce produit, autrement dit, la vraie raison pour laquelle le produit va être développé.
 		
 		\subsection{Maître d'ouvrage, client et autres parties prenantes}
-			Personnes et organismes impliqués dans les enjeux du projet
+			{\color{red}Personnes et organismes impliqués dans les enjeux du projet}
 			
 		\subsection{Utilisateurs du produit}
 		
 	\section{Contraintes sur le Projet}
 		\subsection{Contraintes imposées}
-		Cette section décrit les contraintes sur la manière de satisfaire les exigences qui influencent la conception finale du produit. Remarquez que les contraintes sont un type d’exigences, elles seront donc rédigées de la même manière que les exigences fonctionnelles et non-fonctionnelles, avec entre autres une description, une justification et un critère de satisfaction.
+		{\color{red}Contraintes sur la manière de satisfaire les exigences qui influencent la conception finale du produit : contraintes portant sur le projet en général, applicable sur le système en général}
+			\subsubsection{Contraintes sur la conception :} 
+				\begin{itemize}
+					\item Le produit doit tourner sur ...
+					\item Le produit doit fournir une interface graphique
+					\item Le produit doit prendre en charge les données représentées dans un fichier \lstinline!.csv!
+					\item Le produit doit fournir une analyse statistique descriptive des données en entrée
+					\item Le produit doit produire en sortie une API compatible
+					quel OS ? quelle archi ?
+				\end{itemize}
+			\subsubsection{Environnement de fonctionnement :} Va être installé sur quel OS ? quelle archi ?
+			\subsubsection{Applications partenaires :} 
+			Le produit doit prendre en compte de l'environnement de sortie adéquat pour la production des API, c'est à dire que cette API doit etre compatible avec l'outil DCbrain de visualisation des graphes de réseaux physiques.
 		
 		\subsection{Glossaire et conventions de dénomination}
-		Cette section donne les définitions de tous les termes et acronymes utilisés dans le projet.
 		
 		\subsection{Faits et hypothèses déterminants}
-		a. Facteurs influençant le produit, mais qui ne sont pas des contraintes imposées sur les exigences.\\
-		b. Hypothèses que l’équipe fait sur le projet.
+			\subsubsection{Facteurs influençant le produit, mais qui ne sont pas des contraintes imposées sur les exigences :}
+			\subsubsection{Hypothèses que l’équipe fait sur le projet :}
 		
 	\section{Exigences fonctionnelles}
+		{\color{red}
 		Contexte du projet (diagramme de contexte métier) :\\	 
 		Ce diagramme a pour objet d’identifier les flux d’informations entre les différents acteurs (prescripteurs, pharmaciens, préparateurs, infirmières) et le système d’information.
 		Il s’agit là d’une description des frontières du système d’information, dont le périmètre peut être plus large que le système informatique que l’on veut mettre en place.
+		}
 
 		\subsection{Périmètre de l'œuvre}
 		
 		\subsection{Périmètre de l'ouvrage}
 
-		\subsection{Exigences fonctionnelles et exigences sur les données}		
+		\subsection{Exigences fonctionnelles et exigences sur les données}	
+		{\color{red}
 		Données: Spécification des principaux éléments ou objets métiers ou entités ou classes relatifs au système. Cela peut prendre la forme d’un premier jet de modèle des données, un modèle objet ou un modèle du domaine. Il peut aussi suffire de remplir correctement le glossaire du paragraphe 5. Rédiger un glossaire et faire un diagramme de donnée sont deux façons de modéliser des objets métiers. Il y en a bien d’autres.\\
-		Objectif de la section :
+		}
 	
 	\section{Exigences non fonctionnelles}
 		\subsection{Apparence et interface utilisateur}
+		{\color{red}
 		Les exigences de ce chapitre concernent l’apparence du produit, et la perception par ses utilisateurs potentiels. \\
-		Quelle est la langue souhaitée ?\\
+		Quelle est la langue souhaitée ? anglais\\
 		Désire-t-on des touches de type raccourci ?\\
 		Quelles sont les contraintes graphiques dues à la nécessité éventuelle d’une aide en ligne ? D’une aide contextuelle ?
-		
+		}
 			\subsubsection{Exigences d’apparence} 
+			{\color{red}
 			On donne ici un exemple, mais il doit être retravaillé.\\
 			Attention : cette exigence peut être très difficile à mettre en œuvre dans le cas d’un progiciel sur étagère.
 			Les codes couleurs utilisés par le système devront être cohérents avec les codes couleurs en vigueur pour les différentes catégories d’utilisateur.
 			Une exigence probablement plus simple à mettre en œuvre :\\
 			L’administrateur du système doit pouvoir afficher le logo de l’établissement à chaque page.
-		
+			}
 			\subsubsection{Exigences de style}
+			{\color{red}
 			REMARQUE IMPORTANTE :\\
 			Ce paragraphe est important mais difficile à manier. On peut le laisser vide en mentionnant « Sans objet » (Rappel : afin de conserver la maintenabilité de ce document, ne pas supprimer de paragraphes).
-			Sans objet.
+			}
 
 		\subsection{Utilisabilité}
 		
