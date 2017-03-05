@@ -1,0 +1,73 @@
+\input{../tex/preambule}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+
+\title{\textbf{\Huge Organigramme}\vspace{-4ex}}
+
+\begin{document}
+\maketitle
+
+	\begin{center}\begin{figure}[pb]
+	\begin{tikzpicture}
+		\begin{scope}[xscale=2,yscale=1.5]	
+			% description et nommage des noeuds 
+			\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
+			\node (API) at (-2,5) [rectangle,draw] {\begin{tabular}{c}API\end{tabular}};
+			\node (IG) at (2,5) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
+			\node (CHRG) at (-3.5,3) [rectangle,draw,dashed] {\begin{tabular}{c}Chargement\\des données\end{tabular}};
+			\node (ADD) at (-0.5,3) [rectangle,draw,dashed] {\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};
+			
+			% description des arêtes
+			% -- arête rectiligne entre les noeuds nommés ou indiqués en coordonnées
+			% |- départ vertical arrivée horizontale
+			% -| départ horizontal arrivée verticale
+			\draw (TITRE) |- (-2,6);
+			\draw (TITRE) |- (2,6);
+			\draw (-2,6) -- (API);
+			\draw (2,6) -- (IG);
+			\draw (API) |- (-3.5,4);
+			\draw (API) |- (-0.5,4);
+			\draw (-3.5,4) -- (CHRG);
+			\draw (-0.5,4) -- (ADD);
+			\path[->,>=stealth'] (CHRG) edge[bend left=20] node[anchor=south,above]{(1), (2)} (ADD);
+		
+		\end{scope}
+		
+		%Légende
+		\begin{scope}
+			\node (LEGENDE) at (5.5,3) {\textbf{Légende :}};
+			\node (FAMILLE) at (5.5,2) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
+			\node (MODULE) at (5.5,1) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
+			\path[->,>=stealth'] (5,-0.3) edge[bend left=20] node[anchor=south,above]{informations transmises} (6,-0.3);
+		\end{scope}
+		
+	\end{tikzpicture}
+	
+	\textbf{Notes :}\\
+	(1) Données du fichier \lstinline!.csv! après avoir testé leur cohérence : le fichier + une structure contenant les numéros de lignes incohérentes (donc à ne pas prendre en compte)\\
+	
+	\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
+	\end{figure}\end{center}
+	
+	\section{API}
+		\subsection{Chargement des données}
+		Le module de chargement des données s'occupe de la préparation et de la vérification du fichier fourni en entrée. Étapes du chargement :
+		\begin{itemize}
+		\item Ouverture du fichier en vérifiant qu'il a la bonne extension \lstinline!.csv!
+		\item S'assurer qu'il est accessible en lecture
+		\item Parcourir toutes les entrées du fichier et vérifier la cohérence des types :
+			\begin{lstlisting}[language=C]
+			//Variables
+			Structure de taille dynamique où on stocke les numéros de lignes incohérentes
+			
+			//Parcours du fichier
+			Pour chaque ligne du fichier
+				Pour chaque colonne de la ligne (se terminant par une virgule généralement)
+					Si la donnée ne correspond pas au type attendu
+						Stocker le numéro de cette ligne dans la structure
+			\end{lstlisting}
+		\item Dans ce même parcours du fichier, après avoir vérifié la cohérence d'une données, on vérifie qu'elle n'est pas aberrantes (donnée du bon type mais valeur potentiellement erronées qui peut rendre le calcul incorrect) 
+		\end{itemize}
+	
+\end{document}
