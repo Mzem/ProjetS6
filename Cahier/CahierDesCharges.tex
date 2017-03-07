@@ -22,7 +22,10 @@
 			{\color{red}Personnes et organismes impliqués dans les enjeux du projet}
 			
 		\subsection{Utilisateurs du produit}
+		En premier lieux, l’application va servir aux membres de DCbrain étant donné que leurs clients industriels (Total, ERDF,…)leurs fournissent les fichiers CSV, afin qu’ils puissent appliquer des analyses descriptives sur les données dans le but de repérer des anomalies sur les réseaux de ces derniers. Puis en second lieux, il se pourrait que DCbrain veuille déployer l'application pour ses clients, dans ce cas les membres de ces organismes deviendront des utilisateurs.\\
 		
+		On peut supposer l'absence de restrictions d'utilisations, étant donné l'absence d'exigence de la part du maitre d'œuvre sur ce sujet.
+
 	\section{Contraintes sur le Projet}
 		\subsection{Contraintes imposées}
 		{\color{red}Contraintes sur la manière de satisfaire les exigences qui influencent la conception finale du produit : contraintes portant sur le projet en général, applicable sur le système en général}
@@ -62,36 +65,41 @@
 		}
 	
 	\section{Exigences non fonctionnelles}
-		\subsection{Apparence et interface utilisateur}
-		{\color{red}
-		Les exigences de ce chapitre concernent l’apparence du produit, et la perception par ses utilisateurs potentiels. \\
-		Quelle est la langue souhaitée ? anglais\\
-		Désire-t-on des touches de type raccourci ?\\
-		Quelles sont les contraintes graphiques dues à la nécessité éventuelle d’une aide en ligne ? D’une aide contextuelle ?
-		}
-			\subsubsection{Exigences d’apparence} 
-			{\color{red}
-			On donne ici un exemple, mais il doit être retravaillé.\\
-			Attention : cette exigence peut être très difficile à mettre en œuvre dans le cas d’un progiciel sur étagère.
-			Les codes couleurs utilisés par le système devront être cohérents avec les codes couleurs en vigueur pour les différentes catégories d’utilisateur.
-			Une exigence probablement plus simple à mettre en œuvre :\\
-			L’administrateur du système doit pouvoir afficher le logo de l’établissement à chaque page.
-			}
-			\subsubsection{Exigences de style}
-			{\color{red}
-			REMARQUE IMPORTANTE :\\
-			Ce paragraphe est important mais difficile à manier. On peut le laisser vide en mentionnant « Sans objet » (Rappel : afin de conserver la maintenabilité de ce document, ne pas supprimer de paragraphes).
-			}
+		\subsection{Interface utilisateur du projet}
+		
+		\subsubsection{Exigences d’apparence} 
+		Le produit devra adopter une apparence simple, agréable et devra être facile à comprendre dès sa première prise en main.
+		Le maitre d’œuvre a émis le souhait d’avoir de l’Anglais comme langue utilisée pour l’affichage textuel.
+
+		\subsubsection{Exigences de style}
+		L’application s’adresse à un public professionnel, alors l’une des exigences concernant le style de l’interface est qu’il devra opter pour un style classique, au goût du jour et professionnel. L’affichage des résultats et autre devra susciter la confiance auprès des utilisateurs.
 
 		\subsection{Utilisabilité}
-		
+		Le produit devra être simple d’utilisation et facile à comprendre dès sa première prise en main, afin d’éviter une formation concernant la manipulation du produit pour les futurs utilisateurs.
+		Il aidera également l’utilisateur à analyser une quantité importante de données.
+
 		\subsection{Exigences de performance}
-		
+		Les exigences de performance du futur produit concerne concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un CSV, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client à suggérer que cette attente devra être de l’ordre de la minute maximum. En ce qui concerne le temps de passage d'une fenêtre à l'autre (Choit de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choit du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
+
 		\subsection{Fonctionnement du projet}
-			hello
+			\subsubsection{Principales fonctionnalités}
+			Tout d’abord, l’application devra avoir la fonction majeur de posséder une interface afin de permettre le chargement d’un fichier au format CSV. Après avoir sélectionné un fichier, l’application pourra afficher le contenu de ce fichier sous forme de tableau et les erreurs dans le contenu d'une ligne dans une nouvelle fenêtre. Si le fichier contient une quantité importante de données (Supérieur à 1000), l’affichage ne se fera que sur les 1000 premières données.
+			Il n’y aura pas d’importance à déterminer le type de colonne car il y aura un format prédéfinis pour le CSV.\newline
+
+			Ensuite, il y aura la possibilité de faire une analyse descriptive sur les colonnes du fichier. Avec une analyse qualitative pour obtenir les informations synthétiques tel que la Médiane et les Quantiles mais également les anomalies présente sur certaines valeurs. Puis une analyse quantitative pour obtenir par exemple la distribution des valeurs.\newline
+
+			Enfin, l’application aura la fonctionnalité de récupérer les résultats de ces analyses sous forme d’API afin de permet à DCbrain de connecter ces nouvelles données à leur base de donnes pour insérer de nouvelles informations dans leurs graphe de flux.
+
+			\subsubsection{Précision et exactitude}
+			Lors de l'analyse des données, les résultats sur la Variance et la Moyenne doivent être calculée de façon très précise car elles vont servir de base dans d’autres calculs statistiques. Les autres valeurs calculées peuvent être les plus précises possible mais ces valeurs vont servir pour l'interprétation afin mieux comprendre ce qui se passe sur le réseau.
+
 		\subsection{Maintenabilité du projet}
+		Le produit doit pouvoir être maintenu par ses utilisateurs finaux ou par des développeurs qui ne sont pas les développeurs d’origines, dans le cas où DCbrain souhaiterait ajouter de nouvelles méthodes d’analyses descriptives ou de nouveaux procédés pour afficher les résultats de manière graphique afin de satisfaire les exigences de leurs clients.\newline
+		
+		Le produit devra permettre l'insertion d'éventuels API supplémentaires, tel que l'analyse Multidimensionnel qui utilisera l'API de l'analyse Unidimensionnel dans le but de fournir des descriptions statiques plus poussé pour obtenir une meilleur vue d'ensemble sur les données collectées. Mais encore l'insertion de technique d'analyse de Graphe afin d'obtenir des informations sur l'état d'un graphe.
 		
 		\subsection{Sécurité}
+		L’application ne sera pas connectée à un réseau, la question de la sécurité du système contre des attaques extérieures ne devrait surement pas se poser. Mais le produit doit être programmé de telle sorte qu’il n’endommage pas le système hébergeant l’application.
 		
 	\section{Autres aspects du projet}
 		\subsection{Question ouvertes}
