@@ -1,5 +1,6 @@
 \input{../tex/preambule}
 \usepackage{tikz}
+\usepackage{inputenc}
 \usetikzlibrary{arrows,automata}
 \usetikzlibrary{positioning}
 \geometry{top=3cm,bottom=3cm}
@@ -100,7 +101,25 @@
 				\end{enumerate}
 			
 		\subsection{Interface graphique}
-			JD
+			Le module de l'interface graphique s'occupera de la manière dont l'application sera représenté à l'écran pour l'utilisateur, ce qui correspond au positionnement des élements textuels, boutons et des fonctionnalités disponible dans une fenêtre. Voici une liste des principales fenêtres composant ce module avec leurs fonctionnalités:
+			\begin{enumerate}
+			\item Fenêtre de chargement pour récuperer un fichier \lstinline!.csv! avec validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop).
+			\item Fenêtre de contrôle préliminaire avec visualisation d'un échantillon du \lstinline!.csv!.		
+				\begin{itemize}
+				\item Affichera le nombre de lignes/colonnes contenu dans le .csv.
+				\item Affichera le titre du fichier.
+				\item Affichera un échantillon du contenu du \lstinline!.csv! (environ les 1000 premières lignes) avec un système de scroll.
+				\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).
+				\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations.
+				\item Affichage d'un bouton pour passer à l'étapde de l'analyse de données.
+				\end{itemize}
+			\item Fenêtre correspondant à l'étape de l'analyse de données.
+				\begin{itemize}
+				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci.
+				\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part.
+				\item Un bouton pour lancer l'exportation des résultats sera disponible (Ecriture dans un nouveau fichiers).
+				\end{itemize}
+			\end{enumerate}
 		
 		
 	
