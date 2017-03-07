@@ -14,9 +14,9 @@
 	\section{Présentation de l'organigramme}
 		Le travail peut être décomposé en 3 modules :
 		\begin{itemize}
-		\item Une interface graphique : va faire transiter les informations entre les différentes APIs de l'application
+		\item Une interface graphique : va faire transiter les informations entre les différentes APIs de l'application et fournir des rendus visuels des analyses
 		\item Une API de chargement des données : va effectuer des vérifications sur les données fournies (\lstinline!.csv! puis retourne le résultat à l'interface graphique
-		\item Une API d'analyse descriptive des données : ...
+		\item Une API d'analyse descriptive des données : va permettre de calculer les informations statistiques nécessaires
 		\end{itemize}
 		
 		\begin{center}\begin{tikzpicture}
@@ -53,8 +53,8 @@
 			\textbf{Notes :}\\
 			(1) Fichier \lstinline!.csv! formaté \\
 			(2) Structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...\\
-			(3) Colonne + son type\\
-			(4) Résultats
+			(3) Colonne de données d'un type attendu\\
+			(4) Résultats statistiques (moyenne, quantiles, ecart-type, ...)
 			\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
 		\end{figure}\end{center}
 	
@@ -83,7 +83,21 @@
 				En sortie, on aura donc une structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...
 				
 			\subsubsection{Analyse descriptive des données}
-				SONNY
+				Ce module est utilisé pour fournir des informations de statistiques descriptives sur les colonnes de données qui lui seront fournies. Ses fonctionnalités se décomposent en trois pour les différents types de données à traiter:\\
+				\begin{enumerate}
+				\item qualitatif : calcul des effctifs et fréquences d'apparition
+				\item quantitatif discret :\\
+					\begin{itemize}
+					\item effectifs, effectifs cumulés, fréquence et fréquence cumulée
+					\item moyenne
+					\item médiane et autres quantiles
+					\item variance et écart-type
+					\item anomalies : boîte à moutaches de Tukey
+					\item symétrie : coeff de Pearson ou coeff de Yule
+					\item aplatissement : coeff de Fisher
+					\end{itemize}
+				\item quantitatif continu : on regroupe les valeurs en classe d'intervalles, on peut ensuite appliquer les mêmes techniques que pour les variables discrètes
+				\end{enumerate}
 			
 		\subsection{Interface graphique}
 			JD
