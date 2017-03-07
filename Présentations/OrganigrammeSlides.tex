@@ -1,0 +1,92 @@
+\input{../tex/preambuleSlides}
+\usepackage{../tex/myInfolines}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+
+\title{Organigramme}
+
+\begin{document}
+
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\section*{Présentation de l'organigramme}
+	\begin{frame}
+		\begin{center}\begin{figure}[h]
+			\begin{tikzpicture}[scale=0.6,font=\tiny]
+				\begin{scope}[xscale=3,yscale=1.5]	
+					\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
+					\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=1.5cm,minimum width=3cm,minimum height=2.8cm] {\begin{tabular}{c}API\end{tabular}};
+					\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
+					\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
+					\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
+					\draw (TITRE) |- (-2,6);
+					\draw (TITRE) |- (2,6);
+					\draw (-2,6) -- (API);
+					\draw (2,6) -- (IG);
+					\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG);
+					\path[->,>=stealth'] (CHRG) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
+					\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD);
+					\path[->,>=stealth'] (ADD) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
+				\end{scope}
+				%Légende
+				\begin{scope}
+					\node (LEGENDE) at (5.5,3) {\textbf{Légende :}};
+					\node (FAMILLE) at (5.5,2) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
+					\node (MODULE) at (5.5,1) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
+					\path[->,>=stealth'] (5,-0.3) edge[bend left=20] node[anchor=south,above]{informations transmises} (6,-0.3);
+				\end{scope}
+			\end{tikzpicture}
+			\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
+		\end{figure}\end{center}
+	\end{frame}
+	
+	\subsection*{Chargement des données}
+	\begin{frame}
+		\begin{center}\begin{tikzpicture}[scale=0.6,font=\tiny]
+			\begin{scope}[xscale=3,yscale=1.5]	
+				\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
+				\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=1.5cm,minimum width=3cm,minimum height=2.8cm] {\begin{tabular}{c}API\end{tabular}};
+				\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
+				\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
+				\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
+				\draw (TITRE) |- (-2,6);
+				\draw (TITRE) |- (2,6);
+				\draw (-2,6) -- (API);
+				\draw (2,6) -- (IG);
+				\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG);
+				\path[->,>=stealth'] (CHRG) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
+			\end{scope}
+		\end{tikzpicture}\end{center}
+		\pause
+		\textbf{(1)} Fichier \lstinline!.csv! formaté\\
+		\pause
+		\textbf{(2)} Structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...
+	\end{frame}
+	
+	\subsection*{Analyse descriptive des données}
+	\begin{frame}
+		\begin{center}\begin{tikzpicture}[scale=0.6,font=\tiny]
+			\begin{scope}[xscale=3,yscale=1.5]	
+				\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
+				\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=1.5cm,minimum width=3cm,minimum height=2.8cm] {\begin{tabular}{c}API\end{tabular}};
+				\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
+				\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
+				\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
+				\draw (TITRE) |- (-2,6);
+				\draw (TITRE) |- (2,6);
+				\draw (-2,6) -- (API);
+				\draw (2,6) -- (IG);
+				\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD);
+				\path[->,>=stealth'] (ADD) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
+			\end{scope}
+		\end{tikzpicture}\end{center}
+		\pause
+		\textbf{(3)} blablabla\\
+		\pause
+		\textbf{(4)} blablabla\\		
+	\end{frame}
+
+\end{document}

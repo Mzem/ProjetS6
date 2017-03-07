@@ -2,72 +2,92 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,automata}
 \usetikzlibrary{positioning}
+\geometry{top=3cm,bottom=3cm}
 
-\title{\textbf{\Huge Organigramme}\vspace{-4ex}}
+\title{\vspace{\fill}\textbf{\Huge Organigramme}}
+\author{Sonny Klotz - Jean-Didier Pailleux - Malek Zemni\vspace{2em}\\\textit{Interface de chargement, de contrôle}\\\textit{et d’analyse statistique des données}\\\textit{pour la constitution d’un graphe de flux}\vspace{2em}}
 
 \begin{document}
-\maketitle
-
-	\begin{center}\begin{figure}[pb]
-	\begin{tikzpicture}
-		\begin{scope}[xscale=2,yscale=1.5]	
-			% description et nommage des noeuds 
-			\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
-			\node (API) at (-2,5) [rectangle,draw] {\begin{tabular}{c}API\end{tabular}};
-			\node (IG) at (2,5) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
-			\node (CHRG) at (-3.5,3) [rectangle,draw,dashed] {\begin{tabular}{c}Chargement\\des données\end{tabular}};
-			\node (ADD) at (-0.5,3) [rectangle,draw,dashed] {\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};
-			
-			% description des arêtes
-			% -- arête rectiligne entre les noeuds nommés ou indiqués en coordonnées
-			% |- départ vertical arrivée horizontale
-			% -| départ horizontal arrivée verticale
-			\draw (TITRE) |- (-2,6);
-			\draw (TITRE) |- (2,6);
-			\draw (-2,6) -- (API);
-			\draw (2,6) -- (IG);
-			\draw (API) |- (-3.5,4);
-			\draw (API) |- (-0.5,4);
-			\draw (-3.5,4) -- (CHRG);
-			\draw (-0.5,4) -- (ADD);
-			\path[->,>=stealth'] (CHRG) edge[bend left=20] node[anchor=south,above]{(1), (2)} (ADD);
-		
-		\end{scope}
-		
-		%Légende
-		\begin{scope}
-			\node (LEGENDE) at (5.5,3) {\textbf{Légende :}};
-			\node (FAMILLE) at (5.5,2) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
-			\node (MODULE) at (5.5,1) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
-			\path[->,>=stealth'] (5,-0.3) edge[bend left=20] node[anchor=south,above]{informations transmises} (6,-0.3);
-		\end{scope}
-		
-	\end{tikzpicture}
+\maketitle\vspace{\fill}
+\newpage
 	
-	\textbf{Notes :}\\
-	(1) Données du fichier \lstinline!.csv! après avoir testé leur cohérence : le fichier + une structure contenant les numéros de lignes incohérentes (donc à ne pas prendre en compte)\\
-	
-	\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
-	\end{figure}\end{center}
-	
-	\section{API}
-		\subsection{Chargement des données}
-		Le module de chargement des données s'occupe de la préparation et de la vérification du fichier fourni en entrée. Étapes du chargement :
+	\section{Présentation de l'organigramme}
+		Le travail peut être décomposé en 3 modules :
 		\begin{itemize}
-		\item Ouverture du fichier en vérifiant qu'il a la bonne extension \lstinline!.csv!
-		\item S'assurer qu'il est accessible en lecture
-		\item Parcourir toutes les entrées du fichier et vérifier la cohérence des types :
-			\begin{lstlisting}[language=C]
-			//Variables
-			Structure de taille dynamique où on stocke les numéros de lignes incohérentes
-			
-			//Parcours du fichier
-			Pour chaque ligne du fichier
-				Pour chaque colonne de la ligne (se terminant par une virgule généralement)
-					Si la donnée ne correspond pas au type attendu
-						Stocker le numéro de cette ligne dans la structure
-			\end{lstlisting}
-		\item Dans ce même parcours du fichier, après avoir vérifié la cohérence d'une données, on vérifie qu'elle n'est pas aberrantes (donnée du bon type mais valeur potentiellement erronées qui peut rendre le calcul incorrect) 
+		\item Une interface graphique : va faire transiter les informations entre les différentes APIs de l'application
+		\item Une API de chargement des données : va effectuer des vérifications sur les données fournies (\lstinline!.csv! puis retourne le résultat à l'interface graphique
+		\item Une API d'analyse descriptive des données : ...
 		\end{itemize}
+		
+		\begin{center}\begin{tikzpicture}
+			\begin{scope}[xscale=2,yscale=1.5]	
+				% description et nommage des noeuds 
+				\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
+				\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=3.5cm,minimum width=5cm,minimum height=5.3cm,font=\textbf\Large] {\begin{tabular}{c}API\end{tabular}};
+				\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
+				\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
+				\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
+				% description des arêtes
+				% -- arête rectiligne entre les noeuds nommés ou indiqués en coordonnées
+				% |- départ vertical arrivée horizontale
+				% -| départ horizontal arrivée verticale
+				\draw (TITRE) |- (-2,6);
+				\draw (TITRE) |- (2,6);
+				\draw (-2,6) -- (API);
+				\draw (2,6) -- (IG);
+				\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG);
+				\path[->,>=stealth'] (CHRG) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
+				\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD);
+				\path[->,>=stealth'] (ADD) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
+			\end{scope}
+			%Légende
+			\begin{scope}
+				\node (LEGENDE) at (5.5,3) {\textbf{Légende :}};
+				\node (FAMILLE) at (5.5,2) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
+				\node (MODULE) at (5.5,1) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
+				\path[->,>=stealth'] (5,-0.3) edge[bend left=20] node[anchor=south,above]{informations transmises} (6,-0.3);
+			\end{scope}
+		\end{tikzpicture}\end{center}
+		
+		\begin{center}\begin{figure}[h]
+			\textbf{Notes :}\\
+			(1) Fichier \lstinline!.csv! formaté \\
+			(2) Structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...\\
+			(3) Colonne + son type\\
+			(4) Résultats
+			\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
+		\end{figure}\end{center}
+	
+	\section{Fonctionnalités des modules}
+		\subsection{API}
+			\textit{Application Programming Interface} constituent les paquets utilisables par les développeurs (intégrée), qu'on va livrer au client en plus de l'application elle-même.\\
+			Parmi les modules du logiciel, on a 2 APIs :
+			\begin{itemize}
+				\item Une API de chargement des données
+				\item Une API d'analyse statistique des données
+			\end{itemize}
+		
+			\subsubsection{Chargement des données}
+				Le module de chargement des données s'occupe de la préparation et de la vérification du fichier fourni en entrée. Ces principales fonctionnalités sont :
+				\begin{itemize}
+				\item Ouverture du fichier en vérifiant qu'il a la bonne extension \lstinline!.csv! et qu'il est accessible en lecture.
+				\item Donner le nombre de lignes et de colonnes
+				\item Détection des type de colonnes : ça sera plutôt une détection de la cohérence des types, on parcourt les entrées de chaque colonne et on vérifie si leur type correspond bien au type attendu.\\
+				Dans le même parcours, on pourra aussi gérer les erreurs :
+					\begin{itemize}
+					\item détecter les valeurs erronées (valeurs qui ne correspondent pas au type attendu)
+					\item détecter les cases vides
+					\end{itemize}
+				\item Nommer les colonnes.
+				\end{itemize}
+				En sortie, on aura donc une structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...
+				
+			\subsubsection{Analyse descriptive des données}
+				SONNY
+			
+		\subsection{Interface graphique}
+			JD
+		
+		
 	
 \end{document}
