@@ -14,79 +14,85 @@
 	
 	\section*{Présentation de l'organigramme}
 	\begin{frame}
-		\begin{center}\begin{figure}[h]
-			\begin{tikzpicture}[scale=0.6,font=\tiny]
-				\begin{scope}[xscale=3,yscale=1.5]	
-					\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
-					\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=1.5cm,minimum width=3cm,minimum height=2.8cm] {\begin{tabular}{c}API\end{tabular}};
-					\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
-					\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
-					\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
-					\draw (TITRE) |- (-2,6);
-					\draw (TITRE) |- (2,6);
-					\draw (-2,6) -- (API);
-					\draw (2,6) -- (IG);
-					\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG);
-					\path[->,>=stealth'] (CHRG) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
-					\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD);
-					\path[->,>=stealth'] (ADD) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
-				\end{scope}
-				%Légende
-				\begin{scope}
-					\node (LEGENDE) at (5.5,3) {\textbf{Légende :}};
-					\node (FAMILLE) at (5.5,2) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
-					\node (MODULE) at (5.5,1) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
-					\path[->,>=stealth'] (5,-0.3) edge[bend left=20] node[anchor=south,above]{informations transmises} (6,-0.3);
-				\end{scope}
-			\end{tikzpicture}
-			\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
+		\begin{center}\begin{figure}[h]\begin{tikzpicture}[scale=0.6,font=\tiny]
+			\begin{scope}[xscale=2,yscale=1.5]	
+				\node (IW) at (0,3) [rectangle,draw,dashed] {\begin{tabular}{c}Interface web\end{tabular}};
+				\node (API1) at (-2.5,0) [rectangle,draw,fill=blue!25,text depth=3.8cm,minimum width=3cm,minimum height=4.5cm,font=\textbf\small] {\begin{tabular}{c}API 1\end{tabular}};
+				\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1.3cm]API1.center){\begin{tabular}{c}Vérification fichier\end{tabular}};
+				\node (ANALS) [rectangle,draw,dashed,fill=white,below=of VERIF.south,yshift=0cm] {\begin{tabular}{c}Analyse syntaxique\end{tabular}};
+				\node (DESC) [rectangle,draw,dashed,fill=white,below=of ANALS.south,yshift=0cm] {\begin{tabular}{c}Description colonne\end{tabular}};				
+				\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=3.8cm,minimum width=3cm,minimum height=4.5cm,font=\textbf\small] {\begin{tabular}{c}API 2\end{tabular}};
+				\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1.3cm]API2.center){\begin{tabular}{c}Module 1\end{tabular}};
+				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0cm] {\begin{tabular}{c}Module 2\end{tabular}};
+				\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0cm] {\begin{tabular}{c}Module 3\end{tabular}};
+				\path[->,>=stealth'] (IW) edge[bend left=-20] node[anchor=south,above]{(1)} (VERIF);
+				\path[->,>=stealth'] (VERIF) edge[bend left=-10] node[anchor=south,above]{(2)} (IW);
+				\path[->,>=stealth'] (VERIF) edge[bend left=0] node[anchor=south,left]{(3)} (ANALS);
+				\path[->,>=stealth'] (ANALS) edge[bend left=0] node[anchor=south,left]{(4)} (DESC);
+				\path[->,>=stealth'] (DESC) edge[bend left=-20] node[anchor=south,left]{(5)} (IW);
+				\path[->,>=stealth'] (IW) edge[bend left=20] node[anchor=south,above]{(6)} (ADD1);
+				\path[->,>=stealth'] (ADD1) edge[bend left=0] node[anchor=south,right]{(7)} (ADD2);
+				\path[->,>=stealth'] (ADD2) edge[bend left=0] node[anchor=south,right]{(8)} (ADD3);
+				\path[->,>=stealth'] (ADD3) edge[bend left=20] node[anchor=south,right]{(9)} (IW);
+			\end{scope}
+			%Légende
+			\begin{scope}
+				\node (LEGENDE) at (-7,-5) {\textbf{Légende :}};
+				\node (FAMILLE) at (-4.5,-5) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
+				\node (MODULE) at (-2,-5) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
+				\path[->,>=stealth'] (0.5,-5.3) edge[bend left=0] node[anchor=south,above]{informations transmises} (3,-5.3);
+			\end{scope}
+		\end{tikzpicture}
+		\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
 		\end{figure}\end{center}
 	\end{frame}
 	
-	\subsection*{Chargement des données}
+	\subsection*{API 1 : Chargement des données}
 	\begin{frame}
-		\begin{center}\begin{tikzpicture}[scale=0.6,font=\tiny]
-			\begin{scope}[xscale=3,yscale=1.5]	
-				\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
-				\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=1.5cm,minimum width=3cm,minimum height=2.8cm] {\begin{tabular}{c}API\end{tabular}};
-				\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
-				\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
-				\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
-				\draw (TITRE) |- (-2,6);
-				\draw (TITRE) |- (2,6);
-				\draw (-2,6) -- (API);
-				\draw (2,6) -- (IG);
-				\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG);
-				\path[->,>=stealth'] (CHRG) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
+		\begin{center}\begin{figure}[h]\begin{tikzpicture}[scale=0.6,font=\tiny]
+			\begin{scope}[xscale=2,yscale=1.5]	
+				\node (IW) at (2.5,0) [rectangle,draw,dashed] {\begin{tabular}{c}Interface web\end{tabular}};
+				\node (API1) at (-2.5,0) [rectangle,draw,fill=blue!25,text depth=3.8cm,minimum width=3cm,minimum height=4.5cm,font=\textbf\small] {\begin{tabular}{c}API 1\end{tabular}};
+				\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1.3cm]API1.center){\begin{tabular}{c}Vérification fichier\end{tabular}};
+				\node (ANALS) [rectangle,draw,dashed,fill=white,below=of VERIF.south,yshift=0cm] {\begin{tabular}{c}Analyse syntaxique\end{tabular}};
+				\node (DESC) [rectangle,draw,dashed,fill=white,below=of ANALS.south,yshift=0cm] {\begin{tabular}{c}Description colonne\end{tabular}};				
+				
+				\path[->,>=stealth'] (IW) edge[bend left=-20] node[anchor=south,above]{(1)} (VERIF);
+				\path[->,>=stealth'] (VERIF) edge[bend left=-10] node[anchor=south,above]{(2)} (IW);
+				\path[->,>=stealth'] (VERIF) edge[bend left=0] node[anchor=south,left]{(3)} (ANALS);
+				\path[->,>=stealth'] (ANALS) edge[bend left=0] node[anchor=south,left]{(4)} (DESC);
+				\path[->,>=stealth'] (DESC) edge[bend left=-20] node[anchor=south,below]{(5)} (IW);
 			\end{scope}
-		\end{tikzpicture}\end{center}
-		\pause
-		\textbf{(1)} Fichier \lstinline!.csv! formaté\\
-		\pause
-		\textbf{(2)} Structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...
+		\end{tikzpicture}\end{figure}\end{center}
+		\begin{small}
+		\pause(1) Fichier \lstinline!.csv! \\
+		\pause(2) Erreur ouverture ou format du fichier\\
+		\pause(3) Fichier OK !\\
+		\pause(4) \textbf{Structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (taille de la structure)\\
+		\pause(5) \textbf{Structure 1} + \textbf{Structure 2} contenant 3 champs d'informations sur chaque colonne : le type, le rôle et les données erronées\\
+		\end{small}
 	\end{frame}
 	
-	\subsection*{Analyse descriptive des données}
+	\subsection*{API 2 : Analyse descriptive}
 	\begin{frame}
-		\begin{center}\begin{tikzpicture}[scale=0.6,font=\tiny]
-			\begin{scope}[xscale=3,yscale=1.5]	
-				\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
-				\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=1.5cm,minimum width=3cm,minimum height=2.8cm] {\begin{tabular}{c}API\end{tabular}};
-				\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
-				\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
-				\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
-				\draw (TITRE) |- (-2,6);
-				\draw (TITRE) |- (2,6);
-				\draw (-2,6) -- (API);
-				\draw (2,6) -- (IG);
-				\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD);
-				\path[->,>=stealth'] (ADD) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
+		\begin{center}\begin{figure}[h]\begin{tikzpicture}[scale=0.6,font=\tiny]
+			\begin{scope}[xscale=2,yscale=1.5]	
+				\node (IW) at (-2.5,0) [rectangle,draw,dashed] {\begin{tabular}{c}Interface web\end{tabular}};
+				\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=3.8cm,minimum width=3cm,minimum height=4.5cm,font=\textbf\small] {\begin{tabular}{c}API 2\end{tabular}};
+				\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1.3cm]API2.center){\begin{tabular}{c}Module 1\end{tabular}};
+				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0cm] {\begin{tabular}{c}Module 2\end{tabular}};
+				\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0cm] {\begin{tabular}{c}Module 3\end{tabular}};
+				\path[->,>=stealth'] (IW) edge[bend left=20] node[anchor=south,above]{(6)} (ADD1);
+				\path[->,>=stealth'] (ADD1) edge[bend left=0] node[anchor=south,right]{(7)} (ADD2);
+				\path[->,>=stealth'] (ADD2) edge[bend left=0] node[anchor=south,right]{(8)} (ADD3);
+				\path[->,>=stealth'] (ADD3) edge[bend left=20] node[anchor=south,below]{(9)} (IW);
 			\end{scope}
-		\end{tikzpicture}\end{center}
-		\pause
-		\textbf{(3)} Colonne, de données typées, issue de la lecture du .csv\\
-		\pause
-		\textbf{(4)} Retour des résultats d'analyse\\		
+		\end{tikzpicture}\end{figure}\end{center}
+		\begin{small}
+		\pause(6) text\\
+		\pause(7) text\\
+		\pause(8) text\\
+		\end{small}
 	\end{frame}
 
 \end{document}

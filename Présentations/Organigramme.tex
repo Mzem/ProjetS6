@@ -10,32 +10,33 @@
 \newpage\clearpage\pagenumbering{arabic}
 	
 	\section{Présentation de l'organigramme}
-		Le travail peut être décomposé en 3 grands paquets :
+		Le projet peut être décomposé en 3 grands paquets :
 		\begin{itemize}
-		\item Une \textbf{interface graphique web} : module d'interface utilisateurs qui va faire transiter les informations entre les différentes APIs
-		\item Une \textbf{API 1 de chargement des données} : composée de 3 modules décrits ci-dessous
-		\item Une \textbf{API 2 d'analyse descriptive des données} : composée de 3 modules décrits ci-dessous
+		\item Une \textbf{interface graphique web} : module d'interface utilisateur qui va faire transiter les informations entre les différentes APIs
+		\item Une \textbf{API 1 de chargement des données} : composée de 3 modules
+		\item Une \textbf{API 2 d'analyse descriptive des données} : composée de 3 modules
 		\end{itemize}
 		
-		\begin{center}\begin{tikzpicture}
+		\begin{center}\begin{figure}[h]\begin{tikzpicture}
 			\begin{scope}[xscale=2,yscale=1.5]	
 				\node (IW) at (0,3) [rectangle,draw,dashed] {\begin{tabular}{c}Interface web\end{tabular}};
 				\node (API1) at (-2.5,0) [rectangle,draw,fill=blue!25,text depth=5.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 1\end{tabular}};
-				\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API1.center){\begin{tabular}{c}Vérifications\end{tabular}};
+				\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API1.center){\begin{tabular}{c}Vérification fichier\end{tabular}};
 				\node (ANALS) [rectangle,draw,dashed,fill=white,below=of VERIF.south,yshift=0cm] {\begin{tabular}{c}Analyse syntaxique\end{tabular}};
-				\node (DESC) [rectangle,draw,dashed,fill=white,below=of ANALS.south,yshift=0cm] {\begin{tabular}{c}Description\end{tabular}};				
+				\node (DESC) [rectangle,draw,dashed,fill=white,below=of ANALS.south,yshift=0cm] {\begin{tabular}{c}Description colonne\end{tabular}};				
 				\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=5.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 2\end{tabular}};
 				\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API2.center){\begin{tabular}{c}Module 1\end{tabular}};
 				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0cm] {\begin{tabular}{c}Module 2\end{tabular}};
 				\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0cm] {\begin{tabular}{c}Module 3\end{tabular}};
 				\path[->,>=stealth'] (IW) edge[bend left=-20] node[anchor=south,above]{(1)} (VERIF);
-				\path[->,>=stealth'] (VERIF) edge[bend left=0] node[anchor=south,left]{(2)} (ANALS);
-				\path[->,>=stealth'] (ANALS) edge[bend left=0] node[anchor=south,left]{(3)} (DESC);
-				\path[->,>=stealth'] (DESC) edge[bend left=-20] node[anchor=south,left]{(4)} (IW);
-				\path[->,>=stealth'] (IW) edge[bend left=20] node[anchor=south,above]{(5)} (ADD1);
-				\path[->,>=stealth'] (ADD1) edge[bend left=0] node[anchor=south,right]{(6)} (ADD2);
-				\path[->,>=stealth'] (ADD2) edge[bend left=0] node[anchor=south,right]{(7)} (ADD3);
-				\path[->,>=stealth'] (ADD3) edge[bend left=20] node[anchor=south,right]{(8)} (IW);
+				\path[->,>=stealth'] (VERIF) edge[bend left=-10] node[anchor=south,above]{(2)} (IW);
+				\path[->,>=stealth'] (VERIF) edge[bend left=0] node[anchor=south,left]{(3)} (ANALS);
+				\path[->,>=stealth'] (ANALS) edge[bend left=0] node[anchor=south,left]{(4)} (DESC);
+				\path[->,>=stealth'] (DESC) edge[bend left=-20] node[anchor=south,left]{(5)} (IW);
+				\path[->,>=stealth'] (IW) edge[bend left=20] node[anchor=south,above]{(6)} (ADD1);
+				\path[->,>=stealth'] (ADD1) edge[bend left=0] node[anchor=south,right]{(7)} (ADD2);
+				\path[->,>=stealth'] (ADD2) edge[bend left=0] node[anchor=south,right]{(8)} (ADD3);
+				\path[->,>=stealth'] (ADD3) edge[bend left=20] node[anchor=south,right]{(9)} (IW);
 			\end{scope}
 			%Légende
 			\begin{scope}
@@ -44,43 +45,67 @@
 				\node (MODULE) at (-2,-5) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
 				\path[->,>=stealth'] (0.5,-5.3) edge[bend left=0] node[anchor=south,above]{informations transmises} (3,-5.3);
 			\end{scope}
-		\end{tikzpicture}\end{center}
-		\begin{center}\begin{figure}[h]
-			\textbf{Notes :}\\
-			(1) Fichier \lstinline!.csv! formaté \\
-			(2) Structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...\\
-			(3) Colonne de données d'un type attendu\\
-			(4) Résultats statistiques (moyenne, quantiles, ecart-type, ...)
-			\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
+		\end{tikzpicture}
+		\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
 		\end{figure}\end{center}
+		
+		\hspace{-\parindent}\textbf{Notes :}\\
+			(1) Fichier \lstinline!.csv! \\
+			(2) Erreur ouverture ou format du fichier\\
+			(3) Fichier OK !\\
+			(4) \textbf{Structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (taille de la structure)\\
+			(5) \textbf{Structure 1} + \textbf{Structure 2} contenant 3 champs d'informations sur chaque colonne : le type, le rôle et les données erronées\\
+			(6)\\
+			(7)\\
+			(8)\\
+			(9)\\
 	
 	\section{Fonctionnalités des modules}
-		\subsection{API 1}
-			\subsubsection{Vérifications :}
-				Le module de chargement des données s'occupe de la préparation et de la vérification du fichier fourni en entrée. Ces principales fonctionnalités sont :
-				\begin{itemize}
-				\item Ouverture du fichier en vérifiant qu'il a la bonne extension \lstinline!.csv! et qu'il est accessible en lecture.
-				\item Donner le nombre de lignes et de colonnes
-				\item Détection des type de colonnes : ça sera plutôt une détection de la cohérence des types, on parcourt les entrées de chaque colonne et on vérifie si leur type correspond bien au type attendu.\\
-				Dans le même parcours, on pourra aussi gérer les erreurs :
-					\begin{itemize}
-					\item détecter les valeurs erronées (valeurs qui ne correspondent pas au type attendu)
-					\item détecter les cases vides
-					\end{itemize}
-				\item Nommer les colonnes.
-				\end{itemize}
-				En sortie, on aura donc une structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...
-			\subsubsection{Analyse syntaxique :}
+		\subsection{API 1 : Chargement des données}
+			L'API de chargement des données va être divisée en 3 modules :
 			
-			\subsubsection{Description :}
+			\subsubsection{Vérification fichier :}
+				Ce module va vérifier le fichier fourni en entrée en plusieurs points :
+				\begin{itemize}
+					\item l'ouverture du fichier a réussi
+					\item le fichier est un \lstinline!.csv! contenant du texte brut non formaté (pas de mise en forme avec des balises ou autres)
+					\item le fichier est accessible en lecture
+				\end{itemize}
+			
+			\subsubsection{Analyse syntaxique :}
+				Ce module va exécuter une analyse syntaxique sur le texte du fichier \lstinline!.csv! afin de détecter les différentes données et les stocker dans une structure.
+				\begin{lstlisting}[language=C]
+					//On initialise une structure dynamique pouvant stocker les données du fichier (tableau 2D dynamique ou liste de listes)
+					Pour toute ligne du fichier
+						Lire les caractères de la ligne jusqu à sa fin
+							Si on lit un caractère de séparation (une virgule, un point-virgule ou une tabulation) ou une fin de ligne, on stocke les caractères lus dans la case correspondante de la structure
+				\end{lstlisting}
+				Ce module fournit donc une structure contenant les données du fichier, le nombre de lignes et le nombre de colonnes (taille de la structure).
 				
-		\subsection{API2 : Analyse descriptive des données}
+			\subsubsection{Description colonnes :}
+				Ce module va donner des informations préliminaires sur les données de chaque colonne du fichier :
+				\begin{itemize}
+					\item le type de chaque colonne
+					\item le rôle de chaque colonne
+					\item les données manquants ou erronées de chaque colonne
+				\end{itemize}
+				\begin{lstlisting}[language=C]
+					//On initialise une structure dont la taille est le nombre de colonnes qui contient 3 champs
+					Pour toute colonne du fichier
+						Lire chaque donnée et la comparer au type attendu
+							Si la donnée ne correspond pas au type, signaler dans la structure une donnée erronée
+							A chaque fin de lecture de colonne, attribuer un rôle à celle-ci
+				\end{lstlisting}
+				Ce module fournit donc une structure contenant 3 informations sur chaque colonne : le type, le rôle et les données erronées.
+
+				
+		\subsection{API 2 : Analyse descriptive des données}
 				\subsubsection{Module 1 :}
 				\subsubsection{Module 2 :}
 				\subsubsection{Module 3 :}
 				Ce module est utilisé pour fournir des informations de statistiques descriptives sur les colonnes de données qui lui seront fournies. Ses fonctionnalités se décomposent en trois pour les différents types de données à traiter:\\
 				\begin{enumerate}
-				\item qualitatif : calcul des effctifs et fréquences d'apparition
+				\item qualitatif : calcul des effectifs et fréquences d'apparition
 				\item quantitatif discret :\\
 					\begin{itemize}
 					\item effectifs, effectifs cumulés, fréquence et fréquence cumulée
@@ -95,7 +120,7 @@
 				\end{enumerate}
 			
 		\subsection{Interface graphique web}
-			Le module de l'interface graphique s'occupera de la manière dont l'application sera représentée à l'écran pour l'utilisateur, ce qui correspond au positionnement des éléments textuels, boutons et des fonctionnalités disponible dans une fenêtre. Voici une liste des principales fenêtres composant ce module avec leurs fonctionnalités:
+			Le module de l'interface graphique s'occupera de la manière dont l'application sera représentée à l'écran pour l'utilisateur, ce qui correspond au positionnement des éléments textuels, boutons et des fonctionnalités disponible dans une fenêtre. Voici une liste des principales fenêtres composant ce module avec leurs fonctionnalités :
 			\begin{enumerate}
 			\item Fenêtre de chargement pour récupérer un fichier \lstinline!.csv! avec validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop).
 			\item Fenêtre de contrôle préliminaire avec visualisation d'un échantillon du \lstinline!.csv!.		
@@ -116,6 +141,11 @@
 			\end{enumerate}
 		
 	\section{Coûts}
+		\begin{center}\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{4cm}|>{\centering\arraybackslash}m{7cm}|}			
+				\hline \multicolumn{1}{|c}{\textbf{Module}} & \multicolumn{1}{|c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{|c|}{\textbf{Coût}} \\
+				\hline 	Salut & 113 & nada \\
+				\hline 	
+				\end{longtable}\vspace{1em}\end{center}
 		
 	\newpage\section{Sources}
 		\begin{itemize}
