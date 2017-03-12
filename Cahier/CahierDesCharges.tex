@@ -27,27 +27,39 @@
 			DCbrain est également l'entreprise qui va bénéficier des paquets finaux après leur développement.
 			
 			\subsubsection{Autre partie prenante}
-			Les industriels clients de DCbrain sont des parties prenantes indirectes. Notre travail doit pouvoir être utiliser par DCbrain pour renforcer leur application.
+			Les industriels clients de DCbrain sont des parties prenantes indirectes. Notre travail doit pouvoir être utilisé par DCbrain pour renforcer leur application.
 			
 		\subsection{Utilisateurs du produit}
-		En premier lieux, l’application va servir aux membres de DCbrain étant donné que leurs clients industriels (Total, ERDF,…)leurs fournissent les fichiers CSV, afin qu’ils puissent appliquer des analyses descriptives sur les données dans le but de repérer des anomalies sur les réseaux de ces derniers. Puis en second lieux, il se pourrait que DCbrain veuille déployer l'application pour ses clients, dans ce cas les membres de ces organismes deviendront des utilisateurs.\\
+		En premier lieu, l’application va servir aux membres de DCbrain étant donné que leurs clients industriels (Total, ERDF,…) leur fournissent les fichiers CSV, afin qu’ils puissent appliquer des analyses descriptives sur les données dans le but de repérer des anomalies sur les réseaux de ces derniers. Puis en second lieu, il se pourrait que DCbrain veuille déployer l'application pour ses clients, dans ce cas les membres de ces organismes deviendront des utilisateurs.\\
 		
-		On peut supposer l'absence de restrictions d'utilisations, étant donné l'absence d'exigence de la part du maitre d'œuvre sur ce sujet.
+		On peut supposer l'absence de restrictions d'utilisations, étant donné l'absence d'exigence de la part du maître d'œuvre sur ce sujet.
 
 	\section{Contraintes sur le Projet}
 		\subsection{Contraintes imposées}
-		{\color{red}Contraintes sur la manière de satisfaire les exigences qui influencent la conception finale du produit : contraintes portant sur le projet en général, applicable sur le système en général}
-			\subsubsection{Contraintes sur la conception :} 
-				\begin{itemize}
-					\item Le produit doit tourner sur ...
-					\item Le produit doit fournir une interface graphique
-					\item Le produit doit prendre en charge les données représentées dans un fichier \lstinline!.csv!
-					\item Le produit doit fournir une analyse statistique descriptive des données en entrée
-					\item Le produit doit produire en sortie une API compatible
-					quel OS ? quelle archi ?
-				\end{itemize}
-			\subsubsection{Environnement de fonctionnement :} Va être installé sur quel OS ? quelle archi ?
-			\subsubsection{Applications partenaires :} 
+			\subsubsection{Contraintes sur la conception :}
+				\begin{center}\begin{longtable}{|>{\centering}m{3cm}|>{\raggedright\arraybackslash}m{10cm}|}			
+				\hline \multicolumn{1}{|c}{\textbf{Contrainte}} & \multicolumn{1}{|c|}{\textbf{Fiche}} \\
+				\hline 	1. Le produit doit fournir une application web &
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item{\textbf{Description :}} une "applet" fonctionnant sur un navigateur web.
+						\item{\textbf{Justification :}} assure une très grande portabilité et fournit à l'utilisateur une interface interactive.
+						\item{\textbf{Critère de satisfaction :}} on peut lancer l'application sur un navigateur web.
+						\end{description}\\
+				\hline 2. Le produit doit être développé avec un langage de programmation compatible avec l'analyse de données &
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item{\textbf{Description :}} le langage de programmation choisi doit inclure une bibliothèque qui permet d'analyser les données (taches de data mining et de machine Learning).
+						\item{\textbf{Justification :}} permettre une analyse de données la plus efficace possible.
+						\item{\textbf{Critère de satisfaction :}} on peut analyser les données de manière efficace.
+						\end{description}\\
+				\hline
+				\end{longtable}\vspace{1em}\end{center}
+				
+				\paragraph{Langages de programmation utilisés :} les contraintes 1 et 2 nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Java EE}}. D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
+				De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.
+				
+			\subsubsection{Environnement de fonctionnement :} \colorbox{yellow}{J'enlève cette parie ?}
+			\subsubsection{Applications partenaires :}
+			\colorbox{yellow}{Je mets API en sortie comme exigence ?}
 			Le produit doit prendre en compte de l'environnement de sortie adéquat pour la production des API, c'est à dire que cette API doit etre compatible avec l'outil DCbrain de visualisation des graphes de réseaux physiques.
 		
 		\subsection{Glossaire et conventions de dénomination}
@@ -106,7 +118,7 @@
 		
 		Le produit devra permettre l'insertion d'éventuels API supplémentaires, tel que l'analyse Multidimensionnel qui utilisera l'API de l'analyse Unidimensionnel dans le but de fournir des descriptions statiques plus poussé pour obtenir une meilleur vue d'ensemble sur les données collectées. Mais encore l'insertion de technique d'analyse de Graphe afin d'obtenir des informations sur l'état d'un graphe.
 		
-		\subsection{Sécurité}
+		\subsection{Sécurité} \colorbox{yellow}{c pas bon}
 		L’application ne sera pas connectée à un réseau, la question de la sécurité du système contre des attaques extérieures ne devrait sûrement pas se poser. Mais le produit doit être programmé de telle sorte qu’il n’endommage pas le système hébergeant l’application.
 		
 	\section{Autres aspects du projet}

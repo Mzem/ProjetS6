@@ -24,9 +24,11 @@
 			\begin{scope}[xscale=2,yscale=1.5]	
 				% description et nommage des noeuds 
 				\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
-				\node (API) at (-2,4) [rectangle,draw,fill=blue!25,text depth=3.5cm,minimum width=5cm,minimum height=5.3cm,font=\textbf\Large] {\begin{tabular}{c}API\end{tabular}};
-				\node (CHRG) [rectangle,draw,dashed,fill=white] at (API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
-				\node (ADD) [rectangle,draw,dashed,fill=white] at ([yshift=1.7em]API.south){\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
+				\node (API) at (-2,3) [rectangle,draw,fill=blue!25,text depth=7cm,minimum width=5cm,minimum height=6cm,font=\textbf\Large] {\begin{tabular}{c}API\end{tabular}};
+				\node (CHRG1) [rectangle,draw,dashed,fill=white] at ([yshift=1.5cm]API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
+				\node (CHRG2) [rectangle,draw,dashed,fill=white,below=of CHRG1.south,yshift=0.8cm] {\begin{tabular}{c}Chargement\\des données\end{tabular}};
+				\node (ADD1) [rectangle,draw,dashed,fill=white,below=of CHRG2.south,yshift=0.8cm] {\begin{tabular}{c}Chargement\\des données\end{tabular}};
+				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0.8cm] {\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
 				\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
 				% description des arêtes
 				% -- arête rectiligne entre les noeuds nommés ou indiqués en coordonnées
@@ -36,10 +38,10 @@
 				\draw (TITRE) |- (2,6);
 				\draw (-2,6) -- (API);
 				\draw (2,6) -- (IG);
-				\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG);
-				\path[->,>=stealth'] (CHRG) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
-				\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD);
-				\path[->,>=stealth'] (ADD) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
+				\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG1);
+				\path[->,>=stealth'] (CHRG1) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
+				\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD1);
+				\path[->,>=stealth'] (ADD1) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
 			\end{scope}
 			%Légende
 			\begin{scope}
