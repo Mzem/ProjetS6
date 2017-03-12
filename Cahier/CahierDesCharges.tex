@@ -3,11 +3,13 @@
 \title{\vspace{\fill}\textbf{\Huge Cahier des Charges}}
 \author{Sonny Klotz - Jean-Didier Pailleux - Malek Zemni\vspace{2em}\\\textit{Interface de chargement, de contrôle}\\\textit{et d’analyse statistique des données}\\\textit{pour la constitution d’un graphe de flux}\vspace{2em}}
 
+
 \begin{document}
+\pagenumbering{gobble}\clearpage
 \maketitle\vspace{\fill}
 \newpage
 \tableofcontents
-\newpage
+\newpage\clearpage\pagenumbering{arabic}
 
 	\section{Motivations du projet}
 		\subsection{But du projet}
@@ -20,8 +22,8 @@
 		
 		\subsection{Parties prenantes}
 			\subsubsection{Maître d'ouvrage}
-			Notre interface de contrôle, de chargement, et d'analyse de données est développée pour DCbrain.\\
-			Le projet a été lancé en collabaration avec l'UVSQ.
+			Notre interface de contrôle, de chargement, et d'analyse de données est développée pour l'entreprise \textbf{DCbrain}.\\
+			Le projet a été lancé en collaboration avec l'\textbf{UVSQ}.
 			
 			\subsubsection{Client}
 			DCbrain est également l'entreprise qui va bénéficier des paquets finaux après leur développement.
@@ -41,7 +43,7 @@
 				\hline \multicolumn{1}{|c}{\textbf{Contrainte}} & \multicolumn{1}{|c|}{\textbf{Fiche}} \\
 				\hline 	1. Le produit doit fournir une application web &
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-						\item{\textbf{Description :}} une "applet" fonctionnant sur un navigateur web.
+						\item{\textbf{Description :}} notre produit sera une application fonctionnant sur un navigateur web, appelée \textbf{\textit{applet}}.
 						\item{\textbf{Justification :}} assure une très grande portabilité et fournit à l'utilisateur une interface interactive.
 						\item{\textbf{Critère de satisfaction :}} on peut lancer l'application sur un navigateur web.
 						\end{description}\\
@@ -51,22 +53,52 @@
 						\item{\textbf{Justification :}} permettre une analyse de données la plus efficace possible.
 						\item{\textbf{Critère de satisfaction :}} on peut analyser les données de manière efficace.
 						\end{description}\\
+				\hline 3. Le produit doit fournir une API d'analyse de données en sortie &
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item{\textbf{Description :}} l'application doit intégrer des API d'analyse descriptive de données qui pourront être livrées en sortie au client.
+						\item{\textbf{Justification :}} permettre une réutilisabilité des fonctionnalités majeures du produit.
+						\item{\textbf{Critère de satisfaction :}} on peut exporter une API d'analyse de données en sortie.
+						\end{description}\\
 				\hline
 				\end{longtable}\vspace{1em}\end{center}
 				
-				\paragraph{Langages de programmation utilisés :} les contraintes 1 et 2 nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Java EE}}. D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
+				\paragraph{Choix des langages de programmation :} les contraintes 1 et 2 nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Java EE}}. D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
 				De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.
 				
-			\subsubsection{Environnement de fonctionnement :} \colorbox{yellow}{J'enlève cette parie ?}
+			\subsubsection{Environnement de fonctionnement :}
+				Le produit va fournir une application web ou \textbf{\textit{applet}}. L'environnement technologique de ce genre d'application
+				sont les navigateurs web. Ces navigateurs web jouent le rôle d'interface entre l'utilisateur et l'application.
+				
+				\begin{center}\begin{tikzpicture}\begin{scope}[xscale=2,yscale=1.5]	
+					\node (USR) at (-3,0) [rectangle,draw] {\begin{tabular}{c}Utilisateur\end{tabular}};
+					\node (NAV) at (0,0) [rectangle,draw,fill=blue!25] {\begin{tabular}{c}Navigateur web\end{tabular}};
+					\node (APP) at (3,0) [rectangle,draw] {\begin{tabular}{c}Application\end{tabular}};
+					\path[->,>=stealth'] (USR) edge[bend left=0] node[anchor=south,above]{Accès à l'hôte} (NAV);
+					\path[->,>=stealth'] (NAV) edge[bend left=13] node[anchor=south,above]{Intégration de l'application} (APP);
+				\end{scope}\end{tikzpicture}\end{center}
+					
+				Le produit doit donc être compatible avec tous les navigateurs web bureau (pas de version mobile exigée) prenant en charge les fonctionnalités des dernières versions des langages (\textbf{\textit{HTML5}} et \textbf{\textit{CSS3}}), par exemple \textbf{\textit{Google Chrome}} et \textbf{\textit{Mozilla Firefox}}.
+				
 			\subsubsection{Applications partenaires :}
-			\colorbox{yellow}{Je mets API en sortie comme exigence ?}
-			Le produit doit prendre en compte de l'environnement de sortie adéquat pour la production des API, c'est à dire que cette API doit etre compatible avec l'outil DCbrain de visualisation des graphes de réseaux physiques.
+				Le produit va fournir une API en sortie. Il doit donc prendre en compte de l'environnement d'intégration de cette API, c'est à dire que cette API doit être compatible avec les outils du client, l'entreprise DCbrain.
+				
+			\subsubsection{Temps dont disposent les développeurs du projet :}
+				Le produit doit être rendu avant le 26/05/2017.
+				
+			\subsubsection{Budget du projet :}
+				La réalisation du produit n'exige pas de ressources financières. Aucun budget n'est donc nécessaire.
 		
 		\subsection{Glossaire et conventions de dénomination}
-		
+			\begin{description}[style=unboxed,leftmargin=0.2cm]
+			\item\textbf{API :} \textit{Application Programming Interface}, constituent les paquets utilisables par les développeurs (intégrés), qu'on va livrer au client en plus de l'application elle-même.
+			\item\textbf{ADD :} \textit{Analyse Descriptive de Données}, fonctionnalité d'analyse de description statistique des données.
+			\end{description}
+			
 		\subsection{Faits et hypothèses déterminants}
 			\subsubsection{Facteurs influençant le produit, mais qui ne sont pas des contraintes imposées sur les exigences :}
+				\colorbox{yellow}{Rien à mettre à priori, mettez des trucs si vous en trouvez}
 			\subsubsection{Hypothèses que l’équipe fait sur le projet :}
+				\colorbox{yellow}{rien pour l'instant}
 		
 	\section{Exigences fonctionnelles}
 		{\color{red}
@@ -85,23 +117,25 @@
 		}
 	
 	\section{Exigences non fonctionnelles}
-		\subsection{Interface utilisateur du projet}
+		\subsection{Interface utilisateur du produit}
 		
-		\subsubsection{Exigences d’apparence} 
-		Le produit devra adopter une apparence simple, agréable et devra être facile à comprendre dès sa première prise en main.
-		Le maitre d’œuvre a émis le souhait d’avoir de l’Anglais comme langue utilisée pour l’affichage textuel.
+			\subsubsection{Exigences d’apparence} 
+			Le produit devra adopter une apparence simple, agréable et devra être facile à comprendre dès sa première prise en main.
+			Le maitre d’œuvre a émis le souhait d’avoir de l’Anglais comme langue utilisée pour l’affichage textuel.
 
-		\subsubsection{Exigences de style}
-		L’application s’adresse à un public professionnel, alors l’une des exigences concernant le style de l’interface est qu’il devra opter pour un style classique, au goût du jour et professionnel. L’affichage des résultats et autre devra susciter la confiance auprès des utilisateurs.
+			\subsubsection{Exigences de style}
+			L’application s’adresse à un public professionnel, alors l’une des exigences concernant le style de l’interface est qu’il devra opter pour un style classique, au goût du jour et professionnel. L’affichage des résultats et autre devra susciter la confiance auprès des utilisateurs.
 
 		\subsection{Utilisabilité}
 		Le produit devra être simple d’utilisation et facile à comprendre dès sa première prise en main, afin d’éviter une formation concernant la manipulation du produit pour les futurs utilisateurs.
 		Il aidera également l’utilisateur à analyser une quantité importante de données.
 
-		\subsection{Exigences de performance}
+		\subsection{Exigences de performance} 
+		\colorbox{yellow}{Dans le template y a pas cette partie}\\
+		\colorbox{yellow}{mais y a "Adéquation du produit avec son environnement" qui découle de la partie "Contraintes/Environnement"}\\
 		Les exigences de performance du futur produit concerne concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un CSV, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client à suggérer que cette attente devra être de l’ordre de la minute maximum. En ce qui concerne le temps de passage d'une fenêtre à l'autre (Choit de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choit du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
 
-		\subsection{Fonctionnement du projet}
+		\subsection{Fonctionnement du produit}
 			\subsubsection{Principales fonctionnalités}
 			Tout d’abord, l’application devra avoir la fonction majeur de posséder une interface afin de permettre le chargement d’un fichier au format CSV. Après avoir sélectionné un fichier, l’application pourra afficher le contenu de ce fichier sous forme de tableau et les erreurs dans le contenu d'une ligne dans une nouvelle fenêtre. Si le fichier contient une quantité importante de données (Supérieur à 1000), l’affichage ne se fera que sur les 1000 premières données.
 			Il n’y aura pas d’importance à déterminer le type de colonne car il y aura un format prédéfinis pour le CSV.\newline
@@ -118,7 +152,8 @@
 		
 		Le produit devra permettre l'insertion d'éventuels API supplémentaires, tel que l'analyse Multidimensionnel qui utilisera l'API de l'analyse Unidimensionnel dans le but de fournir des descriptions statiques plus poussé pour obtenir une meilleur vue d'ensemble sur les données collectées. Mais encore l'insertion de technique d'analyse de Graphe afin d'obtenir des informations sur l'état d'un graphe.
 		
-		\subsection{Sécurité} \colorbox{yellow}{c pas bon}
+		\subsection{Sécurité} 
+		\colorbox{yellow}{c pas bon}\\
 		L’application ne sera pas connectée à un réseau, la question de la sécurité du système contre des attaques extérieures ne devrait sûrement pas se poser. Mais le produit doit être programmé de telle sorte qu’il n’endommage pas le système hébergeant l’application.
 		
 	\section{Autres aspects du projet}

@@ -1,57 +1,50 @@
 \input{../tex/preambule}
-\usepackage{tikz}
-\usepackage{inputenc}
-\usetikzlibrary{arrows,automata}
-\usetikzlibrary{positioning}
 \geometry{top=3cm,bottom=3cm}
 
 \title{\vspace{\fill}\textbf{\Huge Organigramme}}
 \author{Sonny Klotz - Jean-Didier Pailleux - Malek Zemni\vspace{2em}\\\textit{Interface de chargement, de contrôle}\\\textit{et d’analyse statistique des données}\\\textit{pour la constitution d’un graphe de flux}\vspace{2em}}
 
 \begin{document}
+\pagenumbering{gobble}\clearpage
 \maketitle\vspace{\fill}
-\newpage
+\newpage\clearpage\pagenumbering{arabic}
 	
 	\section{Présentation de l'organigramme}
-		Le travail peut être décomposé en 3 modules :
+		Le travail peut être décomposé en 3 grands paquets :
 		\begin{itemize}
-		\item Une interface graphique : va faire transiter les informations entre les différentes APIs de l'application et fournir des rendus visuels des analyses
-		\item Une API de chargement des données : va effectuer des vérifications sur les données fournies (\lstinline!.csv!) puis retourne le résultat à l'interface graphique
-		\item Une API d'analyse descriptive des données : va permettre de calculer les informations statistiques nécessaires
+		\item Une \textbf{interface graphique web} : module d'interface utilisateurs qui va faire transiter les informations entre les différentes APIs
+		\item Une \textbf{API 1 de chargement des données} : composée de 3 modules décrits ci-dessous
+		\item Une \textbf{API 2 d'analyse descriptive des données} : composée de 3 modules décrits ci-dessous
 		\end{itemize}
 		
 		\begin{center}\begin{tikzpicture}
 			\begin{scope}[xscale=2,yscale=1.5]	
-				% description et nommage des noeuds 
-				\node (TITRE) at (0,7) [rectangle,draw] {\begin{tabular}{c}Interface d'analyse statistique de données\end{tabular}};
-				\node (API) at (-2,3) [rectangle,draw,fill=blue!25,text depth=7cm,minimum width=5cm,minimum height=6cm,font=\textbf\Large] {\begin{tabular}{c}API\end{tabular}};
-				\node (CHRG1) [rectangle,draw,dashed,fill=white] at ([yshift=1.5cm]API.center){\begin{tabular}{c}Chargement\\des données\end{tabular}};
-				\node (CHRG2) [rectangle,draw,dashed,fill=white,below=of CHRG1.south,yshift=0.8cm] {\begin{tabular}{c}Chargement\\des données\end{tabular}};
-				\node (ADD1) [rectangle,draw,dashed,fill=white,below=of CHRG2.south,yshift=0.8cm] {\begin{tabular}{c}Chargement\\des données\end{tabular}};
-				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0.8cm] {\begin{tabular}{c}Analyse descriptive\\des données\end{tabular}};	
-				\node (IG) at (2,4) [rectangle,draw,dashed] {\begin{tabular}{c}Interface graphique\end{tabular}};
-				% description des arêtes
-				% -- arête rectiligne entre les noeuds nommés ou indiqués en coordonnées
-				% |- départ vertical arrivée horizontale
-				% -| départ horizontal arrivée verticale
-				\draw (TITRE) |- (-2,6);
-				\draw (TITRE) |- (2,6);
-				\draw (-2,6) -- (API);
-				\draw (2,6) -- (IG);
-				\path[->,>=stealth'] (IG) edge[bend left=-20] node[anchor=south,above]{(1)} (CHRG1);
-				\path[->,>=stealth'] (CHRG1) edge[bend left=0] node[anchor=south,above]{(2)} (IG);
-				\path[->,>=stealth'] (IG) edge[bend left=0] node[anchor=south,above]{(3)} (ADD1);
-				\path[->,>=stealth'] (ADD1) edge[bend left=-20] node[anchor=south,above]{(4)} (IG);
+				\node (IW) at (0,3) [rectangle,draw,dashed] {\begin{tabular}{c}Interface web\end{tabular}};
+				\node (API1) at (-2.5,0) [rectangle,draw,fill=blue!25,text depth=5.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 1\end{tabular}};
+				\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API1.center){\begin{tabular}{c}Vérifications\end{tabular}};
+				\node (ANALS) [rectangle,draw,dashed,fill=white,below=of VERIF.south,yshift=0cm] {\begin{tabular}{c}Analyse syntaxique\end{tabular}};
+				\node (DESC) [rectangle,draw,dashed,fill=white,below=of ANALS.south,yshift=0cm] {\begin{tabular}{c}Description\end{tabular}};				
+				\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=5.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 2\end{tabular}};
+				\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API2.center){\begin{tabular}{c}Module 1\end{tabular}};
+				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0cm] {\begin{tabular}{c}Module 2\end{tabular}};
+				\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0cm] {\begin{tabular}{c}Module 3\end{tabular}};
+				\path[->,>=stealth'] (IW) edge[bend left=-20] node[anchor=south,above]{(1)} (VERIF);
+				\path[->,>=stealth'] (VERIF) edge[bend left=0] node[anchor=south,left]{(2)} (ANALS);
+				\path[->,>=stealth'] (ANALS) edge[bend left=0] node[anchor=south,left]{(3)} (DESC);
+				\path[->,>=stealth'] (DESC) edge[bend left=-20] node[anchor=south,left]{(4)} (IW);
+				\path[->,>=stealth'] (IW) edge[bend left=20] node[anchor=south,above]{(5)} (ADD1);
+				\path[->,>=stealth'] (ADD1) edge[bend left=0] node[anchor=south,right]{(6)} (ADD2);
+				\path[->,>=stealth'] (ADD2) edge[bend left=0] node[anchor=south,right]{(7)} (ADD3);
+				\path[->,>=stealth'] (ADD3) edge[bend left=20] node[anchor=south,right]{(8)} (IW);
 			\end{scope}
 			%Légende
 			\begin{scope}
-				\node (LEGENDE) at (5.5,3) {\textbf{Légende :}};
-				\node (FAMILLE) at (5.5,2) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
-				\node (MODULE) at (5.5,1) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
-				\path[->,>=stealth'] (5,-0.3) edge[bend left=20] node[anchor=south,above]{informations transmises} (6,-0.3);
+				\node (LEGENDE) at (-7,-5) {\textbf{Légende :}};
+				\node (FAMILLE) at (-4.5,-5) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
+				\node (MODULE) at (-2,-5) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
+				\path[->,>=stealth'] (0.5,-5.3) edge[bend left=0] node[anchor=south,above]{informations transmises} (3,-5.3);
 			\end{scope}
 		\end{tikzpicture}\end{center}
-		
 		\begin{center}\begin{figure}[h]
 			\textbf{Notes :}\\
 			(1) Fichier \lstinline!.csv! formaté \\
@@ -62,15 +55,8 @@
 		\end{figure}\end{center}
 	
 	\section{Fonctionnalités des modules}
-		\subsection{API}
-			\textit{Application Programming Interface} constituent les paquets utilisables par les développeurs (intégrée), qu'on va livrer au client en plus de l'application elle-même.\\
-			Parmi les modules du logiciel, on a 2 APIs :
-			\begin{itemize}
-				\item Une API de chargement des données
-				\item Une API d'analyse statistique des données
-			\end{itemize}
-		
-			\subsubsection{Chargement des données}
+		\subsection{API 1}
+			\subsubsection{Vérifications :}
 				Le module de chargement des données s'occupe de la préparation et de la vérification du fichier fourni en entrée. Ces principales fonctionnalités sont :
 				\begin{itemize}
 				\item Ouverture du fichier en vérifiant qu'il a la bonne extension \lstinline!.csv! et qu'il est accessible en lecture.
@@ -84,8 +70,14 @@
 				\item Nommer les colonnes.
 				\end{itemize}
 				En sortie, on aura donc une structure décrivant les données du fichier \lstinline!.csv! après vérification : nombre de lignes et de colonnes, entrées erronées, noms des colonnes...
+			\subsubsection{Analyse syntaxique :}
+			
+			\subsubsection{Description :}
 				
-			\subsubsection{Analyse descriptive des données}
+		\subsection{API2 : Analyse descriptive des données}
+				\subsubsection{Module 1 :}
+				\subsubsection{Module 2 :}
+				\subsubsection{Module 3 :}
 				Ce module est utilisé pour fournir des informations de statistiques descriptives sur les colonnes de données qui lui seront fournies. Ses fonctionnalités se décomposent en trois pour les différents types de données à traiter:\\
 				\begin{enumerate}
 				\item qualitatif : calcul des effctifs et fréquences d'apparition
@@ -102,7 +94,7 @@
 				\item quantitatif continu : on regroupe les valeurs en classe d'intervalles, on peut ensuite appliquer les mêmes techniques que pour les variables discrètes
 				\end{enumerate}
 			
-		\subsection{Interface graphique}
+		\subsection{Interface graphique web}
 			Le module de l'interface graphique s'occupera de la manière dont l'application sera représentée à l'écran pour l'utilisateur, ce qui correspond au positionnement des éléments textuels, boutons et des fonctionnalités disponible dans une fenêtre. Voici une liste des principales fenêtres composant ce module avec leurs fonctionnalités:
 			\begin{enumerate}
 			\item Fenêtre de chargement pour récupérer un fichier \lstinline!.csv! avec validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop).
@@ -123,15 +115,16 @@
 				\end{itemize}
 			\end{enumerate}
 		
-		\newpage
-		\section{Sources}
+	\section{Coûts}
+		
+	\newpage\section{Sources}
 		\begin{itemize}
 		\item http://www.math.univ-toulouse.fr/~baccini/zpedago/asde.pdf
 		\item http://www.math.univ-toulouse.fr/~besse/Wikistat/pdf/st-l-des-uni.pdf
 		\item http://iml.univ-mrs.fr/~reboul/cours2.pdf
 		\item http://commons.apache.org/proper/commons-math/userguide/stat.html
 		\item https://hal.archives-ouvertes.fr/halshs-00287751/document
-		\item Wikipédia: Données abérantes.
+		\item Wikipédia: Données aberrantes.
 		\end{itemize}
 		
 	
