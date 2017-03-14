@@ -130,21 +130,46 @@
 				\item Affichera un échantillon du contenu du \lstinline!.csv! (environ les 1000 premières lignes) avec un système de scroll.
 				\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).
 				\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations.
-				\item Affichage d'un bouton pour passer à l'étape de l'analyse de données.
+				\item Affichage d'un mécanisme pour passer à l'étape de l'analyse de données.
 				\end{itemize}
 			\item Fenêtre correspondant à l'étape de l'analyse de données.
 				\begin{itemize}
 				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci.
 				\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part.
-				\item Un bouton pour lancer l'exportation des résultats sera disponible (Écriture dans un nouveau fichiers).
+				\item Une fonctionnalité pour lancer l'exportation des résultats sera disponible (Écriture dans un nouveau fichiers).
 				\end{itemize}
 			\end{enumerate}
 		
 	\section{Coûts}
 		\begin{center}\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{4cm}|>{\centering\arraybackslash}m{7cm}|}			
-				\hline \multicolumn{1}{|c}{\textbf{Module}} & \multicolumn{1}{|c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{|c|}{\textbf{Coût}} \\
-				\hline 	Salut & 113 & nada \\
+				\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{|c|}{\textbf{Justification}} \\
+				\hline 	Main-Application & 15 & Mise en forme du main et appelle de l'application \\
+				\hline 	Fenêtre choix et chargement du fichier & 10 + 20 & Fonctions pour : Drag\& Drop + Système de fichiers\\
+				\hline 	Fenêtre échantillon/contrôle & 5 + 20 + 10 + 10 + 20 & Communication avec le module application + Affichage de l'interface+ lecteurs des valeurs + 	affichage des valeurs \\
+				\hline 	Fenêtre ADD & 10 + 3* 30 &  Envoie d'informations au module application + Construction des graphe pour l'ADD pour les 3 types d'analyse \\
+				\hline  Calcul distribution de données  & 20 + 20*3 & Application des formules pour les calculs de fréquences et d'effectifs + calcul des valeurs pour la construction de 3 graphes \\
+				\hline 	Quantitative Discret & 60 + 20*2 & Application des formules attaché à l'analyse quantitative discret + calcul des valeurs pour la construction de 2 graphes \\
+				\hline 	Quantitative Continu & 20 + 10 + 10 + 5 + 20*2 & Parcours + choix précision classe d'intervale + écriture + comunication avec les modules+ calcul des valeurs pour la construction de 2 graphes\\
+				\hline 	Vérification fichier & 30 & Ouverture fichier + vérification si ouverture en lecture + présence de texte formaté ou non\\
+				\hline 	Analyse Syntaxique & 20 + 5 &  Recopie et vérification + initialisation de la structure\\
+				\hline 	Description & 25 + 10 & Parcours du fichiers avec condition + Fonction pour donner nom et type de colonne\\
 				\hline 	
+				\end{longtable}\vspace{1em}\end{center}
+				
+	\section{Répartition des tâches}
+		\begin{center}\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{3cm}|>{\centering}m{3cm}|>{\centering\arraybackslash}m{3cm}|}			
+				\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Malek}} & \multicolumn{1}{ c|}{\textbf{Sonny}} & \multicolumn{1}{ c|}{\textbf{Jean-Didier}} \\
+				\hline 	Main-Application & & &\XSolid \\
+				\hline 	Fenêtre choix et chargement du fichier &  &  & \XSolid \\
+				\hline 	Fenêtre échantillon/contrôle & \XSolid &  &  \\
+				\hline 	Fenêtre ADD & & \XSolid &  \\
+				\hline  Calcul distribution de données  & & & \XSolid \\
+				\hline 	Quantitative Discret & & \XSolid & \\
+				\hline 	Quantitative Continu & & \XSolid & \\
+				\hline 	Vérification fichier & \XSolid & & \\
+				\hline 	Analyse Syntaxique & &  & \XSolid \\
+				\hline 	Description & \XSolid & & \\
+				\hline
 				\end{longtable}\vspace{1em}\end{center}
 		
 	\newpage\section{Sources}
