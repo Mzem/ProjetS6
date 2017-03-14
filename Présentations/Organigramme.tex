@@ -17,26 +17,46 @@
 		\item Une \textbf{API 2 d'analyse descriptive des données} : composée de 3 modules
 		\end{itemize}
 		
-		\begin{center}\begin{figure}[h]\begin{tikzpicture}
+		\begin{figure}[h]\begin{tikzpicture}
 			\begin{scope}[xscale=2,yscale=1.5]	
-				\node (IW) at (0,3) [rectangle,draw,dashed] {\begin{tabular}{c}Interface web\end{tabular}};
+				\node (IW) at (0,5) [rectangle,draw,text depth=3cm,minimum width=17cm,minimum height=4cm,font=\textbf\Large] {\begin{tabular}{c}Interface web\end{tabular}};
+				\node (F2) [rectangle,draw,dashed] at ([yshift=0.4cm]IW.center) {\begin{tabular}{c}Fenêtre échantillons\end{tabular}};
+				\node (F1) [rectangle,draw,dashed] at ([xshift=-3.7cm]F2.east) {\begin{tabular}{c}Fenêtre chargement fichier\end{tabular}};
+				\node (F3) [rectangle,draw,dashed] at ([xshift=3.7cm]F2.west) {\begin{tabular}{c}Fenêtre résultats ADD\end{tabular}};
+				\node (MAIN) [rectangle,draw,dashed,below=of F2.south,yshift=0cm] {\begin{tabular}{c}Main - Application\end{tabular}};
+
+				
 				\node (API1) at (-2.5,0) [rectangle,draw,fill=blue!25,text depth=5.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 1\end{tabular}};
 				\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API1.center){\begin{tabular}{c}Vérification fichier\end{tabular}};
 				\node (ANALS) [rectangle,draw,dashed,fill=white,below=of VERIF.south,yshift=0cm] {\begin{tabular}{c}Analyse syntaxique\end{tabular}};
 				\node (DESC) [rectangle,draw,dashed,fill=white,below=of ANALS.south,yshift=0cm] {\begin{tabular}{c}Description colonne\end{tabular}};				
-				\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=5.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 2\end{tabular}};
-				\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API2.center){\begin{tabular}{c}Module 1\end{tabular}};
-				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0cm] {\begin{tabular}{c}Module 2\end{tabular}};
-				\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0cm] {\begin{tabular}{c}Module 3\end{tabular}};
-				\path[->,>=stealth'] (IW) edge[bend left=-20] node[anchor=south,above]{(1)} (VERIF);
-				\path[->,>=stealth'] (VERIF) edge[bend left=-10] node[anchor=south,above]{(2)} (IW);
-				\path[->,>=stealth'] (VERIF) edge[bend left=0] node[anchor=south,left]{(3)} (ANALS);
-				\path[->,>=stealth'] (ANALS) edge[bend left=0] node[anchor=south,left]{(4)} (DESC);
-				\path[->,>=stealth'] (DESC) edge[bend left=-20] node[anchor=south,left]{(5)} (IW);
-				\path[->,>=stealth'] (IW) edge[bend left=20] node[anchor=south,above]{(6)} (ADD1);
-				\path[->,>=stealth'] (ADD1) edge[bend left=0] node[anchor=south,right]{(7)} (ADD2);
-				\path[->,>=stealth'] (ADD2) edge[bend left=0] node[anchor=south,right]{(8)} (ADD3);
-				\path[->,>=stealth'] (ADD3) edge[bend left=20] node[anchor=south,right]{(9)} (IW);
+				\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=7cm,minimum width=5cm,minimum height=7.5cm,font=\textbf\Large] {\begin{tabular}{c}API 2\end{tabular}};
+				\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1.4cm]API2.center){\begin{tabular}{c}AD qualitatives\end{tabular}};
+				\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0cm] {\begin{tabular}{c}AD quantitatives\\discrètes\end{tabular}};
+				\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0cm] {\begin{tabular}{c}AD quantitatives\\continues\end{tabular}};
+				
+				\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,left]{1} (F1);
+				\path[->,>=stealth'] (F1) edge[bend left=10] node[anchor=south,left]{2} (MAIN);
+				\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,left]{3} (F2);
+				\path[->,>=stealth'] (F2) edge[bend left=10] node[anchor=south,right]{4} (MAIN);
+				\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,right]{5} (F3);
+				\path[->,>=stealth'] (F3) edge[bend left=10] node[anchor=south,right]{6} (MAIN);
+				
+				\draw[-triangle 45] (MAIN.190) -- node[anchor=south,left] {7} (VERIF.70);
+				\draw[-triangle 45] (VERIF.50) -- node[anchor=south,right] {8} (MAIN.195);
+				\draw[-triangle 45] (MAIN.200) -- node[anchor=south,left] {9} (ANALS.15);
+				\draw[-triangle 45] (ANALS.5) -- node[anchor=south,right] {10} (MAIN.205);				
+				\draw[-triangle 45] (MAIN.210) |- node[anchor=north,above] {11} (DESC.10);
+				\draw[-triangle 45] (DESC) -| node[anchor=south,below] {12} (MAIN.220);				
+				
+				\draw[-triangle 45] (MAIN.350) -- node[anchor=south,right] {13} (ADD1.100);
+				\draw[-triangle 45] (ADD1.120) -- node[anchor=south,left] {14} (MAIN.345);
+				\draw[-triangle 45] (MAIN.340) -- node[anchor=south,right] {15} (ADD2.155);
+				\draw[-triangle 45] (ADD2.170) -- node[anchor=south,left] {16} (MAIN.335);				
+				\draw[-triangle 45] (MAIN.330) |- node[anchor=north,above] {17} (ADD3.165);
+				\draw[-triangle 45] (ADD3) -| node[anchor=south,below] {18} (MAIN.320);
+				
+				
 			\end{scope}
 			%Légende
 			\begin{scope}
@@ -47,24 +67,33 @@
 			\end{scope}
 		\end{tikzpicture}
 		\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
-		\end{figure}\end{center}
+		\end{figure}
 		
 		\hspace{-\parindent}\textbf{Notes :}\\
-			(1) Fichier \lstinline!.csv! \\
-			(2) Erreur ouverture ou format du fichier\\
-			(3) Fichier OK !\\
-			(4) \textbf{Structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (taille de la structure)\\
-			(5) \textbf{Structure 1} + \textbf{Structure 2} contenant 3 champs d'informations sur chaque colonne : le type, le rôle et les données erronées\\
-			(6)\\
-			(7)\\
-			(8)\\
-			(9)\\
+			(1) \\
+			(2) \\
+			(3) \\
+			(4) \\
+			(5) \\
+			(6) \\
+			(7) Fichier \lstinline!.csv! : lancement de la vérification de son format\\
+			(8) Fichier OK ou ERREUR : ouverture ou format du fichier\\
+			(9) Fichier \lstinline!.csv! : lancement de l'analyse syntaxique de son contenu\\
+			(10) \textbf{Structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (taille de la structure)\\
+			(11) \textbf{Structure 1} : lancement de la description des colonnes de la \textbf{Structure 1}\\
+			(12) \textbf{Structure 2} contenant 3 champs d'informations sur chaque colonne : le type, le rôle et les données erronées\\
+			(13) \\
+			(14) \\
+			(15) \\
+			(16) \\
+			(17) \\
+			(18) \\
 	
 	\section{Fonctionnalités des modules}
 		\subsection{API 1 : Chargement des données}
 			L'API de chargement des données va être divisée en 3 modules :
 			
-			\subsubsection{Vérification fichier :}
+			\subsubsection{Vérification format fichier :}
 				Ce module va vérifier le fichier fourni en entrée en plusieurs points :
 				\begin{itemize}
 					\item l'ouverture du fichier a réussi
@@ -72,7 +101,7 @@
 					\item le fichier est accessible en lecture
 				\end{itemize}
 			
-			\subsubsection{Analyse syntaxique :}
+			\subsubsection{Analyse syntaxique contenu :}
 				Ce module va exécuter une analyse syntaxique sur le texte du fichier \lstinline!.csv! afin de détecter les différentes données et les stocker dans une structure.
 				\begin{lstlisting}[language=C]
 					//On initialise une structure dynamique pouvant stocker les données du fichier (tableau 2D dynamique ou liste de listes)
@@ -82,7 +111,7 @@
 				\end{lstlisting}
 				Ce module fournit donc une structure contenant les données du fichier, le nombre de lignes et le nombre de colonnes (taille de la structure).
 				
-			\subsubsection{Description colonnes :}
+			\subsubsection{Description contenu colonnes :}
 				Ce module va donner des informations préliminaires sur les données de chaque colonne du fichier :
 				\begin{itemize}
 					\item le type de chaque colonne
