@@ -129,25 +129,29 @@
 
 				
 		\subsection{API 2 : Analyse descriptive des données}
-				\subsubsection{Module 1 :}
-				\subsubsection{Module 2 :}
-				\subsubsection{Module 3 :}
-				Ce module est utilisé pour fournir des informations de statistiques descriptives sur les colonnes de données qui lui seront fournies. Ses fonctionnalités se décomposent en trois pour les différents types de données à traiter:\\
-				\begin{enumerate}
-				\item qualitatif : calcul des effectifs et fréquences d'apparition
-				\item quantitatif discret :\\
+				\subsubsection{Module 1 : Calcul de la distribution des données - Analyse de données qualitatives}
 					\begin{itemize}
-					\item effectifs, effectifs cumulés, fréquence et fréquence cumulée
+					\item effectifs, effectifs cumulés
+					\item fréquence et fréquence cumulée
+					\item représentations graphiques : diagramme en secteur, histogramme, ...
+					\end{itemize}
+				\subsubsection{Module 2 : Analyse de données quantitatives discrètes}
+					\begin{itemize}
 					\item moyenne
 					\item médiane et autres quantiles
 					\item variance et écart-type
 					\item anomalies : boîte à moutaches de Tukey
 					\item symétrie : coeff de Pearson ou coeff de Yule
 					\item aplatissement : coeff de Fisher
+					\item représentations graphiques : distribution, cumulatif,  boîte à moustaches, ...
 					\end{itemize}
-				\item quantitatif continu : on regroupe les valeurs en classe d'intervalles, on peut ensuite appliquer les mêmes techniques que pour les variables discrètes
-				\end{enumerate}
-			
+				\subsubsection{Module 3 : Découpage en classes d'intervalle - Analyse de données quantitatives continues}
+					\begin{itemize}
+					\item découpage en classe selon une précision définie
+					\item découpage en classe selon une précision par défaut (échelle définie après un parcours des valeurs)
+					\item représentations graphiques : distribution, boîte à moustaches, ...
+					\end{itemize}
+					
 		\subsection{Interface graphique web}
 			Le module de l'interface graphique s'occupera de la manière dont l'application sera représentée à l'écran pour l'utilisateur, ce qui correspond au positionnement des éléments textuels, boutons et des fonctionnalités disponible dans une fenêtre. Voici une liste des principales fenêtres composant ce module avec leurs fonctionnalités :
 			\begin{enumerate}
@@ -159,22 +163,47 @@
 				\item Affichera un échantillon du contenu du \lstinline!.csv! (environ les 1000 premières lignes) avec un système de scroll.
 				\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).
 				\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations.
-				\item Affichage d'un bouton pour passer à l'étape de l'analyse de données.
+				\item Affichage d'un mécanisme pour passer à l'étape de l'analyse de données.
 				\end{itemize}
 			\item Fenêtre correspondant à l'étape de l'analyse de données.
 				\begin{itemize}
 				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci.
 				\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part.
-				\item Un bouton pour lancer l'exportation des résultats sera disponible (Écriture dans un nouveau fichiers).
+				\item Une fonctionnalité pour lancer l'exportation des résultats sera disponible (Écriture dans un nouveau fichiers).
 				\end{itemize}
 			\end{enumerate}
 		
 	\section{Coûts}
 		\begin{center}\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{4cm}|>{\centering\arraybackslash}m{7cm}|}			
-				\hline \multicolumn{1}{|c}{\textbf{Module}} & \multicolumn{1}{|c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{|c|}{\textbf{Coût}} \\
-				\hline 	Salut & 113 & nada \\
+				\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{|c|}{\textbf{Justification}} \\
+				\hline 	Main-Application & 15 & Mise en forme du main et appel de l'application \\
+				\hline 	Fenêtre choix et chargement du fichier & 10 + 20 & Fonctions pour : Drag\& Drop + Système de fichiers\\
+				\hline 	Fenêtre échantillon/contrôle & 5 + 20 + 10 + 10 + 20 & Communication avec le module application + Affichage de l'interface+ lecteurs des valeurs + 	affichage des valeurs \\
+				\hline 	Fenêtre ADD & 10 + 3* 30 &  Envoie d'informations au module application + Construction des graphe pour l'ADD pour les 3 types d'analyse \\
+				\hline  Calcul distribution de données  & 20 + 20*3 & Application des formules pour les calculs de fréquences et d'effectifs + calcul des valeurs pour la construction de 3 graphes \\
+				\hline 	Quantitatif Discret & 60 + 20*2 & Application des formules attaché à l'analyse quantitative discret + calcul des valeurs pour la construction de 2 graphes \\
+				\hline 	Quantitatif Continu & 20 + 10 + 10 + 5 + 20*2 & Parcours + choix précision classe d'intervalle + écriture + communication avec les modules+ calcul des valeurs pour la construction de 2 graphes\\
+				\hline 	Vérification fichier & 30 & Ouverture fichier + vérification si ouverture en lecture + présence de texte formaté ou non\\
+				\hline 	Analyse Syntaxique & 20 + 5 &  Recopie et vérification + initialisation de la structure\\
+				\hline 	Description & 25 + 10 & Parcours du fichiers avec condition + Fonction pour donner nom et type de colonne\\				\hline \textbf{Coût Total} & \textbf{565} & \textbf{Estimation totale du coût}\\
 				\hline 	
 				\end{longtable}\vspace{1em}\end{center}
+				
+	\section{Répartition des tâches}
+		\begin{center}\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{3cm}|>{\centering}m{3cm}|>{\centering\arraybackslash}m{3cm}|}			
+			\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Malek}} & \multicolumn{1}{ c|}{\textbf{Sonny}} & \multicolumn{1}{c|}{\textbf{Jean-Didier}} \\
+			\hline 	Main-Application & ~ & ~ & x \\
+			\hline 	Fenêtre choix et chargement du fichier & ~ & ~ & x \\
+			\hline 	Fenêtre échantillon/contrôle & x & ~ & ~ \\
+			\hline 	Fenêtre ADD & ~ & x & ~ \\
+			\hline  Calcul distribution de données & ~ & ~ & x \\
+			\hline 	Quantitative Discret & ~ & x & ~ \\
+			\hline 	Quantitative Continu &  ~ & x & ~ \\
+			\hline 	Vérification fichier & x & ~ & ~ \\
+			\hline 	Analyse Syntaxique & ~ & ~ & x \\
+			\hline 	Description colonnes fichier & x & ~ & ~ \\
+			\hline
+		\end{longtable}\vspace{1em}\end{center}
 		
 	\newpage\section{Sources}
 		\begin{itemize}
