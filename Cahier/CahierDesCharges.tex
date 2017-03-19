@@ -62,9 +62,6 @@
 				\hline
 				\end{longtable}\vspace{1em}\end{center}
 				
-				\paragraph{Choix des langages de programmation :} les contraintes 1 et 2 nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Java EE}}. D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
-				De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.
-				
 			\subsubsection{Environnement de fonctionnement :}
 				Le produit va fournir une application web ou \textbf{\textit{applet}}. L'environnement technologique de ce genre d'application
 				sont les navigateurs web. Ces navigateurs web jouent le rôle d'interface entre l'utilisateur et l'application.
@@ -77,7 +74,7 @@
 					\path[->,>=stealth'] (NAV) edge[bend left=13] node[anchor=south,above]{Intégration de l'application} (APP);
 				\end{scope}\end{tikzpicture}\end{center}
 					
-				Le produit doit donc être compatible avec tous les navigateurs web bureau (pas de version mobile exigée) prenant en charge les fonctionnalités des dernières versions des langages (\textbf{\textit{HTML5}} et \textbf{\textit{CSS3}}), par exemple \textbf{\textit{Google Chrome}} et \textbf{\textit{Mozilla Firefox}}.
+				Le produit doit donc être compatible avec tous les navigateurs web bureau (pas de version mobile exigée) prenant en charge les fonctionnalités des dernières versions de \textbf{\textit{HTML5}} et \textbf{\textit{CSS3}}, par exemple \textbf{\textit{Google Chrome}} et \textbf{\textit{Mozilla Firefox}}.
 				
 			\subsubsection{Applications partenaires :}
 				Le produit va fournir une API en sortie. Il doit donc prendre en compte de l'environnement d'intégration de cette API, c'est à dire que cette API doit être compatible avec les outils du client, l'entreprise DCbrain.
@@ -91,7 +88,9 @@
 		\subsection{Glossaire et conventions de dénomination}
 			\begin{description}[style=unboxed,leftmargin=0.2cm]
 			\item\textbf{API :} \textit{Application Programming Interface}, constituent les paquets utilisables par les développeurs (intégrés), qu'on va livrer au client en plus de l'application elle-même.
+			\item\textbf{AD :} \textit{Analyse de Données}
 			\item\textbf{ADD :} \textit{Analyse Descriptive de Données}, fonctionnalité d'analyse de description statistique des données.
+			\item\textbf{Applet :} application qui s'exécute dans la fenêtre d'un navigateur web.
 			\end{description}
 			
 		\subsection{Faits et hypothèses déterminants}
@@ -181,6 +180,14 @@
 			\subsubsection{Intégrité}
 			\subsubsection{Protection des données à caractères personnel}
 			\subsubsection{Audit et traçabilité}
+		
+		
+	\section{Langages de programmation :} 
+	Le choix langages de programmation qui vont être utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
+	La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec l'analyse de donnée) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Java EE}}.\\
+	D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
+	De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.
+		
 		
 	\section{Autres aspects du projet}
 		\subsection{Question ouvertes}
