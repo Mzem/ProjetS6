@@ -156,20 +156,20 @@
 		\subsection{Interface graphique web}
 			Le module de l'interface graphique s'occupera de la manière dont l'application sera représentée à l'écran pour l'utilisateur, ce qui correspond au positionnement des éléments textuels, boutons et des fonctionnalités disponible dans une fenêtre. Voici une liste des principales fenêtres composant ce module avec leurs fonctionnalités :
 			\begin{enumerate}
-			\item Fenêtre de chargement pour récupérer un fichier \lstinline!.csv! avec validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop).
+			\item Fenêtre de chargement pour récupérer un fichier \lstinline!.csv! avec validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop). (C.S: Le fichier devra être chargé  et devra correspondre à la demande).
 			\item Fenêtre de contrôle préliminaire avec visualisation d'un échantillon du \lstinline!.csv!.		
 				\begin{itemize}
-				\item Affichera le nombre de lignes/colonnes contenu dans le .csv.
-				\item Affichera le titre du fichier.
-				\item Affichera un échantillon du contenu du \lstinline!.csv! (environ les 1000 premières lignes) avec un système de scroll.
-				\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).
-				\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations.
-				\item Affichage d'un mécanisme pour passer à l'étape de l'analyse de données.
+				\item Affichera le nombre de lignes/colonnes contenu dans le \lstinline!.csv!. (C.S: Affiche le bon nombre de lignes et de colonnes).
+				\item Affichera le titre du fichier. (C.S: Affiche le bon titre du fichier).
+				\item Affichera un échantillon du contenu du \lstinline!.csv! (environ les 1000 premières lignes) avec un système de scroll. (C.S: L'affichage de l'échantillon doit bien se faire sur les 1000 premières valeurs et doivent bien correspondre bien correspondre au contenu du fichier). 
+				\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur) (C.S: Doit bien affiché les lignes contenant les erreurs, le contenu et leur type de façon précise).
+				\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations. (C.S : Le système de navigation doit être lisible et pratique sans trop charger la fenêtre).
+				\item Affichage d'un mécanisme pour passer à l'étape de l'analyse de données (C.S: Fonctionnalité bien placé, qui répond à la demande).
 				\end{itemize}
 			\item Fenêtre correspondant à l'étape de l'analyse de données.
 				\begin{itemize}
-				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci.
-				\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part.
+				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci. (C.S: Sélection de la colonne doit bien se faire + lancement possible après la sélection).
+				\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part. (C.S: résultats conformes + diagramme bien dessiné). 
 				\item Une fonctionnalité pour lancer l'exportation des résultats sera disponible (Écriture dans un nouveau fichiers).
 				\end{itemize}
 			\end{enumerate}

@@ -151,21 +151,21 @@
 			L’application s’adresse à un public professionnel, alors l’une des exigences concernant le style de l’interface est qu’il devra opter pour un style classique, au goût du jour et professionnel. L’affichage des résultats et autre devra susciter la confiance auprès des utilisateurs.
 
 		\subsection{Utilisabilité}
-		Le produit devra être simple d’utilisation et facile à comprendre dès sa première prise en main, afin d’éviter une formation concernant la manipulation du produit pour les futurs utilisateurs.
+		Le produit devra être simple d’utilisation et facile à comprendre dès sa première prise en main, pour ne pas soumettre une formation concernant la manipulation du produit aux futurs utilisateurs.
 		Il aidera également l’utilisateur à analyser une quantité importante de données.
 
 		\subsection{Exigences de performance} 
 
-		Les exigences de performance du futur produit concerne concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un CSV, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client à suggérer que cette attente devra être de l’ordre de la minute maximum. En ce qui concerne le temps de passage d'une fenêtre à l'autre (Choit de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choit du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
+		Les exigences de performance du futur produit concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un CSV, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client à suggérer que cette attente devra être de l’ordre de la minute maximum. En ce qui concerne le temps de passage d'une fenêtre à l'autre (Choit de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choit du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
 
 		\subsection{Fonctionnement du produit}
 			\subsubsection{Principales fonctionnalités}
-			Tout d’abord, l’application devra avoir la fonction majeur de posséder une interface afin de permettre le chargement d’un fichier au format CSV. Après avoir sélectionné un fichier, l’application pourra afficher le contenu de ce fichier sous forme de tableau et les erreurs dans le contenu d'une ligne dans une nouvelle fenêtre. Si le fichier contient une quantité importante de données (Supérieur à 1000), l’affichage ne se fera que sur les 1000 premières données.
-			Il n’y aura pas d’importance à déterminer le type de colonne car il y aura un format prédéfinis pour le CSV.\newline
+			Tout d’abord, l’application devra avoir la fonction majeur de posséder une interface afin de permettre le chargement d’un fichier au format CSV. Après la selection de ce dernier, l’application pourra afficher son contenu sous forme de tableau, ainsi que les erreurs présentent dans le contenu d'une ligne (mauvais type, valeur manquante,..) dans une nouvelle fenêtre. Si le fichier contient une quantité importante de données (Supérieur à 1000), l’affichage ne se fera que sur les 1000 premières données.
+			Il n’y aura pas d’importance à déterminer le type de colonne car nous disposons d'un format prédéfinis pour le CSV.\newline
 
 			Ensuite, il y aura la possibilité de faire une analyse descriptive sur les colonnes du fichier. Avec une analyse qualitative pour obtenir les informations synthétiques tel que la Médiane et les Quantiles mais également les anomalies présente sur certaines valeurs. Puis une analyse quantitative pour obtenir par exemple la distribution des valeurs.\newline
 
-			Enfin, l’application aura la fonctionnalité de récupérer les résultats de ces analyses sous forme d’API afin de permet à DCbrain de connecter ces nouvelles données à leur base de donnes pour insérer de nouvelles informations dans leurs graphe de flux.
+			Enfin, l’application aura la fonctionnalité de récupérer les résultats de ces analyses sous forme d’API afin de permettre à DCbrain de connecter ces nouvelles données à leur base de donnes pour insérer de nouvelles informations dans leurs graphe de flux.
 
 			\subsubsection{Précision et exactitude}
 			Lors de l'analyse des données, les résultats sur la Variance et la Moyenne doivent être calculée de façon très précise car elles vont servir de base dans d’autres calculs statistiques. Les autres valeurs calculées peuvent être les plus précises possible mais ces valeurs vont servir pour l'interprétation afin mieux comprendre ce qui se passe sur le réseau.
@@ -176,7 +176,11 @@
 		Le produit devra permettre l'insertion d'éventuels API supplémentaires, tel que l'analyse Multidimensionnel qui utilisera l'API de l'analyse Unidimensionnel dans le but de fournir des descriptions statiques plus poussé pour obtenir une meilleur vue d'ensemble sur les données collectées. Mais encore l'insertion de technique d'analyse de Graphe dans le but d'obtenir des informations sur ces derniers.
 		
 		\subsection{Sécurité} 
-		NAN
+			\subsubsection{Accès au système}
+			Le produit final étant une application web, l'accès au système se fera à partir de navigateur web.
+			\subsubsection{Intégrité}
+			\subsubsection{Protection des données à caractères personnel}
+			\subsubsection{Audit et traçabilité}
 		
 	\section{Autres aspects du projet}
 		\subsection{Question ouvertes}
@@ -187,21 +191,23 @@
 			Sans Objet
 		\subsection{Tâche à faire}
 			\subsubsection{Étapes}
+			Le développement du produit se décompose en deux étapes, qui sont les suivantes :
 				\begin{itemize}
-				\item Spécification.
-				\item Programmation de l'application.
+				\item La Spécification pour établir le squelette du produit, ainsi que les différents algorithme qui seront utilisésf.
+				\item La Programmation de l'application.
 				\end{itemize}
 			\subsubsection{Phases de développement}
 		\subsection{Contrôle de la finalisation}
 			?
 		\subsection{Risques liés au projet}
+		Au cours du développement du produit, plusieurs risques pouvant nuire à sa réalisation peuvent être recensés, tels que :
 			\begin{itemize}
-			\item	Dysfonctionnement du produit livrés et de son interface.
-			\item	Non-conformité du produit par rapport au cahier des charges.
-			\item	Non respect des délais de livraison.
-			\item	Problèmes d'organisation.
-			\item	Dysfonctionnements informatiques dans la mise en place.
-			\item	Délai de tenue des réunions entre étudiants.
+			\item	Dysfonctionnement du produit livrés et ainsi que de son interface.
+			\item	La non-conformité du produit par rapport au cahier des charges.
+			\item	Le non respect des délais de livraison.
+			\item	Un problèmes d'organisation.
+			\item	Des dysfonctionnements informatiques lors de la mise en place.
+			\item	Le délai de tenue des réunions entre étudiants n'est pas suffisant pour l'avancement du projet.
 			\end{itemize}
 			
 		\subsection{Estimation des coûts}
@@ -210,10 +216,8 @@
 			\item Tableau répartition des tâches
 			\end{itemize}
 		\subsection{Documentation utilisateur et formation}
-			\begin{itemize}
-			\item Pas de formation pour apprendre à manipuler le produit.
-			\item Une documentation utilisateur sera fournis en même que le produit, dans lequelle sera détaillé les consignes 					d'installation et d'utilisations.
-			\end{itemize}
+			Le produit final ne nécessitera pas de formation pour apprendre sa manipulation. Mais une documentation utilisateur 				sera fournis en même temps que le produit, dans lequel sera détaillé les consignes d'installation et d'utilisations.
+			
 		\subsection{Question mise en attente}
 			Sans Objet
 		\subsection{Idées de solutions}
