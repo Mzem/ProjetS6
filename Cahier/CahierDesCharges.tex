@@ -206,7 +206,7 @@
 				\item Enfant : Nom du noeud
 				\item Mesure (unité) : Valeur
 				\end{itemize}
-				\textbf{Remarques :} Le graphe de flux utilisé par DCbrain pour analyser les réseaux de ses clients est orienté. D'où l'utilisation des éléments \textit{Père - Enfant} pourrepérer de quelle connexion on parle.\\
+				\textbf{Remarques :} Le graphe de flux utilisé par DCbrain pour analyser les réseaux de ses clients est orienté. D'où l'utilisation des éléments \textit{Père - Enfant} pour repérer de quelle connexion on parle.\\
 				Les colonnes (une minimum) \textit{Mesure} qui suivent renseignent sur les données mesurées sur les connexions.
 				
 			\subsubsection{Fonctionnalités des modules}
@@ -262,7 +262,8 @@
 			\item Fenêtre choix fichier.
 				\begin{enumerate}
 					\item Permet de récupérer un fichier \lstinline!.csv! 
-					\item Validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop). (C.S: Le fichier devra être chargé  et devra correspondre à la demande).
+					\item Validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop). \\
+					\textbf{Critère de satisfaction : }Le fichier devra être chargé  et devra correspondre à la demande.
 				\end{enumerate}
 			\item Fenêtre rôle et choix colonne.		
 				\begin{enumerate}
@@ -276,8 +277,6 @@
 				 \textbf{Critère de satisfaction : } Doit bien affiché les lignes contenant les erreurs, le contenu et leur type de façon précise.
 				\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations. \\
 				\textbf{Critère de satisfaction : } Le système de navigation doit être lisible et pratique sans trop charger la fenêtre.
-				\item Affichage d'un mécanisme pour passer à l'étape de l'analyse de données. \\
-				\textbf{Critère de satisfaction : } Fonctionnalité bien placé, qui répond à la demande.
 				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci. \\
 				\textbf{Critère de satisfaction : } Sélection de la colonne doit bien se faire + lancement possible après la sélection.
 				\end{enumerate}
@@ -297,69 +296,47 @@
 		
 			\subsubsection{Exigences d’apparence} 
 			Le produit devra adopter une apparence simple, agréable et devra être facile à comprendre dès sa première prise en main.
-			Le maitre d’œuvre a émis le souhait d’avoir de l’Anglais comme langue utilisée pour l’affichage textuel.
+			Le maitre d’ouvrage a émis le souhait d’avoir de l’Anglais comme langue utilisée pour l’affichage textuel.
 
 			\subsubsection{Exigences de style}
-			L’application s’adresse à un public professionnel, alors l’une des exigences concernant le style de l’interface est qu’il devra opter pour un style classique, au goût du jour et professionnel. L’affichage des résultats et autre devra susciter la confiance auprès des utilisateurs.
+			Mots clés: Interface graphique + intéractive.
 
 		\subsection{Utilisabilité}
 		Le produit devra être simple d’utilisation et facile à comprendre dès sa première prise en main, pour ne pas soumettre une formation concernant la manipulation du produit aux futurs utilisateurs.
-		Il aidera également l’utilisateur à analyser une quantité importante de données.
+		
 
 		\subsection{Exigences de performance} 
 
-		Les exigences de performance du futur produit concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un \lstinline!.csv!, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client à suggérer que cette attente devra être de l’ordre de la minute maximum. En ce qui concerne le temps de passage d'une fenêtre à l'autre (Choit de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choit du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
+		Les exigences de performance du futur produit concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un \lstinline!.csv!, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client a suggérer que cette attente devra être de l’ordre de la minute. En ce qui concerne le temps de passage d'une fenêtre à l'autre (choix de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choix du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
 
-		\subsection{Fonctionnement du produit}
-			\subsubsection{Principales fonctionnalités}
-			Tout d’abord, l’application devra avoir la fonction majeur de posséder une interface afin de permettre le chargement d’un fichier au format \lstinline!.csv!. Après la selection de ce dernier, l’application pourra afficher son contenu sous forme de tableau, ainsi que les erreurs présentent dans le contenu d'une ligne (mauvais type, valeur manquante,..) dans une nouvelle fenêtre. Si le fichier contient une quantité importante de données (Supérieur à 1000), l’affichage ne se fera que sur les 1000 premières données.
-			Il n’y aura pas d’importance à déterminer le type de colonne car nous disposons d'un format prédéfinis pour le \lstinline!.csv!.\newline
-
-			Ensuite, il y aura la possibilité de faire une analyse descriptive sur les colonnes du fichier. Avec une analyse qualitative pour obtenir les informations synthétiques tel que la Médiane et les Quantiles mais également les anomalies présente sur certaines valeurs. Puis une analyse quantitative pour obtenir par exemple la distribution des valeurs.\newline
-
-			Enfin, l’application aura la fonctionnalité de récupérer les résultats de ces analyses sous forme d’API afin de permettre à DCbrain de connecter ces nouvelles données à leur base de donnes pour insérer de nouvelles informations dans leurs graphe de flux.
-
-			\subsubsection{Précision et exactitude}
+		\subsection{Précision et exactitude}
 			Lors de l'analyse des données, les résultats sur la Variance et la Moyenne doivent être calculée de façon très précise car elles vont servir de base dans d’autres calculs statistiques. Les autres valeurs calculées peuvent être les plus précises possible mais ces valeurs vont servir pour l'interprétation afin mieux comprendre ce qui se passe sur le réseau.
 
 		\subsection{Maintenabilité du projet}
 		Le produit doit pouvoir être maintenu par ses utilisateurs finaux ou par des développeurs qui ne sont pas les développeurs d’origines, dans le cas où DCbrain souhaiterait ajouter de nouvelles méthodes d’analyses descriptives ou de nouveaux procédés pour afficher les résultats de manière graphique afin de satisfaire les exigences de leurs clients.\newline
 		
-		Le produit devra permettre l'insertion d'éventuels API supplémentaires, tel que l'analyse Multidimensionnel qui utilisera l'API de l'analyse Unidimensionnel dans le but de fournir des descriptions statiques plus poussé pour obtenir une meilleur vue d'ensemble sur les données collectées. Mais encore l'insertion de technique d'analyse de Graphe dans le but d'obtenir des informations sur ces derniers.
+		Le produit devra permettre l'insertion d'éventuels API supplémentaires, tel que l'ADD multidimensionnelle qui utilisera l'API de l'ADD unidimensionnel dans le but de fournir des descriptions statistiques plus poussées pour obtenir une meilleur vue d'ensemble sur les données collectées. Mais encore l'insertion de technique d'analyse de graphe dans le but d'obtenir des informations sur ces derniers.
 		
 		\subsection{Sécurité} 
 			\subsubsection{Accès au système}
 			Le produit final étant une application web, l'accès au système se fera à partir d'un navigateur web pour les utilisateurs. L'accès au produit sera défini grâce à un mécanisme d'adressage (path) dans un système de gestion de fichiers.
 			\subsubsection{Intégrité}
-			Le produit manipulera des données fiables. Ce qui nécessite aucun traitement d'analyse de fiabilité.
+			Le produit manipulera des données fiables. Les données ne représenteront pas de risques pour l'environnement et l'utilisateur du produit final.
 			\subsubsection{Protection des données à caractères personnel}
-			Le produit ne devant pas faire appel aux données à caractères personnel des utilisateurs, ne devra donc aucunement altérer ou supprimer de telles données.
-		
-		
-	\section{Langages de programmation :} 
-	Le choix langages de programmation qui vont être utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
-	La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec l'analyse de donnée) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Java EE}}.\\
-	D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
-	De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.
-		
+			Le produit ne devant pas faire appel aux données à caractères personnel des utilisateurs, ne devra donc aucunement altérer ou supprimer de telles données.		
 		
 	\section{Autres aspects du projet}
 		\subsection{Question ouvertes}
 			La question de l'esthétisme et la présentation des résultats est laissée ouverte puisqu'il n'y a pas de réponse arrêtée à ce sujet.\\
 			Le tout est d'avoir une approche prenant en compte les utilisateurs pour savoir quelles vues faciliteront l'interprétation des analyses.
-			
-		\subsection{Solution étagère}
-			Sans Objet
-			
-		\subsection{Problèmes nouveaux}
-			Sans Objet
-			
+
 		\subsection{Tâche à faire}
 			\subsubsection{Étapes}
-			Le développement du produit se décompose en deux étapes, qui sont les suivantes :
+			Le développement du produit se décompose en deux étapes :
 				\begin{itemize}
-				\item Spécification
+				\item Spécifications
 				\item Développement de l'application
+				\item Compte-rendu
 				\end{itemize}
 				
 			\subsubsection{Phases de développement}
@@ -382,17 +359,6 @@
 			\item Une mesure de la conformité du produit avec les spécifications.
 			\end{enumerate}
 			
-		\subsection{Risques liés au projet}
-		Au cours du développement du produit, plusieurs risques pouvant nuire à sa réalisation peuvent être recensés, tels que :
-			\begin{itemize}
-			\item	Dysfonctionnement du produit livrés et ainsi que de son interface.
-			\item	La non-conformité du produit par rapport au cahier des charges.
-			\item	Le non respect des délais de livraison.
-			\item	Un problèmes d'organisation.
-			\item	Des dysfonctionnements informatiques lors de la mise en place.
-			\item	Le délai de tenue des réunions entre étudiants n'est pas suffisant pour l'avancement du projet.
-			\end{itemize}
-						
 		\subsection{Estimation des coûts}
 		
 			\subsubsection{Tableau des coûts}
@@ -422,7 +388,7 @@
 			\hline 	ADD quantitatives discrètes & ~ & x & ~ & 1\\
 			\hline 	ADD quantitative continues &  ~ & x & ~ & 1\\
 			\hline 	Vérification format fichier & x & ~ & ~ & 1\\
-			\hline 	Analyse contenu fichier & x & ~ & x & 2\\
+			\hline 	Analyse contenu fichier & x & ~ & ~ & 1\\
 			\hline
 			\end{longtable}\vspace{1em}\end{center}
 			
@@ -430,12 +396,10 @@
 		\subsection{Documentation utilisateur et formation}
 			Le produit final ne nécessitera pas de formation pour apprendre sa manipulation. Mais une documentation utilisateur sera fournie en même temps que le produit, dans lequel sera détaillé les consignes d'installation et d'utilisations.
 			
-		\subsection{Question mise en attente}
-			Sans Objet
-			
-		\subsection{Idées de solutions}
-			Sans Objet
-			
 	\section{Conclusion}
+	D'un point de vue technique, le choix des langages de programmation utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
+	La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec ADD) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Python}}.\\
+	D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
+	De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.
 
 \end{document}
