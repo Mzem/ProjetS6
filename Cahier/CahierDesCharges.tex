@@ -31,6 +31,12 @@
 			\subsubsection{Autre partie prenante}
 			Les industriels clients de DCbrain sont des parties prenantes indirectes. Notre travail doit pouvoir être utilisé par DCbrain pour renforcer leur application.
 			
+			\subsubsection{Synthèse}
+			\begin{center}
+			\includegraphics{diagPP.png}
+			\end{center}
+			\textbf{Remarque :} Les différents acteurs seront décrits plus précisément dans la partie \textit{Périmètre de l'ouvrage}.
+			
 		\subsection{Utilisateurs du produit}
 		En premier lieu, l’application va servir aux membres de DCbrain étant donné que leurs clients industriels (Total, ERDF,…) leur fournissent les fichiers CSV, afin qu’ils puissent appliquer des analyses descriptives sur les données dans le but de repérer des anomalies sur les réseaux de ces derniers. Puis en second lieu, DCbrain va déployer l'application pour ses clients, dans ce cas les membres de ces organismes deviendront des utilisateurs.\\
 
@@ -94,9 +100,9 @@
 				\item\textbf{Capteurs IOT :} capteurs \textit{Internet of Things} (internet des objets) déployés sur des réseaux physiques afin d'y collecter des données.
 				\item\textbf{Graphe de flux :} graphes représentant les données liées au flux du réseau.
 				\item\textbf{CSV :} \textit{Comma-separated values}, format de fichier ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.
-				\item\textbf{ADD :} \textit{Analyse Descriptive de Données}, fonctionnalité d'analyse de description statistique des données.
-				\item\textbf{ADD unidimensionnelle :}
-				\item\textbf{ADD multidimensionnelle :}
+				\item\textbf{ADD :} \textit{Analyse Descriptive de Données}, ensemble de techniques de statistique descriptive. Elle consiste à regrouper les données de manière homogène et fournir des descriptions synthétiques de comportements globaux.
+				\item\textbf{ADD unidimensionnelle :} appelée aussi ADD univariée, elle correspond aux techniques manipulant un seul critère du système étudié.
+				\item\textbf{ADD multidimensionnelle :} ADD où les intéractions entre différents critères d'études sont pris en compte pour décrire le jeu de données dans son ensemble.
 				\item\textbf{Applet :} application qui s'exécute dans la fenêtre d'un navigateur web.
 				\item\textbf{API :} \textit{Application Programming Interface}, constituent les paquets utilisables par les développeurs (intégrés), qu'on va livrer au client en plus de l'application elle-même.
 				\item\textbf{Drag\&Drop :} glisser et déposer un fichier dans une fenêtre.
@@ -117,7 +123,7 @@
 		
 			\subsubsection{Diagramme de cas d'utilisation}
 				Le diagramme ci-dessous définit le perimètre d'utilisation de notre travail :\\
-					{\color{red} Diag à insérer ici}
+				\includegraphics{diagCU.png}
 				
 			\subsubsection{Analyse descriptive de données}
 				DCbrain et les industriels eux-mêmes lancent des ADD sur l'applet à partir d'un fichier CSV au bon format.\\
@@ -132,7 +138,7 @@
 				La démarche d'installation, les spécifications des outils des interfaces et leur description sera détaillée dans une documentation.
 				
 			\subsubsection{Maintenance du système}
-				Les développeurs manipulent le code source pour étendre et mettre à jour le système. La démarche sera effectuée lorsque le produit devra être modifer pour des raisons de compatibilité avec le langage et les navigateurs, ou alors pour une extension des fonctionnalités.\\
+				Les développeurs manipulent le code source pour étendre et mettre à jour le système. La démarche sera effectuée lorsque le produit devra être modifé pour des raisons de compatibilité avec le langage et les navigateurs, ou alors pour une extension des fonctionnalités.\\
 				Le nouveau modèle est d'abord conçu. On identifie les éléments à modifier et/ou l'on étudie les fonctionnalités del'extension.\\
 				Les spécifications seront alors réécrites si nécessaire pour ensuite développer et déployer le système mis à jour.\\
 				\textbf{Remarque :} A l'issue de la conception du nouveau modèle, une étude des coûts peut être utile pour déterminer s'il faut poursuivre la maintenance.
@@ -204,23 +210,25 @@
 				(10) même données que (8)\\
 				(11) Chemin du fichier CSV importé \\
 				(12) Informations du (4) et ensemble de données contenu dans le fichier CSV \\
-				(13) Signal de validation du choix colonne et noms des colonnes.\\
+				(13) Signal de validation du choix de la colonne, et noms des colonnes.\\
 				(14) Envoi des résultats d'analyses de (6), (8) et (10)\\
-				(15) Demande d'exportation des résultats de l'ADD, ou analyse d'une autre colonne, ou importation d'un autre fichier\\
+				(15) Signal de contrôle : demande d'exportation des résultats de l'ADD, analyse d'une autre colonne, ou importation d'un autre fichier\\
 			
 			\subsubsection{Format du fichier .csv}
-				Le format du fichier est établi par DCbrain. Le contenu supporté est décrit par des colonnes nécessaires aux types prédéfinies:\\
+				Le format du fichier est établi par DCbrain. Son contenu est décrit par des colonnes aux types prédéfinies:\\
 				\begin{itemize}
 				\item Timestamp : Jour/mois/année	heure:minute:seconde
 				\item Père : Nom du noeud
 				\item Enfant : Nom du noeud
 				\item Mesure (unité) : Valeur
 				\end{itemize}
-				\textbf{Remarques :} Le graphe de flux utilisé par DCbrain pour analyser les réseaux de ses clients est orienté. D'où l'utilisation des éléments \textit{Père - Enfant} pour repérer de quelle connexion on parle.\\
-				Les colonnes (une minimum) \textit{Mesure} qui suivent renseignent sur les données mesurées sur les connexions.
+				\textbf{Remarques :} Le graphe de flux utilisé par DCbrain pour analyser les réseaux de ses clients est orienté, d'où l'utilisation des éléments \textit{Père - Enfant}. Ceux-ci permettent de repérer de quelle connexion on parle.\\
+				Les colonnes \textit{Mesure} renseignent sur les données mesurées sur une connexion à un temps donné.
 				
 			\subsubsection{Fonctionnalités des modules}
 			
+			
+			\textbf{API 1 : Chargement des données}
 			\begin{itemize}
 			\item Vérification format fichier :\\
 				Ce module va vérifier le fichier fourni en entrée en plusieurs points :
@@ -246,7 +254,11 @@
 					\textbf{Critère de satisfaction : } pour chaque colonne, on connaît son type, son rôle et les éventuels données erronées.
 				\end{enumerate}
 				Ce module va donc fournir les deux structures \textbf{structure 1} et \textbf{structure 2} décrites ci-dessus.
-				
+			\end{itemize}
+			
+			\textbf{API 2 : Analyse descriptive de données}
+			
+			\begin{itemize}
 			\item ADD qualitatives:\\
 					\begin{enumerate}
 					\item effectifs, effectifs cumulés
@@ -268,22 +280,25 @@
 					\item découpage en classe selon une précision par défaut (échelle définie après un parcours des valeurs)
 					\item représentations graphiques : distribution, boîte à moustaches, ...
 					\end{enumerate}
-					
-			\item Gestion des flux.
+			\end{itemize}
+			
+			\textbf{Interface web}
+			
+			\begin{itemize}
+			\item Gestion des flux :
 				\begin{enumerate}
-				\item Lancement de l'application. 
-				\item Gestion des événements.
-				\item Gestion des erreurs pour déterminer si oui ou non l'application pour continuer son exécution.
-				\item Interface entres les différentes fonctionnalités.
+				\item Lancement de l'application et exécution continue
+				\item Gestion des branchements : exécution normale ou arrêts pour cause d'erreur
+				\item Interface entres les différentes fonctionnalités : communique les données nécessaires entre les modules
 				\end{enumerate}
 					
-			\item Fenêtre choix fichier.
+			\item Fenêtre choix fichier :
 				\begin{enumerate}
 					\item Permet de récupérer un fichier CSV
 					\item Validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop). \\
 					\textbf{Critère de satisfaction : }Le fichier devra être chargé  et devra correspondre à la demande.
 				\end{enumerate}
-			\item Fenêtre rôle et choix colonne.		
+			\item Fenêtre rôle et choix colonne :
 				\begin{enumerate}
 				\item Affichera le nombre de lignes/colonnes contenu dans le CSV.\\
 				\textbf{Critère de satisfaction : } Affiche le bon nombre de lignes et de colonnes.
@@ -298,7 +313,7 @@
 				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci. \\
 				\textbf{Critère de satisfaction : } Sélection de la colonne doit bien se faire + lancement possible après la sélection.
 				\end{enumerate}
-			\item Fenêtre résultats ADD.
+			\item Fenêtre résultats ADD :
 				\begin{enumerate}
 				\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part.\\
 				\textbf{Critère de satisfaction : } résultats conformes + diagramme bien dessiné. 
@@ -418,6 +433,20 @@
 	D'un point de vue technique, le choix des langages de programmation utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
 	La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec ADD) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Python}}.\\
 	D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
-	De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.
-
+	De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.\\
+	\\
+	Pour finir, il est intéressant de mentionner les diffcultées rencontrées au cours de l'élaboration du cahier des charges.\\
+	Le plus difficile a été pour nous d'apprendre une nouvelle démarche tout en la pratiquant dans un projet de grande ampleur pour des étudiants. Ceci entraine des efforts supplémentaires au niveau de l'organisation et de la gestion des délais à cause du double travail exigé.\\
+	Cela dit, ce premier travail nous a permis à la fois de réaliser l'impact des efforts individuels et collectifs pour mettre à bien un travail qui semble \textit{a priori} difficile, mais aussi d'aborder de nouveaux projets avec une approche plus pragmatique.\\
+	
+	\section{Bibliographie / sitographie - ADD}
+	\begin{itemize}
+		\item http://www.math.univ-toulouse.fr/~baccini/zpedago/asde.pdf
+		\item http://www.math.univ-toulouse.fr/~besse/Wikistat/pdf/st-l-des-uni.pdf
+		\item http://iml.univ-mrs.fr/~reboul/cours2.pdf
+		\item https://hal.archives-ouvertes.fr/halshs-00287751/document
+		\item Wikipédia: Données aberrantes.
+		\item Exploration de données et méthodes statistiques - Ellipses - Lise Bellanger, Richard Tomassone
+		\item Statistique théorique et appliquée: 1. Statistique descriptive et base de l'inférence statistique - 3e édition - de boeck - Pierre Dagnélie
+	\end{itemize}
 \end{document}
