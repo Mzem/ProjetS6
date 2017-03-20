@@ -32,10 +32,8 @@
 			Les industriels clients de DCbrain sont des parties prenantes indirectes. Notre travail doit pouvoir être utilisé par DCbrain pour renforcer leur application.
 			
 			\subsubsection{Synthèse}
-			\begin{center}
-			\includegraphics{diagPP.png}
-			\end{center}
-			\textbf{Remarque :} Les différents acteurs seront décrits plus précisément dans la partie \textit{Périmètre de l'ouvrage}.
+			\begin{center}\includegraphics[scale=0.8]{diagPP.png}\end{center}
+			\textbf{Remarque :} les différents acteurs seront décrits plus précisément dans la partie \textit{Périmètre de l'ouvrage}.
 			
 		\subsection{Utilisateurs du produit}
 		En premier lieu, l’application va servir aux membres de DCbrain étant donné que leurs clients industriels (Total, ERDF,…) leur fournissent les fichiers CSV, afin qu’ils puissent appliquer des analyses descriptives sur les données dans le but de repérer des anomalies sur les réseaux de ces derniers. Puis en second lieu, DCbrain va déployer l'application pour ses clients, dans ce cas les membres de ces organismes deviendront des utilisateurs.\\
@@ -96,7 +94,7 @@
 				\item\textbf{Maître d'œuvre :} entité retenue par le maître d'ouvrage pour réaliser l'ouvrage.
 				\item\textbf{Big data :} ensembles de très gros volumes de données traitées et exploitées pour en tirer des informations.
 				\item\textbf{Machine Learning :} méthodes automatisables offrant la possibilité à une machine d'évoluer grâce à un processus d'apprentissage à partir des données.
-				\item\textbf{Réseaux physiques :} réseaux industriels, de fluide, de distribution (par exemple réseau électrique)
+				\item\textbf{Réseaux physiques :} réseaux industriels, de fluide, de distribution (par exemple réseau électrique).
 				\item\textbf{Capteurs IOT :} capteurs \textit{Internet of Things} (internet des objets) déployés sur des réseaux physiques afin d'y collecter des données.
 				\item\textbf{Graphe de flux :} graphes représentant les données liées au flux du réseau.
 				\item\textbf{CSV :} \textit{Comma-separated values}, format de fichier ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.
@@ -106,8 +104,8 @@
 				\item\textbf{Applet :} application qui s'exécute dans la fenêtre d'un navigateur web.
 				\item\textbf{API :} \textit{Application Programming Interface}, constituent les paquets utilisables par les développeurs (intégrés), qu'on va livrer au client en plus de l'application elle-même.
 				\item\textbf{Drag\&Drop :} glisser et déposer un fichier dans une fenêtre.
-				\item\textbf{Structure 1 :}
-				\item\textbf{Structure 2 :}
+				\item\textbf{Structure 1 :} structure contenant les données du fichier, le nombre de lignes et le nombre de colonnes.
+				\item\textbf{Structure 2 :} structure contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées.
 			\end{description}
 			
 	\section{Exigences fonctionnelles}
@@ -122,8 +120,8 @@
 		\subsection{Périmètre de l'œuvre}
 		
 			\subsubsection{Diagramme de cas d'utilisation}
-				Le diagramme ci-dessous définit le perimètre d'utilisation de notre travail :\\
-				\includegraphics{diagCU.png}
+				Le diagramme ci-dessous définit le périmètre d'utilisation de notre travail :\\
+				\begin{center}\includegraphics[scale=0.8]{diagCU.png}\end{center}
 				
 			\subsubsection{Analyse descriptive de données}
 				DCbrain et les industriels eux-mêmes lancent des ADD sur l'applet à partir d'un fichier CSV au bon format.\\
@@ -141,18 +139,19 @@
 				Les développeurs manipulent le code source pour étendre et mettre à jour le système. La démarche sera effectuée lorsque le produit devra être modifé pour des raisons de compatibilité avec le langage et les navigateurs, ou alors pour une extension des fonctionnalités.\\
 				Le nouveau modèle est d'abord conçu. On identifie les éléments à modifier et/ou l'on étudie les fonctionnalités del'extension.\\
 				Les spécifications seront alors réécrites si nécessaire pour ensuite développer et déployer le système mis à jour.\\
-				\textbf{Remarque :} A l'issue de la conception du nouveau modèle, une étude des coûts peut être utile pour déterminer s'il faut poursuivre la maintenance.
+				\textbf{Remarque :} à l'issue de la conception du nouveau modèle, une étude des coûts peut être utile pour déterminer s'il faut poursuivre la maintenance.
 				
-		\subsection{Présentation de l'organigramme et des fonctionnalités}
+		\subsection{Organigramme et fonctionnalités des modules}
 		
 			\subsubsection{Organigramme et données échangées}
 			
-				\begin{figure}[p]\begin{tikzpicture}
+				\begin{figure}[H]
+				\begin{tikzpicture}
 				\begin{scope}[xscale=2,yscale=1.5]	
-					\node (IW) at (0,5) [rectangle,draw,text depth=3cm,minimum width=15.5cm,minimum height=4cm,font=\textbf\Large] {\begin{tabular}{c}Interface web\end{tabular}};
+					\node (IW) at (0,5) [rectangle,draw,text depth=3cm,minimum width=16cm,minimum height=4cm,font=\textbf\Large] {\begin{tabular}{c}Interface web\end{tabular}};
 					\node (F2) [rectangle,draw,dashed] at ([yshift=0.4cm]IW.center) {\begin{tabular}{c}Fenêtre rôle et choix colonne \end{tabular}};
-					\node (F1) [rectangle,draw,dashed] at ([xshift=-3.5cm]F2.east) {\begin{tabular}{c}Fenêtre choix fichier\end{tabular}};
-					\node (F3) [rectangle,draw,dashed] at ([xshift=3.4cm]F2.west) {\begin{tabular}{c}Fenêtre résultats ADD\end{tabular}};
+					\node (F1) [rectangle,draw,dashed] at ([xshift=-4cm]F2.east) {\begin{tabular}{c}Fenêtre choix fichier\end{tabular}};
+					\node (F3) [rectangle,draw,dashed] at ([xshift=4.1cm]F2.west) {\begin{tabular}{c}Fenêtre résultats ADD\end{tabular}};
 					\node (MAIN) [rectangle,draw,dashed,below=of F2.south,yshift=0cm] {\begin{tabular}{c}Gestion des flux\end{tabular}};
 
 				
@@ -165,20 +164,19 @@
 					\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0.5cm] {\begin{tabular}{c}ADD quantitatives\\discrètes\end{tabular}};
 					\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0.5cm] {\begin{tabular}{c}ADD quantitatives\\continues\end{tabular}};
 				
-					%\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,left]{1} (F1);
-					\path[->,>=stealth'] (F1) edge[bend left=10] node[anchor=south,left]{11} (MAIN);
+					\draw[-triangle 45] (F1.south east) -- node[anchor=south,left]{11} (MAIN.north west);
 					\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,left]{12} (F2);
 					\path[->,>=stealth'] (F2) edge[bend left=10] node[anchor=south,right]{13} (MAIN);
 					\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,right]{14} (F3);
 					\path[->,>=stealth'] (F3) edge[bend left=10] node[anchor=south,right]{15} (MAIN);
 				
 					\draw[-triangle 45] (MAIN.south west) -- node[anchor=south,left] {1} (VERIF.100);
-					\draw[-triangle 45] (VERIF.80) -- node[anchor=south,right] {2} (MAIN.195);
-					\draw[-triangle 45] (MAIN.200) |- node[anchor=south,left] {3} (ANALYS.5);
-					\draw[-triangle 45] (ANALYS.355) -| node[anchor=south,below] {4} (MAIN.205);			
+					\draw[-triangle 45] (VERIF.80) -- node[anchor=south,right] {2} (MAIN.197);
+					\draw[-triangle 45] (MAIN.210) |- node[anchor=south,left] {3} (ANALYS.5);
+					\draw[-triangle 45] (ANALYS.355) -| node[anchor=south,below] {4} (MAIN.215);			
 				
 					\draw[-triangle 45] (MAIN.south east) -- node[anchor=south,right] {5} (ADD1.80);
-					\draw[-triangle 45] (ADD1.110) -- node[anchor=south,left] {6} (MAIN.345);
+					\draw[-triangle 45] (ADD1.110) -- node[anchor=south,left] {6} (MAIN.343);
 					\draw[-triangle 45] (MAIN.335) |- node[anchor=south,right] {7} (ADD2.175);
 					\draw[-triangle 45] (ADD2.185) -| node[anchor=south,below] {8} (MAIN.330);				
 					\draw[-triangle 45] (MAIN.290) |- node[anchor=north,right] {9} (ADD3.175);
@@ -201,127 +199,130 @@
 				(2) Code d'erreur : fichier OK ou ERREUR\\
 				(3) Fichier CSV : lancement de l'analyse de son contenu\\
 				(4) \textbf{structure 1} : contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure)\\
-				\hspace*{1.9em} \textbf{structure 2} : contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes\\
-				(5) ensemble de données de type qualitatif\\
-				(6) erreur ou effectifs, effectifs cumulés, fréquences, fréquences cumulées, diagramme en secteur, histogramme\\
-				(7) ensemble de données de type quantitatif discret\\
-				(8) erreur ou indicateurs de tendance central, de dispersion et de forme, les anomalies, la distribution des données, un diagramme à moustaches\\
-				(9) ensemble de données de type quantitatif continu\\
-				(10) même données que (8)\\
+				\hspace*{1.5em} \textbf{structure 2} : contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes\\
+				(5) Ensemble de données de type qualitatif\\
+				(6) Erreur ou effectifs, effectifs cumulés, fréquences, fréquences cumulées, diagramme en secteur, histogramme\\
+				(7) Ensemble de données de type quantitatif discret\\
+				(8) Erreur ou indicateurs de tendance central, de dispersion et de forme, les anomalies, la distribution des données, un diagramme à moustaches\\
+				(9) Ensemble de données de type quantitatif continu\\
+				(10) Même données que (8)\\
 				(11) Chemin du fichier CSV importé \\
 				(12) Informations du (4) et ensemble de données contenu dans le fichier CSV \\
-				(13) Signal de validation du choix de la colonne, et noms des colonnes.\\
+				(13) Signal de validation du choix de la colonne, et noms des colonnes\\
 				(14) Envoi des résultats d'analyses de (6), (8) et (10)\\
 				(15) Signal de contrôle : demande d'exportation des résultats de l'ADD, analyse d'une autre colonne, ou importation d'un autre fichier\\
 			
-			\subsubsection{Format du fichier .csv}
-				Le format du fichier est établi par DCbrain. Son contenu est décrit par des colonnes aux types prédéfinies:\\
+			\subsubsection{Format du fichier CSV}
+				Le format du fichier est établi par DCbrain. Son contenu est décrit par des colonnes aux types prédéfinies :
 				\begin{itemize}
-				\item Timestamp : Jour/mois/année	heure:minute:seconde
-				\item Père : Nom du noeud
-				\item Enfant : Nom du noeud
+				\item Timestamp : jour/mois/année	\lstinline!heure:minute:seconde!
+				\item Père : nom du noeud
+				\item Enfant : nom du noeud
 				\item Mesure (unité) : Valeur
 				\end{itemize}
-				\textbf{Remarques :} Le graphe de flux utilisé par DCbrain pour analyser les réseaux de ses clients est orienté, d'où l'utilisation des éléments \textit{Père - Enfant}. Ceux-ci permettent de repérer de quelle connexion on parle.\\
+				\textbf{Remarques :} le graphe de flux utilisé par DCbrain pour analyser les réseaux de ses clients est orienté, d'où l'utilisation des éléments \textit{Père - Enfant}. Ceux-ci permettent de repérer de quelle connexion on parle.\\
 				Les colonnes \textit{Mesure} renseignent sur les données mesurées sur une connexion à un temps donné.
 				
 			\subsubsection{Fonctionnalités des modules}
+			\begin{description}[style=unboxed,leftmargin=0.2cm]
 			
-			
-			\textbf{API 1 : Chargement des données}
-			\begin{itemize}
-			\item Vérification format fichier :\\
-				Ce module va vérifier le fichier fourni en entrée en plusieurs points :
+				\item\textbf{1. API 1 - Chargement des données}
 				\begin{enumerate}
-					\item l'ouverture du fichier a réussi
-					\item le fichier est un CSV contenant du texte brut non formaté (pas de mise en forme avec des balises ou autres)
-					\item le fichier est accessible en lecture
+					\item Module Vérification format fichier :\\
+					Ce module va vérifier le fichier fourni en entrée en plusieurs points :
+					\begin{itemize}
+						\item l'ouverture du fichier a réussi
+						\item le fichier est un CSV contenant du texte brut non formaté (pas de mise en forme avec des balises ou autres)
+						\item le fichier est accessible en lecture
+					\end{itemize}
+					\textbf{Critère de satisfaction : } le fichier est bien ouvert, accessible en lecture et ne contient que du texte brut.
+				
+					\item Module Analyse contenu fichier :\\
+					Ce module comprend deux fonctionnalités principales :
+					\begin{itemize}
+						\item Lecture du contenu du fichier CSV :\\
+						On initialise une première structure (\textbf{structure 1}) pour y sauvegarder le contenu du fichier.\\
+						On lit ligne par ligne des caractères du fichier. A chaque fois qu'on détecte un caractère de séparation (une virgule, un point-virgule ou une tabulation), on stocke les caractères lus (la donnée) dans la structure.\\
+						Cette fonctionnalité fournit la \textbf{structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure).\\
+						\textbf{Critère de satisfaction : } l'ensemble des entrée du fichier sont renseignées dans une structure (donc exploitables).
+						
+						\item Descriptions préliminaires des données de chaque colonne du fichier CSV :\\
+						On initialise une deuxième structure (\textbf{structure 2}) pour y stocker des informations sur chaque colonne.\\
+						On lit une par une les données de chaque colonne. On vérifie le type de la donnée en le comparant au type attendu. Si le type ne correspond pas, on signale dans la structure que la colonne contient une donnée erronée ou manquante (repérée par sa position dans la colonne). A la fin du parcours d'une colonne, on pourra lui attribuer un rôle/nom.\\
+						Cette fonctionnalité fournit donc la \textbf{structure 2} contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes.\\
+						\textbf{Critère de satisfaction : } pour chaque colonne, on connaît son type, son rôle et les éventuels données erronées.
+					\end{itemize}
+					Ce module va donc fournir les deux structures \textbf{structure 1} et \textbf{structure 2} décrites ci-dessus.
 				\end{enumerate}
-				\textbf{Critère de satisfaction : } le fichier est bien ouvert, accessible en lecture et ne contient que du texte brut.
-			
-			\item Analyse contenu fichier :\\
-				Ce module comprend deux fonctionnalités principales :
+				~\\
+				\item\textbf{2. API 2 - Analyse descriptive de données}
 				\begin{enumerate}
-					\item Lecture du contenu du fichier CSV :\\
-					On initialise une première structure (\textbf{structure 1}) pour y sauvegarder le contenu du fichier.\\
-					On lit ligne par ligne des caractères du fichier. A chaque fois qu'on détecte un caractère de séparation (une virgule, un point-virgule ou une tabulation), on stocke les caractères lus (la donnée) dans la structure.\\
-					Cette fonctionnalité fournit la \textbf{structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure).\\
-					\textbf{Critère de satisfaction : } l'ensemble des entrée du fichier sont renseignées dans une structure (donc exploitables)
-					\item Descriptions préliminaires des données de chaque colonne du fichier CSV :\\
-					On initialise une deuxième structure (\textbf{structure 2}) pour y stocker des informations sur chaque colonne.\\
-					On lit une par une les données de chaque colonne. On vérifie le type de la donnée en le comparant au type attendu. Si le type ne correspond pas, on signale dans la structure que la colonne contient une donnée erronée ou manquante (repérée par sa position dans la colonne). A la fin du parcours d'une colonne, on pourra lui attribuer un rôle/nom.\\
-					Cette fonctionnalité fournit donc la \textbf{structure 2} contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes.\\
-					\textbf{Critère de satisfaction : } pour chaque colonne, on connaît son type, son rôle et les éventuels données erronées.
+					\item Module ADD qualitatives :
+						\begin{itemize}
+						\item effectifs, effectifs cumulés
+						\item fréquence et fréquence cumulée
+						\item représentations graphiques : diagramme en secteur, histogramme
+						\end{itemize}
+					\item Module ADD quantitatives discrètes :
+						\begin{itemize}
+						\item tendance centrale : moyenne, médiane
+						\item dispersion : quantiles, variance et écart-type
+	-					\item anomalies : boîte à moutaches de Tukey
+						\item forme (symétrie) : coeff de Pearson ou coeff de Yule
+						\item forme (aplatissement) : coeff de Fisher
+						\item représentations graphiques : distribution, cumulatif,  boîte à moustaches, ...
+						\end{itemize}
+					\item Module ADD quantitatives continues :
+						\begin{itemize}
+						\item découpage en classe selon une précision définie
+						\item découpage en classe selon une précision par défaut (échelle définie après un parcours des valeurs)
+						\item représentations graphiques : distribution, boîte à moustaches, ...
+						\end{itemize}
 				\end{enumerate}
-				Ce module va donc fournir les deux structures \textbf{structure 1} et \textbf{structure 2} décrites ci-dessus.
-			\end{itemize}
-			
-			\textbf{API 2 : Analyse descriptive de données}
-			
-			\begin{itemize}
-			\item ADD qualitatives:\\
-					\begin{enumerate}
-					\item effectifs, effectifs cumulés
-					\item fréquence et fréquence cumulée
-					\item représentations graphiques : diagramme en secteur, histogramme
-					\end{enumerate}
-			\item ADD quantitatives discrètes :\\
-					\begin{enumerate}
-					\item tendance centrale : moyenne, médiane
-					\item dispersion : quantiles, variance et écart-type
--					\item anomalies : boîte à moutaches de Tukey
-					\item forme (symétrie) : coeff de Pearson ou coeff de Yule
-					\item forme (aplatissement) : coeff de Fisher
-					\item représentations graphiques : distribution, cumulatif,  boîte à moustaches, ...
-					\end{enumerate}
-			\item ADD quantitatives continues :\\
-					\begin{enumerate}
-					\item découpage en classe selon une précision définie
-					\item découpage en classe selon une précision par défaut (échelle définie après un parcours des valeurs)
-					\item représentations graphiques : distribution, boîte à moustaches, ...
-					\end{enumerate}
-			\end{itemize}
-			
-			\textbf{Interface web}
-			
-			\begin{itemize}
-			\item Gestion des flux :
+				~\\
+				\item\textbf{3. Interface web}
 				\begin{enumerate}
-				\item Lancement de l'application et exécution continue
-				\item Gestion des branchements : exécution normale ou arrêts pour cause d'erreur
-				\item Interface entres les différentes fonctionnalités : communique les données nécessaires entre les modules
-				\end{enumerate}
+					\item Module Gestion des flux :
+						\begin{itemize}
+						\item Lancement de l'application et exécution continue.
+						\item Gestion des branchements : exécution normale ou arrêts pour cause d'erreur.
+						\item Interface entres les différentes fonctionnalités : communique les données nécessaires entre les modules.
+						\end{itemize}
+						
+					\item Module Fenêtre choix fichier :
+						\begin{itemize}
+						\item Récupération un fichier CSV.
+						\item Validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop).\\
+						\textbf{Critère de satisfaction : } le fichier devra être chargé  et devra correspondre à la demande.
+						\end{itemize}
+						
+					\item Module Fenêtre rôle et choix colonne :
+						\begin{itemize}
+						\item Affichera le nombre de lignes/colonnes contenu dans le CSV.\\
+							\textbf{Critère de satisfaction : } affiche le bon nombre de lignes et de colonnes.
+						\item Affichera le titre du fichier.\\
+							\textbf{Critère de satisfaction : } affiche le bon titre du fichier.
+						\item Affichera un échantillon du contenu du CSV (environ les 1000 premières lignes) avec un système de scroll.\\ 
+							\textbf{Critère de satisfaction : } l'affichage de l'échantillon doit bien se faire sur les 1000 premières valeurs et doivent bien correspondre bien correspondre au contenu du fichier. 
+						\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).\\
+							\textbf{Critère de satisfaction : } doit bien afficher les lignes contenant les erreurs, le contenu et leur type de façon précise.
+						\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations.\\
+							\textbf{Critère de satisfaction : } le système de navigation doit être lisible et pratique sans trop charger la fenêtre.
+						\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci. \\
+							\textbf{Critère de satisfaction : } sélection de la colonne doit bien se faire + lancement possible après la sélection.
+						\end{itemize}
 					
-			\item Fenêtre choix fichier :
-				\begin{enumerate}
-					\item Permet de récupérer un fichier CSV
-					\item Validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop). \\
-					\textbf{Critère de satisfaction : }Le fichier devra être chargé  et devra correspondre à la demande.
-				\end{enumerate}
-			\item Fenêtre rôle et choix colonne :
-				\begin{enumerate}
-				\item Affichera le nombre de lignes/colonnes contenu dans le CSV.\\
-				\textbf{Critère de satisfaction : } Affiche le bon nombre de lignes et de colonnes.
-				\item Affichera le titre du fichier. \\
-				\textbf{Critère de satisfaction : } Affiche le bon titre du fichier.
-				\item Affichera un échantillon du contenu du CSV (environ les 1000 premières lignes) avec un système de scroll.\\ 
-				\textbf{Critère de satisfaction : } L'affichage de l'échantillon doit bien se faire sur les 1000 premières valeurs et doivent bien correspondre bien correspondre au contenu du fichier. 
-				\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).\\
-				 \textbf{Critère de satisfaction : } Doit bien affiché les lignes contenant les erreurs, le contenu et leur type de façon précise.
-				\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations. \\
-				\textbf{Critère de satisfaction : } Le système de navigation doit être lisible et pratique sans trop charger la fenêtre.
-				\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci. \\
-				\textbf{Critère de satisfaction : } Sélection de la colonne doit bien se faire + lancement possible après la sélection.
-				\end{enumerate}
-			\item Fenêtre résultats ADD :
-				\begin{enumerate}
-				\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part.\\
-				\textbf{Critère de satisfaction : } résultats conformes + diagramme bien dessiné. 
-				\item Une fonctionnalité pour lancer l'exportation des résultats sera disponible (Écriture dans un nouveau fichiers).
-				\end{enumerate}
-			\end{itemize}
+					\item Module Fenêtre résultats ADD :
+						\begin{itemize}
+						\item La fenêtre affichera les résultats de l'étude qualitative (Médiane, Quantile et anomalie) d'une part et de l'étude quantitative (Histogramme et Diagramme de secteur) d'autre part.\\
+						\textbf{Critère de satisfaction : } résultats conformes + diagramme bien dessiné. 
+						\item Une fonctionnalité pour lancer l'exportation des résultats sera disponible (Écriture dans un nouveau fichiers).
+						\end{itemize}
+					\end{enumerate}
+				
+			\end{description}
 			
-			\textbf{Remarque :} En ce qui concerne les critères de satisfaction de l'ADD, puisqu'il s'agit d'un domaine scientifique, le système devra fournir des résultats conformes aux techniques de ce domaine.
+			\textbf{Remarque :} en ce qui concerne les critères de satisfaction de l'ADD, puisqu'il s'agit d'un domaine scientifique, le système devra fournir des résultats conformes aux techniques de ce domaine.
 	
 	
 	\section{Exigences non fonctionnelles}
@@ -329,17 +330,16 @@
 		
 			\subsubsection{Exigences d’apparence} 
 			Le produit devra adopter une apparence simple, agréable et devra être facile à comprendre dès sa première prise en main.
-			Le maitre d’ouvrage a émis le souhait d’avoir de l’Anglais comme langue utilisée pour l’affichage textuel.
+			Le maître d’ouvrage a émis le souhait d’avoir de l’Anglais comme langue utilisée pour l’affichage textuel.
 
 			\subsubsection{Exigences de style}
-			Mots clés: Interface graphique + intéractive.
+			Le produit doit fournir une interface graphique interactive et intuitive à l'utilisateur.
 
 		\subsection{Utilisabilité}
 		Le produit devra être simple d’utilisation et facile à comprendre dès sa première prise en main, pour ne pas soumettre une formation concernant la manipulation du produit aux futurs utilisateurs.
 		
 
 		\subsection{Exigences de performance} 
-
 		Les exigences de performance du futur produit concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un CSV, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client a suggérer que cette attente devra être de l’ordre de la minute. En ce qui concerne le temps de passage d'une fenêtre à l'autre (choix de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choix du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
 
 		\subsection{Précision et exactitude}
@@ -360,8 +360,7 @@
 		
 	\section{Autres aspects du projet}
 		\subsection{Question ouvertes}
-			La question de l'esthétisme et la présentation des résultats est laissée ouverte puisqu'il n'y a pas de réponse arrêtée à ce sujet.\\
-			Le tout est d'avoir une approche prenant en compte les utilisateurs pour savoir quelles vues faciliteront l'interprétation des analyses.
+			La question de l'esthétisme et la présentation des résultats est laissée ouverte puisqu'il n'y a pas de réponse arrêtée à ce sujet. Le tout est d'avoir une approche prenant en compte les utilisateurs pour savoir quelles vues faciliteront l'interprétation des analyses.
 
 		\subsection{Tâche à faire}
 			\subsubsection{Étapes}
@@ -377,11 +376,11 @@
 				\item Build
 				\item Développement des fonctionnalités
 				\item Développement des tests
-				\item Ecriture de la documentation
+				\item Écriture de la documentation
 				\item Exécution des tests et correction éventuelle du code (debug)
 				\end{itemize}
 				
-				\textbf{Remarque} : Ces étapes ne sont pas efféctuées séparément, il sera avantageux de les réaliser en même temps. L'intensité de travail sur chacune des phases va varier tout le long du projet.
+				\textbf{Remarque} : Ces étapes ne sont pas effectuées séparément, il sera avantageux de les réaliser en même temps. L'intensité de travail sur chacune des phases va varier tout au long du projet.
 				
 
 		\subsection{Contrôle de la finalisation}
@@ -430,22 +429,22 @@
 			Le produit final ne nécessitera pas de formation pour apprendre sa manipulation. Mais une documentation utilisateur sera fournie en même temps que le produit, dans lequel sera détaillé les consignes d'installation et d'utilisations.
 			
 	\section{Conclusion}
-	D'un point de vue technique, le choix des langages de programmation utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
-	La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec ADD) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Python}}.\\
-	D'une part, ce langage est orienté pour le développement d'applications web robustes et distribuées, déployées et exécutées sur un serveur d'applications. D'autre part, ce langage qui est basé sur Java est doté de plusieurs modules d'analyse de données, dont l'outil \textbf{\textit{Weka}} par exemple.\\
-	De plus, l'applet Java doit être intégrée dans une page web pour être exécutée : on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme.\\
-	\\
-	Pour finir, il est intéressant de mentionner les diffcultées rencontrées au cours de l'élaboration du cahier des charges.\\
-	Le plus difficile a été pour nous d'apprendre une nouvelle démarche tout en la pratiquant dans un projet de grande ampleur pour des étudiants. Ceci entraine des efforts supplémentaires au niveau de l'organisation et de la gestion des délais à cause du double travail exigé.\\
-	Cela dit, ce premier travail nous a permis à la fois de réaliser l'impact des efforts individuels et collectifs pour mettre à bien un travail qui semble \textit{a priori} difficile, mais aussi d'aborder de nouveaux projets avec une approche plus pragmatique.\\
+		D'un point de vue technique, le choix des langages de programmation utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
+		La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec ADD) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Python}}.\\
+		D'une part, ce langage est compatible avec le développement d'applications web grâce aux nombreuses bibliothèques web qui permettent cela, par exemple \textbf{\textit{Django}}. D'autre part, Python est doté de plusieurs modules permettant d'effectuer du calcul scientifique sur des données et donc de l'analyse de données, par exemple l'ensemble des outils mis à disposition par le \textbf{\textit{Projet SciPy}}.\\
+		De plus, puisque le produit doit être une applet intégrée dans une page web pour s'exécuter, on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme de ces pages web.
+		
+		\paragraph{} Pour finir, il est intéressant de mentionner les difficultés rencontrées au cours de l'élaboration du cahier des charges.\\
+		Le plus difficile a été pour nous d'apprendre une nouvelle démarche tout en la pratiquant dans un projet de grande ampleur pour des étudiants. Ceci entraîne des efforts supplémentaires au niveau de l'organisation et de la gestion des délais à cause du double travail exigé.\\
+		Cela dit, ce premier travail nous a permis à la fois de réaliser l'impact des efforts individuels et collectifs pour mettre à bien un travail qui semble \textit{à priori} difficile, mais aussi d'aborder de nouveaux projets avec une approche plus pragmatique.\\
 	
-	\section{Bibliographie / sitographie - ADD}
+	\section{Bibliographie/sitographie ADD}
 	\begin{itemize}
 		\item http://www.math.univ-toulouse.fr/~baccini/zpedago/asde.pdf
 		\item http://www.math.univ-toulouse.fr/~besse/Wikistat/pdf/st-l-des-uni.pdf
 		\item http://iml.univ-mrs.fr/~reboul/cours2.pdf
 		\item https://hal.archives-ouvertes.fr/halshs-00287751/document
-		\item Wikipédia: Données aberrantes.
+		\item Wikipédia : Données aberrantes
 		\item Exploration de données et méthodes statistiques - Ellipses - Lise Bellanger, Richard Tomassone
 		\item Statistique théorique et appliquée: 1. Statistique descriptive et base de l'inférence statistique - 3e édition - de boeck - Pierre Dagnélie
 	\end{itemize}
