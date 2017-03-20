@@ -4,5 +4,10 @@
 *.nav
 *.snm
 *.toc
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
 *.synctex.gz
+*.synctex.gz(busy)
+*.pdfsyn
 Notes.txt

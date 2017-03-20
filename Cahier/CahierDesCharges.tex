@@ -32,7 +32,7 @@
 			Les industriels clients de DCbrain sont des parties prenantes indirectes. Notre travail doit pouvoir être utilisé par DCbrain pour renforcer leur application.
 			
 		\subsection{Utilisateurs du produit}
-		En premier lieu, l’application va servir aux membres de DCbrain étant donné que leurs clients industriels (Total, ERDF,…) leur fournissent les fichiers \lstinline!.csv!, afin qu’ils puissent appliquer des analyses descriptives sur les données dans le but de repérer des anomalies sur les réseaux de ces derniers. Puis en second lieu, DCbrain va déployer l'application pour ses clients, dans ce cas les membres de ces organismes deviendront des utilisateurs.\\
+		En premier lieu, l’application va servir aux membres de DCbrain étant donné que leurs clients industriels (Total, ERDF,…) leur fournissent les fichiers CSV, afin qu’ils puissent appliquer des analyses descriptives sur les données dans le but de repérer des anomalies sur les réseaux de ces derniers. Puis en second lieu, DCbrain va déployer l'application pour ses clients, dans ce cas les membres de ces organismes deviendront des utilisateurs.\\
 
 
 	\section{Contraintes sur le Projet}
@@ -48,9 +48,9 @@
 						\end{description}\\
 				\hline 2. Le produit doit être développé avec un langage de programmation compatible avec l'analyse de données &
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-						\item{\textbf{Description :}} le langage de programmation choisi doit inclure une bibliothèque qui permet d'analyser les données (taches de data mining et de machine Learning).
-						\item{\textbf{Justification :}} permettre une analyse de données la plus efficace possible.
-						\item{\textbf{Critère de satisfaction :}} on peut analyser les données de manière efficace.
+						\item{\textbf{Description :}} le langage de programmation choisi doit inclure des bibliothèques qui permettent d'analyser les données (taches de data mining et de machine Learning).
+						\item{\textbf{Justification :}} permettre une analyse de données efficace.
+						\item{\textbf{Critère de satisfaction :}} on peut effectuer une analyse descriptive de données.
 						\end{description}\\
 				\hline 3. Le produit doit fournir une API d'analyse de données en sortie &
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
@@ -73,7 +73,7 @@
 					\path[->,>=stealth'] (NAV) edge[bend left=13] node[anchor=south,above]{Intégration de l'application} (APP);
 				\end{scope}\end{tikzpicture}\end{center}
 					
-				Le produit doit donc être compatible avec tous les navigateurs web bureau (pas de version mobile exigée) prenant en charge les fonctionnalités des dernières versions de \textbf{\textit{HTML5}} et \textbf{\textit{CSS3}}, par exemple \textbf{\textit{Google Chrome}} et \textbf{\textit{Mozilla Firefox}}.
+				Le produit doit donc être compatible avec tous les navigateurs web bureau (pas de version mobile exigée) prenant en charge les fonctionnalités des dernières versions \textbf{\textit{HTML5}} et \textbf{\textit{CSS3}}, par exemple \textbf{\textit{Google Chrome}} et \textbf{\textit{Mozilla Firefox}}.
 				
 			\subsubsection{Applications partenaires :}
 				Le produit va fournir une API en sortie. Il doit donc prendre en compte de l'environnement d'intégration de cette API, c'est à dire que cette API doit être compatible avec les outils du client, l'entreprise DCbrain.
@@ -86,20 +86,31 @@
 		
 		\subsection{Glossaire et conventions de dénomination}
 			\begin{description}[style=unboxed,leftmargin=0.2cm]
-			\item\textbf{API :} \textit{Application Programming Interface}, constituent les paquets utilisables par les développeurs (intégrés), qu'on va livrer au client en plus de l'application elle-même.
-			\item\textbf{AD :} \textit{Analyse de Données}
-			\item\textbf{ADD :} \textit{Analyse Descriptive de Données}, fonctionnalité d'analyse de description statistique des données.
-			\item\textbf{Applet :} application qui s'exécute dans la fenêtre d'un navigateur web.
+				\item\textbf{Maître d'ouvrage :} entité porteuse du besoin, définissant l'objectif et les exigences du projet, attendant la réalisation d'un produit, appelé ouvrage.
+				\item\textbf{Maître d'œuvre :} entité retenue par le maître d'ouvrage pour réaliser l'ouvrage.
+				\item\textbf{Big data :} ensembles de très gros volumes de données traitées et exploitées pour en tirer des informations.
+				\item\textbf{Machine Learning :} méthodes automatisables offrant la possibilité à une machine d'évoluer grâce à un processus d'apprentissage à partir des données.
+				\item\textbf{Réseaux physiques :} réseaux industriels, de fluide, de distribution (par exemple réseau électrique)
+				\item\textbf{Capteurs IOT :} capteurs \textit{Internet of Things} (internet des objets) déployés sur des réseaux physiques afin d'y collecter des données.
+				\item\textbf{Graphe de flux :} graphes représentant les données liées au flux du réseau.
+				\item\textbf{CSV :} \textit{Comma-separated values}, format de fichier ouvert représentant des données tabulaires sous forme de valeurs séparées par des virgules.
+				\item\textbf{ADD :} \textit{Analyse Descriptive de Données}, fonctionnalité d'analyse de description statistique des données.
+				\item\textbf{ADD unidimensionnelle :}
+				\item\textbf{ADD multidimensionnelle :}
+				\item\textbf{Applet :} application qui s'exécute dans la fenêtre d'un navigateur web.
+				\item\textbf{API :} \textit{Application Programming Interface}, constituent les paquets utilisables par les développeurs (intégrés), qu'on va livrer au client en plus de l'application elle-même.
+				\item\textbf{Drag\&Drop :} glisser et déposer un fichier dans une fenêtre.
+				\item\textbf{Structure 1 :}
+				\item\textbf{Structure 2 :}
 			\end{description}
 			
 	\section{Exigences fonctionnelles}
 	
 		\subsection{Périmètre de l'ouvrage}
-		
-			Deux parties prenantes vont intéragir avec notre système :\\
+			Deux parties prenantes vont interagir avec notre système :
 			\begin{itemize}
-			\item Les industriels : Ce sont les détenteurs des réseaux physiques et des données mesurées grâce aux capteurs IoT, clients de DCbrain. Ceux-ci n'ont pas de connaissances en informatique ou en statistique présupposées. Leur besoin va être de contrôler le réseau physique et simuler son évolution.\\
-			\item DCbrain : Notre client souhaite proposer un meilleur service aux industriels. Pour cela, nous offrons une applet simple ainsi que des API pour renforcer leur produit. Les API seront manipuler par des développeurs aptes à comprendre et réutiliser des paquets informatiques documentés.
+			\item Les industriels : ce sont les détenteurs des réseaux physiques et des données mesurées grâce aux capteurs IoT, clients de DCbrain. Ceux-ci n'ont pas de connaissances en informatique ou en statistique présupposées. Leur besoin va être de contrôler le réseau physique et simuler son évolution.
+			\item DCbrain : notre client souhaite proposer un meilleur service aux industriels. Pour cela, nous offrons une applet simple ainsi que des API pour renforcer leur produit. Les API seront manipuler par des développeurs aptes à comprendre et réutiliser des paquets informatiques documentés.
 			\end{itemize}
 				
 		\subsection{Périmètre de l'œuvre}
@@ -109,7 +120,7 @@
 					{\color{red} Diag à insérer ici}
 				
 			\subsubsection{Analyse descriptive de données}
-				DCbrain et les industriels eux-mêmes lancent des ADD sur l'applet à partir d'un fichier \lstinline!.csv! au bon format.\\
+				DCbrain et les industriels eux-mêmes lancent des ADD sur l'applet à partir d'un fichier CSV au bon format.\\
 				Sur une applet s'exécutant dans un navigateur, l'acteur importe son fichier s'il est au bon format - retenter sinon. Il peut ainsi consulter un échantillon du jeu de données brut et deux options sont maintenant disponibles.\\
 				L'acteur peut naviguer pour consulter soit une description préliminaire du fichier, soit les données étant mal typées et donc non analysables.\\
 				Le déroulement type se poursuit en attribuant un rôle aux colonnes du fichier puis à la sélection de l'une d'elles pour lancer son analyse si l'ensemble de données n'est pas vide.\\
@@ -180,10 +191,9 @@
 				\end{figure}
 				
 				\textbf{Notes :}\\
-				%(1) Lancement de la fenêtre de chargement du fichier \lstinline!.csv! par le Gestion des flux\\
-				(1) Fichier \lstinline!.csv! : lancement de la vérification de son format\\
+				(1) Fichier CSV : lancement de la vérification de son format\\
 				(2) Code d'erreur : fichier OK ou ERREUR\\
-				(3) Fichier \lstinline!.csv! : lancement de l'analyse de son contenu\\
+				(3) Fichier CSV : lancement de l'analyse de son contenu\\
 				(4) \textbf{structure 1} : contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure)\\
 				\hspace*{1.9em} \textbf{structure 2} : contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes\\
 				(5) ensemble de données de type qualitatif\\
@@ -191,11 +201,11 @@
 				(7) ensemble de données de type quantitatif discret\\
 				(8) erreur ou indicateurs de tendance central, de dispersion et de forme, les anomalies, la distribution des données, un diagramme à moustaches\\
 				(9) ensemble de données de type quantitatif continu\\
-				(10) même données que (8).\\
-				(11) Chemin du fichier importé. \lstinline!.csv! \\
-				(12) Informations du (4) et ensemble de données contenu dans le fichier \lstinline!.csv! \\
+				(10) même données que (8)\\
+				(11) Chemin du fichier CSV importé \\
+				(12) Informations du (4) et ensemble de données contenu dans le fichier CSV \\
 				(13) Signal de validation du choix colonne et noms des colonnes.\\
-				(14) Envoi des résultats d'analyses de (6), (8) et (10).\\
+				(14) Envoi des résultats d'analyses de (6), (8) et (10)\\
 				(15) Demande d'exportation des résultats de l'ADD, ou analyse d'une autre colonne, ou importation d'un autre fichier\\
 			
 			\subsubsection{Format du fichier .csv}
@@ -216,7 +226,7 @@
 				Ce module va vérifier le fichier fourni en entrée en plusieurs points :
 				\begin{enumerate}
 					\item l'ouverture du fichier a réussi
-					\item le fichier est un \lstinline!.csv! contenant du texte brut non formaté (pas de mise en forme avec des balises ou autres)
+					\item le fichier est un CSV contenant du texte brut non formaté (pas de mise en forme avec des balises ou autres)
 					\item le fichier est accessible en lecture
 				\end{enumerate}
 				\textbf{Critère de satisfaction : } le fichier est bien ouvert, accessible en lecture et ne contient que du texte brut.
@@ -224,12 +234,12 @@
 			\item Analyse contenu fichier :\\
 				Ce module comprend deux fonctionnalités principales :
 				\begin{enumerate}
-					\item Lecture du contenu du fichier \lstinline!.csv! :\\
+					\item Lecture du contenu du fichier CSV :\\
 					On initialise une première structure (\textbf{structure 1}) pour y sauvegarder le contenu du fichier.\\
 					On lit ligne par ligne des caractères du fichier. A chaque fois qu'on détecte un caractère de séparation (une virgule, un point-virgule ou une tabulation), on stocke les caractères lus (la donnée) dans la structure.\\
 					Cette fonctionnalité fournit la \textbf{structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure).\\
 					\textbf{Critère de satisfaction : } l'ensemble des entrée du fichier sont renseignées dans une structure (donc exploitables)
-					\item Descriptions préliminaires des données de chaque colonne du fichier \lstinline!.csv! :\\
+					\item Descriptions préliminaires des données de chaque colonne du fichier CSV :\\
 					On initialise une deuxième structure (\textbf{structure 2}) pour y stocker des informations sur chaque colonne.\\
 					On lit une par une les données de chaque colonne. On vérifie le type de la donnée en le comparant au type attendu. Si le type ne correspond pas, on signale dans la structure que la colonne contient une donnée erronée ou manquante (repérée par sa position dans la colonne). A la fin du parcours d'une colonne, on pourra lui attribuer un rôle/nom.\\
 					Cette fonctionnalité fournit donc la \textbf{structure 2} contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes.\\
@@ -261,17 +271,17 @@
 					
 			\item Fenêtre choix fichier.
 				\begin{enumerate}
-					\item Permet de récupérer un fichier \lstinline!.csv! 
+					\item Permet de récupérer un fichier CSV
 					\item Validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop). \\
 					\textbf{Critère de satisfaction : }Le fichier devra être chargé  et devra correspondre à la demande.
 				\end{enumerate}
 			\item Fenêtre rôle et choix colonne.		
 				\begin{enumerate}
-				\item Affichera le nombre de lignes/colonnes contenu dans le \lstinline!.csv!.\\
+				\item Affichera le nombre de lignes/colonnes contenu dans le CSV.\\
 				\textbf{Critère de satisfaction : } Affiche le bon nombre de lignes et de colonnes.
 				\item Affichera le titre du fichier. \\
 				\textbf{Critère de satisfaction : } Affiche le bon titre du fichier.
-				\item Affichera un échantillon du contenu du \lstinline!.csv! (environ les 1000 premières lignes) avec un système de scroll.\\ 
+				\item Affichera un échantillon du contenu du CSV (environ les 1000 premières lignes) avec un système de scroll.\\ 
 				\textbf{Critère de satisfaction : } L'affichage de l'échantillon doit bien se faire sur les 1000 premières valeurs et doivent bien correspondre bien correspondre au contenu du fichier. 
 				\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).\\
 				 \textbf{Critère de satisfaction : } Doit bien affiché les lignes contenant les erreurs, le contenu et leur type de façon précise.
@@ -307,13 +317,13 @@
 
 		\subsection{Exigences de performance} 
 
-		Les exigences de performance du futur produit concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un \lstinline!.csv!, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client a suggérer que cette attente devra être de l’ordre de la minute. En ce qui concerne le temps de passage d'une fenêtre à l'autre (choix de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choix du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
+		Les exigences de performance du futur produit concerne la latence acceptable que devra avoir l'application. Ici la durée de réponse de l’affichage d’un CSV, ou d’une requête concernant l’analyse de données venant de l’utilisateur ne devra pas être trop longue, le client a suggérer que cette attente devra être de l’ordre de la minute. En ce qui concerne le temps de passage d'une fenêtre à l'autre (choix de(s) colonne(s) pour l'exécution d'une analyse statistique, affichage de la fenêtre d'erreurs, lors du choix du méthode d’affichage des résultats,..), l’application devra répondre de manière fluide. 
 
 		\subsection{Précision et exactitude}
 			Lors de l'analyse des données, les résultats sur la Variance et la Moyenne doivent être calculée de façon très précise car elles vont servir de base dans d’autres calculs statistiques. Les autres valeurs calculées peuvent être les plus précises possible mais ces valeurs vont servir pour l'interprétation afin mieux comprendre ce qui se passe sur le réseau.
 
 		\subsection{Maintenabilité du projet}
-		Le produit doit pouvoir être maintenu par ses utilisateurs finaux ou par des développeurs qui ne sont pas les développeurs d’origines, dans le cas où DCbrain souhaiterait ajouter de nouvelles méthodes d’analyses descriptives ou de nouveaux procédés pour afficher les résultats de manière graphique afin de satisfaire les exigences de leurs clients.\newline
+		Le produit doit pouvoir être maintenu par ses utilisateurs finaux ou par des développeurs qui ne sont pas les développeurs d’origines, dans le cas où DCbrain souhaiterait ajouter de nouvelles méthodes d’analyses descriptives ou de nouveaux procédés pour afficher les résultats de manière graphique afin de satisfaire les exigences de leurs clients.\\
 		
 		Le produit devra permettre l'insertion d'éventuels API supplémentaires, tel que l'ADD multidimensionnelle qui utilisera l'API de l'ADD unidimensionnel dans le but de fournir des descriptions statistiques plus poussées pour obtenir une meilleur vue d'ensemble sur les données collectées. Mais encore l'insertion de technique d'analyse de graphe dans le but d'obtenir des informations sur ces derniers.
 		
