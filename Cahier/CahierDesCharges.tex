@@ -1,35 +1,48 @@
 \input{../tex/preambule}
 
 \title{\vspace{\fill}\textbf{\Huge Cahier des Charges}}
-\author{Sonny Klotz - Jean-Didier Pailleux - Malek Zemni\vspace{2em}\\\textit{Interface de chargement, de contrôle}\\\textit{et d’analyse statistique des données}\\\textit{pour la constitution d’un graphe de flux}\vspace{2em}}
+\author{
+	Sonny Klotz - Jean-Didier Pailleux - Malek Zemni
+	\vspace{2em}\\
+	\textit{Interface de chargement, de contrôle}\\\textit{et d’analyse statistique des données}\\\textit{pour la constitution d’un graphe de flux}
+	\vspace{2em}
+}
 
 
 \begin{document}
 \pagenumbering{gobble}\clearpage
-\maketitle\vspace{\fill}
+\maketitle\vspace{13em}
+\begin{center}\includegraphics[scale=0.7]{logo.png}\end{center}
+\begin{flushright}Module \textit{Projet}\end{flushright}
 \newpage
 \tableofcontents
 \newpage\clearpage\pagenumbering{arabic}
 
+	\section*{Introduction}
+		Ce projet s'inscrit dans le cadre du module \textit{Projet} de la licence informatique de l'UVSQ. Le sujet qu'on nous a remis a été proposé par l'entreprise DCbrain. Notre travail va être décrit au préalable dans ce cahier des charges en plusieurs points.\\
+		Dans les deux premières parties, on va décrire le contexte et l'environnement dans lequel va s'inscrire notre système. Ensuite, les exigences vont permettre de détailler les fonctionnalités l'application. Finalement, la dernière partie s'intéressera à notre démarche de travail.
+	
 	\section{Motivations du projet}
 		\subsection{But du projet}
 			\subsubsection{Contexte du projet}
 			De nos jours, les masses de données collectées sont de plus en plus importantes. L'objectif principal de cette collecte de données est d'en extraire une valeur ajoutée. Or, ces données à l'état brut sont difficilement exploitables dû à leur volume et à leur complexité.\\
 			Notre produit correspond au travail indispensable d'analyse de ces données, afin de faciliter leur exploitation.
 			\subsubsection{Objectif du projet}
-			Ce projet a pour but de fournir aux utilisateurs une application qui se chargera d'une part de structurer les données, les analyser et les visualiser, et d'autre part de préparer ces données pour un chargement via des API.
-		
+			Ce projet a pour but de fournir aux utilisateurs une application web qui se chargera d'une part de structurer les données, les analyser et les visualiser, et d'autre part de préparer ces données pour un chargement via des API. Ces données supplémentaires permettront d'alimenter leur base de données dans le but de mieux prévenir la présence d'anomalie sur les réseaux physique.
 		
 		\subsection{Parties prenantes}
 			\subsubsection{Maître d'ouvrage}
 			Notre interface de contrôle, de chargement, et d'analyse de données est développée pour l'entreprise \textbf{DCbrain}.\\
-			Le projet a été lancé en collaboration avec l'\textbf{UVSQ}.
+			Le projet a été lancé en collaboration avec l'\textbf{UVSQ}.\\
+			Ils suivent ce projet et sont amenés à décider des grandes orientations prisent pour son élaboration.
 			
 			\subsubsection{Client}
-			DCbrain est également l'entreprise qui va bénéficier des paquets finaux après leur développement.
+			DCbrain est l'entreprise qui va bénéficier des paquets finaux après leur développement. Le projet étant un produit qui va leur permettre de mieux comprendre ce qui se passe sur leurs réseaux.\\
+			Cette entreprise spécialisée dans l'analyse de données collectées à partir de réseaux physiques, cherche à développer un outil de visualisation préliminaire de données.\\
+			Notre travail doit donc pouvoir être utilisé par DCbrain pour renforcer leur application.
 			
 			\subsubsection{Autre partie prenante}
-			Les industriels clients de DCbrain sont des parties prenantes indirectes. Notre travail doit pouvoir être utilisé par DCbrain pour renforcer leur application.
+			Les industriels clients de DCbrain sont des parties prenantes indirectes. Leur rôle consistant à fournir les données à la startup pour l'analyse de données. Le projet est motivé par le besoin de gérer leurss réseaux physiques plus efficacement.
 			
 			\subsubsection{Synthèse}
 			\begin{center}\includegraphics[scale=0.8]{diagPP.png}\end{center}
@@ -361,6 +374,12 @@
 	\section{Autres aspects du projet}
 		\subsection{Question ouvertes}
 			La question de l'esthétisme et la présentation des résultats est laissée ouverte puisqu'il n'y a pas de réponse arrêtée à ce sujet. Le tout est d'avoir une approche prenant en compte les utilisateurs pour savoir quelles vues faciliteront l'interprétation des analyses.
+			
+		\subsection{Choix du langage}
+				D'un point de vue technique, le choix des langages de programmation utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
+		La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec ADD) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Python}}.\\
+		D'une part, ce langage est compatible avec le développement d'applications web grâce aux nombreuses bibliothèques web qui permettent cela, par exemple \textbf{\textit{Django}}. D'autre part, Python est doté de plusieurs modules permettant d'effectuer du calcul scientifique sur des données et donc de l'analyse de données, par exemple l'ensemble des outils mis à disposition par le \textbf{\textit{Projet SciPy}}.\\
+		De plus, puisque le produit doit être une applet intégrée dans une page web pour s'exécuter, on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme de ces pages web.
 
 		\subsection{Tâche à faire}
 			\subsubsection{Étapes}
@@ -428,17 +447,14 @@
 		\subsection{Documentation utilisateur et formation}
 			Le produit final ne nécessitera pas de formation pour apprendre sa manipulation. Mais une documentation utilisateur sera fournie en même temps que le produit, dans lequel sera détaillé les consignes d'installation et d'utilisations.
 			
-	\section{Conclusion}
-		D'un point de vue technique, le choix des langages de programmation utilisés pour le développement du produit est justifié par les contraintes et les exigences définies précédemment.\\
-		La contrainte 1 (fournir une application web) et la contrainte 2 (compatibilité avec ADD) nous permettent de nous fixer sur le choix du langage : \textbf{\textit{Python}}.\\
-		D'une part, ce langage est compatible avec le développement d'applications web grâce aux nombreuses bibliothèques web qui permettent cela, par exemple \textbf{\textit{Django}}. D'autre part, Python est doté de plusieurs modules permettant d'effectuer du calcul scientifique sur des données et donc de l'analyse de données, par exemple l'ensemble des outils mis à disposition par le \textbf{\textit{Projet SciPy}}.\\
-		De plus, puisque le produit doit être une applet intégrée dans une page web pour s'exécuter, on va donc avoir recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme de ces pages web.
+	\section*{Conclusion}
+		Les contraintes et les exigences du projet sont facteurs qui nous ont permis de choisir le langage de programmation. Cependant, cette étape a abouti à deux langages potentiels Java et Python. Notre choix s'est finalisé avec Python, c'est un langage plus préconisé par les startups pour construire des applications. Java, lui, est utilisé par des entreprises pouvant se permettre de déployer plus de moyens pour le développement et la maintenance du système.
 		
 		\paragraph{} Pour finir, il est intéressant de mentionner les difficultés rencontrées au cours de l'élaboration du cahier des charges.\\
 		Le plus difficile a été pour nous d'apprendre une nouvelle démarche tout en la pratiquant dans un projet de grande ampleur pour des étudiants. Ceci entraîne des efforts supplémentaires au niveau de l'organisation et de la gestion des délais à cause du double travail exigé.\\
 		Cela dit, ce premier travail nous a permis à la fois de réaliser l'impact des efforts individuels et collectifs pour mettre à bien un travail qui semble \textit{à priori} difficile, mais aussi d'aborder de nouveaux projets avec une approche plus pragmatique.\\
 	
-	\section{Bibliographie/sitographie ADD}
+	\section*{Bibliographie/sitographie ADD}
 	\begin{itemize}
 		\item http://www.math.univ-toulouse.fr/~baccini/zpedago/asde.pdf
 		\item http://www.math.univ-toulouse.fr/~besse/Wikistat/pdf/st-l-des-uni.pdf
