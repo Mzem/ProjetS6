@@ -9,24 +9,63 @@
 		\titlepage
 	\end{frame}
 	
-	\begin{frame}
-		\frametitle{Plan général}
-		\tableofcontents
-	\end{frame}
-	
 	\section{Introduction}
 	\begin{frame}
-		Malek
+		Projet de L3 informatique UVSQ, remis par DCbrain.\\~\\
+		Le travail est décrit dans ce cahier des charges :
+		\begin{itemize}
+			\item Motivations
+			\item Contraintes
+			\item Exigences fonctionnelles
+			\item Exigences non fonctionnelles
+			\item Autres aspects du projet
+		\end{itemize}
 	\end{frame}
 	
-	\section{Motivations}
+	\section{Motivations du projet}
 	\begin{frame}
-		Malek
+		\textbf{Problème :} masses de données importantes et difficilement exploitables
+		\textbf{Objectif :} fournir un outil d'analyses préliminaires de ces données
+		\\~\\
+		\pause
+		\textbf{Parties prenantes :} \pause
+		\begin{itemize}
+			\item \textbf{Maitre d'ouvrage :} DCbrain, module Projet de l'UVSQ
+			\item \textbf{Client :} DCbrain
+			\item \textbf{Autres :} industriels
+		\end{itemize}
+		\begin{center}\includegraphics[scale=0.35]{../Cahier/diagPP.png}\end{center}
+		\pause \vspace{-0.5em}
+		\textbf{Utilisateurs :} membres de DCbrain + industriels du domaine
 	\end{frame}	
 	
 	\section{Contraintes}
 	\begin{frame}
-		Malek
+		3 exigences contraignantes pour le produit :
+		\pause
+		\begin{itemize}
+			\item Fournir une application web \textbf{\textit{applet}}
+			\pause
+			\item Développé avec un langage permettant une analyse de données
+			\pause
+			\item Fournir API d'analyse de données en sortie
+		\end{itemize}
+		~\\
+		\pause
+		\textbf{Environnement de fonctionnement :} celui d'une \textbf{\textit{applet}}
+			\begin{center}\begin{tikzpicture}[scale=0.5]\begin{scope}[xscale=2,yscale=1.5]	
+				\node (USR) at (-3,0) [rectangle,draw] {\begin{tabular}{c}{\tiny Utilisateur}\end{tabular}};
+				\node (NAV) at (0,0) [rectangle,draw,fill=blue!25] {\begin{tabular}{c}{\tiny Navigateur web}\end{tabular}};
+				\node (APP) at (3,0) [rectangle,draw] {\begin{tabular}{c}{\tiny Application}\end{tabular}};
+				\path[->,>=stealth'] (USR) edge[bend left=17] node[anchor=south,above]{{\tiny Accès à l'hôte}} (NAV);
+				\path[->,>=stealth'] (NAV) edge[bend left=17] node[anchor=south,above]{{\tiny Intégration de l'application}} (APP);
+			\end{scope}\end{tikzpicture}\end{center}
+		~\\
+		\pause
+		\textbf{Applications partenaires :} outils de DCbrain (intégration API)
+		\\~\\
+		\pause
+		\textbf{Temps et budget :} rendu avant le 26/05/2017, aucun budget.
 	\end{frame}
 	
 	\section{Exigences fonctionnelles}
@@ -41,43 +80,50 @@
 	
 	\section{Exigences non fonctionnelles}
 	\begin{frame}
-		Jean-Édouard
+		\textbf{Interface utilisateur:} Interface simple, agréable, intuitive et interactive en anglais.\\~\\ 
+		\pause
+		\textbf{Utilisabilité:} Simple d'utilisation et facile à comprendre.\\~\\
+		\pause
+		\textbf{Performance:} Réponse fluide et affichage des résultats de l'ordre de la minute.\\~\\
+		\pause
+		\textbf{Précision et exactitude:} Calculs très précis pour la Moyenne et la Variance. Sinon le plus précis possible.\\~\\
+		\pause
+		\textbf{Maintenabilité:} Doit pouvoir être maintenu par ses utilisateurs finaux ou par des développeurs. Permettre l'insertion d'éventuels API supplémentaires.\\~\\
+		\pause
+		\textbf{Sécurité:} Accès à partir d'un navigateur web. Manipulation des données fiables. Pas de manipulation de données à caractère personnel.\\
 	\end{frame}
 	
 	\section{Autres aspects}
 	\begin{frame}
-		\begin{itemize}
-		\item \textbf{Question ouverte} : Esthétisme et présentation des résultats laissé ouverte. Approche prenant en compte les utilisateurs.
-		\item \textbf{Choix du langage} :
-		\item \textbf{Tâche à faire} :
-		\item \textbf{Contrôle de la finalisation} :
-		\item \textbf{Estimation des coûts} : Une estimation de 565 lignes de code.
-		\item \textbf{Documentation utilisateur et formation} : Pas de formation, mais documentation fournie.
-		\item \textbf{Répartition des tâches} : 
-		\begin{center}\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{1cm}|}			
-			\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Malek}} & \multicolumn{1}{ c|}{\textbf{Sonny}} & \multicolumn{1}{c|}{\textbf{Jean-Didier}} & {\textbf{Total}} \\
-			\hline 	Gestion des flux & ~ & ~ & x & 1\\
-			\hline 	Fenêtre choix fenêtre & ~ & ~ & x & 1\\
-			\hline 	Fenêtre rôle et choix colonne & x & ~ & ~ & 1\\
-			\hline 	Fenêtre résultats ADD & ~ & x & ~ & 1\\
-			\hline  ADD qualitatives & ~ & ~ & x & 1\\
-			\hline 	ADD quantitatives discrètes & ~ & x & ~ & 1\\
-			\hline 	ADD quantitative continues &  ~ & x & ~ & 1\\
-			\hline 	Vérification format fichier & x & ~ & ~ & 1\\
-			\hline 	Analyse contenu fichier & x & ~ & ~ & 1\\
-			\hline
-			\end{longtable}\vspace{1em}\end{center}
-		\end{itemize}
+		\textbf{Question ouverte} : Esthétisme et présentation des résultats laissé ouverte.\\~\\
+		\pause
+		\textbf{Choix du langage} : \textbf{Python} compatible avec le développement d'applications web et doté de plusieurs modules pour les calculs scientifique. \\
+		\pause
+		\textbf{HTML} et \textbf{CSS} pour la présentation et la mise en formes des pages.\\~\\
+		\pause
+		\textbf{Tâche à faire} : Développement du produit sur 3 étapes. 5 étapes durant la phase de développement qui ne sont pas effectuées séparément.\\~\\
+		\pause
+		\textbf{Contrôle de la finalisation} :Qualité étudié sur plusieurs niveaux.\\~\\
+		\pause
+		\textbf{Estimation des coûts} : Une estimation de 565 lignes de code.\\~\\
+		\pause
+		\textbf{Documentation utilisateur et formation} : Pas de formation, mais documentation fournie.\\~\\
+		\pause
+		\textbf{Répartition des tâches} : Répartition de 3 modules chacun.\\~\\
+		
+		
 	\end{frame}
 	
 	\section{Conclusion}
 	\begin{frame}
 		Deux langages potentiels Java et Python. Notre choix s'est finalisé sur Python.
 		\begin{itemize}
+		\pause
 		\item \textbf{Python} : Langage préconisé par les startups pour construire des applications. 
+		\pause
 		\item \textbf{Java} : Utilisé par les entreprises ayant les moyens pour le développement et la maintenance du système.
 		\end{itemize}
-		
+		\pause
 		\textbf{Difficultés rencontrées :}  Apprendre une nouvelle démarche et pratique dans un projet à grande ampleur.\\
 		
 		
