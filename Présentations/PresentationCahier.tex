@@ -70,12 +70,98 @@
 	
 	\section{Exigences fonctionnelles}
 	\begin{frame}
-		Sonny
+		\begin{center}\includegraphics[scale=0.43]{../Cahier/diagCU.png}\end{center} \pause
+		\begin{itemize}
+			\item \textbf{ADD :} Importation .csv -> Echantillon -> Analyse
+			\item \textbf{Maintenance :} Mises à jour d'extension et de correction
+			\item \textbf{Script :} Installation des paquets -> Programmation
+		\end{itemize} \pause
+		
+		Format du fichier .csv\\
+		\begin{itemize}
+			\item \textbf{Timestamp :} Date et heure des mesures
+			\item \textbf{Père et Enfant :} Connexion où les mesures sont faites
+			\item \textbf{Mesure (unité) :} Valeur
+		\end{itemize}
 	\end{frame}
 	
-	\section{Exigences fonctionnelles}
 	\begin{frame}
 		\begin{center}\includegraphics[scale=0.43]{org.png}\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\textbf{API 1 :} Chargement des données\\
+		Vérification format fichier :
+		\begin{itemize}
+			\item format csv
+			\item ouverture en lecture
+			\item texte brut non formaté
+		\end{itemize} \pause
+		Analyse contenu fichier :
+		\begin{itemize}
+			\item \textbf{structure 1 :} contenu du fichier et nb lignes et colonnes
+			\item \textbf{structure 2 :} type, rôle et données erronées des colonnes
+		\end{itemize}		
+	\end{frame}
+	
+	\begin{frame}
+		\begin{center}\includegraphics[scale=0.43]{org.png}\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\textbf{API 1 :} Chargement des données\\
+		Vérification format fichier :
+		\begin{itemize}
+			\item format csv
+			\item ouverture en lecture
+			\item texte brut non formaté
+		\end{itemize}
+		Analyse contenu fichier :
+		\begin{itemize}
+			\item \textbf{structure 1 :} contenu du fichier et nb lignes et colonnes
+			\item \textbf{structure 2 :} type, rôle et données erronées des colonnes
+		\end{itemize}
+		
+		\textbf{API 2 :} Analyse descriptive des données\\
+		\begin{itemize}
+			\item \textbf{Données :} Données d'une colonne
+			\item \textbf{Retour :} Informations statistiques et représentations graphiques
+			\item \textbf{ADD quantitatives continues :} Discrétisation des valeurs
+		\end{itemize}	
+	\end{frame}
+	
+	\begin{frame}
+		\begin{center}\includegraphics[scale=0.43]{org.png}\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\textbf{Interface web}\\
+		Gestion des flux :
+		\begin{itemize}
+			\item Lancement de l'application
+			\item Flux d'exéction : Branchements et arrêts de l'application
+			\item Flux de données : Rôle d'interface pour communiquer les données
+		\end{itemize} \pause
+		
+		Fenêtre choix fichier :
+		\begin{itemize}
+			\item Choix du fichier : Parcours du système de fichier - Drag & Drop
+			\item Validation du choix
+		\end{itemize} \pause
+		
+		Fenêtre rôle et choix colonne :
+		\begin{itemize}
+			\item Titre - Nb de lignes et colonnes - Echantillon
+			\item Données erronées (numéro ligne, type attendu - valeur reçue)
+			\item Navigation
+			\item Sélection colonne : attribution nom et lancement de l'analyse
+		\end{itemize} \pause
+		
+		Fenêtre résultats ADD :
+		\begin{itemize}
+			\item \textbf{Affichage :} Informations statistiques et représentations graphiques
+			\item \textbf{Exportation :} Sauvegarder les résultats en local
+		\end{itemize}
 	\end{frame}
 	
 	\section{Exigences non fonctionnelles}
