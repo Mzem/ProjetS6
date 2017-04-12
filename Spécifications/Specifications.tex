@@ -1,0 +1,49 @@
+\input{../tex/preambule}
+
+\title{\vspace{\fill}\textbf{\Huge Spécifications}}
+\author{
+	Sonny Klotz - Jean-Didier Pailleux - Malek Zemni
+	\vspace{2em}\\
+	\textit{Interface de chargement, de contrôle}\\\textit{et d’analyse statistique des données}\\\textit{pour la constitution d’un graphe de flux}
+	\vspace{2em}
+}
+
+\begin{document}
+\pagenumbering{gobble}\clearpage
+\maketitle\vspace{8em}
+\begin{center}\includegraphics[scale=0.7]{../Cahier/logo.png}\end{center}
+\begin{flushright}Module \textit{Projet}\end{flushright}
+\newpage
+\tableofcontents
+\newpage\clearpage\pagenumbering{arabic}
+
+	\section*{Introduction}
+		Ce document va décrire l'ensemble des exigence fonctionnelles que doit satisfaire notre produit final, c'est-à-dire les différentes fonctionnalités que notre application va fournir. Ces fonctionnalités seront présentées selon les modules de l'organigramme établi dans le cahier des charges. Ces modules eux-mêmes seront regroupés en packages.\\
+		Ce document va donc décrire, pour chaque package de l'organigramme, les fonctionnalités de ces modules : d'abord ceux du package de chargement des données, ensuite ceux du package d'analyse descriptive des données et enfin ceux du package de l'interface web.
+		
+	\section{Package Chargement des données}
+	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
+		
+		\subsection{Module Vérification format fichier}
+			Ce module va vérifier le format du fichier fourni en entrée en 3 points. Il aura donc 3 fonctionnalités :
+			\begin{itemize}
+				\item Vérification de l'ouverture du fichier 
+				\begin{lstlisting}[language=Python]
+					def verifOuverture(chemin):
+				\end{lstlisting}
+			\end{itemize}
+		
+		
+		\subsection{Module Analyse contenu fichier}
+	
+	
+	\section{Package Analyse descriptive des données}
+	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
+	
+	\section{Package Interface web}
+	
+	
+	\section*{Conclusion}
+		
+		
+\end{document}
