@@ -26,12 +26,28 @@
 		
 		\subsection{Module Vérification format fichier}
 			Ce module va vérifier le format du fichier fourni en entrée en 3 points. Il aura donc 3 fonctionnalités :
-			\begin{itemize}
-				\item Vérification de l'ouverture du fichier 
-				\begin{lstlisting}[language=Python]
-					def verifOuverture(chemin):
-				\end{lstlisting}
-			\end{itemize}
+			\begin{enumerate}
+				\vspace{1em}\item Fonctionnalité de vérification de l'ouverture du fichier :
+					\begin{lstlisting}
+						verifOuverture(fichierCSV)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! (type représentant les entrées/sorties en général, dont les fichiers)
+						\end{description}
+					\underline{Type retour :} booléen\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! contient des informations cohérentes d'un fichier, et renvoie un booléen vrai si c'est le cas, faux sinon.
+				\vspace{1em}\item Fonctionnalité de vérification de l'extension du fichier ouvert :
+					\begin{lstlisting}
+						verifExtenstion(fichierCSV)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! (type représentant les entrées/sorties en général, dont les fichiers)
+						\end{description}
+					\underline{Type retour :} booléen\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! est...
+			\end{enumerate}
 		
 		
 		\subsection{Module Analyse contenu fichier}
