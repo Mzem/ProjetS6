@@ -19,15 +19,15 @@
 
 	\section*{Introduction}
 		Ce document va décrire l'ensemble des exigences fonctionnelles que doit satisfaire notre produit final, c'est-à-dire les différentes fonctionnalités que notre application va fournir. Cette description va prendre en compte les caractéristiques des outils de développements choisis.
-		\paragraph{}Notre outil, Python, est un langage de programmation hybride. On utilisera d'une part la programmation fonctionnelle pour les calculs, et d'autre part la programmation objet pour le développement des interfaces graphiques. Dans Python, le type de données n'est connu qu'à l'exécution (typage dynamique), par conséquent, ces types ne seront pas indiqués dans les signatures des fonctions et les structures des classes. Ils seront précisés dans des paragraphes explicatifs.
+		\paragraph{}Notre outil, Python, est un langage de programmation hybride. On utilisera d'une part la programmation fonctionnelle pour les calculs, et d'autre part la programmation objet pour le développement des interfaces graphiques. Dans Python, le type de données n'est connu qu'à l'exécution (typage dynamique), par conséquent, ces types ne seront pas indiqués dans les signatures des fonctions et les structures des classes. Ils seront néanmoins définis dans des paragraphes explicatifs.
 		\paragraph{}Pour les parties qui s'appuient sur une interaction avec l'utilisateur, notre démarche de description des fonctionnalités va essentiellement prendre en compte l'\textit{expérience utilisateur}\footnote{http://uxdesign.com/ux-defined}. Cette description sera donc axée sur la qualification du résultat et du ressenti de l'utilisateur lors de la manipulation de l'interface fournie (une illustration à l'aide croquis), plutôt que sur les points techniques de l'application (fonctions et classes).
 		\paragraph{}Les fonctionnalités de notre application seront présentées selon les modules de l'organigramme établi dans le cahier des charges. Ces modules eux-mêmes seront regroupés en packages. Ce document va donc décrire, pour chaque package de l'organigramme, les fonctionnalités de ses modules : d'abord ceux du package de chargement des données, ensuite ceux du package d'analyse descriptive des données et enfin ceux du package de l'interface web.
 		
 	\section{Package Chargement des données}
-	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
+	Ce package est composé de deux modules qui ont pour fonction de traiter le fichier de données fourni : une vérification de son format et une analyse de son contenu. On pourra aussi parler de API puisque ce package peut être éventuellement livré en sortie. 
 		
 		\subsection{Module Vérification format fichier}
-			Ce module va vérifier le format du fichier fourni en entrée en 3 points. Il aura donc 3 fonctionnalités :
+			Ce module va vérifier le format du fichier de données fourni en entrée en 3 points. Il aura donc 3 fonctionnalités :
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité de vérification de l'ouverture du fichier :
 					\begin{lstlisting}
@@ -35,25 +35,47 @@
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! (type représentant les entrées/sorties en général, dont les fichiers)
+							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - type représentant les entrées/sorties en général, dont les fichiers : le paramètre représente le fichier CSV fourni.
 						\end{description}
-					\underline{Type retour :} booléen\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! contient des informations cohérentes d'un fichier, et renvoie un booléen vrai si c'est le cas, faux sinon.
+					\underline{Retour :} variable de type booléen.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! contient bien des informations représentant un fichier quelconque, et renvoie un booléen vrai si c'est le cas, faux sinon.
 				\vspace{1em}\item Fonctionnalité de vérification de l'extension du fichier ouvert :
 					\begin{lstlisting}
 						verifExtenstion(fichierCSV)
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! (type représentant les entrées/sorties en général, dont les fichiers)
+							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - type représentant les entrées/sorties en général, dont les fichiers : le paramètre représente le fichier CSV fourni.
 						\end{description}
-					\underline{Type retour :} booléen\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! est...
+					\underline{Retour :} variable de type booléen.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que l'information décrivant l'extension du fichier dans le paramètre \lstinline!fichierCSV! correspond bien au format CSV, et renvoie un booléen vrai si c'est le cas, faux sinon.
+				\vspace{1em}\item Fonctionnalité de vérification de l'accessibilité en lecture du fichier :
+					\begin{lstlisting}
+						verifLecture(fichierCSV)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - type représentant les entrées/sorties en général, dont les fichiers : le paramètre représente le fichier CSV fourni.
+						\end{description}
+					\underline{Retour :} variable de type booléen.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! représentant le fichier possède bien la propriété d'accès en lecture. Un test de lecture sera aussi effectué sur le fichier. La fonction renvoie un booléen vrai si l'accès en lecture est permis, faux sinon.
 			\end{enumerate}
 		
 		
 		\subsection{Module Analyse contenu fichier}
-	
+			Ce module va analyser le contenu du fichier fourni en lisant, d'une part, les données de ce fichier une à une et d'autre part, en repérant les données erronées. Il aura donc 2 fonctionnalités :
+			\begin{enumerate}
+				\vspace{1em}\item Fonctionnalité de lecture du contenu du fichier CSV :
+					\begin{lstlisting}
+						lecture(fichierCSV)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - type représentant les entrées/sorties en général, dont les fichiers : le paramètre représente le fichier CSV fourni.
+						\end{description}
+					\underline{Retour :} structure contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure). \\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle crée une structure pour y sauvegarder le contenu du fichier représenté par le paramètre \lstinline!fichierCSV!. On lit ligne par ligne des caractères du fichier. A chaque fois qu’on détecte un caractère de séparation (une virgule, un point-virgule ou une tabulation), on stocke les caractères lus (la donnée) dans la structure.
+			\end{enumerate}
 	
 	\section{Package Analyse descriptive des données}
 	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
