@@ -18,10 +18,10 @@
 \newpage\clearpage\pagenumbering{arabic}
 
 	\section*{Introduction}
-		Ce document va décrire l'ensemble des exigences fonctionnelles que doit satisfaire notre produit final, c'est-à-dire les différentes fonctionnalités que notre application va fournir. Cette description va prendre en compte les caractéristiques des outils de développements choisis.
+		Ce document va décrire l'ensemble des exigences fonctionnelles que doit satisfaire notre produit final, c'est-à-dire les différentes fonctionnalités que notre application va fournir. Cette description va prendre en compte les caractéristiques des outils de développement choisis.
 		\paragraph{}Notre outil, Python, est un langage de programmation hybride. On utilisera d'une part la programmation fonctionnelle pour les calculs, et d'autre part la programmation objet pour le développement des interfaces graphiques. Dans Python, le type de données n'est connu qu'à l'exécution (typage dynamique), par conséquent, ces types ne seront pas indiqués dans les signatures des fonctions et les structures des classes. Ils seront précisés dans des paragraphes explicatifs.
-		\paragraph{}Pour les parties qui s'appuient sur une interaction avec l'utilisateur, notre démarche de description des fonctionnalités va essentiellement prendre en compte l'\textit{expérience utilisateur}\footnote{http://uxdesign.com/ux-defined}. Cette description sera donc axée sur la qualification du résultat et du ressenti de l'utilisateur lors de la manipulation de l'interface fournie (une illustration à l'aide croquis), plutôt que sur les points techniques de l'application (fonctions et classes).
-		\paragraph{}Les fonctionnalités de notre application seront présentées selon les modules de l'organigramme établi dans le cahier des charges. Ces modules eux-mêmes seront regroupés en packages. Ce document va donc décrire, pour chaque package de l'organigramme, les fonctionnalités de ses modules : d'abord ceux du package de chargement des données, ensuite ceux du package d'analyse descriptive des données et enfin ceux du package de l'interface web.
+		\paragraph{}Pour les parties qui s'appuient sur une interaction avec l'utilisateur, notre démarche de description des fonctionnalités va essentiellement prendre en compte l'\textit{expérience utilisateur}\footnote{http://uxdesign.com/ux-defined}. Cette description sera donc axée sur la qualification du résultat et du ressenti de l'utilisateur lors de la manipulation de l'interface fournie (une illustration à l'aide de croquis), plutôt que sur les points techniques de l'application (fonctions et classes).
+		\paragraph{}Les fonctionnalités de notre application seront présentées selon les modules de l'organigramme établi dans le cahier des charges. Ces modules eux-mêmes seront regroupés en packages. Ce document va donc décrire, pour chaque package de l'organigramme, les fonctionnalités de ses modules : d'abord ceux du package de chargement des données, puis ceux du package d'analyse descriptive des données et ensuite ceux du package de l'interface web. Les types Python utilisés seront décrits dans la dernière partie, le glossaire des types.
 		
 	\section{Package Chargement des données}
 	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
@@ -58,14 +58,32 @@
 	\section{Package Analyse descriptive des données}
 	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
 	
+		\subsection{Module Analyse de données qualitatives}
+		
+		\subsection{Module Analyse de données quantitatives discrètes}
+			
+		\subsection{Module Analyse de données quantitatives continues}
+		
+		
 	\section{Package Interface web}
+		
+		\subsection{Module Gestion des flux}
+		
+		\subsection{Module Fenêtre choix fichier}
+		
+		\subsection{Module Fenêtre rôle et choix colonne}
+		
+		\subsection{Module Fenêtre résultats ADD\footnote{ADD : analyse descriptive de données}}
 	
+	\section{Glossaire des types}
 	
 	\section*{Conclusion}
 		Bilan : rappel ce qu'on a fait et ce que ça a apporté\\
 		Ouvertures :\\
 			- Mise en place des tests d'acceptations (comment on va mesurer, il faut définir une mesure et après la calculer)\\
 			- Difficultés\\
-		Dernière phrase positive.
+			- Limites des spécifications dans notre cas : nécessité de tester une 1ere version de l'appli pour bien definir l'experience utilisateur\\
+		Dernière phrase positive :
+			- Decouverte nouveaux outils, nouvelle demarche pour le dev : devops, ux design, balsamiq
 		
 \end{document}
