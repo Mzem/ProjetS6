@@ -99,26 +99,29 @@
 			\end{enumerate}
 	
 	\section{Package Analyse descriptive des données}
+	\colorbox{yellow}{package à décrire Sonny stp}\\
 	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
 	
 		\subsection{Module Analyse de données qualitatives}
-	Ce module va effectuer les calculs d'effectifs, d'effectifs cumulés, de fréquences et de fréquences cumulés. Il s'occupera également de fournir les informations nécessaire pour la construction d'un diagramme de secteur et d'un histogramme. Il aura donc 6 fonctionnalités :
+			Ce module va effectuer les calculs d'effectifs, d'effectifs cumulés, de fréquences et de fréquences cumulés. Il s'occupera également de fournir les informations nécessaire pour la construction d'un diagramme de secteur et d'un histogramme. Il aura donc 6 fonctionnalités :
 	
-		\begin{enumerate}
-				\vspace{1em}\item Fonctionnalité pour calculer l'effectif :
+			\begin{enumerate}
+				\vspace{1em}\item Fonctionnalité de calcul de l'effectif :
 					\begin{lstlisting}
 						calculEffectif(donneeQualitative)
 					\end{lstlisting}
-					\underline{Paramètres :} \lstinline!donneeQualitative! - structure contenant les données de type qualitatif de la colonne\\
-					\underline{Retour :} variable de type  \lstinline!list! - correspondant à la sortie du calcul des effectifs de chaque valeur de la colonne.\\
+					\underline{Paramètres :} 
+					\colorbox{yellow}{toujours passer à la ligne et indenter (desc), meme si un seul param, c plus clair}\\
+						\lstinline!donneeQualitative! : \colorbox{yellow}{type??} - structure contenant les données de type qualitatif de la colonne.\\
+					\underline{Retour :} variable de type  \lstinline!list! : représente la sortie du calcul des effectifs de chaque valeur de la colonne.\\
 					\underline{Description :} cette fonction prendra en paramètre les données de type qualitatif. Elle calculera les effectifs pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
 					
-				\vspace{1em}\item Fonctionnalité pour calculer l'effectif cumulé:
+				\vspace{1em}\item Fonctionnalité de calculer de l'effectif cumulé :
 					\begin{lstlisting}
 						calculEffectifCumule(listeEffectif)
 					\end{lstlisting}
-					\underline{Paramètres :} \lstinline!listeEffectif! est de type  \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectif(donneeQualitative)!\\
-					\underline{Retour :} variable de type  \lstinline!list! - copie de \lstinline!listeEffectif! mais dont les effectifs seront remplacé par les effectifs cumulés. \\
+					\underline{Paramètres :} \lstinline!listeEffectif! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectif(donneeQualitative)!\\
+					\underline{Retour :} variable de type  \lstinline!list! : copie de \lstinline!listeEffectif! mais dont les effectifs seront remplacé par les effectifs cumulés. \\
 					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculEffectif! préalablement stocké dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et remplacera les effectifs par les effectifs cumulés. La fonction retournera cette nouvelle liste.
 					
 				\vspace{1em}\item Fonctionnalité pour calculer la fréquence :
@@ -160,6 +163,7 @@
 		
 		
 	\section{Package Interface web}
+		\colorbox{yellow}{Une desc du package JD stp}
 		
 		\subsection{Module Gestion des flux}
 		
@@ -189,7 +193,7 @@
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item\lstinline!chemin! : \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni\\
+							\item\lstinline!chemin! : \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni.
 						\end{description}
 					\underline{Retour :} variable de type booléen.\\
 					\underline{Description :} cette fonction prend en entrée le chemin du fichier CSV. Elle va faire appel à la fonction  \lstinline!ouvrir(chemin)! du module "Vérification format fichier" pour l'ouverture du fichier. Dans ce cas la fonction renvoie un booléen à vrai si le fichier à bien été ouvert, faux sinon.
@@ -215,8 +219,8 @@
 		Ouvertures :\\
 			- Mise en place des tests d'acceptations (comment on va mesurer, il faut définir une mesure et après la calculer)\\
 			- Difficultés\\
-			- Limites des spécifications dans notre cas : nécessité de tester une 1ere version de l'appli pour bien definir l'experience utilisateur\\
-		Dernière phrase positive :
-			- Decouverte nouveaux outils, nouvelle demarche pour le dev : devops, ux design, balsamiq
+			- Limites des spécifications dans notre cas : nécessité de tester une 1ere version de l'appli pour bien définir l'expérience utilisateur\\
+		Dernière phrase positive :\\
+			- Découverte nouveaux outils, nouvelle démarche pour le dev : devops, ux design, balsamiq
 		
 \end{document}
