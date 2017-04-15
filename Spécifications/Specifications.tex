@@ -81,6 +81,56 @@
 	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
 	
 		\subsection{Module Analyse de données qualitatives}
+	Ce module va effectuer les calculs d'effectifs, d'effectifs cumulés, de fréquences et de fréquences cumulés. Ce module s'occupera également de fournir les informations nécessaire pour la construction d'un diagramme de secteur et d'un histogramme. Il aura donc 6 fonctionnalités :
+	
+		\begin{enumerate}
+				\vspace{1em}\item Fonctionnalité pour calculer l'effectif :
+					\begin{lstlisting}
+						calculEffectif(donneeQualitative)
+					\end{lstlisting}
+					\underline{Paramètres :} Un ensemble \lstinline!donneeQualitative! - structure contenant des données de type qualitative fichier, le nombre de lignes et le nombre de colonnes\\
+					\underline{Retour :} Une liste contenant les effectifs des données de la colonne.\\
+					\underline{Description :} cette fonction prendra en paramètre la structure contenant les données du fichier. Elle calculera les effectifs pour chaque valeurs
+					
+				\vspace{1em}\item Fonctionnalité pour calculer l'effectif cumulé:
+					\begin{lstlisting}
+						calculEffectifCumule(listeEffectif)
+					\end{lstlisting}
+					\underline{Paramètres :} \lstinline!listeEffectif! est de type liste, et correspond au résultat de la fonction \lstinline!calculEffectif(structure1)!\\
+					\underline{Description :} 
+					
+				\vspace{1em}\item Fonctionnalité pour calculer la fréquence :
+					\begin{lstlisting}
+						calculFrequence(donneeQualitative)
+					\end{lstlisting}
+					\underline{Paramètres :} un objet \lstinline!strucutre1! - structure contenant les données du fichier, le nombre de lignes et le nombre de colonnes\\\\
+					\underline{Retour :} Une liste contenant la fréquence des données de la colonne.\\
+					\underline{Description :} 
+					
+				\vspace{1em}\item Fonctionnalité pour calculer la fréquence cumulé :
+					\begin{lstlisting}
+						calculFrequenceCumule(listeFrequence)
+					\end{lstlisting}
+					\underline{Paramètres :} \lstinline!listeFrequence! est de type liste, et correspond au résultat de la fonction \lstinline!calculFrequence(structure1)! \\ \\
+					\underline{Retour :} Une liste \\
+					\underline{Description :} 
+					
+				\vspace{1em}\item Fonctionnalité pour les données du diagramme en secteur :
+					\begin{lstlisting}
+						infoSecteur(something)
+					\end{lstlisting}
+					\underline{Paramètres :} \\
+					\underline{Retour :} Une liste contenant les informations nécessaire pour la construction d'un diagramme de secteur.\\
+					\underline{Description :} 
+					
+				\vspace{1em}\item Fonctionnalité pour les données de l'histogramme :
+					\begin{lstlisting}
+						infoHistogramme(something)
+					\end{lstlisting}
+					\underline{Paramètres :} \\
+					\underline{Retour :}  Une liste contenant les informations nécessaire pour la construction d'un histogramme.\\
+					\underline{Description :} 
+			\end{enumerate}
 		
 		\subsection{Module Analyse de données quantitatives discrètes}
 			
@@ -92,6 +142,36 @@
 		\subsection{Module Gestion des flux}
 		
 		\subsection{Module Fenêtre choix fichier}
+		Ce module est la fenêtre qui va permettre à l'utilisateur d'aller charger le fichier CSV. Il y aura 3 fonctionnalités :
+
+			\begin{enumerate}
+				\vspace{1em}\item Fonctionnalité pour ouvrir le fichier avec le Système de Gestion de fichier :
+					\begin{lstlisting}
+						FileWithSGF()
+					\end{lstlisting}
+					\underline{Paramètres :} Ne demande aucun paramètre en entrée.\\
+					\underline{Retour :} chaîne de caractères correspondant au chemin de l'emplacement du fichier\\
+					\underline{Description :} cette fonction ne prend pas de paramètre en entrée. Elle permet de récupérer le chemin de l'emplacement du fichier CSV avec la technique du Drag\&Drop. Elle renvoie donc une chaîne de caractères correspondant à ce chemin.
+					
+				\vspace{1em}\item Fonctionnalité pour ouvrir le fichier avec la technique du Drag\&Drop.
+					\begin{lstlisting}
+						FileWithDragDrop()
+					\end{lstlisting}
+					\underline{Paramètres :} Ne demande aucun paramètre en entrée.\\
+					\underline{Retour :} chaîne de caractères correspondant au chemin de l'emplacement du fichier\\
+					\underline{Description :} cette fonction ne prend pas de paramètre en entrée. Elle permet de récupérer le chemin de l'emplacement du fichier CSV en parcourant le système de gestion de fichiers. Elle renvoie donc une chaîne de caractères correspondant à ce chemin.
+					
+				\vspace{1em}\item Fonctionnalité qui va ouvrir en lecture le fichier CSV.
+					\begin{lstlisting}
+						OpenFile(cheminFichier)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item\lstinline!cheminFichier! : chaîne de caractères - chemin du fichier CSV fourni.
+						\end{description}
+					\underline{Retour :} variable de type booléen.\\
+					\underline{Description :} cette fonction prend en entrée le chemin du fichier CSV. Elle va faire appel aux fonctionnalités du module "Vérification format fichier" pour savoir si le fichier peut-être ouvert ou non. Dans ce cas la fonction renvoie un booléen à vrai si le fichier à bien été ouvert, faux sinon.
+			\end{enumerate}
 		
 		\subsection{Module Fenêtre rôle et choix colonne}
 
