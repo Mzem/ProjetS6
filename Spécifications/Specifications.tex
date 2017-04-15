@@ -27,7 +27,7 @@
 	Ce package est composé de deux modules qui ont pour fonction de traiter le fichier de données fourni : une vérification de son format et une analyse de son contenu. On pourra aussi parler de API puisque ce package peut être éventuellement livré en sortie. 
 		
 		\subsection{Module Vérification format fichier}
-			Ce module va vérifier le format du fichier de données fourni en entrée en 3 points. Il aura donc 3 fonctionnalités :
+			Ce module va vérifier le format du fichier de données fourni en entrée en 3 points. Il aura donc trois fonctionnalités de vérification et une fonctionnalité globale d'ouverture du fichier.
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité de vérification de l'ouverture du fichier :
 					\begin{lstlisting}
@@ -37,8 +37,8 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - représente le fichier CSV fourni.
 						\end{description}
-					\underline{Retour :} variable de type booléen.\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! contient bien des informations représentant un fichier quelconque, et renvoie un booléen vrai si c'est le cas, faux sinon.
+					\underline{Retour :} variable de type entier signalant un succès (0) ou une erreur (1).\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! contient bien des informations représentant un fichier quelconque, et renvoie l'entier 0 si c'est le cas, l'entier 1 sinon.
 				\vspace{1em}\item Fonctionnalité de vérification de l'extension du fichier ouvert :
 					\begin{lstlisting}
 						verifExtenstion(fichierCSV)
@@ -47,8 +47,8 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - représente le fichier CSV fourni.
 						\end{description}
-					\underline{Retour :} variable de type booléen.\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que l'information décrivant l'extension du fichier dans le paramètre \lstinline!fichierCSV! correspond bien au format CSV, et renvoie un booléen vrai si c'est le cas, faux sinon.
+					\underline{Retour :} variable de type entier signalant un succès (0) ou une erreur (2).\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que l'information décrivant l'extension du fichier dans le paramètre \lstinline!fichierCSV! correspond bien au format CSV, et renvoie l'entier 0 si c'est le cas, l'entier 2 sinon.
 				\vspace{1em}\item Fonctionnalité de vérification de l'accessibilité en lecture du fichier :
 					\begin{lstlisting}
 						verifLecture(fichierCSV)
@@ -57,13 +57,23 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - représente le fichier CSV fourni.
 						\end{description}
-					\underline{Retour :} variable de type booléen.\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! représentant le fichier possède bien la propriété d'accès en lecture. Un test de lecture sera aussi effectué sur le fichier. La fonction renvoie un booléen vrai si l'accès en lecture est permis, faux sinon.
+					\underline{Retour :} variable de type entier signalant un succès (0) ou une erreur (3).\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle vérifie que le paramètre \lstinline!fichierCSV! représentant le fichier possède bien la propriété d'accès en lecture. Un test de lecture sera aussi effectué sur le fichier. La fonction renvoie l'entier 0 si l'accès en lecture est permis, l'entier 3 sinon.
+				\vspace{1em}\item Fonctionnalité globale d'ouverture du fichier CSV :
+					\begin{lstlisting}
+						ouvrir(chemin)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item\lstinline!chemin! : \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni.
+						\end{description}
+					\underline{Retour :} variable de type entier signalant un succès (0) ou une erreur (1, 2, ou 3).\\
+					\underline{Description :} cette fonction prend en entrée le chemin du fichier CSV fourni. Elle ouvre ce fichier en lecture à l'aide de la fonction \lstinline!open(chemin,"r")! et le stocke dans une variable de type \lstinline!TextIoWrapper!. Elle applique ensuite dans l'ordre les trois fonctions de vérifications du module et renvoie le code de la fonction qui fait échouer l'ouverture (l'entier 1, 2 ou 3), ou bien un code signalant le succès de l'ouverture (l'entier 0).
 			\end{enumerate}
 		
 		
 		\subsection{Module Analyse contenu fichier}
-			Ce module va analyser le contenu du fichier fourni en lisant, d'une part, les données de ce fichier une à une et d'autre part, en repérant les données erronées. Il aura donc 2 fonctionnalités :
+			Ce module va analyser le contenu du fichier fourni en lisant une à une les données de ce fichier et en repérant les données erronées. Il aura donc deux fonctionnalités :
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité de lecture du contenu du fichier CSV :
 					\begin{lstlisting}
@@ -73,8 +83,19 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - représente le fichier CSV fourni.
 						\end{description}
-					\underline{Retour :} structure contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure). \\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle crée une structure pour y sauvegarder le contenu du fichier représenté par le paramètre \lstinline!fichierCSV!. On lit ligne par ligne des caractères du fichier. A chaque fois qu’on détecte un caractère de séparation (une virgule, un point-virgule ou une tabulation), on stocke les caractères lus (la donnée) dans la structure.
+					\underline{Retour :} une variable de type \lstinline!list! : une liste dont chaque élément représente une ligne du fichier CSV : ses éléments sont des sous-listes contenant les données des lignes du fichier.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle crée une liste pour y sauvegarder le contenu de ce fichier, ligne par ligne. Elle lit les caractères du fichier en entier à l'aide de la fonction \lstinline!read()!. Ensuite, pour chaque ligne du fichier, elle applique la fonction \lstinline!split(',')! pour séparer les caractères de cette ligne selon la virgule et les stocker dans une sous-liste qui sera finalement stockée dans la liste englobante.
+				\vspace{1em}\item Fonctionnalité de description des données des colonnes du fichier CSV :
+					\begin{lstlisting}
+						descriptionColonnes(lignesCSV)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item\lstinline!lignesCSV! : \lstinline!list! - liste représentant les données du fichier CSV ligne par ligne.
+						\end{description}
+					\underline{Retour :} une variable de type \lstinline!dict! : un dictionnaire dont chaque élément représente une colonne du fichier CSV : la clé représente le rôle de la colonne, et la variable correspondante est une liste contenant toutes les données de cette colonne.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV préalablement lu et stocké dans la liste \lstinline!lignesCSV!. Elle crée un dictionnaire pour y sauvegarder le contenu de ce fichier, colonne par colonne. Elle lit la liste \lstinline!lignesCSV! colonne par colonne, stocke en premier lieu le rôle de la colonne dans la clé puis stocke les données dans la variable (liste) correspondante. \\
+					Pour chaque colonne, une vérification de type sera effectuée sur chaque donnée. Les données manquantes ou erronées (dont le type ne correspond pas au type attendu) seront renseignées dans une liste de tuples dont la structure est \lstinline![("rôle colonne", numéro de ligne erronée)]!. Celle-ci sera stockée en dernier dans le dictionnaire avec comme clé \lstinline!"erreurs"!.
 			\end{enumerate}
 	
 	\section{Package Analyse descriptive des données}
@@ -95,13 +116,17 @@
 		
 		\subsection{Module Fenêtre rôle et choix colonne}
 
-		\subsection{Module Fenêtre résultats ADD, footnote{ADD : analyse descriptive de données}}
+		\subsection{Module Fenêtre résultats ADD}
 	
 	\section{Glossaire des types}
 	
 	Dans ce glossaire, on va préciser la définition en Python des types des données qu'on a utilisé dans la description des fonctionnalités.
 	\begin{itemize}
 		\item \lstinline!TextIoWrapper! : classe représentant les flux de texte bufferisés (entrées/sorties de texte avec une sauvegarde dans une mémoire tampon). Elle permet donc de représenter les fichiers de texte brut en particulier. Elle définit des méthodes de manipulation de ces flux.
+		\item \lstinline!str! : classe représentant des séquences de caractères (donc des chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
+		\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.		
+		\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.		
+		\item \lstinline!tuple! : classe représentant des listes immuables (non modifiables).
 	\end{itemize}
 	
 	\section*{Conclusion}

@@ -1,4 +1,5 @@
 *.log
+*.dvi
 *.aux
 *.out
 *.nav
