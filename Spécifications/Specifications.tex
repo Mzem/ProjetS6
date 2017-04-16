@@ -83,17 +83,17 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - représente le fichier CSV fourni.
 						\end{description}
-					\underline{Retour :} une variable de type \lstinline!list! : une liste dont chaque élément est un dictionnaire contenant les données d'une ligne du fichier CSV.\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle crée une liste pour y sauvegarder le contenu de ce fichier, ligne par ligne. Elle lit les caractères du fichier en entier à l'aide de la fonction \lstinline!read()!. Ensuite, pour chaque ligne du fichier, elle applique la fonction \lstinline!split(',')! pour séparer les caractères de cette ligne selon la virgule et les stocker dans un dictionnaire qui sera finalement stocké dans la liste englobante. L'utilisation d'un dictionnaire permet d'indexer les données de la ligne par le nom de la colonne : 
+					\underline{Retour :} une variable de type \lstinline!list! : une liste dont chaque élément est une sous-liste contenant les données d'une ligne du fichier CSV.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle crée une liste pour y sauvegarder le contenu de ce fichier, ligne par ligne. Elle lit les caractères du fichier en entier à l'aide de la fonction \lstinline!read()!. Ensuite, pour chaque ligne du fichier, elle applique la fonction \lstinline!split(',')! pour séparer les caractères de cette ligne selon la virgule et les stocker dans une sous-liste qui sera finalement stockée dans la liste englobante. L'utilisation d'une liste de listes permet d'indexer les lignes et les colonnes du fichier par leurs numéros.
 					\begin{lstlisting}
+						#Exemple d'un fichier CSV de 2 lignes à 2 données
 						[ 	
-							{"nomColonne1" : donnée1Ligne1, "nomColonne2" donnée2Ligne1},
-							{"nomColonne1" : donnée1Ligne2, "nomColonne2" donnée2Ligne2} 
+							[donnéeColonne1Ligne1, donnéeColonne2Ligne1],
+							[donnéeColonne1Ligne2, donnéeColonne2Ligne2]
 						] 
 					\end{lstlisting}
-					Ces noms de colonnes proviennent du fichier CSV.
 					
-				\vspace{1em}\item Fonctionnalité de description du type et des erreurs des colonnes du fichier CSV :
+				\vspace{1em}\item Fonctionnalité de description du nom, du type et des erreurs des colonnes du fichier CSV :
 					\begin{lstlisting}
 						descriptionColonnes(lignesCSV)
 					\end{lstlisting}
@@ -101,17 +101,21 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!lignesCSV! : \lstinline!list! - liste représentant les données du fichier CSV ligne par ligne.
 						\end{description}
-					\underline{Retour :} une variable de type \lstinline!dict! : un dictionnaire de 2 dictionnaires indexés par \lstinline!"types"! et \lstinline!"erreurs"!.\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV préalablement lu et stocké dans la liste \lstinline!lignesCSV!. Elle crée un dictionnaire de 2 éléments de type dictionnaire également, pour y renseigner le type et les erreurs de chaque colonne de ce fichier.\\
-					Elle remplit d'abord le champ \lstinline!types! du dictionnaire par les types attendus. Ensuite, elle lit la liste \lstinline!lignesCSV! colonne par colonne. Pour chaque donnée d'une colonne, elle compare son type au type attendu et, en cas d'erreur, renseigne le numéro de cette ligne dans une liste dans le champ \lstinline!erreurs! du dictionnaire.
+					\underline{Retour :} une variable de type \lstinline!dict! : un dictionnaire de 3 sous-listes ayant pour clés : \lstinline!"nom"!, \lstinline!"type"! et \lstinline!"erreurs"!.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV préalablement lu et stocké dans la liste \lstinline!lignesCSV!. Elle crée un dictionnaire de 3 éléments de type liste, pour y renseigner le nom, le type et les lignes erronées de chaque colonne de ce fichier :\\
+					1 - Elle remplit le champ \lstinline!"nom"! du dictionnaire par le nom de chaque colonne, lu à partir du fichier CSV.\\
+					2 - Elle remplit le champ \lstinline!"type"! du dictionnaire par le type attendu pour chaque colonne.\\ 
+					3 - Elle lit la liste \lstinline!lignesCSV! colonne par colonne. Pour chaque donnée d'une colonne, elle compare son type au type attendu et, en cas d'erreur, renseigne le numéro de cette ligne dans une sous-sous-liste dans le champ \lstinline!"erreurs"! du dictionnaire.
 					\begin{lstlisting}
+						#Exemple de description d'un fichier CSV à 2 colonnes
 						{ 	
-							"types" : {"nomColonne1" : typeColonne1, "nomColonne2" typeColonne2},
+							"nom" : ["nomColonne1", "nomColonne2"],
+							"type" : [typeColonne1, typeColonne2],
 							"erreurs" : 
-							{
-								"nomColonne1" : [liste des numéros de lignes des données erronées de la colonne 1], 
-								"nomColonne2" : [liste des numéros de lignes des données erronées de la colonne 2]
-							} 
+							[
+								[liste des numéros de lignes des données erronées de la colonne 1], 
+								[liste des numéros de lignes des données erronées de la colonne 2]
+							] 
 						} 
 					\end{lstlisting}
 			\end{enumerate}
