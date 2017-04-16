@@ -223,7 +223,7 @@
 							\item Ne prend aucun paramètre.
 						\end{description}
 					\underline{Retour :} \lstinline!render_template()! : fonction qui renvoie le contenu de la page web mis en paramètre qui va être envoyée au client. \\
-					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/choix_fichier/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre choix fichier.
+					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/choix_fichier/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre choix fichier. Des variables en tant qu'arguments optionnels peuvent-être utilisé dans le cas où l'on souhaiterait afficher des valeurs.
 					
 				\vspace{1em}\item Fonctionnalité pour générer la fenêtre rôle et choix colonne.
 					\begin{lstlisting}
@@ -234,7 +234,7 @@
 							\item Ne prend aucun paramètre.
 						\end{description}
 					\underline{Retour :} \lstinline!render_template()! : fonction qui renvoie le contenu de la page web mis en paramètre qui va être envoyée au client. \\
-					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/role_choix_colonne/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre rôle et choix colonne.
+					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/role_choix_colonne/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre rôle et choix colonne. Des variables en tant qu'arguments optionnels peuvent-être utilisé dans le cas où l'on souhaiterait afficher des valeurs.
 					
 				\vspace{1em}\item Fonctionnalité pour générer la fenêtre résultats ADD.
 					\begin{lstlisting}
@@ -245,19 +245,30 @@
 							\item Ne prend aucun paramètre.
 						\end{description}
 					\underline{Retour :} \lstinline!render_template()! : fonction qui renvoie le contenu de la page web mis en paramètre qui va être envoyée au client. \\
-					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/resultat_ADD/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre résultat ADD.
+					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/resultat_ADD/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre résultat ADD. Des variables en tant qu'arguments optionnels peuvent-être utilisé dans le cas où l'on souhaiterait afficher des valeurs.
 					
-				\vspace{1em}\item \colorbox{yellow}{Surement inutile => en cours de réfléxion} Fonctionnalité pour vérifier que la vérification du format est OK.
+				\vspace{1em}\item Fonctionnalité pour la validation du choix colonne. \colorbox{yellow}{En attente de Malek}
 					\begin{lstlisting}
-						verifFormatOK(ouverture)
+						validChoixColonne(signal)
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item \lstinline!ouverture! : \lstinline!int! - correspond à la valeur de retour de \lstinline!ouvrir(chemin)!
+							\item \lstinline!signal! : 
 						\end{description}
-					\underline{Retour :} variable de type entier signalant un succès (0) ou un échec (1).\\
-					\underline{Description :} cette fonction prend en paramètre un entiers correspondant à la sortie de la fonction \lstinline!ouvrir(chemin)! du module "Vérification format fichier". Si la fonction de ce module n'a détecté aucune erreur alors elle renverra 0, sinon 1.
+					\underline{Retour :} \\
+					\underline{Description :} 
 					
+				\vspace{1em}\item Fonctionnalité pour la demande d'exportation. \colorbox{yellow}{En attente de Sonny}
+					\begin{lstlisting}
+						demandeExport(signal)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!signal! : 
+						\end{description}
+					\underline{Retour :} \\
+					\underline{Description :} 
+										
 					\end{enumerate}
 		
 		\subsection{Module Fenêtre choix fichier}
@@ -285,18 +296,6 @@
 					\end{description}
 					\underline{Retour :} variable de type \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni.\\
 					\underline{Description :} cette fonction ne prend pas de paramètre en entrée. Elle permet de récupérer l'emplacement du fichier CSV en parcourant le système de gestion de fichiers. Elle renvoie donc une chaîne de caractères correspondant à ce chemin.
-					
-				\vspace{1em}\item Fonctionnalité qui va ouvrir en lecture le fichier CSV.
-					\begin{lstlisting}
-						ouvrirFichier(chemin)
-					\end{lstlisting}
-					\underline{Paramètres :}
-						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item\lstinline!chemin! : \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni.
-						\end{description}
-					\underline{Retour :} variable de type booléen.\\
-					\underline{Description :} cette fonction prend en entrée le chemin du fichier CSV. Elle va faire appel à la fonction  \lstinline!ouvrir(chemin)! du module "Vérification format fichier" pour l'ouverture du fichier. Dans ce cas la fonction renvoie un booléen à vrai si le fichier à bien été ouvert, faux sinon.
-					\colorbox{yellow}{Whet??! ça sert à rien appelle directement ma fction non??}
 
 				\vspace{1em}\item Aspect visuel.
 				
@@ -306,7 +305,7 @@
 				\paragraph{}La fenêtre prendra ensuite l'apparence du croquis suivant lorsque l'utilisateur aura choisi un fichier. Son chemin sera affiché à l'écran. A côté de celui-ci sera affiché un indicateur pour la validité du fichier, et un bouton pour supprimé le choix. Dans le dernier cas, la fenêtre reprendra sa première apparence. Puis un bouton sera afficher pour valider le choix:
 					
 					\begin{center}\includegraphics[scale=0.5]{Fenetre_choix_fichier2.jpg}\end{center}
-				\paragraph{}Les deux fenêtres abordent une apparence simple et épuré. L'effet cherché et que lorsque l'utilisateur regardera la fenêtre, il devra tout de suite comprendre comment fonctionnera la fenêtre.
+				\paragraph{}Les deux fenêtres abordent une apparence simple et épuré. L'effet cherché est que lorsque l'utilisateur regardera la fenêtre, il devra tout de suite comprendre comment elle fonctionnera.
 
 			\end{enumerate}
 			
