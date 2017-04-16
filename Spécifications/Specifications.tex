@@ -129,32 +129,42 @@
 						calculEffectif(donneeQualitative)
 					\end{lstlisting}
 					\underline{Paramètres :} 
-					\colorbox{yellow}{toujours passer à la ligne et indenter (desc), meme si un seul param, c plus clair}\\
-						\lstinline!donneeQualitative! : \colorbox{yellow}{type??} - structure contenant les données de type qualitatif de la colonne.\\
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item\lstinline!donneeQualitative! : \lstinline!list! - structure contenant les données de type qualitatif de la colonne.
+					\end{description}
 					\underline{Retour :} variable de type  \lstinline!list! : représente la sortie du calcul des effectifs de chaque valeur de la colonne.\\
-					\underline{Description :} cette fonction prendra en paramètre les données de type qualitatif. Elle calculera les effectifs pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
+					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données de type qualitatif pour le calcul. Elle calculera les effectifs pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
 					
 				\vspace{1em}\item Fonctionnalité de calculer de l'effectif cumulé :
 					\begin{lstlisting}
 						calculEffectifCumule(listeEffectif)
 					\end{lstlisting}
-					\underline{Paramètres :} \lstinline!listeEffectif! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectif(donneeQualitative)!\\
-					\underline{Retour :} variable de type  \lstinline!list! : copie de \lstinline!listeEffectif! mais dont les effectifs seront remplacé par les effectifs cumulés. \\
+					\underline{Paramètres :} 
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item\lstinline!listeEffectif! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectif!.
+					\end{description}
+					\underline{Retour :} \lstinline!listeEffectif! : \lstinline!list! : copie de \lstinline!listeEffectif! mais dont les effectifs seront remplacé par les effectifs cumulés. \\
 					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculEffectif! préalablement stocké dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et remplacera les effectifs par les effectifs cumulés. La fonction retournera cette nouvelle liste.
 					
 				\vspace{1em}\item Fonctionnalité pour calculer la fréquence :
 					\begin{lstlisting}
 						calculFrequence(donneeQualitative)
 					\end{lstlisting}
-					\underline{Paramètres :} \lstinline!donneeQualitative! - structure contenant les données de type qualitatif de la colonne\\
+					\underline{Paramètres :} 
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item\lstinline!donneeQualitative! : \lstinline!list! - structure contenant les données de type qualitatif de la colonne.
+					\end{description}
 					\underline{Retour :} variable de type  \lstinline!list! - correspondant à la sortie du calcul des fréquences de chaque valeur de la colonne.\\
-					\underline{Description :} cette fonction prendra en paramètre les données de type qualitatif. Elle calculera les fréquences pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
+					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données de type qualitatif pour le calcul. Elle calculera les fréquences pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
 					
 				\vspace{1em}\item Fonctionnalité pour calculer la fréquence cumulé :
 					\begin{lstlisting}
 						calculFrequenceCumule(listeFrequence)
 					\end{lstlisting}
-					\underline{Paramètres :} \lstinline!listeFrequence! est de type \lstinline!list! - correspond au résultat de la fonction \lstinline!calculFrequence(donneeQualitative)! \\
+					\underline{Paramètres :} 
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item\lstinline!listeFrequence! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculFrequence!.
+					\end{description}
 					\underline{Retour :} variable de type  \lstinline!list! - copie de \lstinline!listFréquence! mais dont les fréquences seront remplacé par les fréquences cumulés. \\
 					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculFrequence! préalablement stocké dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et remplacera les fréquences par les fréquences cumulés. La fonction retournera cette nouvelle liste.
 					
@@ -162,7 +172,10 @@
 					\begin{lstlisting}
 						infoSecteur(frequence)
 					\end{lstlisting}
-					\underline{Paramètres :} variable de type  \lstinline!list! - correspondant à la sortie du calcul des fréquences.\\
+					\underline{Paramètres :} 
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item \lstinline!frequence! :  \lstinline!list! - correspondant à la sortie du calcul des fréquences.
+					\end{description}
 					\underline{Retour :} fichier au format  \lstinline!.json! - contenant les informations nécessaire pour la construction d'un diagramme de secteur.\\
 					\underline{Description :} cette fonction prend en entrée le résultat du calcul des fréquences préalablement stocké dans une liste \lstinline!frequence!. Elle va créer un fichier  \lstinline!.json!  pour y stocker les données pour construire le diagramme de secteur. Pour chaque couple (fréquence-valeur) elle va associer un angle compris entre 0\degre et 360\degre tel que la somme de tout les angles soit égale à 360\degre.
 					
@@ -170,7 +183,10 @@
 					\begin{lstlisting}
 						infoHistogramme(effectif)
 					\end{lstlisting}
-					\underline{Paramètres :} variable de type  \lstinline!list! - correspondant à la sortie du calcul des effectifs.\\
+					\underline{Paramètres :} 
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item \lstinline!effectif! : \lstinline!list! - correspondant à la sortie du calcul des effectifs.
+					\end{description}
 					\underline{Retour :} fichier au format  \lstinline!.json! - contenant les informations nécessaire pour la construction d'un histogramme.\\
 					\underline{Description :} cette fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste \lstinline!effectif!. Elle va créer un fichier  \lstinline!.json! pour y stocker les données pour construire l'histogramme.
 			\end{enumerate}
@@ -181,9 +197,68 @@
 		
 		
 	\section{Package Interface web}
-		Ce package est composé de 3 modules de fenêtre graphique web qui assurent l'interaction avec l'utilisateur, et d'un module de gestion des flux qui s'occupe de la transition des informations entre les différents packages de l'application.
+		Ce package est composé de 3 modules de fenêtre graphique web qui assurent l'interaction avec l'utilisateur, et d'un module de gestion des flux qui s'occupe du lancement de l'application et de la transition des informations entre ses différents packages.
 		
 		\subsection{Module Gestion des flux}
+		Ce module va lancer l'application et sera au centre du programme. Il s'occupera de gérer les branchements pour l'exécution, de communiquer les informations entre les différents modules et arrêtera le programme en cas d'erreur. Il aura \colorbox{yellow}{??} fonctionnalités ainsi que le \lstinline!main! de l'application:
+		
+		\begin{enumerate} 
+				\vspace{1em}\item La fonction main.
+					\begin{lstlisting}
+						main()
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item Ne prend aucun paramètre.
+						\end{description}
+					\underline{Retour :} Ne retourne rien.\\
+					\underline{Description :} la fonction \lstinline!main()! ne prend aucun paramètre en entrée et ne retourne rien en sortie. Elle s'occupe de lancer l'application en faisant appel à la première fenêtre choix fichier, et de faire tourner l'application. Elle s'occupe également de gérer les erreurs et donc de l'arrêt du programme. 
+					
+				\vspace{1em}\item Fonctionnalité pour générer la fenêtre choix fichier.
+					\begin{lstlisting}
+						choix_fichier()
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item Ne prend aucun paramètre.
+						\end{description}
+					\underline{Retour :} \lstinline!render_template()! : fonction qui renvoie le contenu de la page web mis en paramètre qui va être envoyée au client. \\
+					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/choix_fichier/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre choix fichier.
+					
+				\vspace{1em}\item Fonctionnalité pour générer la fenêtre rôle et choix colonne.
+					\begin{lstlisting}
+						role_choix_colonne()
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item Ne prend aucun paramètre.
+						\end{description}
+					\underline{Retour :} \lstinline!render_template()! : fonction qui renvoie le contenu de la page web mis en paramètre qui va être envoyée au client. \\
+					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/role_choix_colonne/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre rôle et choix colonne.
+					
+				\vspace{1em}\item Fonctionnalité pour générer la fenêtre résultats ADD.
+					\begin{lstlisting}
+						resultat_ADD()
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item Ne prend aucun paramètre.
+						\end{description}
+					\underline{Retour :} \lstinline!render_template()! : fonction qui renvoie le contenu de la page web mis en paramètre qui va être envoyée au client. \\
+					\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/resultat_ADD/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre résultat ADD.
+					
+				\vspace{1em}\item \colorbox{yellow}{Surement inutile => en cours de réfléxion} Fonctionnalité pour vérifier que la vérification du format est OK.
+					\begin{lstlisting}
+						verifFormatOK(ouverture)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!ouverture! : \lstinline!int! - correspond à la valeur de retour de \lstinline!ouvrir(chemin)!
+						\end{description}
+					\underline{Retour :} variable de type entier signalant un succès (0) ou un échec (1).\\
+					\underline{Description :} cette fonction prend en paramètre un entiers correspondant à la sortie de la fonction \lstinline!ouvrir(chemin)! du module "Vérification format fichier". Si la fonction de ce module n'a détecté aucune erreur alors elle renverra 0, sinon 1.
+					
+					\end{enumerate}
 		
 		\subsection{Module Fenêtre choix fichier}
 		Ce module est une fenêtre graphique web qui va permettre à l'utilisateur de charger un fichier CSV. Il aura 3 fonctionnalités :
@@ -193,7 +268,10 @@
 					\begin{lstlisting}
 						FileWithSGF()
 					\end{lstlisting}
-					\underline{Paramètres :} Ne demande aucun paramètre en entrée.\\
+					\underline{Paramètres :} 
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item Ne demande aucun paramètre en entrée.
+					\end{description}
 					\underline{Retour :} variable de type \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni.\\
 					\underline{Description :} cette fonction ne prend pas de paramètre en entrée. Elle permet de récupérer  l'emplacement du fichier CSV avec la technique du Drag\&Drop. Elle renvoie donc une chaîne de caractères correspondant à ce chemin.
 					
@@ -201,7 +279,10 @@
 					\begin{lstlisting}
 						FileWithDragDrop()
 					\end{lstlisting}
-					\underline{Paramètres :} Ne demande aucun paramètre en entrée.\\
+					\underline{Paramètres :} 
+					\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item Ne demande aucun paramètre en entrée.
+					\end{description}
 					\underline{Retour :} variable de type \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni.\\
 					\underline{Description :} cette fonction ne prend pas de paramètre en entrée. Elle permet de récupérer l'emplacement du fichier CSV en parcourant le système de gestion de fichiers. Elle renvoie donc une chaîne de caractères correspondant à ce chemin.
 					
@@ -216,8 +297,19 @@
 					\underline{Retour :} variable de type booléen.\\
 					\underline{Description :} cette fonction prend en entrée le chemin du fichier CSV. Elle va faire appel à la fonction  \lstinline!ouvrir(chemin)! du module "Vérification format fichier" pour l'ouverture du fichier. Dans ce cas la fonction renvoie un booléen à vrai si le fichier à bien été ouvert, faux sinon.
 					\colorbox{yellow}{Whet??! ça sert à rien appelle directement ma fction non??}
+
+				\vspace{1em}\item Aspect visuel.
+				
+				\paragraph{}Le croquis ci-dessous représente la fenêtre avant d'avoir choisi un fichier. Le chemin relatif ou absolu sera être renseigné soit en déplaçant dans la zone en pointillé ce dernier, soit en cliquant sur le symbole "+" pour parcourir le système de gestion de fichiers:
+					\begin{center}\includegraphics[scale=0.57]{Fenetre_choix_fichier1.jpg}\end{center} 
+					
+				\paragraph{}La fenêtre prendra ensuite l'apparence du croquis suivant lorsque l'utilisateur aura choisi un fichier. Son chemin sera affiché à l'écran. A côté de celui-ci sera affiché un indicateur pour la validité du fichier, et un bouton pour supprimé le choix. Dans le dernier cas, la fenêtre reprendra sa première apparence. Puis un bouton sera afficher pour valider le choix:
+					
+					\begin{center}\includegraphics[scale=0.5]{Fenetre_choix_fichier2.jpg}\end{center}
+				\paragraph{}Les deux fenêtres abordent une apparence simple et épuré. L'effet cherché et que lorsque l'utilisateur regardera la fenêtre, il devra tout de suite comprendre comment fonctionnera la fenêtre.
+
 			\end{enumerate}
-		
+			
 		\subsection{Module Fenêtre rôle et choix colonne}
 			Ce module est une fenêtre graphique web qui permet d'une part d'afficher un échantillon filtré des données du fichier et ses informations relatives, et d'autre part, de choisir une colonne de cet échantillon pour l'analyser. Ce module aura 3 fonctionnalités qui peuvent être illustrées par ce croquis :
 			\begin{center}\includegraphics[scale=0.5]{fenetreEchantillons.png}\end{center}
