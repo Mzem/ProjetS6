@@ -24,10 +24,10 @@
 		\paragraph{}Les fonctionnalités de notre application seront présentées selon les modules de l'organigramme établi dans le cahier des charges. Ces modules eux-mêmes seront regroupés en packages. Ce document va donc décrire, pour chaque package de l'organigramme, les fonctionnalités de ses modules : d'abord ceux du package de chargement des données, puis ceux du package d'analyse descriptive des données et ensuite ceux du package de l'interface web. Les types Python utilisés seront décrits dans la dernière partie, le glossaire des types.
 		
 	\section{Package Chargement des données}
-	Ce package est composé de deux modules qui ont pour fonction de traiter le fichier de données fourni : une vérification de son format et une analyse de son contenu. On pourra aussi parler de API puisque ce package peut être éventuellement livré en sortie. 
+	Ce package est composé de 2 modules qui ont pour fonction de traiter le fichier de données fourni : une vérification de son format et une analyse de son contenu. On pourra aussi parler de API puisque ce package peut être éventuellement livré en sortie. 
 		
 		\subsection{Module Vérification format fichier}
-			Ce module va vérifier le format du fichier de données fourni en entrée en 3 points. Il aura donc trois fonctionnalités de vérification et une fonctionnalité globale d'ouverture du fichier.
+			Ce module va vérifier le format du fichier de données fourni en entrée en 3 points. Il aura donc 3 fonctionnalités de vérification et une fonctionnalité globale d'ouverture du fichier.
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité de vérification de l'ouverture du fichier :
 					\begin{lstlisting}
@@ -73,7 +73,7 @@
 		
 		
 		\subsection{Module Analyse contenu fichier}
-			Ce module va analyser le contenu du fichier fourni en lisant une à une les données de ce fichier et en repérant les données erronées. Il aura donc deux fonctionnalités :
+			Ce module va analyser le contenu du fichier fourni en lisant une à une les données de ce fichier et en repérant les données erronées. Il aura donc 2 fonctionnalités :
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité de lecture du contenu du fichier CSV :
 					\begin{lstlisting}
@@ -83,9 +83,17 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!fichierCSV! : \lstinline!TextIoWrapper! - représente le fichier CSV fourni.
 						\end{description}
-					\underline{Retour :} une variable de type \lstinline!list! : une liste dont chaque élément représente une ligne du fichier CSV : ses éléments sont des sous-listes contenant les données des lignes du fichier.\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle crée une liste pour y sauvegarder le contenu de ce fichier, ligne par ligne. Elle lit les caractères du fichier en entier à l'aide de la fonction \lstinline!read()!. Ensuite, pour chaque ligne du fichier, elle applique la fonction \lstinline!split(',')! pour séparer les caractères de cette ligne selon la virgule et les stocker dans une sous-liste qui sera finalement stockée dans la liste englobante.
-				\vspace{1em}\item Fonctionnalité de description des données des colonnes du fichier CSV :
+					\underline{Retour :} une variable de type \lstinline!list! : une liste dont chaque élément est un dictionnaire contenant les données d'une ligne du fichier CSV.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV ouvert. Elle crée une liste pour y sauvegarder le contenu de ce fichier, ligne par ligne. Elle lit les caractères du fichier en entier à l'aide de la fonction \lstinline!read()!. Ensuite, pour chaque ligne du fichier, elle applique la fonction \lstinline!split(',')! pour séparer les caractères de cette ligne selon la virgule et les stocker dans un dictionnaire qui sera finalement stocké dans la liste englobante. L'utilisation d'un dictionnaire permet d'indexer les données de la ligne par le nom de la colonne : 
+					\begin{lstlisting}
+						[ 	
+							{"nomColonne1" : donnée1Ligne1, "nomColonne2" donnée2Ligne1},
+							{"nomColonne1" : donnée1Ligne2, "nomColonne2" donnée2Ligne2} 
+						] 
+					\end{lstlisting}
+					Ces noms de colonnes proviennent du fichier CSV.
+					
+				\vspace{1em}\item Fonctionnalité de description du type et des erreurs des colonnes du fichier CSV :
 					\begin{lstlisting}
 						descriptionColonnes(lignesCSV)
 					\end{lstlisting}
@@ -93,9 +101,19 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!lignesCSV! : \lstinline!list! - liste représentant les données du fichier CSV ligne par ligne.
 						\end{description}
-					\underline{Retour :} une variable de type \lstinline!dict! : un dictionnaire dont chaque élément représente une colonne du fichier CSV : la clé représente le rôle de la colonne, et la variable correspondante est une liste contenant toutes les données de cette colonne.\\
-					\underline{Description :} cette fonction prend en entrée le fichier CSV préalablement lu et stocké dans la liste \lstinline!lignesCSV!. Elle crée un dictionnaire pour y sauvegarder le contenu de ce fichier, colonne par colonne. Elle lit la liste \lstinline!lignesCSV! colonne par colonne, stocke en premier lieu le rôle de la colonne dans la clé puis stocke les données dans la variable (liste) correspondante. \\
-					Pour chaque colonne, une vérification de type sera effectuée sur chaque donnée. Les données manquantes ou erronées (dont le type ne correspond pas au type attendu) seront renseignées dans une liste de tuples dont la structure est \lstinline![("rôle colonne", numéro de ligne erronée)]!. Celle-ci sera stockée en dernier dans le dictionnaire avec comme clé \lstinline!"erreurs"!.
+					\underline{Retour :} une variable de type \lstinline!dict! : un dictionnaire de 2 dictionnaires indexés par \lstinline!"types"! et \lstinline!"erreurs"!.\\
+					\underline{Description :} cette fonction prend en entrée le fichier CSV préalablement lu et stocké dans la liste \lstinline!lignesCSV!. Elle crée un dictionnaire de 2 éléments de type dictionnaire également, pour y renseigner le type et les erreurs de chaque colonne de ce fichier.\\
+					Elle remplit d'abord le champ \lstinline!types! du dictionnaire par les types attendus. Ensuite, elle lit la liste \lstinline!lignesCSV! colonne par colonne. Pour chaque donnée d'une colonne, elle compare son type au type attendu et, en cas d'erreur, renseigne le numéro de cette ligne dans une liste dans le champ \lstinline!erreurs! du dictionnaire.
+					\begin{lstlisting}
+						{ 	
+							"types" : {"nomColonne1" : typeColonne1, "nomColonne2" typeColonne2},
+							"erreurs" : 
+							{
+								"nomColonne1" : [liste des numéros de lignes des données erronées de la colonne 1], 
+								"nomColonne2" : [liste des numéros de lignes des données erronées de la colonne 2]
+							} 
+						} 
+					\end{lstlisting}
 			\end{enumerate}
 	
 	\section{Package Analyse descriptive des données}
@@ -163,12 +181,12 @@
 		
 		
 	\section{Package Interface web}
-		\colorbox{yellow}{Une desc du package JD stp}
+		Ce package est composé de 3 modules de fenêtre graphique web qui assurent l'interaction avec l'utilisateur, et d'un module de gestion des flux qui s'occupe de la transition des informations entre les différents packages de l'application.
 		
 		\subsection{Module Gestion des flux}
 		
 		\subsection{Module Fenêtre choix fichier}
-		Ce module est la fenêtre qui va permettre à l'utilisateur d'aller charger le fichier CSV. Il y aura 3 fonctionnalités :
+		Ce module est une fenêtre graphique web qui va permettre à l'utilisateur de charger un fichier CSV. Il aura 3 fonctionnalités :
 
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité pour ouvrir le fichier avec le Système de Gestion de fichier :
@@ -197,22 +215,30 @@
 						\end{description}
 					\underline{Retour :} variable de type booléen.\\
 					\underline{Description :} cette fonction prend en entrée le chemin du fichier CSV. Elle va faire appel à la fonction  \lstinline!ouvrir(chemin)! du module "Vérification format fichier" pour l'ouverture du fichier. Dans ce cas la fonction renvoie un booléen à vrai si le fichier à bien été ouvert, faux sinon.
+					\colorbox{yellow}{Whet??! ça sert à rien appelle directement ma fction non??}
 			\end{enumerate}
 		
 		\subsection{Module Fenêtre rôle et choix colonne}
-
+			Ce module est une fenêtre graphique web qui permet d'une part d'afficher un échantillon filtré des données du fichier et ses informations relatives, et d'autre part, de choisir une colonne de cet échantillon pour l'analyser. Ce module aura 3 fonctionnalités qui peuvent être illustrées par ce croquis :
+			\begin{center}\includegraphics[scale=0.5]{fenetreEchantillons.png}\end{center}
+			\begin{enumerate}
+				\vspace{1em}\item Fonctionnalité d'affichage de l'échantillon :
+				\vspace{1em}\item Fonctionnalité de filtrage de l'échantillon :
+				\vspace{1em}\item Fonctionnalité de choix de colonne à analyser :
+			\end{enumerate}
+			
+			
 		\subsection{Module Fenêtre résultats ADD}
 	
 	\section{Glossaire des types}
-	
-	Dans ce glossaire, on va préciser la définition en Python des types des données qu'on a utilisé dans la description des fonctionnalités.
-	\begin{itemize}
-		\item \lstinline!TextIoWrapper! : classe représentant les flux de texte bufferisés (entrées/sorties de texte avec une sauvegarde dans une mémoire tampon). Elle permet donc de représenter les fichiers de texte brut en particulier. Elle définit des méthodes de manipulation de ces flux.
-		\item \lstinline!str! : classe représentant des séquences de caractères (donc des chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
-		\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.		
-		\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.		
-		\item \lstinline!tuple! : classe représentant des listes immuables (non modifiables).
-	\end{itemize}
+		Dans ce glossaire, on va préciser la définition en Python des types des données qu'on a utilisé dans la description des fonctionnalités.
+		\begin{itemize}
+			\item \lstinline!TextIoWrapper! : classe représentant les flux de texte bufferisés (entrées/sorties de texte avec une sauvegarde dans une mémoire tampon). Elle permet donc de représenter les fichiers de texte brut en particulier. Elle définit des méthodes de manipulation de ces flux.
+			\item \lstinline!str! : classe représentant des séquences de caractères (donc des chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
+			\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.		
+			\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.		
+			\item \lstinline!tuple! : classe représentant des listes immuables (non modifiables).
+		\end{itemize}
 	
 	\section*{Conclusion}
 		Bilan : rappel ce qu'on a fait et ce que ça a apporté\\
