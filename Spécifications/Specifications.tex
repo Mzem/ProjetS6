@@ -249,30 +249,33 @@
 					
 				\vspace{1em}\item Fonctionnalité pour la validation du choix colonne. \colorbox{yellow}{En attente de Malek}
 					\begin{lstlisting}
-						validChoixColonne(signal)
+						validChoixColonne()
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item \lstinline!signal! : 
+							\item 
 						\end{description}
 					\underline{Retour :} \\
 					\underline{Description :} 
 					
-				\vspace{1em}\item Fonctionnalité pour la demande d'exportation. \colorbox{yellow}{En attente de Sonny}
+				\vspace{1em}\item Fonctionnalité pour la demande d'exportation.
 					\begin{lstlisting}
-						demandeExport(signal)
+						sauvResultats()
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item \lstinline!signal! : 
+							\item Ne prend pas de paramètre.
 						\end{description}
-					\underline{Retour :} \\
-					\underline{Description :} 
+					\underline{Retour :} Ne retourne rien.\\
+					\underline{Description :} cette fonction ne prend aucun paramètre. Elle s'active lorsque l'utilisateur fait la demande d'exporter les résultats. Le téléchargement sera alors lancé par le navigateur web.
 										
 					\end{enumerate}
 		
 		\subsection{Module Fenêtre choix fichier}
-		Ce module est une fenêtre graphique web qui va permettre à l'utilisateur de charger un fichier CSV. Il aura 3 fonctionnalités :
+		Ce module est une fenêtre graphique web qui va permettre à l'utilisateur de charger un fichier CSV. Ce module aura 2 fonctionnalités et peut être illustré par les deux croquis suivants :
+
+			\begin{center}\includegraphics[scale=0.57]{Fenetre_choix_fichier1.jpg}\end{center} 
+			\begin{center}\includegraphics[scale=0.5]{Fenetre_choix_fichier2.jpg}\end{center}
 
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité pour ouvrir le fichier avec le Système de Gestion de fichier :
@@ -296,16 +299,6 @@
 					\end{description}
 					\underline{Retour :} variable de type \lstinline!str! - chaîne de caractères représentant le chemin relatif ou absolu du fichier CSV fourni.\\
 					\underline{Description :} cette fonction ne prend pas de paramètre en entrée. Elle permet de récupérer l'emplacement du fichier CSV en parcourant le système de gestion de fichiers. Elle renvoie donc une chaîne de caractères correspondant à ce chemin.
-
-				\vspace{1em}\item Aspect visuel.
-				
-				\paragraph{}Le croquis ci-dessous représente la fenêtre avant d'avoir choisi un fichier. Le chemin relatif ou absolu sera être renseigné soit en déplaçant dans la zone en pointillé ce dernier, soit en cliquant sur le symbole "+" pour parcourir le système de gestion de fichiers:
-					\begin{center}\includegraphics[scale=0.57]{Fenetre_choix_fichier1.jpg}\end{center} 
-					
-				\paragraph{}La fenêtre prendra ensuite l'apparence du croquis suivant lorsque l'utilisateur aura choisi un fichier. Son chemin sera affiché à l'écran. A côté de celui-ci sera affiché un indicateur pour la validité du fichier, et un bouton pour supprimé le choix. Dans le dernier cas, la fenêtre reprendra sa première apparence. Puis un bouton sera afficher pour valider le choix:
-					
-					\begin{center}\includegraphics[scale=0.5]{Fenetre_choix_fichier2.jpg}\end{center}
-				\paragraph{}Les deux fenêtres abordent une apparence simple et épuré. L'effet cherché est que lorsque l'utilisateur regardera la fenêtre, il devra tout de suite comprendre comment elle fonctionnera.
 
 			\end{enumerate}
 			
