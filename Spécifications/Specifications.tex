@@ -117,7 +117,7 @@
 			\end{enumerate}
 	
 	\section{Package Analyse descriptive des données}
-	\colorbox{yellow}{package à décrire Sonny stp}\\
+	Ce package est composé de trois modules d'ADD\footnote{ADD : analyse descriptive de données}. Ces informations pourront être utilisées pour le filtrage des valeurs dans l'échantillon de la fenêtre rôle et choix colonne, mais aussi servir pour les compte-rendu statistiques des colonnes.
 	Ce package va être livré au client pour une intégration externe. On pourra donc parler de API.
 	
 		\subsection{Module Analyse de données qualitatives}
@@ -192,9 +192,12 @@
 			\end{enumerate}
 		
 		\subsection{Module Analyse de données quantitatives discrètes}
+			\begin{enumerate}
+			\end{enumerate}
 			
 		\subsection{Module Analyse de données quantitatives continues}
-		
+			\begin{enumerate}
+			\end{enumerate}
 		
 	\section{Package Interface web}
 		Ce package est composé de 3 modules de fenêtre graphique web qui assurent l'interaction avec l'utilisateur, et d'un module de gestion des flux qui s'occupe du lancement de l'application et de la transition des informations entre ses différents packages.
@@ -320,24 +323,46 @@
 			
 			
 		\subsection{Module Fenêtre résultats ADD}
+			Ce module décrit la fenêtre dans laquelle l'utilisateur de l'applet pourra consulter les résultats d'analyse des colonnes du fichier importé.
+			\begin{enumerate}
+				\item \underline{Aspect visuel :}\\
+					\begin{center}\includegraphics[scale=0.8]{FenetreADD.pdf}\end{center}
+					Les résultats doivent se présenter de manière simple et sans surcharge. Les utilisateurs de ce produit doivent pouvoir prendre en main et comprendre les données sans pour autant être formés. C'est pour cela que l'information se limite à un bouton, des reprèsentations graphiques, et des explications générées à laide des calculs d'analyse descriptive.
+				\item \underline{Intéractions avec l'utilisateur :}\\
+					\begin{itemize}
+						\item Miniatures : Un clic sur une miniature permet de la faire basculer en vue précise.
+						\item Vue précise : Un affichage interactif des valeurs rend la consultation plus intuitive et la charge de la vue plus légère. (une valeur non-demandée n'est pas affichée)
+						\item Sauvegarde des résultats : Une simple icône de téléchargement permettra de lancer la sauvegarde des résultats en local.
+					\end{itemize}
+				\item \underline{Vues précises :}\\
+					Ci-dessous, une liste des représentations graphiques disponibles, ainsi que le type d'analyse qui permet de les afficher :
+					\begin{itemize}
+						\item Histogramme : ADD qualitatives
+						\item Diagramme en secteur : ADD qualitatives
+						\item Série temporelle : ADD quantitatives
+						\item Distribution des valeurs : ADD quantitatives
+						\item Distribution cumulative des valeurs : ADD quantitatives
+						\item Diagramme à moustaches : ADD quantitatives
+			\end{enumerate}
 	
 	\section{Glossaire des types}
-		Dans ce glossaire, on va préciser la définition en Python des types des données qu'on a utilisé dans la description des fonctionnalités.
+		Dans ce glossaire, on va préciser la définition des types des données qu'on a utilisé dans la description des fonctionnalités.
 		\begin{itemize}
 			\item \lstinline!TextIoWrapper! : classe représentant les flux de texte bufferisés (entrées/sorties de texte avec une sauvegarde dans une mémoire tampon). Elle permet donc de représenter les fichiers de texte brut en particulier. Elle définit des méthodes de manipulation de ces flux.
 			\item \lstinline!str! : classe représentant des séquences de caractères (donc des chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
-			\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.		
+			\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.\\
+				L'utilisation de ce type de données pour la manipulation des colonnes du fchier \lstinline!.csv! est préconisée car, tout d'abord, le type et les fonctions de manipulations sont disponibles directement avec Python, ensuite, ces listes sont implémentées sous forme de tableau ce qui garantie l'accès rapide à chacun de ses éléments, et enfin, leur taille maximale est définie par l'entier \lstinline!sys.maxsize!\footnote{https://docs.python.org/2/library/sys.html#sys.maxsize} qui dépend des machines mais dépasse largement le million sur des PC bureautiques standards. Le million correspond à une borne maximale du nombre de lignes du fichier \lstinline!.csv! importé, la manipulation des listes peut donc se faire sans risque de crash mémoire.
 			\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.		
 			\item \lstinline!tuple! : classe représentant des listes immuables (non modifiables).
-		\end{itemize}
+			\item \lstinline!.json! : (JavaScript Object Notation) format de données textuelles basé sur la notation des objets JavaScript. C'est un moyen simple d'accéder à des données car un flux JSON est une sérialisation (une traduction) d'un objet JavaScript.
+ 		\end{itemize}
 	
 	\section*{Conclusion}
 		Bilan : rappel ce qu'on a fait et ce que ça a apporté\\
 		Ouvertures :\\
-			- Mise en place des tests d'acceptations (comment on va mesurer, il faut définir une mesure et après la calculer)\\
 			- Difficultés\\
 			- Limites des spécifications dans notre cas : nécessité de tester une 1ere version de l'appli pour bien définir l'expérience utilisateur\\
 		Dernière phrase positive :\\
-			- Découverte nouveaux outils, nouvelle démarche pour le dev : devops, ux design, balsamiq
+			- Découverte nouveaux outils, nouvelle démarche pour le dev : devops, ux design, balsamiq, les app web (javascript c'est assez bien en vrai)
 		
 \end{document}
