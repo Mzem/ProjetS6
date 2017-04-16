@@ -192,12 +192,8 @@
 			\end{enumerate}
 		
 		\subsection{Module Analyse de données quantitatives discrètes}
-			\begin{enumerate}
-			\end{enumerate}
 			
 		\subsection{Module Analyse de données quantitatives continues}
-			\begin{enumerate}
-			\end{enumerate}
 		
 	\section{Package Interface web}
 		Ce package est composé de 3 modules de fenêtre graphique web qui assurent l'interaction avec l'utilisateur, et d'un module de gestion des flux qui s'occupe du lancement de l'application et de la transition des informations entre ses différents packages.
@@ -314,7 +310,7 @@
 			
 		\subsection{Module Fenêtre rôle et choix colonne}
 			Ce module est une fenêtre graphique web qui permet d'une part d'afficher un échantillon filtré des données du fichier et ses informations relatives, et d'autre part, de choisir une colonne de cet échantillon pour l'analyser. Ce module aura 3 fonctionnalités qui peuvent être illustrées par ce croquis :
-			\begin{center}\includegraphics[scale=0.5]{fenetreEchantillons.png}\end{center}
+			\begin{center}\includegraphics[scale=0.6]{fenetreEchantillons.png}\end{center}
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité d'affichage de l'échantillon :
 				\vspace{1em}\item Fonctionnalité de filtrage de l'échantillon :
@@ -343,6 +339,7 @@
 						\item Distribution des valeurs : ADD quantitatives
 						\item Distribution cumulative des valeurs : ADD quantitatives
 						\item Diagramme à moustaches : ADD quantitatives
+					\end{itemize}
 			\end{enumerate}
 	
 	\section{Glossaire des types}
@@ -351,7 +348,7 @@
 			\item \lstinline!TextIoWrapper! : classe représentant les flux de texte bufferisés (entrées/sorties de texte avec une sauvegarde dans une mémoire tampon). Elle permet donc de représenter les fichiers de texte brut en particulier. Elle définit des méthodes de manipulation de ces flux.
 			\item \lstinline!str! : classe représentant des séquences de caractères (donc des chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
 			\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.\\
-				L'utilisation de ce type de données pour la manipulation des colonnes du fchier \lstinline!.csv! est préconisée car, tout d'abord, le type et les fonctions de manipulations sont disponibles directement avec Python, ensuite, ces listes sont implémentées sous forme de tableau ce qui garantie l'accès rapide à chacun de ses éléments, et enfin, leur taille maximale est définie par l'entier \lstinline!sys.maxsize!\footnote{https://docs.python.org/2/library/sys.html#sys.maxsize} qui dépend des machines mais dépasse largement le million sur des PC bureautiques standards. Le million correspond à une borne maximale du nombre de lignes du fichier \lstinline!.csv! importé, la manipulation des listes peut donc se faire sans risque de crash mémoire.
+			L'utilisation de ce type de données pour la manipulation des colonnes du fichier CSV est préconisée car, tout d'abord, le type et les fonctions de manipulations sont disponibles directement avec Python, ensuite, ces listes sont implémentées sous forme de tableau ce qui garantie l'accès rapide à chacun de ses éléments, et enfin, leur taille maximale est définie par l'entier \lstinline!sys.maxsize!\footnote{https://docs.python.org/2/library/sys.html\#sys.maxsize} qui dépend des machines mais dépasse largement le million sur des PC bureautiques standards. Le million correspond à une borne maximale du nombre de lignes du fichier CSV importé, la manipulation des listes peut donc se faire sans risque d'erreurs mémoire.
 			\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.		
 			\item \lstinline!tuple! : classe représentant des listes immuables (non modifiables).
 			\item \lstinline!.json! : (JavaScript Object Notation) format de données textuelles basé sur la notation des objets JavaScript. C'est un moyen simple d'accéder à des données car un flux JSON est une sérialisation (une traduction) d'un objet JavaScript.
