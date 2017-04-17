@@ -24,8 +24,7 @@
 		\paragraph{}Les fonctionnalités de notre application seront présentées selon les modules de l'organigramme établi dans le cahier des charges. Ces modules eux-mêmes seront regroupés en packages. Ce document va donc décrire, pour chaque package de l'organigramme, les fonctionnalités de ses modules : d'abord ceux du package de chargement des données, ensuite ceux du package d'analyse descriptive des données et enfin ceux du package de l'interface web. Dans une dernière partie, un glossaire sera consacré à la définition des types de données utilisés.
 		
 	\section{Package Chargement des données}
-	Ce package est composé de 2 modules qui ont pour fonction de traiter le fichier de données fourni : une vérification de son format et une analyse de son contenu. \textcolor{yellow}{On pourra aussi parler de API puisque ce package peut être éventuellement livré en sortie.}
-	%En jaune : à supprimer maybe
+	Ce package est composé de 2 modules qui ont pour fonction de traiter le fichier de données fourni : une vérification de son format et une analyse de son contenu.
 		
 		\subsection{Module Vérification format fichier}
 			Ce module va vérifier le format du fichier de données fourni en entrée en 3 points. Il aura donc 3 fonctionnalités de vérification et une fonctionnalité globale d'ouverture du fichier.
@@ -125,8 +124,7 @@
 			\end{enumerate}
 	
 	\section{Package Analyse descriptive des données}
-	Ce package est composé de trois modules d'ADD\footnote{ADD : analyse descriptive de données}. Ces informations pourront être \textcolor{yellow}{utilisées pour le filtrage des valeurs dans l'échantillon de la fenêtre rôle et choix colonne}, mais aussi servir pour les compte-rendu statistiques des colonnes.
-	Ce package va aussi être livré au client pour une intégration externe. On pourra donc parler de API.
+	Ce package est composé de trois modules d'ADD\footnote{ADD : analyse descriptive de données}. Ce package va aussi être livré au client pour une intégration externe. On pourra donc parler de API.
 	
 		\subsection{Module Analyse de données qualitatives}
 			Ce module va effectuer les calculs d'effectifs, d'effectifs cumulés, de fréquences et de fréquences cumulées. Il s'occupera également de fournir les informations nécessaires pour la construction d'un diagramme en secteurs et d'un histogramme. Il aura donc 6 fonctionnalités :
@@ -134,47 +132,47 @@
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité de calcul de l'effectif :
 					\begin{lstlisting}
-						calculEffectif(donneeQualitative)
+						calculEffectifs(listeDonnees)
 					\end{lstlisting}
 					\underline{Paramètres :} 
 					\begin{description}[style=unboxed,leftmargin=0.2cm]
-						\item\lstinline!donneeQualitative! : \lstinline!list! - structure contenant les données de type qualitatif de la colonne.
+						\item\lstinline!listeDonnees! : \lstinline!list! - structure contenant les données à analyser
 					\end{description}
 					\underline{Retour :} variable de type  \lstinline!list! : représente la sortie du calcul des effectifs de chaque valeur de la colonne.\\
-					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données de type qualitatif pour le calcul. Elle calculera les effectifs pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
+					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données pour le calcul. Elle calculera les effectifs pour chaque valeur et effectuera un tri pour ordonner ces valeurs.
 					
-				\vspace{1em}\item Fonctionnalité de calcul de l'effectif cumulé :
+				\vspace{1em}\item Fonctionnalité de calcul des effectifs cumulés :
 					\begin{lstlisting}
-						calculEffectifCumule(listeEffectif)
+						calculEffectifsCumules(listeEffectifs)
 					\end{lstlisting}
 					\underline{Paramètres :} 
 					\begin{description}[style=unboxed,leftmargin=0.2cm]
-						\item\lstinline!listeEffectif! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectif!.
+						\item\lstinline!listeEffectifs! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectifs!.
 					\end{description}
-					\underline{Retour :} variable de type \lstinline!list! : copie du paramètre \lstinline!listeEffectif! dont les effectifs seront remplacés par les effectifs cumulés.\\
-					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculEffectif! préalablement stocké dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et remplacera les effectifs par les effectifs cumulés. La fonction retournera cette nouvelle liste.
+					\underline{Retour :} variable de type \lstinline!list! : copie du paramètre \lstinline!listeEffectifs! dont les effectifs seront remplacés par les effectifs cumulés.\\
+					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculEffectifs! préalablement stocké dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et remplacera les effectifs par les effectifs cumulés. La fonction retournera cette nouvelle liste.
 					
 				\vspace{1em}\item Fonctionnalité pour calculer les fréquences d'apparition :
 					\begin{lstlisting}
-						calculFrequence(donneeQualitative)
+						calculFrequences(listeEffectifs)
 					\end{lstlisting}
 					\underline{Paramètres :} 
 					\begin{description}[style=unboxed,leftmargin=0.2cm]
-						\item\lstinline!donneeQualitative! : \lstinline!list! - structure contenant les données de type qualitatif de la colonne.
+						\item\lstinline!listeEffectifs!  : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectifs!.
 					\end{description}
 					\underline{Retour :} variable de type \lstinline!list! : correspond à la sortie du calcul des fréquences de chaque valeur de la colonne.\\
-					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données de type qualitatif pour le calcul. Elle calculera les fréquences pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
+					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données pour le calcul. Elle calculera les fréquences pour chaque valeur à partir de leur effectif.
 					
 				\vspace{1em}\item Fonctionnalité pour calculer les fréquences cumulées :
 					\begin{lstlisting}
-						calculFrequenceCumule(listeFrequence)
+						calculFrequencesCumulees(listeEffectifsCumules)
 					\end{lstlisting}
 					\underline{Paramètres :} 
 					\begin{description}[style=unboxed,leftmargin=0.2cm]
-						\item\lstinline!listeFrequence! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculFrequence!.
+						\item\lstinline!listeEffectifsCumules! : \lstinline!list! - correspond au résultat de la fonction \lstinline!calculEffectifsCumules!.
 					\end{description}
-					\underline{Retour :} variable de type  \lstinline!list! - copie de \lstinline!listFréquence! mais dont les fréquences seront remplacés par les fréquences cumulées. \\
-					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculFrequence! préalablement stocké dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et remplacera les fréquences par les fréquences cumulées. La fonction retournera cette nouvelle liste.
+					\underline{Retour :} variable de type  \lstinline!list! - copie de \lstinline!listeEffectifsCumules! mais dont les effectifs seront divisés par le nombre d'élément total. \\
+					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculEffectifsCumules! préalablement stockés dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et calculera les fréquences cumulées.
 					
 				\vspace{1em}\item Fonctionnalité fournissant les données du diagramme en secteurs :
 					\begin{lstlisting}
@@ -222,7 +220,7 @@
 							\item \lstinline!ordre : float! - Nombre flottant compris entre 0 et 1
 							\item \lstinline!listeFrequencesCumulees : list! - structure contenant les différentes fréquences cumulées des données de la colonne analysées
 						\end{description}
-					\underline{Type retour :}\lstinline!float!\\
+					\underline{Type retour :} \lstinline!float!\\
 					\underline{Description :} Valeur de la liste séparant les données en deux ensembles, le premier contenant la fraction \lstinline!ordre! des données, le deuxième contenant le reste. La médiane est le quantile d'ordre 1/2.
 					
 				\vspace{1em}\item Calcul de la variance
@@ -234,7 +232,7 @@
 							\item \lstinline!listeEffectif : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
 						\end{description}
 					\underline{Type retour :} \lstinline!float!\\
-					\underline{Description :} Variance de l'ensemble de données analysé
+					\underline{Description :} Variance de l'ensemble de données analysé.
 				
 				\vspace{1em}\item Calcul de l'écart-type
 					\begin{lstlisting}
@@ -267,7 +265,7 @@
 							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
 						\end{description}
 					\underline{Type retour :} \lstinline!float! - Nombre flottant compris entre -1 et 1.\\
-					\underline{Description :} Coefficient d'asymétrie de Pearson calculé avec la moyenne, la médiane et l'écart-type: s'il est nul la distributione est symétrique, s'il est positif, la série est étalée à droite, et s'il est négatif, la série est étalée  à gauche.
+					\underline{Description :} Coefficient d'asymétrie de Pearson calculé avec la moyenne, la médiane et l'écart-type: s'il est nul la distribution des valeurs est symétrique, s'il est positif, la série est étalée à droite, et s'il est négatif, la série est étalée  à gauche.
 				
 				\vspace{1em}\item Calcul du coefficient d'aplatissment
 					\begin{lstlisting}
@@ -280,16 +278,16 @@
 					\underline{Type retour :}  \lstinline!float!\\
 					\underline{Description :} Coefficient d'aplatissement de Fisher, calculé à partir de la moyenne et de l'écart-type. Si le coefficient est égal à 3, la série suit une loi normale centrée réduite, s'il est inférieur la distribution des valeurs est aplatie, et s'il est supérieur, les valeurs sont concentrées autour de la moyenne.
 				
-				\vspace{1em}\item Fonctionnalité pour les données de la distribution des valeurs
+				\vspace{1em}\item Fonctionnalité pour les données de la distribution des valeurs (cas discret)
 					\begin{lstlisting}
-						infoDistribution(listeEffectifs)
+						infoDistributionDiscrete(listeEffectifs)
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
 						\end{description}
-					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (valeur, effectif)\\
-					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution des valeurs.
+					\underline{Retour :} aucun retour.\\
+					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution des valeurs (Diagramme en bâtons). Cette procédure écrit dans un fichier au format \lstinline!.json! pour stocker les couples (valeur, effectif) nécessaires au diagramme.
 					
 				\vspace{1em}\item Fonctionnalité pour les données de la distribution cumulative des valeurs (cas discret)
 					\begin{lstlisting}
@@ -299,8 +297,8 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item \item \lstinline!listeEffectifsCumules : list! - structure contenant les différents effectifs cumulés des données de l'ensemble analysé.
 						\end{description}
-					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (valeur, effectif cumulé)\\
-					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs (diagramme en escaliers)
+					\underline{Retour :} aucun retour.\\
+					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs (diagramme en escaliers). Cette procédure écrit un fichier au format \lstinline!.json! - pour renseigner les couples (valeur, effectif cumulé).
 					
 				\vspace{1em}\item Fonctionnalité pour les données de la boîte à moustaches de Tukey
 					\begin{lstlisting}
@@ -310,8 +308,8 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
 						\end{description}
-					\underline{Retour :} fichier au format \lstinline!.csv! - contenant les données du paramètre. \\
-					\underline{Description :} La représentation graphique met en valeur les quartiles et la médiane, ainsi que les anomalies de Tukey.
+					\underline{Retour :} aucun retour.\\
+					\underline{Description :} La représentation graphique met en valeur les quartiles et la médiane, ainsi que les anomalies de Tukey. La procédure écrit un fichier fichier au format \lstinline!.csv! - contenant les données du paramètre. 
 					
 				\vspace{1em}\item Fonctionnalité pour les données de la série temporelle
 					\begin{lstlisting}
@@ -321,8 +319,8 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item \lstinline!listeSerieTemporelle : list! - liste des couples (Timestamp, valeur) des données analysées.
 						\end{description}
-					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (Timestamp, valeur)\\\\
-					\underline{Description :} La représentation graphique associée consiste à afficher l'évolution des valeurs dans le temps.
+					\underline{Retour :} aucun retour.\\
+					\underline{Description :} La représentation graphique associée consiste à afficher l'évolution des valeurs dans le temps. La procédure écrit un fichier au format \lstinline!.json! - contenant les couples (Timestamp, valeur).
 			\end{enumerate}
 			
 		\subsection{Module Analyse de données quantitatives continues}
@@ -339,7 +337,7 @@
 					\underline{Type retour :} \lstinline!list! - collection d'\lstinline!Intervalle! (voir glossaire des types)\\
 					\underline{Description :} La fonction se charge de décomposer l'étendue [min ; max] de l'ensemble de données en \lstinline!nombreClasses! intervalles de même étendue, puis de remplacer les occurrences des données par l'intervalle auquel la donnée appartient.
 					
-				\vspace{1em}\item Calcul du nombre de classes optimal pour la discrétisation des valeurs
+				\vspace{1em}\item Calcul du nombre de classes pour la discrétisation des valeurs
 					\begin{lstlisting}
 						calculNombreClasses(donneesContinues)
 					\end{lstlisting}
@@ -363,7 +361,7 @@
 					
 				\vspace{1em}\item Calcul des quantiles (cas continu)
 					\begin{lstlisting}
-						quanileContinu(ordre, listeFrequencesCumulees)
+						quantileContinu(ordre, listeFrequencesCumulees)
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
@@ -385,6 +383,17 @@
 						\end{description}
 					\underline{Type retour :} \lstinline!float! - abscisse\\
 					\underline{Description :} Les points  \lstinline!p1, p2! nous permettent d'identifier une fonction linéaire. On retrouve ensuite l'abscisse du point d'ordonnée  \lstinline!y! se trouvant sur la courbe de la fonction.
+				
+				\vspace{1em}\item Fonctionnalité pour les données de la distribution des valeurs (cas continu)
+					\begin{lstlisting}
+						infoDistributionContinue(listeEffectifs)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+						\end{description}
+					\underline{Retour :} aucun retour.\\
+					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution des valeurs. Cette procédure écrit dans un fichier au format \lstinline!.json! pour stocker les couples (valeur, effectif) nécessaires au diagramme.
 					
 				\vspace{1em}\item Fonctionnalité pour les données de la distribution cumulative des valeurs (cas continu)
 					\begin{lstlisting}
@@ -394,8 +403,8 @@
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item \item \lstinline!listeFrequencesCumulees : list! - structure contenant les différentes fréquences cumulées des données de l'ensemble analysé.
 						\end{description}
-					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (valeur, fréquence cumulée)\\
-					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs. L'objet de retour est une collection de points que l'on va relier avec des droites.
+					\underline{Retour :} aucun retour.\\
+					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs. La procédure écrit un fichier au format \lstinline!.json! - contenant les couples (valeur, fréquence cumulée).
 					
 			\end{enumerate}
 		
@@ -415,7 +424,7 @@
 						\item Ne prend aucun paramètre.
 					\end{description}
 				\underline{Retour :} sans retour (vide).\\
-				\underline{Description :} cette fonction ne prend aucun paramètre en entrée et ne retourne rien en sortie. Elle s'occupe de lancer l'application en faisant appel à la première fenêtre choix fichier, et de faire tourner l'application. Également la gestion des erreurs sera traité ainsi que de l'arrêt du programme. 
+				\underline{Description :} cette fonction ne prend aucun paramètre en entrée et ne retourne rien en sortie. Elle s'occupe de lancer l'application en faisant appel à la première fenêtre choix fichier, et de gérer l'exécution du programme en fonction des commandes de l'utilisateur. Également la gestion des erreurs sera traité ainsi que l'arrêt du programme. 
 				
 			\vspace{1em}\item Fonctionnalité générant la fenêtre choix fichier :
 				\begin{lstlisting}
@@ -452,7 +461,7 @@
 				
 			\vspace{1em}\item Fonctionnalité de demande d'exportation :
 				\begin{lstlisting}
-					sauvResultats()
+					sauvegardeResultats()
 				\end{lstlisting}
 				\underline{Paramètres :}
 					\begin{description}[style=unboxed,leftmargin=0.2cm]
@@ -583,7 +592,7 @@
 			
 			
 		\subsection{Module Fenêtre résultats ADD}
-			Ce module est une fenêtre graphique web qui permet à l'utilisateur de consulter les résultats d'analyse des colonnes du fichier importé.
+			Ce module est une fenêtre graphique web qui permet à l'utilisateur de consulter les résultats d'analyse des colonnes du fichier importé. La fenêtre résultats ADD est lancée avec la fonction \lstinline!fenetre_resultat_ADD()! du module Gestion des flux. Son contenu est disponible sur une page web et sera donc codé à l'aide de scripts JavaScript.
 			\begin{enumerate}
 				\item \underline{Aspect visuel :}\\
 					\begin{center}\includegraphics[scale=0.8]{FenetreADD.pdf}\end{center}
@@ -592,25 +601,28 @@
 					\begin{itemize}
 						\item Miniatures : Un clic sur une miniature permet de la faire basculer en vue précise.
 						\item Vue précise : Un affichage interactif des valeurs rend la consultation plus intuitive et la charge de la vue plus légère. (une valeur non-demandée n'est pas affichée)
-						\item Sauvegarde des résultats : Une simple icône de téléchargement permettra de lancer la sauvegarde des résultats en local.
+						\item Sauvegarde des résultats : Une simple icône de téléchargement permettra de lancer la sauvegarde des résultats en local. Cette sauvegarde passe par l'appel à la fonction du module Gestion des flux \lstinline!sauvegardeResultats()!.
 					\end{itemize}
 				\item \underline{Vues précises :}\\
 					Ci-dessous, une liste des représentations graphiques disponibles, ainsi que le type d'analyse qui permet de les afficher :
 					\begin{itemize}
-						\item Histogramme : ADD qualitatives
-						\item Diagramme en secteur : ADD qualitatives
-						\item Série temporelle : ADD quantitatives
-						\item Distribution des valeurs : ADD quantitatives
-						\item Distribution cumulative des valeurs : ADD quantitatives
-						\item Diagramme à moustaches : ADD quantitatives
+						\item Histogramme : ADD qualitatives.
+						\item Diagramme en secteur : ADD qualitatives.
+						\item Série temporelle : ADD quantitatives.
+						\item Diagramme en bâtons : Distribution des valeurs pour l'ADD quantitatives discrètes.
+						\item Diagramme en escaliers : Distribution cumulative des valeurs pour l'ADD quantitatives discrètes.
+						\item Courbe représentative : Distribution des valeurs pour l'ADD quantitatives continues.
+						\item Courbe cumulative : Distribution cumulative des valeurs pour l'ADD quantitatives continues.
+						\item Diagramme à moustaches : ADD quantitatives (discrète et conitnue).
 					\end{itemize}
+					Les données préparées pourles représentations graphiques sont aux formats \lstinline!.json! et \lstinline!.csv!. Les librairies c3js\footnote{http://c3js.org/} et d3js\footnote{https://d3js.org/} spécialisées dans les graphes et la présentation des données nous permettront d'obtenir ces représentations grpahiques.
 			\end{enumerate}
 	
 	\section{Glossaire des types}
 		Dans ce glossaire, on va préciser la définition des types des données qu'on a utilisé dans la description des fonctionnalités.
 		\begin{itemize}
 			\item \lstinline!TextIoWrapper! : classe représentant les flux de texte bufferisés (entrées/sorties de texte avec une sauvegarde dans une mémoire tampon). Elle permet donc de représenter les fichiers de texte brut en particulier. Elle définit des méthodes de manipulation de ces flux.
-			\item \lstinline!str! : classe représentant des séquences de caractères (donc des chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
+			\item \lstinline!str! : classe représentant des séquences de caractères (ou chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
 			\item \lstinline!float! : classe représentant les nombres flottants à double précision en Python.
 			\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.\\
 				L'utilisation de ce type de données pour la manipulation des colonnes du fichier \lstinline!.csv! est préconisée car, tout d'abord, le type et les fonctions de manipulations sont disponibles directement avec Python, ensuite, ces listes sont implémentées sous forme de tableau ce qui garantie l'accès rapide à chacun de ses éléments, et enfin, leur taille maximale est définie par l'entier \lstinline!sys.maxsize!\footnote{https://docs.python.org/2/library/sys.html\#sys.maxsize} qui dépend des machines mais dépasse largement le million sur des PC bureautiques standards. Le million correspond à une borne maximale du nombre de lignes du fichier \lstinline!.csv! importé, la manipulation des listes peut donc se faire sans risque de crash mémoire.
@@ -651,14 +663,9 @@
  		\end{itemize}
 	
 	\section*{Conclusion}
-		Bilan : rappel ce qu'on a fait et ce que ça a apporté\\
-		Ouvertures :\\
-			- Difficultés\\
-			- Limites des spécifications dans notre cas : nécessité de tester une 1ere version de l'appli pour bien définir l'expérience utilisateur\\
-		Dernière phrase positive :\\
-			- Découverte nouveaux outils, nouvelle démarche pour le dev : devops, ux design, balsamiq, les app web (javascript c'est assez bien en vrai)\\
+		Pour conclure, ce document décrit l'architecture de l'oeuvre en spécifiant les choix techniques qui ont été faits. Notre travail se résume en deux points. Tout d'abord Python va être le langage de programmation principal qui permet de gérer le calculet l'aspect web grâce aux librairies et aux frameworks disponibles. Ensuite, puisque nous codons une applet, JavaScript est l'outil le plus puissant pour assurer l'intéractivité de nos pages pour ainsi offrir une meilleure expérience à ses potentiels clients.\\
 			
-		Lors de la rédaction de ce document, plusieurs difficultés ont été rencontrées, notamment sur la spécification des aspects visuels du produit. En effet, ce produit étant une application web de traitement de données, on a été contraint d'adopter des outils de développement qui nous sont peu familiers : le langage Python et ses frameworks d'une part, et JavaScript d'autre part. Ces outils seront utilisés pour la réalisation des interfaces d'interaction avec l'utilisateur, ainsi que des rendus graphiques d'analyses. Par conséquent, il est possible que certaines de ces fonctionnalités s'avèrent non spécifiées.\\
+		Lors de la rédaction de ce document, plusieurs difficultés ont été rencontrées, notamment sur la spécification des aspects visuels du produit. En effet, ce produit étant une application web de traitement de données, on a été contraint d'adopter des outils de développement qui nous sont peu familiers : le langage Python et ses frameworks d'une part, et JavaScript d'autre part. Ces outils seront utilisés pour la réalisation des interfaces d'interaction avec l'utilisateur, ainsi que des rendus graphiques d'analyses. Par conséquent, il est possible que certaines de ces fonctionnalités s'avèrent non spécifiées. Mais aussi, l'intéractivité et le design des résultats nous pousse à tester les fonctionnalités sur une première version de l'applet pour pouvoir lancer une réflexion concrète sur le ressenti et l'expérience de l'utilisateur, ainsi les choix concernant les aspects graphiques sont les plus sujettes à des modifications.\\
 		Néanmoins, et dans un cadre pédagogique, cette épreuve ne sera qu'enrichissante pour nous, non seulement sur le plan compétence, mais aussi expérience.
 		
 \end{document}
