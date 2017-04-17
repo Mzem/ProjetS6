@@ -184,8 +184,8 @@
 					\begin{description}[style=unboxed,leftmargin=0.2cm]
 						\item \lstinline!listeFrequences! :  \lstinline!list! - correspondant à la sortie du calcul des fréquences.
 					\end{description}
-					\underline{Retour :} fichier au format \lstinline!.json! : contenant les informations nécessaires pour la construction d'un diagramme de secteurs.\\
-					\underline{Description :} cette fonction prend en entrée le résultat du calcul des fréquences préalablement stocké dans une liste \lstinline!listeFrequences!. Elle va créer un fichier \lstinline!.json! pour y stocker les données nécessaires à la construction du diagramme en secteurs. Pour chaque couple (fréquence, valeur) elle va associer un angle compris entre 0\degre et 360\degre telle que la somme de tous les angles soit égale à 360\degre.
+					\underline{Retour :} sans retour (vide).\\
+					\underline{Description :} cette fonction prend en entrée le résultat du calcul des fréquences préalablement stocké dans une liste \lstinline!listeFrequences!. Elle va créer un fichier \lstinline!.json! pour y stocker (écrire) les données nécessaires à la construction du diagramme en secteurs. Pour chaque couple (fréquence, valeur) elle va associer un angle compris entre 0\degre et 360\degre telle que la somme de tous les angles soit égale à 360\degre. Ne retourne aucune valeur.
 					
 				\vspace{1em}\item Fonctionnalité fournissant les données de l'histogramme :
 					\begin{lstlisting}
@@ -195,8 +195,8 @@
 					\begin{description}[style=unboxed,leftmargin=0.2cm]
 						\item \lstinline!listeEffectifs! : \lstinline!list! - correspond à la sortie du calcul des effectifs.
 					\end{description}
-					\underline{Retour :} fichier au format  \lstinline!.json! : contenant les informations nécessaires pour la construction d'un histogramme.\\
-					\underline{Description :} cette fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste \lstinline!listeEffectifs!. Elle va créer un fichier \lstinline!.json! pour y stocker les données nécessaires à la construction de l'histogramme.
+					\underline{Retour :} sans retour (vide).\\
+					\underline{Description :} cette fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste \lstinline!listeEffectifs!. Elle va créer un fichier \lstinline!.json! pour y stocker (écrire) les données nécessaires à la construction de l'histogramme. Ne retourne aucune valeur.
 			\end{enumerate}
 		
 		\subsection{Module Analyse de données quantitatives discrètes}
