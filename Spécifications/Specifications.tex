@@ -207,7 +207,7 @@
 		Ce package est composé de 3 modules de fenêtre graphique web qui assurent l'interaction avec l'utilisateur, et d'un module de gestion des flux qui s'occupe du lancement de l'application et de la transition des informations entre ses différents packages.
 		
 		\subsection{Module Gestion des flux}
-		Ce module va lancer l'application et sera au centre du programme. Il s'occupera de gérer les branchements pour l'exécution, de faire transiter les informations entre les différents modules et de faire le traitement nécessaire en cas d'erreur. Il aura \colorbox{yellow}{??} fonctionnalités \colorbox{yellow}{de...} ainsi que la fonctionnalité principale \lstinline!main! de l'application :
+		Ce module va lancer l'application et sera au centre du programme. Il s'occupera de gérer les branchements pour l'exécution, de faire transiter les informations entre les différents modules et de faire le traitement nécessaire en cas d'erreur. Il aura 4 fonctionnalités qui se chargeront de l'affichage des pages web dans lesquels les branchements seront géré, ainsi que la fonctionnalité principale \lstinline!main! de l'application :
 		
 		\begin{enumerate} 
 			\vspace{1em}\item Fonctionnalité principale de l'application :
@@ -219,7 +219,7 @@
 						\item Ne prend aucun paramètre.
 					\end{description}
 				\underline{Retour :} sans retour (vide).\\
-				\underline{Description :} cette fonction ne prend aucun paramètre en entrée et ne retourne rien en sortie. Elle s'occupe de lancer l'application en faisant appel à la première fenêtre choix fichier, et de faire tourner l'application. Elle s'occupe également de gérer les erreurs ainsi que de l'arrêt du programme. 
+				\underline{Description :} cette fonction ne prend aucun paramètre en entrée et ne retourne rien en sortie. Elle s'occupe de lancer l'application en faisant appel à la première fenêtre choix fichier, et de faire tourner l'application. Également la gestion des erreurs sera traité ainsi que de l'arrêt du programme. 
 				
 			\vspace{1em}\item Fonctionnalité générant la fenêtre choix fichier :
 				\begin{lstlisting}
@@ -252,18 +252,7 @@
 						\item Ne prend aucun paramètre.
 					\end{description}
 				\underline{Retour :} \lstinline!render_template()! : fonction qui renvoie le contenu de la page web mis en paramètre qui va être envoyée à l'utilisateur. \\
-				\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client (l'utilisateur) et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/resultat_ADD/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre résultat ADD. Des variables en tant qu'arguments optionnels peuvent être utilisées dans le cas où l'on souhaiterait afficher des valeurs.
-				
-			\vspace{1em}\item Fonctionnalité de validation du choix d'une colonne :
-				\begin{lstlisting}
-					validerChoixColonne()
-				\end{lstlisting}
-				\underline{Paramètres :}
-					\begin{description}[style=unboxed,leftmargin=0.2cm]
-						\item 
-					\end{description}
-				\underline{Retour :} \\
-				\underline{Description :} 
+				\underline{Description :} cette fonction correspond à la requête HTTP (c'est à dire le chemin de la page demandée) envoyée par le client (l'utilisateur) et reçue par le serveur qui sera soit un GET soit un POST. Pour cela il faudra indiquer avant de déclarer la fonction la ligne suivante : \lstinline!@app.route('/resultat_ADD/', methods=['GET', 'POST'])!. Elle retournera le contenu de la page web mis en paramètre de la fonction \lstinline!render_template()! associé au code \lstinline!HTML! de la fenêtre résultat ADD. Le deuxième argument qui sera mis dans \lstinline!render_template()! sera la liste contenant les données de la colonne choisie. Cette fonction sera appelé dès que le choix sera validé dans la fenêtre rôle et choix colonne pour accéder à la fenêtre suivante.
 				
 			\vspace{1em}\item Fonctionnalité de demande d'exportation :
 				\begin{lstlisting}
