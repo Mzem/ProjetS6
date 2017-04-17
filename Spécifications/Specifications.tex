@@ -584,8 +584,9 @@
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
 							\item\lstinline!lignesCSV! : \lstinline!list! - liste représentant les données filtrées du fichier CSV en entier, ligne par ligne.
+							\item\lstinline!indiceColonne! : \lstinline!int! - numéro de la colonne choisie.
 						\end{description}
-					\underline{Retour :} variable de type \lstinline!list! : liste simple contenant les données d'une colonne choisie.\\
+					\underline{Retour :} variable de type \lstinline!list! : liste simple contenant les données de la colonne choisie.\\
 					\underline{Description :} cette fonction prend en entrée la liste \lstinline!lignesCSV! représentant les données filtrées du fichier CSV ligne par ligne. Elle crée une nouvelle liste pour y stocker une colonne unique. Elle parcourt le liste initiale ligne par ligne, et pour chaque ligne, elle stocke la valeur de la colonne d'indice \lstinline!indiceColonne! dans la nouvelle liste.
 				
 			\end{enumerate}
@@ -626,8 +627,7 @@
 			\item \lstinline!float! : classe représentant les nombres flottants à double précision en Python.
 			\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.\\
 				L'utilisation de ce type de données pour la manipulation des colonnes du fichier \lstinline!.csv! est préconisée car, tout d'abord, le type et les fonctions de manipulations sont disponibles directement avec Python, ensuite, ces listes sont implémentées sous forme de tableau ce qui garantie l'accès rapide à chacun de ses éléments, et enfin, leur taille maximale est définie par l'entier \lstinline!sys.maxsize!\footnote{https://docs.python.org/2/library/sys.html\#sys.maxsize} qui dépend des machines mais dépasse largement le million sur des PC bureautiques standards. Le million correspond à une borne maximale du nombre de lignes du fichier \lstinline!.csv! importé, la manipulation des listes peut donc se faire sans risque de crash mémoire.
-			\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.		
-			\item \lstinline!tuple! : classe représentant des listes immuables (non modifiables).
+			\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.
 			\item \lstinline!.json! : (JavaScript Object Notation) format de données textuelles basé sur la notation des objets JavaScript. C'est un moyen simple d'accéder à des données car un flux JSON est une sérialisation (une traduction) d'un objet JavaScript.
 			\item  \lstinline!Intervalle! : classe à implémenter
 				\begin{lstlisting}
