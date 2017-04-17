@@ -135,7 +135,7 @@
 					\underline{Retour :} variable de type  \lstinline!list! : représente la sortie du calcul des effectifs de chaque valeur de la colonne.\\
 					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données de type qualitatif pour le calcul. Elle calculera les effectifs pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
 					
-				\vspace{1em}\item Fonctionnalité de calculer de l'effectif cumulé :
+				\vspace{1em}\item Fonctionnalité de calcul de l'effectif cumulé :
 					\begin{lstlisting}
 						calculEffectifCumule(listeEffectif)
 					\end{lstlisting}
@@ -146,7 +146,7 @@
 					\underline{Retour :} \lstinline!listeEffectif! : \lstinline!list! : copie de \lstinline!listeEffectif! mais dont les effectifs seront remplacé par les effectifs cumulés. \\
 					\underline{Description :} cette fonction prend en entrée les résultats de la fonction \lstinline!calculEffectif! préalablement stocké dans une liste. Elle va copier dans une nouvelle liste celle rentrée en paramètre, et remplacera les effectifs par les effectifs cumulés. La fonction retournera cette nouvelle liste.
 					
-				\vspace{1em}\item Fonctionnalité pour calculer la fréquence :
+				\vspace{1em}\item Fonctionnalité pour calculer les fréquences d'apparition :
 					\begin{lstlisting}
 						calculFrequence(donneeQualitative)
 					\end{lstlisting}
@@ -157,7 +157,7 @@
 					\underline{Retour :} variable de type  \lstinline!list! - correspondant à la sortie du calcul des fréquences de chaque valeur de la colonne.\\
 					\underline{Description :} cette fonction prendra en paramètre une liste qui contiendra les données de type qualitatif pour le calcul. Elle calculera les fréquences pour chaque valeur et effectuera un tris pour ordonner ces valeurs.
 					
-				\vspace{1em}\item Fonctionnalité pour calculer la fréquence cumulé :
+				\vspace{1em}\item Fonctionnalité pour calculer les fréquences cumulées :
 					\begin{lstlisting}
 						calculFrequenceCumule(listeFrequence)
 					\end{lstlisting}
@@ -193,12 +193,203 @@
 		
 		\subsection{Module Analyse de données quantitatives discrètes}
 			\begin{enumerate}
+				\vspace{1em}\item Calcul de la moyenne
+					\begin{lstlisting}
+						moyenne(listeEffectifs)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+						\end{description}
+					\underline{Type retour :} \lstinline!float! : moyenne arithmétique de l'ensemble de données\\
+					\underline{Description :} Calcul de la moyenne arithmétique en fonction des données et de leur occurrences dans la liste.
+				
+				\vspace{1em}\item Calcul des quantiles (cas discret)
+					\begin{lstlisting}
+						quantileDiscret(ordre, listeFrequencesCumulees)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!ordre : float! - Nombre flottant compris entre 0 et 1
+							\item \lstinline!listeFrequencesCumulees : list! - structure contenant les différentes fréquences cumulées des données de la colonne analysées
+						\end{description}
+					\underline{Type retour :}\lstinline!float!\\
+					\underline{Description :} Valeur de la liste séparant les données en deux ensembles, le premier contenant la fraction \lstinline!ordre! des données, le deuxième contenant le reste. La médiane est le quantile d'ordre 1/2.
+					
+				\vspace{1em}\item Calcul de la variance
+					\begin{lstlisting}
+						variance(listeEffectifs)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeEffectif : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+						\end{description}
+					\underline{Type retour :} \lstinline!float!\\
+					\underline{Description :} Variance de l'ensemble de données analysé
+				
+				\vspace{1em}\item Calcul de l'écart-type
+					\begin{lstlisting}
+						ecartType(variance)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!variance : float!
+						\end{description}
+					\underline{Type retour :} \lstinline!float!\\
+					\underline{Description :} Racine carrée de la variance.
+					
+				\vspace{1em}\item Détection des anomalies
+					\begin{lstlisting}
+						anomaliesTukey(listeEffectifs)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+						\end{description}
+					\underline{Type retour :}\lstinline!list! : collection contenant les données considérées anormales pour la distribution des valeurs\\
+					\underline{Description :} Selon la méthode de Tukey, toute donnée n'étant pas contenue dans l'intervalle \lstinline![Q1 - 1.5*(Q3 - Q1) ; Q3 + 1.5*(Q3 - Q1)] !, avec \lstinline!Q1, Q3! les quartiles, est considérée comme une anomalie statistique.\footnote{https ://hal.archives-ouvertes.fr/halshs-00287751/document}
+				
+				\vspace{1em}\item Calcul du coefficient de symétrie
+					\begin{lstlisting}
+						symetrie(listeEffectifs)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+						\end{description}
+					\underline{Type retour :} \lstinline!float! - Nombre flottant compris entre -1 et 1.\\
+					\underline{Description :} Coefficient d'asymétrie de Pearson calculé avec la moyenne, la médiane et l'écart-type: s'il est nul la distributione est symétrique, s'il est positif, la série est étalée à droite, et s'il est négatif, la série est étalée  à gauche.
+				
+				\vspace{1em}\item Calcul du coefficient d'aplatissment
+					\begin{lstlisting}
+						aplatissement(listeEffectifs)
+					\end{lstlisting} \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item
+						\end{description}
+					\underline{Type retour :}  \lstinline!float!\\
+					\underline{Description :} Coefficient d'aplatissement de Fisher, calculé à partir de la moyenne et de l'écart-type. Si le coefficient est égal à 3, la série suit une loi normale centrée réduite, s'il est inférieur la distribution des valeurs est aplatie, et s'il est supérieur, les valeurs sont concentrées autour de la moyenne.
+				
+				\vspace{1em}\item Fonctionnalité pour les données de la distribution des valeurs
+					\begin{lstlisting}
+						infoDistribution(listeEffectifs)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+						\end{description}
+					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (valeur, effectif)\\
+					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution des valeurs.
+					
+				\vspace{1em}\item Fonctionnalité pour les données de la distribution cumulative des valeurs (cas discret)
+					\begin{lstlisting}
+						infoDistributionCumulativeDiscrete(listeEffectifsCumules)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \item \lstinline!listeEffectifsCumules : list! - structure contenant les différents effectifs cumulés des données de l'ensemble analysé.
+						\end{description}
+					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (valeur, effectif cumulé)\\
+					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs (diagramme en escaliers)
+					
+				\vspace{1em}\item Fonctionnalité pour les données de la boîte à moustaches de Tukey
+					\begin{lstlisting}
+						infoBoiteTukey(listeEffectifs)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+						\end{description}
+					\underline{Retour :} fichier au format \lstinline!.csv! - contenant les données du paramètre. \\
+					\underline{Description :} La représentation graphique met en valeur les quartiles et la médiane, ainsi que les anomalies de Tukey.
+					
+				\vspace{1em}\item Fonctionnalité pour les données de la série temporelle
+					\begin{lstlisting}
+						infoSerieTemporelle(listeSerieTemporelle)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeSerieTemporelle : list! - liste des couples (Timestamp, valeur) des données analysées.
+						\end{description}
+					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (Timestamp, valeur)\\\\
+					\underline{Description :} La représentation graphique associée consiste à afficher l'évolution des valeurs dans le temps.
 			\end{enumerate}
 			
 		\subsection{Module Analyse de données quantitatives continues}
 			\begin{enumerate}
+				\vspace{1em}\item Fonctionnalité pour la discrétisation des valeurs
+					\begin{lstlisting}
+						discretisation(nombreClasses, donneesContinues)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinilne!nombreClasses : int! - indique en combien de classes d'intervalle l'étendue des données va être divisée.
+							\item \lstinline!donnesContinues : list! - liste de flottants représentant les mesures analysées.
+						\end{description}
+					\underline{Type retour :} \lstinline!list! - collection d'\lstinline!Intervalle! (voir glossaire des types)\\
+					\underline{Description :} La fonction se charge de décomposer l'étendue [min ; max] de l'ensemble de données en \lstinline!nombreClasses! intervalles de même étendue, puis de remplacer les occurrences des données par l'intervalle auquel la donnée appartient.
+					
+				\vspace{1em}\item Calcul du nombre de classes optimal pour la discrétisation des valeurs
+					\begin{lstlisting}
+						calculNombreClasses(donneesContinues)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!donneesContinues : list! - liste de flottants représentant les mesures analysées.
+						\end{description}
+					\underline{Type retour :} \lstinline!int!\\
+					\underline{Description :} Calcul le nombre de classes selon la règle de Sturges.
+					
+				\vspace{1em}\item Préparation des données pour l'utilisation des éléments de calcul du module ADD quantitatives discrètes
+					\begin{lstlisting}
+						preparationIntervallesAnalyse(listeIntervalles)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!listeIntervalles : list! - issue de la discrétisation des valeurs.
+						\end{description}
+					\underline{Type retour :} \lstinline!list! - liste de flottants\\
+					\underline{Description :} Pour effectuer les analyses descriptives dans le cas continu, la démarche est la même (sauf quantiles) que pour le cas discret en utilisant comme données les centres des intervalles.
+					
+				\vspace{1em}\item Calcul des quantiles (cas continu)
+					\begin{lstlisting}
+						quanileContinu(ordre, listeFrequencesCumulees)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!ordre : float! - Nombre flottant compris entre 0 et 1
+							\item \lstinline!listeFrequencesCumulees : list! - structure contenant les différentes fréquences cumulées des données de la colonne analysées
+						\end{description}
+					\underline{Type retour :} \lstinline!float!\\
+					\underline{Description :} Les quantiles dans le cas continu sont calculés tout d'abord en identifiant la classe d'intervalle dans laquelle le quantile se trouve à l'aide des fréquences cumulées, puis par interpolation linéaire.
+					
+				\vspace{1em}\item Calcul d'abscisse par interpolation linéaire
+					\begin{lstlisting}
+						interpolationLineaire(p1, p2, y)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!p1 : float! Premier point de la droite
+							\item \lstinline!p2 : float! Second point de la droite
+							\item \lstinline!y : float! ordonnée du point dont on veut retrouver l'abscisse
+						\end{description}
+					\underline{Type retour :} \lstinline!float! - abscisse\\
+					\underline{Description :} Les points  \lstinline!p1, p2! nous permettent d'identifier une fonction linéaire. On retrouve ensuite l'abscisse du point d'ordonnée  \lstinline!y! se trouvant sur la courbe de la fonction.
+					
+				\vspace{1em}\item Fonctionnalité pour les données de la distribution cumulative des valeurs (cas continu)
+					\begin{lstlisting}
+						infoDistributionCumulativeContinue(listeFrequencesCumulees)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \item \lstinline!listeFrequencesCumulees : list! - structure contenant les différentes fréquences cumulées des données de l'ensemble analysé.
+						\end{description}
+					\underline{Retour :} fichier au format \lstinline!.json! - contenant les couples (valeur, fréquence cumulée)\\
+					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs. L'objet de retour est une collection de points que l'on va relier avec des droites.
+					
 			\end{enumerate}
-		
+				
 	\section{Package Interface web}
 		Ce package est composé de 3 modules de fenêtre graphique web qui assurent l'interaction avec l'utilisateur, et d'un module de gestion des flux qui s'occupe du lancement de l'application et de la transition des informations entre ses différents packages.
 		
@@ -327,7 +518,7 @@
 			\begin{enumerate}
 				\item \underline{Aspect visuel :}\\
 					\begin{center}\includegraphics[scale=0.8]{FenetreADD.pdf}\end{center}
-					Les résultats doivent se présenter de manière simple et sans surcharge. Les utilisateurs de ce produit doivent pouvoir prendre en main et comprendre les données sans pour autant être formés. C'est pour cela que l'information se limite à un bouton, des reprèsentations graphiques, et des explications générées à laide des calculs d'analyse descriptive.
+					Les résultats doivent se présenter de manière simple et sans surcharge. Les utilisateurs de ce produit doivent pouvoir prendre en main et comprendre les données sans pour autant être formés.
 				\item \underline{Intéractions avec l'utilisateur :}\\
 					\begin{itemize}
 						\item Miniatures : Un clic sur une miniature permet de la faire basculer en vue précise.
@@ -343,6 +534,7 @@
 						\item Distribution des valeurs : ADD quantitatives
 						\item Distribution cumulative des valeurs : ADD quantitatives
 						\item Diagramme à moustaches : ADD quantitatives
+						
 			\end{enumerate}
 	
 	\section{Glossaire des types}
@@ -350,11 +542,43 @@
 		\begin{itemize}
 			\item \lstinline!TextIoWrapper! : classe représentant les flux de texte bufferisés (entrées/sorties de texte avec une sauvegarde dans une mémoire tampon). Elle permet donc de représenter les fichiers de texte brut en particulier. Elle définit des méthodes de manipulation de ces flux.
 			\item \lstinline!str! : classe représentant des séquences de caractères (donc des chaînes de caractères) en Python. Elle définit des méthodes de manipulation de ces chaînes.
+			\item \lstinline!float! : classe représentant les nombres flottants à double précision en Python.
 			\item \lstinline!list! : classe représentant des séquences de variables de type quelconque indexés par des entier. Elle définit des méthodes de manipulation de ces séquences.\\
 				L'utilisation de ce type de données pour la manipulation des colonnes du fchier \lstinline!.csv! est préconisée car, tout d'abord, le type et les fonctions de manipulations sont disponibles directement avec Python, ensuite, ces listes sont implémentées sous forme de tableau ce qui garantie l'accès rapide à chacun de ses éléments, et enfin, leur taille maximale est définie par l'entier \lstinline!sys.maxsize!\footnote{https://docs.python.org/2/library/sys.html#sys.maxsize} qui dépend des machines mais dépasse largement le million sur des PC bureautiques standards. Le million correspond à une borne maximale du nombre de lignes du fichier \lstinline!.csv! importé, la manipulation des listes peut donc se faire sans risque de crash mémoire.
 			\item \lstinline!dict! : classe représentant des séquences de couple clés, variables (indexés par cette clé). Elle définit des méthodes de manipulation de ces séquences.		
 			\item \lstinline!tuple! : classe représentant des listes immuables (non modifiables).
 			\item \lstinline!.json! : (JavaScript Object Notation) format de données textuelles basé sur la notation des objets JavaScript. C'est un moyen simple d'accéder à des données car un flux JSON est une sérialisation (une traduction) d'un objet JavaScript.
+			\item  \lstinline!Intervalle! : classe à implémenter
+				\begin{lstlisting}
+					class Intervalle:
+				\end{lstlisting}
+				\underline{Attributs :}
+					\begin{itemize}
+						\item \lstinline!borneInf : float! - limite inférieure de l'intervalle
+						\item \lstinline!borneSup : float! limite supérieure de lintervalle
+						\item \lstinline!infInclus : boolean! - vrai si l'intervalle est fermé à gauche
+						\item \lstinline!supInclus : boolean! - vrai si l'intervalle est fermé à droite
+						\item \lstinline!centre : float! - centre de l'intervalle calculé dans le constructeur
+					\end{itemize}
+				\underline{Méthodes :}
+					\begin{itemize}
+						\vspace{1em}\item
+						\begin{lstlisting}
+							__init__(self, borneInf, borneSup, infInclus, supInclus)
+						\end{lstlisting}
+						\underline{Description :} Constructeur
+						
+						\vspace{1em}\item
+						\begin{lstlisting}
+							contient(nombre)
+						\end{lstlisting}
+						\underline{Paramètres :}
+							\begin{description}[style=unboxed,leftmargin=0.2cm]
+								\item \lstinline!nombre : float!
+							\end{description}
+						\underline{Retour :} \lstinline!boolean!\\
+						\underline{Description :} Renvoie vrai si \lstinline!nombre! est contenu dans l'intervalle, faux sinon.
+					\end{itemize}
  		\end{itemize}
 	
 	\section*{Conclusion}
