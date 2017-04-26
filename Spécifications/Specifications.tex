@@ -10,7 +10,7 @@
 
 \begin{document}
 \pagenumbering{gobble}\clearpage
-\maketitle\vspace{8em}
+\maketitle\vspace{9em}
 \begin{center}\includegraphics[scale=0.7]{../Cahier/logo.png}\end{center}
 \begin{flushright}Module \textit{Projet}\end{flushright}
 \newpage
@@ -338,15 +338,15 @@
 					\underline{Type retour :} \lstinline!float! - Nombre flottant compris entre -1 et 1.\\
 					\underline{Description :} Coefficient d'asymétrie de Pearson calculé avec la moyenne, la médiane et l'écart-type: s'il est nul la distribution des valeurs est symétrique, s'il est positif, la série est étalée à droite, et s'il est négatif, la série est étalée  à gauche.
 				
-				\vspace{1em}\item Calcul du coefficient d'aplatissment
+				\vspace{1em}\item Calcul du coefficient d'aplatissement
 					\begin{lstlisting}
 						aplatissement(listeEffectifs)
-					\end{lstlisting} \lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
+					\end{lstlisting} 
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item
+							\item\lstinline!listeEffectifs : list! - structure contenant les différents effectifs des données de l'ensemble analysé.
 						\end{description}
-					\underline{Type retour :}  \lstinline!float!\\
+					\underline{Type retour :} \lstinline!float!\\
 					\underline{Description :} Coefficient d'aplatissement de Fisher, calculé à partir de la moyenne et de l'écart-type. Si le coefficient est égal à 3, la série suit une loi normale centrée réduite, s'il est inférieur la distribution des valeurs est aplatie, et s'il est supérieur, les valeurs sont concentrées autour de la moyenne.
 				
 				\vspace{1em}\item Fonctionnalité pour les données de la distribution des valeurs (cas discret)
@@ -366,7 +366,7 @@
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item \item \lstinline!listeEffectifsCumules : list! - structure contenant les différents effectifs cumulés des données de l'ensemble analysé.
+							\item \lstinline!listeEffectifsCumules : list! - structure contenant les différents effectifs cumulés des données de l'ensemble analysé.
 						\end{description}
 					\underline{Retour :} aucun retour.\\
 					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs (diagramme en escaliers). Cette procédure écrit un fichier au format \lstinline!.json! - pour renseigner les couples (valeur, effectif cumulé).
@@ -472,7 +472,7 @@
 					\end{lstlisting}
 					\underline{Paramètres :}
 						\begin{description}[style=unboxed,leftmargin=0.2cm]
-							\item \item \lstinline!listeFrequencesCumulees : list! - structure contenant les différentes fréquences cumulées des données de l'ensemble analysé.
+							\item \lstinline!listeFrequencesCumulees : list! - structure contenant les différentes fréquences cumulées des données de l'ensemble analysé.
 						\end{description}
 					\underline{Retour :} aucun retour.\\
 					\underline{Description :} Préparation de l'objet contenant les informations nécessaires à l'affichage de la distribution cumulative des valeurs. La procédure écrit un fichier au format \lstinline!.json! - contenant les couples (valeur, fréquence cumulée).
@@ -545,9 +545,9 @@
 		
 		\subsection{Module Fenêtre choix fichier}
 		Ce module est une fenêtre graphique web qui permet à l'utilisateur de charger un fichier CSV. Ce module aura 2 fonctionnalités qui peuvent être illustrées par les croquis suivants :
-
-			\begin{center}\includegraphics[scale=0.57]{Fenetre_choix_fichier1.jpg}\end{center} 
-			\begin{center}\includegraphics[scale=0.5]{Fenetre_choix_fichier2.jpg}\end{center}
+			\vspace{3em}
+			\begin{center}\includegraphics[scale=0.7]{Fenetre_choix_fichier1.jpg}\end{center}
+			\begin{center}\includegraphics[scale=0.575]{Fenetre_choix_fichier2.jpg}\end{center}
 
 			\begin{enumerate}
 				\vspace{1em}\item Fonctionnalité d'ouverture du fichier avec le système de gestion de fichiers :
@@ -576,7 +576,7 @@
 			
 		\subsection{Module Fenêtre rôle et choix colonne}
 			Ce module est une fenêtre graphique web qui permet d'une part d'afficher un échantillon filtré des données du fichier et ses informations relatives, et d'autre part, de choisir une colonne de cet échantillon pour l'analyser. Ce module aura 5 fonctionnalités qui peuvent être illustrées par ce croquis :
-			\begin{center}\includegraphics[scale=0.55]{fenetreEchantillons.png}\end{center}
+			\begin{center}\includegraphics[scale=0.57]{fenetreEchantillons.png}\end{center}
 			\begin{enumerate}
 			
 				\vspace{1em}\item Fonctionnalité d'affichage de l'échantillon :
@@ -667,9 +667,9 @@
 			Ce module est une fenêtre graphique web qui permet à l'utilisateur de consulter les résultats d'analyse des colonnes du fichier importé. La fenêtre résultats ADD est lancée avec la fonction \lstinline!fenetre_resultat_ADD()! du module Gestion des flux. Son contenu est disponible sur une page web et sera donc codé à l'aide de scripts JavaScript.
 			\begin{enumerate}
 				\item \underline{Aspect visuel :}\\
-					\begin{center}\includegraphics[scale=0.8]{FenetreADD.pdf}\end{center}
+					\begin{center}\includegraphics[height=250pt, width=420pt]{FenetreADD.pdf}\end{center}
 					Les résultats doivent se présenter de manière simple et sans surcharge. Les utilisateurs de ce produit doivent pouvoir prendre en main et comprendre les données sans pour autant être formés.
-				\item \underline{Intéractions avec l'utilisateur :}\\
+				\item \underline{Interactions avec l'utilisateur :}
 					\begin{itemize}
 						\item Miniatures : Un clic sur une miniature permet de la faire basculer en vue précise.
 						\item Vue précise : Un affichage interactif des valeurs rend la consultation plus intuitive et la charge de la vue plus légère. (une valeur non-demandée n'est pas affichée)
@@ -687,7 +687,7 @@
 						\item Courbe cumulative : Distribution cumulative des valeurs pour l'ADD quantitatives continues.
 						\item Diagramme à moustaches : ADD quantitatives (discrète et conitnue).
 					\end{itemize}
-					Les données préparées pour les représentations graphiques sont aux formats \lstinline!.json! et \lstinline!.csv!. Les librairies c3js\footnote{http://c3js.org/} et d3js\footnote{https://d3js.org/} spécialisées dans les graphes et la présentation des données nous permettront d'obtenir ces représentations grpahiques.
+					Les données préparées pour les représentations graphiques sont aux formats \lstinline!.json! et \lstinline!.csv!. Les librairies c3js\footnote{http://c3js.org/} et d3js\footnote{https://d3js.org/} spécialisées dans les graphes et la présentation des données nous permettront d'obtenir ces représentations graphiques.
 			\end{enumerate}
 	
 	\section{Glossaire des types}
@@ -713,30 +713,28 @@
 						\item \lstinline!centre : float! - centre de l'intervalle calculé dans le constructeur
 					\end{itemize}
 				\underline{Méthodes :}
-					\begin{itemize}
-						\vspace{1em}\item
-						\begin{lstlisting}
-							__init__(self, borneInf, borneSup, infInclus, supInclus)
-						\end{lstlisting}
-						\underline{Description :} Constructeur
+					\begin{lstlisting}
+						__init__(self, borneInf, borneSup, infInclus, supInclus)
+					\end{lstlisting}
+					\underline{Description :} Constructeur
 						
-						\vspace{1em}\item
-						\begin{lstlisting}
-							contient(nombre)
-						\end{lstlisting}
-						\underline{Paramètres :}
-							\begin{description}[style=unboxed,leftmargin=0.2cm]
-								\item \lstinline!nombre : float!
-							\end{description}
-						\underline{Retour :} \lstinline!boolean!\\
-						\underline{Description :} Renvoie vrai si \lstinline!nombre! est contenu dans l'intervalle, faux sinon.
-					\end{itemize}
+					\vspace{1em}
+					\begin{lstlisting}
+						contient(nombre)
+					\end{lstlisting}
+					\underline{Paramètres :}
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+							\item \lstinline!nombre : float!
+						\end{description}
+					\underline{Retour :} \lstinline!boolean!\\
+					\underline{Description :} Renvoie vrai si \lstinline!nombre! est contenu dans l'intervalle, faux sinon.
+				
  		\end{itemize}
 	
 	\section*{Conclusion}
-		Pour conclure, ce document décrit l'architecture de l'oeuvre en spécifiant les choix techniques qui ont été faits. Notre travail se résume en deux points. Tout d'abord Python va être le langage de programmation principal qui permet de gérer le calculet l'aspect web grâce aux librairies et aux frameworks disponibles. Ensuite, puisque nous codons une applet, JavaScript est l'outil le plus puissant pour assurer l'intéractivité de nos pages pour ainsi offrir une meilleure expérience à ses potentiels clients.\\
-			
-		Lors de la rédaction de ce document, plusieurs difficultés ont été rencontrées, notamment sur la spécification des aspects visuels du produit. En effet, ce produit étant une application web de traitement de données, on a été contraint d'adopter des outils de développement qui nous sont peu familiers : le langage Python et ses frameworks d'une part, et JavaScript d'autre part. Ces outils seront utilisés pour la réalisation des interfaces d'interaction avec l'utilisateur, ainsi que des rendus graphiques d'analyses. Par conséquent, il est possible que certaines de ces fonctionnalités s'avèrent non spécifiées. Mais aussi, l'intéractivité et le design des résultats nous pousse à tester les fonctionnalités sur une première version de l'applet pour pouvoir lancer une réflexion concrète sur le ressenti et l'expérience de l'utilisateur, ainsi les choix concernant les aspects graphiques sont les plus sujettes à des modifications.\\
-		Néanmoins, et dans un cadre pédagogique, cette épreuve ne sera qu'enrichissante pour nous, non seulement sur le plan compétence, mais aussi expérience.
+		Ce document décrit l'architecture de l'œuvre en spécifiant les choix techniques qui ont été faits. Notre travail se concrétise en deux points. D'une part, Python va être le langage de programmation principal qui permet de gérer le calcul et l'aspect web grâce aux librairies et aux frameworks disponibles. D'autre part, puisque nous développons une application web, JavaScript sera l'outil le plus adapté à la réalisation de pages interactives et de rendus graphiques d'analyses pour ainsi offrir une meilleure expérience aux utilisateurs.
+		\paragraph{}Lors de la rédaction de ce document, plusieurs difficultés ont été rencontrées, notamment sur la spécification des aspects visuels du produit. En effet, ce produit étant une application web de traitement de données, on a été contraint d'adopter des outils de développement qui nous sont peu familiers pour la réalisation des fonctionnalités de cette applications. Par conséquent, il est possible que certaines de ces fonctionnalités s'avèrent non spécifiées.\\
+		De plus, l'interactivité et le design des résultats nous pousse à effectuer des tests sur les fonctionnalités d'une première version de l'application pour pouvoir lancer une réflexion concrète sur le ressenti et l'expérience de l'utilisateur. De ce fait, les choix concernant les aspects graphiques sont les plus sujettes à des modifications.
+		\paragraph{}Néanmoins, et dans un cadre pédagogique, cette épreuve ne peut être qu'enrichissante pour nous, non seulement sur le plan compétence, mais aussi expérience.
 		
 \end{document}
