@@ -11,4 +11,5 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsyn
+*.pyc
 Notes.txt

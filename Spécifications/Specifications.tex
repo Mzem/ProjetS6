@@ -23,6 +23,75 @@
 		\paragraph{}Pour les parties qui s'appuient sur une interaction avec l'utilisateur, notre démarche de description des fonctionnalités va essentiellement prendre en compte l'\textit{expérience utilisateur}\footnote{http://uxdesign.com/ux-defined}. Cette description sera donc axée sur la qualification du résultat et du ressenti de l'utilisateur lors de la manipulation de l'interface fournie (une illustration à l'aide de croquis), plutôt que sur les points techniques de l'application (fonctions et classes).
 		\paragraph{}Les fonctionnalités de notre application seront présentées selon les modules de l'organigramme établi dans le cahier des charges. Ces modules eux-mêmes seront regroupés en packages. Ce document va donc décrire, pour chaque package de l'organigramme, les fonctionnalités de ses modules : d'abord ceux du package de chargement des données, ensuite ceux du package d'analyse descriptive des données et enfin ceux du package de l'interface web. Dans une dernière partie, un glossaire sera consacré à la définition des types de données utilisés.
 		
+	\section{Organigramme et données échangées}
+			
+				\begin{figure}[H]
+				\begin{tikzpicture}
+				\begin{scope}[xscale=2,yscale=1.5]	
+					\node (IW) at (0,5) [rectangle,draw,text depth=3cm,minimum width=16cm,minimum height=4cm,font=\textbf\Large] {\begin{tabular}{c}Interface web\end{tabular}};
+					\node (F2) [rectangle,draw,dashed] at ([yshift=0.4cm]IW.center) {\begin{tabular}{c}Fenêtre rôle et choix colonne \end{tabular}};
+					\node (F1) [rectangle,draw,dashed] at ([xshift=-4cm]F2.east) {\begin{tabular}{c}Fenêtre choix fichier\end{tabular}};
+					\node (F3) [rectangle,draw,dashed] at ([xshift=4.1cm]F2.west) {\begin{tabular}{c}Fenêtre résultats ADD\end{tabular}};
+					\node (MAIN) [rectangle,draw,dashed,below=of F2.south,yshift=0cm] {\begin{tabular}{c}Gestion des flux\end{tabular}};
+
+				
+					\node (API1) at (-2.5,0) [rectangle,draw,fill=blue!25,text depth=-3.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 1\\Chargement des données\end{tabular}};
+					\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API1.center){\begin{tabular}{c}Vérification format\\fichier\end{tabular}};
+					\node (ANALYS) [rectangle,draw,dashed,fill=white,below=of VERIF.south,yshift=0.5cm] {\begin{tabular}{c}Analyse contenu\\fichier\end{tabular}};
+				
+					\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=-5cm,minimum width=5cm,minimum height=6.5cm,font=\textbf\Large] {\begin{tabular}{c}API 2\\Analyse descriptive des données\end{tabular}};
+					\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1.7cm]API2.center){\begin{tabular}{c}ADD qualitatives\end{tabular}};
+					\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0.5cm] {\begin{tabular}{c}ADD quantitatives\\discrètes\end{tabular}};
+					\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0.5cm] {\begin{tabular}{c}ADD quantitatives\\continues\end{tabular}};
+				
+					\draw[-triangle 45] (F1.south east) -- node[anchor=south,left]{11} (MAIN.north west);
+					\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,left]{12} (F2);
+					\path[->,>=stealth'] (F2) edge[bend left=10] node[anchor=south,right]{13} (MAIN);
+					\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,right]{14} (F3);
+					\path[->,>=stealth'] (F3) edge[bend left=10] node[anchor=south,right]{15} (MAIN);
+				
+					\draw[-triangle 45] (MAIN.south west) -- node[anchor=south,left] {1} (VERIF.100);
+					\draw[-triangle 45] (VERIF.80) -- node[anchor=south,right] {2} (MAIN.197);
+					\draw[-triangle 45] (MAIN.210) |- node[anchor=south,left] {3} (ANALYS.5);
+					\draw[-triangle 45] (ANALYS.355) -| node[anchor=south,below] {4} (MAIN.215);			
+				
+					\draw[-triangle 45] (MAIN.south east) -- node[anchor=south,right] {5} (ADD1.80);
+					\draw[-triangle 45] (ADD1.110) -- node[anchor=south,left] {6} (MAIN.343);
+					\draw[-triangle 45] (MAIN.335) |- node[anchor=south,right] {7} (ADD2.175);
+					\draw[-triangle 45] (ADD2.185) -| node[anchor=south,below] {8} (MAIN.330);				
+					\draw[-triangle 45] (MAIN.290) |- node[anchor=north,right] {9} (ADD3.175);
+					\draw[-triangle 45] (ADD3.185) -| node[anchor=south,below] {10} (MAIN.270);
+				
+				\end{scope}
+				%Légende
+				\begin{scope}
+					\node (LEGENDE) at (-7,-5) {\textbf{Légende :}};
+					\node (FAMILLE) at (-4.5,-5) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
+					\node (MODULE) at (-2,-5) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
+					\path[->,>=stealth'] (0.5,-5.3) edge[bend left=0] node[anchor=south,above]{informations transmises} (3,-5.3);
+				\end{scope}
+				\end{tikzpicture}
+				\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
+				\end{figure}
+				
+				\textbf{Notes :}\\
+				(1) Fichier CSV : lancement de la vérification de son format\\
+				(2) Code d'erreur : fichier OK ou ERREUR\\
+				(3) Fichier CSV : lancement de l'analyse de son contenu\\
+				(4) \textbf{structure 1} : contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure)\\
+				\hspace*{1.5em} \textbf{structure 2} : contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes\\
+				(5) Ensemble de données de type qualitatif\\
+				(6) Erreur ou effectifs, effectifs cumulés, fréquences, fréquences cumulées, diagramme en secteur, histogramme\\
+				(7) Ensemble de données de type quantitatif discret\\
+				(8) Erreur ou indicateurs de tendance central, de dispersion et de forme, les anomalies, la distribution des données, un diagramme à moustaches\\
+				(9) Ensemble de données de type quantitatif continu\\
+				(10) Même données que (8)\\
+				(11) Chemin du fichier CSV importé \\
+				(12) Informations du (4) et ensemble de données contenu dans le fichier CSV \\
+				(13) Signal de validation du choix de la colonne, et noms des colonnes\\
+				(14) Envoi des résultats d'analyses de (6), (8) et (10)\\
+				(15) Signal de contrôle : demande d'exportation des résultats de l'ADD, analyse d'une autre colonne, ou importation d'un autre fichier\\
+		
 	\section{Package Chargement des données}
 	Ce package est composé de 2 modules qui ont pour fonction de traiter le fichier de données fourni : une vérification de son format et une analyse de son contenu.
 		
