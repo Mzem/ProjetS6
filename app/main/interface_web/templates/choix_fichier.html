@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DCbrain</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="nav"> <ul> <li><a href="#">Home</a></li> <li><a href="#">About</a></li> <li><a href="#">Contact</a></li> </ul> </nav>
+
+<section>
+
+  <br><br><h1>Upload Successful!</h1>
+
+  Here is the file you just uploaded. Your form data was discarded in this , but if you check your terminal window you can see that all their names and
+  values were submitted to the server.<br>
+
+  <a href="{{ url_for('index') }}">Back to front page</a><br><br>
+  <img src="{{ url_for('static', filename='/{}/{}'.format(filepath, filename)) }}">
+
+</section>  
+</body>
+</html>
