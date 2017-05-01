@@ -18,15 +18,18 @@ $(function(){
         formData.append("file2upload", files[0]);
 
         var req = {
-            url: "/FileWithDragDrop",
-            method: "post",
+            url: "/FileWithDragDrop/",
+            method: "POST",
             processData: false,
             contentType: false,
-            data: formData
+            data: formData,
+            success : function(data) {
+                var file = files[0].name;
+                window.location = NEXT_URL + file;
+            }       
         };
 
         var promise = $.ajax(req);
-        window.navigate = NEXT_URL + files[0]; 
     };
 
     var dropHandlerSet = {

@@ -10,13 +10,19 @@
 
 <section>
 
-  <br><br><h1>Upload Successful!</h1>
+<div style="margin-top:130px; ">
+  	<form>
+  		<img src="{{ url_for('static', filename='file.png') }}" alt="file" style="height:250px; vertical-align:middle;">
+  		<input type="text" name="filepath" style="width: 600px; height: 50px; font-size:28px;" value="{{'/{}/{}'.format(filepath, file) }}" disabled="disabled" />
+  		<a href="{{ url_for('index') }}">Back page</a><br><br>
+	</form><br><br>
 
-  Here is the file you just uploaded. Your form data was discarded in this , but if you check your terminal window you can see that all their names and
-  values were submitted to the server.<br>
+	
 
-  <a href="{{ url_for('index') }}">Back to front page</a><br><br>
-  <img src="{{ url_for('static', filename='/{}/{}'.format(filepath, filename)) }}">
+  	<form action="#">
+  		<input type="submit" style="text-align:center; " class="submit" value="Valider" id="upload-button1">
+	</form>
+</div>
 
 </section>  
 </body>
