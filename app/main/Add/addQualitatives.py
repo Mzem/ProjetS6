@@ -9,20 +9,23 @@ import os
 import json
 import glob
 
+# Fonction utilisé pour calculer le nombred'élements utilisé pour construire ListeEffectifs
+def nbElemListeCouple(liste):
+    i = 0
+    for couple in liste:
+        i += couple[1]
+    return i    
 
 def calculEffectifs(listeDonnees):
     # Création d'un dictionnaire où chaque clé correspond à une valeur de listeDonnees, 
     # et dont la veleur est initialisé à 0.
-    nbElem = len(listeDonnees)
     effectifs = {}.fromkeys(set(listeDonnees),0)
     
     for valeur in listeDonnees:
         effectifs[valeur] += 1
     
     # On retoune le dictionnaire converti en liste de couple (valeur, effectif) et trié par ordre croissant de valeur.
-    listeEffectifs = sorted(effectifs.items())
-    listeEffectifs.append(nbElem)
-    
+    listeEffectifs = sorted(effectifs.items())    
     return listeEffectifs
 
 def calculEffectifsCumules(listeEffectifs):
@@ -32,7 +35,7 @@ def calculEffectifsCumules(listeEffectifs):
     
     # Pour chaque couple on remplace l'effectif par l'effectif cumulée
     i = 0
-    while i <  len(listeEffectifs)-1: # Le dernier élément de listeEffectifs est le nombre d'éléments
+    while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
         tmp = (listeEffectifs[i][0], listeEffectifs[i][1] + add)
         listeEffectifsCumules.append(tmp)
         add += listeEffectifs[i][1]    # Mise à jour de add
@@ -42,25 +45,23 @@ def calculEffectifsCumules(listeEffectifs):
 def calculFrequences(listeEffectifs):
     # On récupère le nombre d'élements qu'on analyse (situé à la fin de la liste) 
     # + définition de listeFrequencesCumules comme étant une liste
-    nbElem = listeEffectifs[-1]
+    nbElem = nbElemListeCouple(listeEffectifs)
     listeFrequences = []
     i = 0
-    while i <  len(listeEffectifs)-1: # Le dernier élément de listeEffectifs est le nombre d'éléments
+    while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
         tmp = (listeEffectifs[i][0], listeEffectifs[i][1]/nbElem)
         listeFrequences.append(tmp)
         i += 1
-    listeFrequences.append(nbElem)       
-    
+        
     return listeFrequences
 
 def calculFrequencesCumulees(listeFrequences):
     # On récupère le nombre d'élements qu'on analyse + définition de listeFrequencesCumules comme étant une liste
-    nbElem = listeFrequences[-1]
     add = 0
     listeFrequencesCumules = []
     
     i = 0
-    while i <  len(listeFrequences)-1:
+    while i <  len(listeFrequences):
         tmp = (listeFrequences[i][0],listeFrequences[i][1]+add)
         add += listeFrequences[i][1]
         listeFrequencesCumules.append(tmp)
