@@ -124,10 +124,10 @@ def aplatissement(listeEffectifs):
 		somme += ((couple[0] - moy) ** 4) * couple[1]
 		taille += couple[1]
 		
-	momCentreeOrdre4 = somme / taille
+	momentCentreOrdre4 = somme / taille
 	ecType = ecartType(variance(listeEffectifs))
 	
-	return  momCentreeOrdre4 / (ecType ** 4)
+	return  momentCentreOrdre4 / (ecType ** 4)
 
 # A faire plus tard
 def infoDistributionDiscrete(listeEffectifs):
