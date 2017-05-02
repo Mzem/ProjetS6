@@ -51,4 +51,32 @@ class Intervalle(object):
 			return supInclus
 		else:
 			return nombre > borneInf and nombre < borneSup
-			
+
+def rechercheIntervalle(intervalles, nombre):
+	"""Retrouve l'intervalle contenant un nombre en parmaètre
+	
+	Les intervalles de la liste sont distincts.
+	Les intervalles de la liste forment une partition de l'étendue qu'ils représentent et sont triés.
+	Ainsi, le nombre (on suppose qu'il appartient à l'étendue) appartient à un unique intervalle de la liste.
+	
+	Exemple:
+		etendue = [1, 3]
+		l = { [0, 1[ ; [1, 2[ ; [2, 3] }
+		
+	On exploite la liste triée avec une recherche dichotomique.
+		
+	:return: retourne l'intervalle auquel ``nombre`` appartient.
+	
+	"""
+	i = len(intervalles) / 2
+	while len(intervalles) > 0:
+		if intervalles[i].contient(nombre):
+			break
+		elif nombre < intervalles[i].borneInf:
+			intervalles = intervalles[0 : i - 1]
+			i = (i - 1) / 2
+		else:# nombre > intervalles[i].borneSup
+			intervalles = intervalles[i + 1 :] #de l'indice i + 1 à la fin de la liste
+			i = ((i + 1) + (len(intervalles) - 1)) ∕ 2
+
+	return intervalles[i]
