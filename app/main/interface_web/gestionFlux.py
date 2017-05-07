@@ -15,7 +15,7 @@ import glob
 from interface_web.choixFichier import choixFic
 
 UPLOAD_FOLDER = 'interface_web/static/uploads'
-ALLOWED_EXTENSION = set(['csv','py','png','jpg'])
+ALLOWED_EXTENSION = set(['csv'])
 app = Flask(__name__)
 app.register_blueprint(choixFic)
 
