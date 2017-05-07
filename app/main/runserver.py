@@ -19,7 +19,7 @@ args = parser.parse_args()
 # Fonction main
 if __name__ == '__main__':
     flask_options = dict(
-        debug=False,
+        debug=True,
         port=args.port,
         threaded=True,
     )
