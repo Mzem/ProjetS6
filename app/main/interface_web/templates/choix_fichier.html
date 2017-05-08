@@ -12,16 +12,22 @@
 
 <div style="margin-top:130px; ">
   	<form>
-  		<img src="{{ url_for('static', filename='file.png') }}" alt="file" style="height:250px; vertical-align:middle;">
+  		<img src="{{ url_for('static', filename='img/file.png') }}" alt="file" style="height:250px; vertical-align:middle;">
   		<input type="text" name="filepath" style="width: 700px; height: 50px; font-size:28px;" value="{{'/{}/{}'.format(filepath, file) }}" disabled="disabled" />
-  		<a href="{{ url_for('index') }}">Back page</a><br><br>
-	</form><br><br>
 
-	
+  		{% if verif == "Success opening file" %}
+  			<img src="{{ url_for('static', filename='img/valide.png') }}" style="vertical-align:middle;" title="Valid file">
+  			<a href="{{ url_for('index') }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle;" title="Change choice"></a>
+  			</form><br><br>
 
-  	<form action="#">
-  		<input type="submit" style="text-align:center; " class="submit" value="Valider" id="upload-button1">
-	</form>
+  			<form action="{{ url_for('fenetre_role_choix_colonne') }}">
+  				<input type="submit" style="text-align:center; " class="submit" value="Valider" id="upload-button1">
+			</form>
+  		{%else %}
+	  		<img src="{{ url_for('static', filename='img/invalide.png') }}" style="vertical-align:middle;" title="Invalid file">
+  			<a href="{{ url_for('index') }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle;" title="Change choice"></a>
+			</form><br><br>
+		{% endif %}
 </div>
 
 </section>  

@@ -9,15 +9,9 @@
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, Blueprint
 from werkzeug.utils import secure_filename
 
+
 choixFic = Blueprint('choixFic', __name__, template_folder='templates')
 UPLOAD_FOLDER = 'interface_web/static/uploads'
-ALLOWED_EXTENSION = set(['csv'])
-
-def verifExtension(filename):
-    if'.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSION :
-        return 0
-    else :
-        return 2
 
 # Fonction pour upload fichier SGF (A voir pour renvoyer le chemin du fichier uploader)
 @choixFic.route('/FileWithSGF/', methods=['GET', 'POST'])
@@ -28,11 +22,10 @@ def FileWithSGF():
      """
     if request.method == 'POST':
         file = request.files['file']
-        if file and verifExtension(file.filename) == 0:
-            filename = secure_filename(file.filename)
-            save_path = "{}/{}".format(UPLOAD_FOLDER, filename)
-            file.save(save_path)
-            return redirect(url_for("fenetre_choix_fichier", file=filename))
+        filename = secure_filename(file.filename)
+        save_path = "{}/{}".format(UPLOAD_FOLDER, filename)
+        file.save(save_path)
+        return redirect(url_for("fenetre_choix_fichier", file=filename))
     return "error"
 
 # Fonction pour upload fichier avec Drag&Drop

@@ -13,9 +13,9 @@ import os
 import json
 import glob
 from interface_web.choixFichier import choixFic
+from chargement_des_donnees.verificationFormatFichier import *
 
 UPLOAD_FOLDER = 'interface_web/static/uploads'
-ALLOWED_EXTENSION = set(['csv'])
 app = Flask(__name__)
 app.register_blueprint(choixFic)
 
@@ -39,7 +39,8 @@ def fenetre_choix_fichier(file):
     return: retour le template "choix_fichier.html"
     """
     #Le fichier se trouve dans /uploadr/static/uploads/<filename>
-    return render_template("choix_fichier.html", filepath=UPLOAD_FOLDER, file=file)
+    verif = ouvrir("{}/{}".format(UPLOAD_FOLDER, file)) # Ouverture du fichier CSV et de vérification
+    return render_template("choix_fichier.html", filepath=UPLOAD_FOLDER, file=file, verif=verif)
 
 @app.route("/fenetre_role_choix_colonne/",methods=['GET','POST'])
 def fenetre_role_choix_colonne():
