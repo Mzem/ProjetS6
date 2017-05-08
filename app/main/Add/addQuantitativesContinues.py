@@ -117,7 +117,33 @@ def quantileContinu(ordre, listeFrequencesCumulees, intervalles):
 	
 	return interpolationLineaire(p1, p2, ordre)
 	
+def infoDistributionCumulativeContinue(listeEffectifsCumulees, intervalles):
+	"""Écriture dans le fichier distributionCumulative.json
+	
+	Format du fihier :
+		Début
+		{
+			"x": [ liste des abscisses / bornes des intervalles ],
+			"value": [ liste des ordonnées / effectifs cumulés ]
+		}
+		Fin
+		
+	:param listeEffectifCumules: liste de couples (centre de l'intervalle, effectif cumulé).
+	"""
+	
+	fichierJson = open("data/distributionCumulative.json", 'w')
 
-# A faire plus tard
-def infoDistributionContinue(listeEffectifs):
-def infoDistributionCumulativeContinue(listeEffectifsCumulees):
+	strX = str(intervalles[0].borneInf) + ", "
+	strValues = "0, "
+	i = 0
+	for couple in listeEffectifsCumules:
+		if couple != listeEffectifsCumules[len(listeEffectifsCumules) - 1]:
+			strX += str(intervalles[i].borneSup) + ", "
+			strValues += str(couple[1]) + ", "
+		else:
+			strX += str(intervalles[i].borneSup)
+			strValues += str(couple[1])
+		i += 1
+	
+	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
+	fichierJson.close()

@@ -129,8 +129,92 @@ def aplatissement(listeEffectifs):
 	
 	return  momentCentreOrdre4 / (ecType ** 4)
 
-# A faire plus tard
 def infoDistributionDiscrete(listeEffectifs):
+	"""Écriture dans le fichier distribution.json
+	
+	Format du fihier :
+		Début
+		{
+			"x": [ liste des abscisses ],
+			"value": [ liste des ordonnées / effectifs ]
+		}
+		Fin
+		
+	:param listeEffectifs: liste de couples (valeur, effectif).
+	"""
+	
+	fichierJson = open("data/distribution.json", 'w')
+	
+	strX = str()
+	strValues = str()
+	for couple in listeEffectifs:
+		if couple != listeEffectifs[len(listeEffectifs) - 1]:
+			strX += str(couple[0]) + ", "
+			strValues += str(couple[1]) + ", "
+		else:
+			strX += couple[0]
+			strValues += str(couple[1])
+	
+	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
+	fichierJson.close()
+
 def infoDistributionCumulativeDiscrete(listeEffectifsCumules):
+	"""Écriture dans le fichier distributionCumulative.json
+	
+	Format du fihier :
+		Début
+		{
+			"x": [ liste des abscisses ],
+			"value": [ liste des ordonnées / effectifs cumulés ]
+		}
+		Fin
+		
+	:param listeEffectifCumules: liste de couples (valeur, effectif cumulé).
+	"""
+	
+	fichierJson = open("data/distributionCumulative.json", 'w')
+	
+	strX = str()
+	strValues = str()
+	for couple in listeEffectifsCumules:
+		if couple != listeEffectifsCumules[len(listeEffectifsCumules) - 1]:
+			strX += str(couple[0]) + ", "
+			strValues += str(couple[1]) + ", "
+		else:
+			strX += couple[0]
+			strValues += str(couple[1])
+	
+	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
+	fichierJson.close()
+	
 def infoBoiteTukey(listeEffectifs):
+	pass
+
 def infoSerieTemporelle(listeSerieTemporelle):
+	"""Écriture dans le fichier timeSeries.json
+	
+	Format du fihier :
+		Début
+		{
+			"x": [ liste des Timestamp ],
+			"value": [ liste des valeurs ]
+		}
+		Fin
+		
+	:param listeSerieTemporelle: liste de couples (Timestamp, valeur), et un Timestamp est une chaîne de caractères.
+	"""
+	
+	fichierJson = open("data/timeSeries.json", 'w')
+	
+	strX = str()
+	strValues = str()
+	for couple in listeSerieTemporelle:
+		if couple != listeSerieTemporelle[len(listeSerieTemporelle) - 1]:
+			strX += couple[0] + ", "
+			strValues += str(couple[1]) + ", "
+		else:
+			strX += couple[0]
+			strValues += str(couple[1])
+	
+	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
+	fichierJson.close()
