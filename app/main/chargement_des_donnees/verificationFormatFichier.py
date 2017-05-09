@@ -1,5 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
-	Module "Vérification format fichier"
+	Module "VÃ©rification format fichier"
 	========================================================
 """
 
@@ -8,7 +10,7 @@ import os
 
 def verifOuverture(chemin):
 	"""
-		Fonctionnalité de vérification de l’existance du fichier pour l'ouverture
+		FonctionnalitÃ© de vÃ©rification de lâ€™existance du fichier pour l'ouverture
 
 		:param chemin: chemin du fichier
 		:type chemin: str
@@ -20,7 +22,7 @@ def verifOuverture(chemin):
 
 def verifExtension(chemin):
 	"""
-		Fonctionnalité de vérification de l’extension du fichier
+		FonctionnalitÃ© de vÃ©rification de lâ€™extension du fichier
 
 		:param chemin: chemin du fichier
 		:type chemin: str
@@ -32,7 +34,7 @@ def verifExtension(chemin):
 
 def verifLecture(fichierCSV):
 	"""
-		Fonctionnalité de vérification de l’accès au contenu du fichier et de sa nature
+		FonctionnalitÃ© de vÃ©rification de lâ€™accÃ¨s au contenu du fichier et de sa nature
 
 		:param fichierCSV: fichier CSV
 		:type fichierCSV: TextIoWrapper
@@ -41,10 +43,10 @@ def verifLecture(fichierCSV):
 	if not fichierCSV.readable():
 		return "Error: file content not readable"
 	
-	#test du contenu du fichier (si c'est bien du texte non formaté)
+	#test du contenu du fichier (si c'est bien du texte non formatÃ©)
 	try:
 		fichierCSV.read()
-		fichierCSV.seek(0)	#remise du curseur au début
+		fichierCSV.seek(0)	#remise du curseur au dÃ©but
 	except UnicodeDecodeError:
 		return "Error: not a raw text file"
 	
@@ -52,11 +54,11 @@ def verifLecture(fichierCSV):
 
 def ouvrir(chemin):
 	"""
-		Fonctionnalité principale d'ouverture du fichier CSV et de vérification
+		FonctionnalitÃ© principale d'ouverture du fichier CSV et de vÃ©rification
 
 		:param chemin: chemin du fichier
 		:type chemin: str
-		:return: chaîne de caractères signalant le succès ou la description de l'erreur
+		:return: chaÃ®ne de caractÃ¨res signalant le succÃ¨s ou la description de l'erreur
     """
 	#test du chemin du fichier
 	codeErreur = verifOuverture(chemin)
@@ -69,7 +71,7 @@ def ouvrir(chemin):
 	#ouverture en lecture
 	fichierCSV = open(chemin, "r", encoding='utf-8')	
 	
-	#test de l'accès en lecture
+	#test de l'accÃ¨s en lecture
 	codeErreur = verifLecture(fichierCSV) 
 	if codeErreur != 0: return codeErreur
 	
