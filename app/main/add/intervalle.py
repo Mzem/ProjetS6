@@ -38,20 +38,20 @@ class Intervalle(object):
 		Calcule le centre de l'intervalle et initialise l'attribut ``centre`` avec cette valeur.
 		
 		"""
-		self.borneInf = borneInf
-		self.borneSup = borneSup
+		self.borneInf = float(borneInf)
+		self.borneSup = float(borneSup)
 		self.infInclus = infInclus
 		self.supInclus = supInclus
 		self.centre = (borneInf + borneSup) / 2
 		
 	def contient(self, nombre):
 		"""Retourne vrai si l'argument appartient à l'intervalle, faux sinon"""
-		if nombre == borneInf:
-			return infInclus
-		elif nombre == borneSup:
-			return supInclus
+		if nombre == self.borneInf:
+			return self.infInclus
+		elif nombre == self.borneSup:
+			return self.supInclus
 		else:
-			return nombre > borneInf and nombre < borneSup
+			return nombre > self.borneInf and nombre < self.borneSup
 
 def rechercheIntervalle(intervalles, nombre):
 	"""Retrouve l'intervalle contenant un nombre en parmaètre
@@ -63,21 +63,10 @@ def rechercheIntervalle(intervalles, nombre):
 	Exemple:
 		etendue = [1, 3]
 		l = { [0, 1[ ; [1, 2[ ; [2, 3] }
-		
-	On exploite la liste triée avec une recherche dichotomique.
-		
+				
 	:return: retourne l'intervalle auquel ``nombre`` appartient.
 	
 	"""
-	i = len(intervalles) / 2
-	while len(intervalles) > 0:
-		if intervalles[i].contient(nombre):
-			break
-		elif nombre < intervalles[i].borneInf:
-			intervalles = intervalles[0 : i - 1]
-			i = (i - 1) / 2
-		else:# nombre > intervalles[i].borneSup
-			intervalles = intervalles[i + 1 :] #de l'indice i + 1 à la fin de la liste
-			i = ((i + 1) + (len(intervalles) - 1)) ∕ 2
-
-	return intervalles[i]
+	for elt in intervalles:
+		if elt.contient(nombre):
+			return elt

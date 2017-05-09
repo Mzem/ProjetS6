@@ -88,7 +88,7 @@ def calculFrequences(listeEffectifs):
     listeFrequences = []
     i = 0
     while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
-        tmp = (listeEffectifs[i][0], listeEffectifs[i][1]/nbElem)
+        tmp = (listeEffectifs[i][0], listeEffectifs[i][1]/float(nbElem))
         listeFrequences.append(tmp)
         i += 1
         

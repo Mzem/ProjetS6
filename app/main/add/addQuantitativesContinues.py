@@ -7,7 +7,7 @@
 	
 """
 
-from math import log2
+from math import log
 from intervalle import Intervalle, rechercheIntervalle
 from addQuantitativesDiscretes import quantileDiscret
 import json
@@ -25,16 +25,18 @@ def discretisation(nombreClasses, donneesContinues):
 	
 	nombreClasses = calculNombreClasses(donneesContinues)
 	
-	etendue = max(donneesContinues) - min(donneesContinues)
+	maximum = max(donneesContinues)
+	minimum = min(donneesContinues)
+	etendue = maximum - minimum
 	tailleIntervalle = etendue / nombreClasses
 	
 	intervalles = []
 	for i in range(nombreClasses - 1):
-		tmp = Intervalle(i * tailleIntervalle, (i + 1) * tailleIntervalle, True, False)
+		tmp = Intervalle(minimum + i * tailleIntervalle, minimum + (i + 1) * tailleIntervalle, True, False)
 		intervalles.append(tmp)
 	
 	#dernier intervalle fermé
-	tmp = Intervalle((nombreClasses - 1) * tailleIntervalle, etendue, True, True)
+	tmp = Intervalle(minimum + (nombreClasses - 1) * tailleIntervalle, maximum, True, True)
 	intervalles.append(tmp)
 	
 	#remplacement dans donneesContinues la donnee par l'intervalle auquel il appartient
@@ -52,7 +54,7 @@ def calculNombreClasses(donneesContinues):
 	
 	"""
 	
-	return 1 + log2(len(donneesContinues))
+	return 1 + int(log(len(donneesContinues), 2))
 	
 def preparationIntervallesAnalyse(listeIntervalles):
 	"""Prépare les données pour l’utilisation des éléments de calcul du module ADD quantitatives discrètes.

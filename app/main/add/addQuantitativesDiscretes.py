@@ -9,7 +9,7 @@
 
 from math import sqrt
 from intervalle import Intervalle
-from addQualitatives import calculEffectifsCumules, calculFrequencesCumulees
+from addQualitatives import calculFrequences, calculFrequencesCumulees
 import json
 
 def moyenne(listeEffectifs):
@@ -74,13 +74,11 @@ def anomaliesTukey(listeEffectifs):
 	:return: Collection contenant les données anormales pour la distribution des valeurs.
 	
 	"""
-	
-	listeFrequencesCumulees = calculFrequencesCumulees(calculEffectifsCumules(listeEffectifs))
-	q1 = quantileDiscret(listeFrequencesCumulees)
-	q3 = quantileDiscret(listeFrequencesCumulees)
+	listeFrequencesCumulees = calculFrequencesCumulees(calculFrequences(listeEffectifs))
+	q1 = quantileDiscret(0.25, listeFrequencesCumulees)
+	q3 = quantileDiscret(0.75, listeFrequencesCumulees)
 	iq = q3 - q1
- 	interv = Intervalle(q1 - 1.5 * iq, q3 + 1.5 * iq, true, true)
-	
+ 	interv = Intervalle(q1 - 1.5 * iq, q3 + 1.5 * iq, True, True)
 	listeAnomalies = []
 	for couple in listeEffectifs:
 		if not interv.contient(couple[0]):
@@ -90,24 +88,27 @@ def anomaliesTukey(listeEffectifs):
 	return listeAnomalies
 
 def symetrie(listeEffectifs):
-	"""Calcule le coefficient de symétrie de Pearson.
+	"""Calcule le coefficient de symétrie de Fisher.
 	
-	Si le coefficient est nul, la distribution est symétrique.
+	Si le coefficient est proche 0, la distribution est approximativement symétrique.
 	Si le coefficient est positif, la distribution est étalée sur la droite.
 	Si le coefficient est négatif, la distribution est étalée sur la gauche.
 	
 	
 	:rtype: float
-	:return: Valeur comprise entre -1 et 1.
-	
+		
 	"""
-	
 	moy = moyenne(listeEffectifs)
-	listeFrequencesCumulees = calculFrequencesCumulees(calculEffectifsCumules(listeEffectifs))
-	mediane = quantileDiscret(1/2, listeFrequencesCumulees)
+	
+	somme, taille = 0, 0
+	for couple in listeEffectifs:
+		somme += ((couple[0] - moy) ** 3) * couple[1]
+		taille += couple[1]
+		
+	momentCentreOrdre3 = somme / taille
 	ecType = ecartType(variance(listeEffectifs))
 	
-	return (moy - mediane) / ecType
+	return  momentCentreOrdre3 / (ecType ** 3)
 	
 def aplatissement(listeEffectifs):
 	"""Calcule le coefficient d'aplatissement de Fisher.
