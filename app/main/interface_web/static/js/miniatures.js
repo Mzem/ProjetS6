@@ -3,8 +3,10 @@ var timeSeriesMini = c3.generate({
 	data: {
 		x: 'x',
 		type: 'spline',
-        url: '../../data/timeSeries.json',
-        mimeType: 'json'
+        json: {
+			x: [30, 50, 100, 400, 500, 650],
+			value: [130, 100, 140, 200, 150, 50]
+		}
     },
     axis: {
         x: {
@@ -30,8 +32,10 @@ var distributionMini = c3.generate({
 	data: {
 		x: 'x',
 		type: 'spline',
-        url: '../../data/distribution.json',
-        mimeType: 'json'
+        json: {
+			x: [30, 50, 100, 400, 500, 650],
+			value: [130, 100, 140, 200, 150, 50]
+		}
     },
     axis: {
         x: {
@@ -57,8 +61,10 @@ var distributionCumulativeMini = c3.generate({
 	data: {
 		x: 'x',
 		type: 'line',
-        url: '../../data/distributionCumulative.json',
-        mimeType: 'json'
+        json: {
+			x: [30, 50, 100, 400, 500, 650],
+			value: [130, 100, 140, 200, 150, 50]
+		}
     },
     axis: {
         x: {
