@@ -7,6 +7,7 @@
 	</head>
 	
 	<body>
+		<a href="{{ url_for('index') }}" alt="Back page"> retour home </a>
 
 		<nav class="nav">
 			<ul>
@@ -36,7 +37,7 @@
 		
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/c3.min.js') }}"></script>
-		<script type="text/javascript" src="../../Add/static/js/miniatures.js"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='miniatures.js') }}"></script>
 		
 	</body>
 </html>
