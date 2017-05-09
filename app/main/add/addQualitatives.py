@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 	Le module ``Analyse de données qualitatives``
 	========================================================

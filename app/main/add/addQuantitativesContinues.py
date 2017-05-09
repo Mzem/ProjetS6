@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 	Le module ``Analyse de données quantitatives continues``
 	========================================================
@@ -9,6 +10,7 @@
 from math import log2
 from intervalle import Intervalle, rechercheIntervalle
 from addQuantitativesDiscretes import quantileDiscret
+import json
 
 def discretisation(nombreClasses, donneesContinues):
 	"""Discrétise des données continues du paramètre.

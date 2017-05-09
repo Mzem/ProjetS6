@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 	Le module ``Analyse de données quantitatives discrètes``
 	========================================================
@@ -9,6 +10,7 @@
 from math import sqrt
 from intervalle import Intervalle
 from addQualitatives import calculEffectifsCumules, calculFrequencesCumulees
+import json
 
 def moyenne(listeEffectifs):
 	"""Calcule la moyenne arithmétique.
