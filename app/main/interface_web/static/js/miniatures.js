@@ -4,8 +4,8 @@ var timeSeriesMini = c3.generate({
 		x: 'x',
 		type: 'spline',
         json: {
-			x: [30, 50, 100, 400, 500, 650],
-			value: [130, 100, 140, 200, 150, 50]
+			x: [30, 50, 100, 200, 300, 450],
+			value: [130, 100, 140, 200, 150, 300]
 		}
     },
     axis: {
@@ -63,7 +63,7 @@ var distributionCumulativeMini = c3.generate({
 		type: 'line',
         json: {
 			x: [30, 50, 100, 400, 500, 650],
-			value: [130, 100, 140, 200, 150, 50]
+			value: [130, 230, 370, 570, 720, 770]
 		}
     },
     axis: {

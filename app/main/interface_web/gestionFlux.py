@@ -7,7 +7,7 @@
 
 """
 
-from flask import Flask, request, redirect, url_for, render_template, send_from_directory
+from flask import Flask, request, redirect, url_for, render_template, send_from_directory, jsonify
 from werkzeug.utils import secure_filename
 import os
 import json
@@ -60,3 +60,10 @@ def fenetre_resultat_ADD():
     """
     return render_template("resultat_ADD.html")
 
+@app.route('/infoStats')
+def infoStats():
+	stats_path = os.path.join(app.static_folder, 'json/stats.js')
+	with open(stats_path) as json_file:
+		data = json.load(json_file)
+		print(data)
+	return jsonify(data)

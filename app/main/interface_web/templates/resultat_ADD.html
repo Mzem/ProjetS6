@@ -24,21 +24,32 @@
 			<div id="distributionCumulativeMini"></div>
 		</nav>
 		
-		<section>
-<!--
-			section réservée pour la vue principale (zoom sur le graphe choisi)
--->
-		</section>
+		<section id="graphePrincipal"></section>
+		<section id="infoStats">Test</section>
 		
-		<section>
-<!--
-			section reservée pour les données statistiques / explications
--->
-		</section>
-		
+		<!--Dépendances-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/c3.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+				
+		<!--Scripts-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/miniatures.js') }}"></script>
+<!--
+		<script type="text/javascript" src="{{ url_for('static', filename='js/infoStats.js') }}"></script>
+-->
+		<script>
+			$('#infoStats').click(function(){
+				$.getJSON("/infoStats", function(json) {
+					console.log(json);
+				});
+			});
+		</script>
+		<!--Gestion des évènements-->
+		<script>
+		//Pour chaque miniature:
+		//	miniature .onclick => charge le graphe correspondant // fin surbrillance ancienne mini // surbrillance nouvelle mini
+		//  miniature .onmouseover => infobulle titre graphe // légère surbrillance
+		</script>
 		
 	</body>
 </html>
