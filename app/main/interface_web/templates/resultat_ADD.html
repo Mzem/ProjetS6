@@ -18,14 +18,23 @@
 			</ul>
 		</nav>
 		
-		<nav class="miniatures">
-			<div id="timeSeriesMini"></div>
-			<div id="distributionMini"></div>
-			<div id="distributionCumulativeMini"></div>
+		<nav id="miniatures">
+			<div class="mini" id="timeSeriesMini"></div>
+			<div class="mini" id="distributionMini"></div>
+			<div class="mini" id="distributionCumulativeMini"></div>
 		</nav>
 		
-		<section id="graphePrincipal"></section>
-		<section id="infoStats">Test</section>
+		<section id="graphePrincipal">
+				<h1 id="mainViewTitle">Time Series</h1>
+			<div class="mainView" id="timeSeries"></div>
+			<div class="mainView" id="distribution"></div>
+			<div class="mainView" id="distributionCumulative"></div>
+		</section>
+		
+		<section id="infoStats">
+			<h1 class="listeHeader" id="stats">Statistics</h1>
+			<h1 class="listeHeader" id="outliers">Outliers</h1>
+		</section>
 		
 		<!--Dépendances-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
@@ -34,21 +43,35 @@
 				
 		<!--Scripts-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/miniatures.js') }}"></script>
-<!--
 		<script type="text/javascript" src="{{ url_for('static', filename='js/infoStats.js') }}"></script>
--->
-		<script>
-			$('#infoStats').click(function(){
-				$.getJSON("/infoStats", function(json) {
-					console.log(json);
-				});
-			});
-		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/vuesInteractives.js') }}"></script>
+		
 		<!--Gestion des évènements-->
 		<script>
-		//Pour chaque miniature:
-		//	miniature .onclick => charge le graphe correspondant // fin surbrillance ancienne mini // surbrillance nouvelle mini
-		//  miniature .onmouseover => infobulle titre graphe // légère surbrillance
+			// On montre par défaut la série temporelle 
+			$('#distribution').hide();
+			$('#distributionCumulative').hide();
+			
+			$('#timeSeriesMini').click(function() {
+				$('#mainViewTitle').text('Time Series');
+				$('#timeSeries').show();
+				$('#distribution').hide();
+				$('#distributionCumulative').hide();
+			});
+			
+			$('#distributionMini').click(function(){
+				$('#mainViewTitle').text('Distribution');
+				$('#timeSeries').hide();
+				$('#distribution').show();
+				$('#distributionCumulative').hide();
+			});
+			
+			$('#distributionCumulativeMini').click(function(){
+				$('#mainViewTitle').text('Cumulative Distribution');
+				$('#timeSeries').hide();
+				$('#distribution').hide();
+				$('#distributionCumulative').show();
+			});
 		</script>
 		
 	</body>
