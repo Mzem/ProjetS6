@@ -8,17 +8,19 @@
 	</head>
 	
 	<body>
-		<a href="{{ url_for('index') }}" alt="Back page"> retour home </a>
 
 		<nav class="nav">
 			<ul>
-				<li><a href="#">Home</a></li>
+				<li><a href="{{ url_for('index') }}">Home</a></li>
 				<li><a href="#">About</a></li>
 				<li><a href="#">Contact</a></li>
 			</ul>
 		</nav>
-		
+				<a href="{{ url_for('index') }}" alt="Back page"> retour home </a>
+
 		<nav class="miniatures">
+			<div id="bar"></div>
+			<div id="pie"></div>
 			<div id="timeSeriesMini"></div>
 			<div id="distributionMini"></div>
 			<div id="distributionCumulativeMini"></div>

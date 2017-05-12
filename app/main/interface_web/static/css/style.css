@@ -33,7 +33,8 @@
 
 /* Mise en page de la page */
 body {
-    background-color: #FFFFFF;
+    /* background-color: #FFFFFF; */
+    background-color: #EFEFEF;
     font-family: Verdana,Arial,Helvetica,sans-serif;
     font-size: small;
     color: #000000;
@@ -74,14 +75,14 @@ section input {
     -webkit-border-radius:10px 10px 0 0;
 }
 .upload_form_cont {
-    background: -moz-linear-gradient(#ffffff, #f2f2f2);
-    background: -ms-linear-gradient(#ffffff, #f2f2f2);
+    background: -moz-linear-gradient(#eeeeee, #dddddd);
+    background: -ms-linear-gradient(#eeeeee, #dddddd);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #f2f2f2));
-    background: -webkit-linear-gradient(#ffffff, #f2f2f2);
-    background: -o-linear-gradient(#ffffff, #f2f2f2);
+    background: -webkit-linear-gradient(#eeeeee, #dddddd);
+    background: -o-linear-gradient(#eeeeee, #dddddd);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f2f2f2');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f2f2f2')";
-    background: linear-gradient(#ffffff, #f2f2f2);
+    background: linear-gradient(#eeeeee, #e2e2e2);
 
     color: #000;
     overflow: hidden;

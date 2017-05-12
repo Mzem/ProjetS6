@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
-	Le module ``Analyse de données qualitatives``
+	Le module ``Analyse de donnï¿½es qualitatives``
 	========================================================
 
 
@@ -11,15 +13,15 @@ import os
 import json
 import glob
 
-# Fonction utilisé pour calculer le nombred'élements utilisé pour construire ListeEffectifs
+# Fonction utilisï¿½ pour calculer le nombred'ï¿½lements utilisï¿½ pour construire ListeEffectifs
 def nbElemListeCouple(listeEffectifs):
-    """Calcul l'effectif total des données de listeEffectifs.
+    """Calcul l'effectif total des donnï¿½es de listeEffectifs.
 
-    La fonction se charge simple de calculer l'effectif total des données contenu dans la listeEffectifs ens sommant 
+    La fonction se charge simple de calculer l'effectif total des donnï¿½es contenu dans la listeEffectifs ens sommant 
     l'effectif de chaque tuple (couple[1]).
 
-    :param listeEffectifs: liste de tuples (donnée, effectif)
-    :return: l'effectif total des données de listeEffectifs
+    :param listeEffectifs: liste de tuples (donnï¿½e, effectif)
+    :return: l'effectif total des donnï¿½es de listeEffectifs
     :rtype: int
     """    
     i = 0
@@ -28,66 +30,66 @@ def nbElemListeCouple(listeEffectifs):
     return i    
 
 def calculEffectifs(listeDonnees):
-    """Calcul l'effectifs pour chaque données contenu dans listeDonnees.
+    """Calcul l'effectifs pour chaque donnï¿½es contenu dans listeDonnees.
 
-    La fonction prend en entrée une liste contenant les données à analyser. Elle calculera les effectifs pour chaque valeur à 
-    l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué sur pour ordonner les
+    La fonction prend en entrï¿½e une liste contenant les donnï¿½es ï¿½ analyser. Elle calculera les effectifs pour chaque valeur ï¿½ 
+    l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectuï¿½ sur pour ordonner les
     tuples.
 
-    :param listeDonnees: liste contenant les données à analyser
-    :return: listeEffectifs: liste de tuples (donnée, effectif)
+    :param listeDonnees: liste contenant les donnï¿½es ï¿½ analyser
+    :return: listeEffectifs: liste de tuples (donnï¿½e, effectif)
     :rtype: list
     """   
-    # Création d'un dictionnaire où chaque clé correspond à une valeur de listeDonnees, 
-    # et dont la veleur est initialisé à 0.
+    # Crï¿½ation d'un dictionnaire oï¿½ chaque clï¿½ correspond ï¿½ une valeur de listeDonnees, 
+    # et dont la veleur est initialisï¿½ ï¿½ 0.
     effectifs = {}.fromkeys(set(listeDonnees),0)
     
     for valeur in listeDonnees:
         effectifs[valeur] += 1
     
-    # On retoune le dictionnaire converti en liste de couple (valeur, effectif) et trié par ordre croissant de valeur.
+    # On retoune le dictionnaire converti en liste de couple (valeur, effectif) et triï¿½ par ordre croissant de valeur.
     listeEffectifs = sorted(effectifs.items())    
     return listeEffectifs
 
 def calculEffectifsCumules(listeEffectifs):
-    """Calcul l'effectifs cumulés avec l'aide de listeEffectifs.
+    """Calcul l'effectifs cumulï¿½s avec l'aide de listeEffectifs.
 
-    La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste l'effectifs cumulés à partir 
-    de "listeEffectifs" en remplaçant l'effectif par l'effectif cumulés.
+    La fonction prend en entrï¿½e la liste des effectifs. Elle calculera dans une nouvelle liste l'effectifs cumulï¿½s ï¿½ partir 
+    de "listeEffectifs" en remplaï¿½ant l'effectif par l'effectif cumulï¿½s.
 
-    :param listeEffectifs: liste de tuples (donnée, effectif)
-    :return: listeEffectifsCumules: liste de tuples (donnée, effectif cumulé)
+    :param listeEffectifs: liste de tuples (donnï¿½e, effectif)
+    :return: listeEffectifsCumules: liste de tuples (donnï¿½e, effectif cumulï¿½)
     :rtype: list
     """   
-    # Variables : add contiendra la valeur cumulée à chaque itération + définition de listeEffectifsCumules comme étant une liste
+    # Variables : add contiendra la valeur cumulï¿½e ï¿½ chaque itï¿½ration + dï¿½finition de listeEffectifsCumules comme ï¿½tant une liste
     add = 0
     listeEffectifsCumules = []
     
-    # Pour chaque couple on remplace l'effectif par l'effectif cumulée
+    # Pour chaque couple on remplace l'effectif par l'effectif cumulï¿½e
     i = 0
-    while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
+    while i <  len(listeEffectifs): # Le dernier ï¿½lï¿½ment de listeEffectifs est le nombre d'ï¿½lï¿½ments
         tmp = (listeEffectifs[i][0], listeEffectifs[i][1] + add)
         listeEffectifsCumules.append(tmp)
-        add += listeEffectifs[i][1]    # Mise à jour de add
+        add += listeEffectifs[i][1]    # Mise ï¿½ jour de add
         i += 1
     return listeEffectifsCumules
 
 def calculFrequences(listeEffectifs):
-    """Calcul les fréquences d'apparitions des valeurs.
+    """Calcul les frï¿½quences d'apparitions des valeurs.
 
-    La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeEffectifs" en remplaçant l'effectif par la fréquence.
+    La fonction prend en entrï¿½e la liste des effectifs. Elle calculera dans une nouvelle liste la frï¿½quence ï¿½ partir 
+    de "listeEffectifs" en remplaï¿½ant l'effectif par la frï¿½quence.
 
-    :param listeEffectifs: liste de tuples (donnée, effectif)
-    :return: listeFrequences: liste de tuples (donnée, frequence)
+    :param listeEffectifs: liste de tuples (donnï¿½e, effectif)
+    :return: listeFrequences: liste de tuples (donnï¿½e, frequence)
     :rtype: list    
     """
-    # On récupère le nombre d'élements qu'on analyse (situé à la fin de la liste) 
-    # + définition de listeFrequencesCumules comme étant une liste
+    # On rï¿½cupï¿½re le nombre d'ï¿½lements qu'on analyse (situï¿½ ï¿½ la fin de la liste) 
+    # + dï¿½finition de listeFrequencesCumules comme ï¿½tant une liste
     nbElem = nbElemListeCouple(listeEffectifs)
     listeFrequences = []
     i = 0
-    while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
+    while i <  len(listeEffectifs): # Le dernier ï¿½lï¿½ment de listeEffectifs est le nombre d'ï¿½lï¿½ments
         tmp = (listeEffectifs[i][0], listeEffectifs[i][1]/float(nbElem))
         listeFrequences.append(tmp)
         i += 1
@@ -95,16 +97,16 @@ def calculFrequences(listeEffectifs):
     return listeFrequences
 
 def calculFrequencesCumulees(listeFrequences):
-    """Calcul les fréquences cumulés pour une liste de fréquences.
+    """Calcul les frï¿½quences cumulï¿½s pour une liste de frï¿½quences.
 
-    La fonction prend en entrée la liste des frequences. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeFrequence" en remplaçant la fréquence par la fréquence cumulé.
+    La fonction prend en entrï¿½e la liste des frequences. Elle calculera dans une nouvelle liste la frï¿½quence ï¿½ partir 
+    de "listeFrequence" en remplaï¿½ant la frï¿½quence par la frï¿½quence cumulï¿½.
 
-    :param listeFrequences: liste de tuples (donnée, frequence)
-    :return: listeFrequences: liste de tuples (donnée, frequence cumulé)
+    :param listeFrequences: liste de tuples (donnï¿½e, frequence)
+    :return: listeFrequences: liste de tuples (donnï¿½e, frequence cumulï¿½)
     :rtype: list        
     """
-    # On récupère le nombre d'élements qu'on analyse + définition de listeFrequencesCumules comme étant une liste
+    # On rï¿½cupï¿½re le nombre d'ï¿½lements qu'on analyse + dï¿½finition de listeFrequencesCumules comme ï¿½tant une liste
     add = 0
     listeFrequencesCumules = []
     
@@ -118,13 +120,13 @@ def calculFrequencesCumulees(listeFrequences):
     
 
 def infoSecteurs(listeFrequences):
-    """Stock dans un fichier JSON les informations nécessaire à la création d'un diagramme de secteurs.
+    """Stock dans un fichier JSON les informations nï¿½cessaire ï¿½ la crï¿½ation d'un diagramme de secteurs.
 
-    La fonction prend en entrée le résultat du calcul des fréquences .Elle va créer un fichier .json pour y stocker (écrire)
-    les données nécessaires à la construction du diagramme en secteurs. Pour chaque couple (fréquence,valeur) elle va associer 
-    un angle compris entre 0°et 360°.
+    La fonction prend en entrï¿½e le rï¿½sultat du calcul des frï¿½quences .Elle va crï¿½er un fichier .json pour y stocker (ï¿½crire)
+    les donnï¿½es nï¿½cessaires ï¿½ la construction du diagramme en secteurs. Pour chaque couple (frï¿½quence,valeur) elle va associer 
+    un angle compris entre 0ï¿½et 360ï¿½.
 
-    :param listeFrequences: liste de tuples (donnée, fréquence)     
+    :param listeFrequences: liste de tuples (donnï¿½e, frï¿½quence)     
     """
     # Construction du dictionnaire qui sera mis dans le .json
     secteur = {}
@@ -133,17 +135,17 @@ def infoSecteurs(listeFrequences):
     secteur['data']['colums'] = listeFrequences
     secteur['data']['type'] = 'pie'
     
-    # Stockage des données pour le diagramme de secteur dans "secteur.json"
+    # Stockage des donnï¿½es pour le diagramme de secteur dans "secteur.json"
     with open('../interface_web/static/json/secteur.json', 'w', encoding='utf-8') as f:
         json.dump(secteur, f, indent=4)  
 
 def infoHistogramme(listeEffectifs):
-    """Stock dans un fichier JSON les informations nécessaire à la création d'un histogramme.
+    """Stock dans un fichier JSON les informations nï¿½cessaire ï¿½ la crï¿½ation d'un histogramme.
 
-    La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste listeEffectifs. Elle 
-    va créer un fichier .json pour y stocker les données nécessaires à la construction de l’histogramme.
+    La fonction prend en entrï¿½e le rï¿½sultat du calcul des effectifs prï¿½alablement stockï¿½ dans une liste listeEffectifs. Elle 
+    va crï¿½er un fichier .json pour y stocker les donnï¿½es nï¿½cessaires ï¿½ la construction de lï¿½histogramme.
 
-    :param listeEffectifs: liste de tuples (donnée, effectif)     
+    :param listeEffectifs: liste de tuples (donnï¿½e, effectif)     
       """
     # Construction du dictionnaire qui sera mis dans le .json
     histo = {}
@@ -152,7 +154,13 @@ def infoHistogramme(listeEffectifs):
     histo['data']['colums'] = listeEffectifs
     histo['data']['type'] = 'bar'  
     
-    # Stockage des données pour l'histogramme dans "histogramme.json"
+    # Stockage des donnï¿½es pour l'histogramme dans "histogramme.json"
     with open('../interface_web/static/json/histogramme.json', 'w', encoding='utf-8') as f:
         json.dump(histo, f, indent=4)    
         
+
+histo = [("Data1",5),("Data2",23),("Data3",17),("Data4",25),("Data5",1),("Data6",2)]
+sect = [("Data1",0.05),("Data2",0.23),("Data3",0.17),("Data4",0.25),("Data5",0.1),("Data6",0.2)]
+
+infoHistogramme(histo)
+infoSecteurs(sect)

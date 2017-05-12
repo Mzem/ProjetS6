@@ -17,6 +17,7 @@ def verifOuverture(chemin):
 		:return: entier 0 ou code de l'erreur
     """  
 	if not os.path.isfile(chemin):
+		print(os.path.isfile(chemin))
 		return "Error: not an existing file"
 	return 0
 
@@ -81,5 +82,6 @@ def ouvrir(chemin):
 	
 #test independant du module
 if __name__ == "__main__":
-	print(ouvrir("sample.csv"))
+	
+	print(ouvrir("fichier_csv_st_denis.csv"))
 	

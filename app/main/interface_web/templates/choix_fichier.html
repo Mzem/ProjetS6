@@ -4,27 +4,33 @@
 <title>DCbrain</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body style="background-color: #EEEEEE;">
 
-<nav class="nav"> <ul> <li><a href="#">Home</a></li> <li><a href="#">About</a></li> <li><a href="#">Contact</a></li> </ul> </nav>
+	<nav class="nav">
+		<ul>
+			<li><a href="{{ url_for('index') }}">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</nav>
 
 <section>
 
 <div style="margin-top:130px; ">
   	<form>
-  		<img src="{{ url_for('static', filename='img/file.png') }}" alt="file" style="height:250px; vertical-align:middle;">
-  		<input type="text" name="filepath" style="width: 700px; height: 50px; font-size:28px;" value="{{'/{}/{}'.format(filepath, file) }}" disabled="disabled" />
+  		<img src="{{ url_for('static', filename='img/file.png') }}" alt="file" style="height:250px; vertical-align:middle;"> &nbsp; &nbsp;
+  		<input type="text" name="filepath" style="width: 700px; height: 45px; font-size:28px; " value="{{'{}'.format(file) }}" disabled="disabled" /> &nbsp; &nbsp;
 
-  		{% if verif == "Success opening file" %}
-  			<img src="{{ url_for('static', filename='img/valide.png') }}" style="vertical-align:middle;" title="Valid file">
-  			<a href="{{ url_for('index') }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle;" title="Change choice"></a>
+  		{% if verif == True %}
+  			<img src="{{ url_for('static', filename='img/valide.png') }}" style="vertical-align:middle; margin-bottom: 10px;" title="Valid file">
+  			<a href="{{ url_for('index') }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle; margin-bottom: 10px;" title="Change choice"></a>
   			</form><br><br>
-
-  			<form action="{{ url_for('fenetre_role_choix_colonne') }}">
+  			
+  			<form action="{{ url_for('fenetre_role_choix_colonne', fichierCSV=fichierCSV) }}">
   				<input type="submit" style="text-align:center; " class="submit" value="Valider" id="upload-button1">
 			</form>
   		{%else %}
-	  		<img src="{{ url_for('static', filename='img/invalide.png') }}" style="vertical-align:middle;" title="Invalid file">
+	  		<img src="{{ url_for('static', filename='img/invalide.png') }}" style="vertical-align:middle; margin-bottom: 10px;" title="Invalid file">
   			<a href="{{ url_for('index') }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle;" title="Change choice"></a>
 			</form><br><br>
 		{% endif %}
