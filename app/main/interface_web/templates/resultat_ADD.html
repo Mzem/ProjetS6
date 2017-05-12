@@ -16,6 +16,7 @@
 				<li><a href="#">Contact</a></li>
 			</ul>
 		</nav>
+<<<<<<< HEAD
 				<a href="{{ url_for('index') }}" alt="Back page"> retour home </a>
 
 		<nav class="miniatures">
@@ -24,23 +25,65 @@
 			<div id="timeSeriesMini"></div>
 			<div id="distributionMini"></div>
 			<div id="distributionCumulativeMini"></div>
+=======
+		
+		<nav id="miniatures">
+				<h1 id="miniaturesTitle">Miniatures</h1>
+			<div class="mini" id="timeSeriesMini"></div>
+			<div class="mini" id="distributionMini"></div>
+			<div class="mini" id="distributionCumulativeMini"></div>
+>>>>>>> 299da4fe05a77447548f28b52f5a04f3fe060138
 		</nav>
 		
-		<section>
-<!--
-			section réservée pour la vue principale (zoom sur le graphe choisi)
--->
+		<section id="graphePrincipal">
+				<h1 id="mainViewTitle">Time Series</h1>
+			<div class="mainView" id="timeSeries"></div>
+			<div class="mainView" id="distribution"></div>
+			<div class="mainView" id="distributionCumulative"></div>
 		</section>
 		
-		<section>
-<!--
-			section reservée pour les données statistiques / explications
--->
+		<section id="infoStats">
+			<h1 class="listeHeader" id="stats">Statistics</h1>
+			<h1 class="listeHeader" id="outliers">Outliers</h1>
 		</section>
 		
+		<!--Dépendances-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/c3.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+				
+		<!--Scripts-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/miniatures.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/infoStats.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/vuesInteractives.js') }}"></script>
+		
+		<!--Gestion des évènements-->
+		<script>
+			// On montre par défaut la série temporelle 
+			$('#distribution').hide();
+			$('#distributionCumulative').hide();
+			
+			$('#timeSeriesMini').click(function() {
+				$('#mainViewTitle').text('Time Series');
+				$('#timeSeries').show();
+				$('#distribution').hide();
+				$('#distributionCumulative').hide();
+			});
+			
+			$('#distributionMini').click(function(){
+				$('#mainViewTitle').text('Distribution');
+				$('#timeSeries').hide();
+				$('#distribution').show();
+				$('#distributionCumulative').hide();
+			});
+			
+			$('#distributionCumulativeMini').click(function(){
+				$('#mainViewTitle').text('Cumulative Distribution');
+				$('#timeSeries').hide();
+				$('#distribution').hide();
+				$('#distributionCumulative').show();
+			});
+		</script>
 		
 	</body>
 </html>

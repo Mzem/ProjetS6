@@ -1,88 +1,88 @@
-var timeSeriesMini = c3.generate({
-	bindto: '#timeSeriesMini',
-	data: {
-		x: 'x',
-		type: 'spline',
-        json: {
-			x: [30, 50, 100, 400, 500, 650],
-			value: [130, 100, 140, 200, 150, 50]
-		}
-    },
-    axis: {
-        x: {
-            show: false
-        },
-        y: {
+$.getJSON("/timeSeries", function(json) {
+	
+	var timeSeriesMini = c3.generate({
+		bindto: '#timeSeriesMini',
+		data: {
+			x: 'x',
+			type: 'spline',
+			json: json
+		},
+		axis: {
+			x: {
+				show: false
+			},
+			y: {
+				show: false
+			}
+		},
+		legend: {
+			show: false
+		},
+		tooltip: {
+			show:false
+		},
+		point: {
 			show: false
 		}
-    },
-    legend: {
-        show: false
-    },
-    tooltip: {
-    	show:false
-    },
-    point: {
-        show: false
-    }
+	});
 });
 
-var distributionMini = c3.generate({
-	bindto: '#distributionMini',
-	data: {
-		x: 'x',
-		type: 'spline',
-        json: {
-			x: [30, 50, 100, 400, 500, 650],
-			value: [130, 100, 140, 200, 150, 50]
-		}
-    },
-    axis: {
-        x: {
-            show: false
-        },
-        y: {
+$.getJSON("/distribution", function(json) {
+	
+	var distributionMini = c3.generate({
+		bindto: '#distributionMini',
+		data: {
+			x: 'x',
+			type: 'spline',
+			json: json
+		},
+		axis: {
+			x: {
+				show: false
+			},
+			y: {
+				show: false
+			}
+		},
+		legend: {
+			show: false
+		},
+		tooltip: {
+			show:false
+		},
+		point: {
 			show: false
 		}
-    },
-    legend: {
-        show: false
-    },
-    tooltip: {
-    	show:false
-    },
-    point: {
-        show: false
-    }
+	});
 });
 
-var distributionCumulativeMini = c3.generate({
-	bindto: '#distributionCumulativeMini',
-	data: {
-		x: 'x',
-		type: 'line',
-        json: {
-			x: [30, 50, 100, 400, 500, 650],
-			value: [130, 100, 140, 200, 150, 50]
-		}
-    },
-    axis: {
-        x: {
-            show: false
-        },
-        y: {
+$.getJSON("/distribution", function(json) {
+
+	var distributionCumulativeMini = c3.generate({
+		bindto: '#distributionCumulativeMini',
+		data: {
+			x: 'x',
+			type: 'line',
+			json: json
+		},
+		axis: {
+			x: {
+				show: false
+			},
+			y: {
+				show: false
+			}
+		},
+		legend: {
+			show: false
+		},
+		tooltip: {
+			show:false
+		},
+		point: {
 			show: false
 		}
-    },
-    legend: {
-        show: false
-    },
-    tooltip: {
-    	show:false
-    },
-    point: {
-        show: false
-    }
+	});
 });
 
 var bar = c3.generate({
