@@ -1,0 +1,42 @@
+
+.mini {
+	margin: 0 auto;
+	border: solid 1.5px;
+	height: 150px;
+	margin-bottom: 10px;
+}
+
+.container2 {
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	position:relative;
+}
+
+.container2 nav {
+	float: left;
+	width: 20%;
+	text-align: center;
+	border-radius: 10px;
+	position:absolute;
+}
+
+.container2 section {
+	margin-left: 25%;
+	float : left;
+	width: 75%;
+	text-align: center;
+	border: solid 2px;
+	overflow: scroll;
+	display: inline;
+	margin-top: 20px;
+}
+
+.container2 nav div, #infoStats, #graphePrincipal {
+	background-color: white;
+}
+
+body{
+	margin: 0 auto;
+}
+

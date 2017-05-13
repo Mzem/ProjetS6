@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/c3.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/add.css') }}">
 	</head>
 	
 	<body>
@@ -16,23 +17,13 @@
 				<li><a href="#">Contact</a></li>
 			</ul>
 		</nav>
-<<<<<<< HEAD
-				<a href="{{ url_for('index') }}" alt="Back page"> retour home </a>
 
-		<nav class="miniatures">
-			<div id="bar"></div>
-			<div id="pie"></div>
-			<div id="timeSeriesMini"></div>
-			<div id="distributionMini"></div>
-			<div id="distributionCumulativeMini"></div>
-=======
-		
+<div class="container2">
 		<nav id="miniatures">
 				<h1 id="miniaturesTitle">Miniatures</h1>
 			<div class="mini" id="timeSeriesMini"></div>
 			<div class="mini" id="distributionMini"></div>
-			<div class="mini" id="distributionCumulativeMini"></div>
->>>>>>> 299da4fe05a77447548f28b52f5a04f3fe060138
+			<div class="mini" id="distributionCumulativeMini"></div> 
 		</nav>
 		
 		<section id="graphePrincipal">
@@ -42,11 +33,11 @@
 			<div class="mainView" id="distributionCumulative"></div>
 		</section>
 		
-		<section id="infoStats">
-			<h1 class="listeHeader" id="stats">Statistics</h1>
+		<section id="infoStats" style= "margin-bottom: 20px;">
+			<h1 class="listeHeader" id="stats">Statistics</h1><br>
 			<h1 class="listeHeader" id="outliers">Outliers</h1>
 		</section>
-		
+</div>
 		<!--Dépendances-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/c3.js') }}"></script>
