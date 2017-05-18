@@ -1,5 +1,4 @@
-Pour la documentation : http://sametmax.com/les-docstrings/
-Dedans il conseille sphinx, un générateur de documentation puissant
+Update lien de la documentation : http://deusyss.developpez.com/tutoriels/Python/SphinxDoc/
 
 J'avais un problème que je voulais poster dans issue mais je l'ai corrigé, pas besoin de check les issues comme je le dis dans mon commit
 
