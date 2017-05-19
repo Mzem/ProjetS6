@@ -1,6 +1,17 @@
-import unittest 
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+	``Test module choixFichier``
+	========================================================
 
-class addQualitativesTest(unittest.TestCase): 
+
+"""
+import unittest 
+import sys
+sys.path[:0] = ['../']
+from interface_web.choixFichier import *
+
+class choixFichierTest(unittest.TestCase): 
 
     # initialization logic for the test suite declared in the test module
     # code that is executed before all tests in one test run
@@ -15,27 +26,22 @@ class addQualitativesTest(unittest.TestCase):
         pass 
 
     # initialization logic
-    # code that is executed before each test
+    # code exécuté avant chaque test
     def setUp(self):
         pass 
 
     # clean up logic
-    # code that is executed after each test
+    # code exécuté après chaque test
     def tearDown(self):
         pass 
 
-    # test fonction du module Add_qualitatives        
-    def test_calculEffectifs(self):
-        return True 
+    # test fonctions du module Add_qualitatives 
+    def test_FileWithSGF(self):
+        return True
+    
+    def test_FileWithDragDrop(self):
+        return True
         
-    def test_calculEffectifsCumules(self):
-        return True 
-        
-    def test_calculFrequences(self):
-        return True 
-        
-    def calculFrequencesCumules(self):
-        return True 
 
 # runs the unit tests in the module
 if __name__ == '__main__':

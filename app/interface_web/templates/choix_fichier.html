@@ -23,7 +23,7 @@
 
   		{% if verif == True %}
   			<img src="{{ url_for('static', filename='img/valide.png') }}" style="vertical-align:middle; margin-bottom: 10px;" title="Valid file">
-  			<a href="{{ url_for('index') }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle; margin-bottom: 10px;" title="Change choice"></a>
+  			<a href="{{ url_for('remove', file=file) }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle; margin-bottom: 10px;" title="Change choice"></a>
   			</form><br><br>
   			
   			<form action="{{ url_for('fenetre_role_choix_colonne', fichierCSV=fichierCSV) }}">
@@ -31,7 +31,7 @@
 			</form>
   		{%else %}
 	  		<img src="{{ url_for('static', filename='img/invalide.png') }}" style="vertical-align:middle; margin-bottom: 10px;" title="Invalid file">
-  			<a href="{{ url_for('index') }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle;" title="Change choice"></a>
+  			<a href="{{ url_for('remove', file=file) }}" alt="Back page"><img src="{{ url_for('static', filename='img/supprimer.png') }}" alt="fichier valide" style="vertical-align:middle;" title="Change choice"></a>
 			</form><br><br>
 		{% endif %}
 

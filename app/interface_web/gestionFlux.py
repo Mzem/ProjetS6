@@ -16,7 +16,6 @@ import glob
 from interface_web.choixFichier import choixFic
 from chargement_des_donnees.verificationFormatFichier import *
 
-UPLOAD_FOLDER = 'interface_web/static/uploads'
 app = Flask(__name__)
 app.register_blueprint(choixFic)
 
@@ -65,6 +64,16 @@ def fenetre_resultat_ADD():
     """
     return render_template("resultat_ADD.html")
 
+@app.route("/remove/<file>",methods=['GET','POST'])
+def remove(file):
+    """Fonction qui supprime le fichier uploadé
+    
+    :param: file de type str correspond au nom du fichier csv
+    :return: redirige vers la route index
+    """
+    os.remove('{}{}'.format('interface_web/static/uploads/',file))
+    return redirect(url_for("index"))
+
 @app.route('/infoStats')
 def infoStats():
 	stats_path = os.path.join(app.static_folder, 'json/stats.js')
@@ -92,3 +101,6 @@ def distributionCumulative():
 	with open(stats_path) as json_file:
 		data = json.load(json_file)
 	return jsonify(data)
+
+def sauvegardeResultats():
+    pass

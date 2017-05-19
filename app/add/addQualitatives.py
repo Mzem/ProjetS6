@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
 	Le module ``Analyse de donn�es qualitatives``
 	========================================================
@@ -132,7 +130,7 @@ def infoSecteurs(listeFrequences):
     secteur = {}
     secteur['bindto'] = '#pie' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #pie
     secteur['data'] = {}
-    secteur['data']['colums'] = listeFrequences
+    secteur['data']['columns'] = listeFrequences
     secteur['data']['type'] = 'pie'
     
     # Stockage des donn�es pour le diagramme de secteur dans "secteur.json"
@@ -151,7 +149,7 @@ def infoHistogramme(listeEffectifs):
     histo = {}
     histo['bindto'] = '#bar' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #bar
     histo['data'] = {}
-    histo['data']['colums'] = listeEffectifs
+    histo['data']['columns'] = listeEffectifs
     histo['data']['type'] = 'bar'  
     
     # Stockage des donn�es pour l'histogramme dans "histogramme.json"
@@ -164,3 +162,5 @@ sect = [("Data1",0.05),("Data2",0.23),("Data3",0.17),("Data4",0.25),("Data5",0.1
 
 infoHistogramme(histo)
 infoSecteurs(sect)
+val = os.path.isfile('../interface_web/static/json/histogramme.json')
+print("val : %s" %val)

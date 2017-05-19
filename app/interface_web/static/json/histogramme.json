@@ -1,32 +1,32 @@
 {
-    "bindto": "#pie",
+    "bindto": "#bar",
     "data": {
-        "colums": [
+        "columns": [
             [
                 "Data1",
-                0.05
+                5
             ],
             [
                 "Data2",
-                0.23
+                23
             ],
             [
                 "Data3",
-                0.17
+                17
             ],
             [
                 "Data4",
-                0.25
+                25
             ],
             [
                 "Data5",
-                0.1
+                1
             ],
             [
                 "Data6",
-                0.2
+                2
             ]
         ],
-        "type": "pie"
+        "type": "bar"
     }
 }
