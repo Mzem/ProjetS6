@@ -81,11 +81,4 @@ def ouvrir(chemin):
 	if codeErreur != 0: return codeErreur
 	
 	return fichierCSV
-
-	
-	
-#test independant du module
-if __name__ == "__main__":
-	
-	print(ouvrir("sampleF.csv"))
 	

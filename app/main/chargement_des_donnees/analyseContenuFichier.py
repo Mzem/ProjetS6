@@ -132,7 +132,7 @@ def analyseFichier(fichierCSV):
 		Fonctionnalité principale d'analyse du contenu du fichier CSV ouvert
 
 		:param fichierCSV: le fichier CSV ouvert et vérifié
-		:type chemin: TextIoWrapper
+		:type fichierCSV: TextIoWrapper
 		:return: une liste contenant les données du fichier et un dictionnaire décrivant ces données
     """
 	lignesCSV = lecture(fichierCSV)
@@ -145,17 +145,25 @@ def analyseFichier(fichierCSV):
 #test independant du module
 if __name__ == "__main__":
 	
-	lignesCSV, descCSV = analyseFichier(ouvrir("sample.csv")) #JD : t'appelles cette fct et tu m'envoies ces deux listes
+	#JD : il faut appeler la fct ouvrir, voir s'il y'a erreur et ensuite appeler la fct analyse et me renvoyer son résultat
+	#le problème si je prends juste le chemin pour la fct analyse et que j'ouvre le fichier dedans c'est que tu ne pourras pas faire grand chose avec le message d'erreur
 	
-	#Affichages de test
-	print("\n###################################################################################\n")
+	fichierCSV = ouvrir("sample.csv")
 	
-	for ligne in lignesCSV:
-		print(ligne)
+	if type(fichierCSV) is str: 
+		print(fichierCSV)
+	else :
+		lignesCSV, descCSV = analyseFichier(fichierCSV)
 	
-	print("\n###################################################################################\n")
-	
-	print(descCSV["nom"])
-	print(descCSV["type"])
-	for ligne in descCSV["erreurs"]:
-		print(ligne)
+		#Affichages de test
+		print("\n###################################################################################\n")
+		
+		for ligne in lignesCSV:
+			print(ligne)
+		
+		print("\n###################################################################################\n")
+		
+		print(descCSV["nom"])
+		print(descCSV["type"])
+		for ligne in descCSV["erreurs"]:
+			print(ligne)
