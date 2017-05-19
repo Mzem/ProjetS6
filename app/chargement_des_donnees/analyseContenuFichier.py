@@ -104,6 +104,8 @@ def descriptionColonnes(lignesCSV):
 						descCSV["erreurs"][numLigne][numColonne] = "correct"
 					except ValueError:
 						descCSV["erreurs"][numLigne][numColonne] = "date string format not supported"
+					except IndexError:
+						descCSV["erreurs"][numLigne][numColonne] = "date string format not supported"
 				elif typeDeDonnee(donnee) == "VIDE":
 					descCSV["erreurs"][numLigne][numColonne] = "missing value"
 					
@@ -148,7 +150,7 @@ if __name__ == "__main__":
 	#JD : il faut appeler la fct ouvrir, voir s'il y'a erreur et ensuite appeler la fct analyse et me renvoyer son résultat
 	#le problème si je prends juste le chemin pour la fct analyse et que j'ouvre le fichier dedans c'est que tu ne pourras pas faire grand chose avec le message d'erreur
 	
-	fichierCSV = ouvrir("sample.csv")
+	fichierCSV = ouvrir("fichier topologie csv st denis.csv")
 	
 	if type(fichierCSV) is str: 
 		print(fichierCSV)
