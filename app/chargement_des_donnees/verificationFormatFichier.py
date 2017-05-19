@@ -1,65 +1,69 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-	Module "VÃ©rification format fichier"
+	Module "Vérification format fichier"
 	========================================================
 """
 
 from flask import Flask
 import os
 
+
 def verifOuverture(chemin):
 	"""
-		FonctionnalitÃ© de vÃ©rification de lâ€™existance du fichier pour l'ouverture
+		Fonctionnalité de vérification de l'existance du fichier pour l'ouverture
 
 		:param chemin: chemin du fichier
 		:type chemin: str
-		:return: entier 0 ou code de l'erreur
+		:return: entier 0 ou une description de l'erreur
     """  
 	if not os.path.isfile(chemin):
 		print(os.path.isfile(chemin))
 		return "Error: not an existing file"
 	return 0
 
+	
 def verifExtension(chemin):
 	"""
-		FonctionnalitÃ© de vÃ©rification de lâ€™extension du fichier
+		Fonctionnalité de vérification de l'extension du fichier
 
 		:param chemin: chemin du fichier
 		:type chemin: str
-		:return: entier 0 ou code de l'erreur
+		:return: entier 0 ou une description de l'erreur
     """ 
 	if os.path.splitext(chemin)[1] != ".csv":
 		return "Error: file extension not .csv"
 	return 0
 
+	
 def verifLecture(fichierCSV):
 	"""
-		FonctionnalitÃ© de vÃ©rification de lâ€™accÃ¨s au contenu du fichier et de sa nature
+		Fonctionnalité de vérification de l'accès au contenu du fichier et de sa nature
 
-		:param fichierCSV: fichier CSV
+		:param fichierCSV: le fichier CSV ouvert
 		:type fichierCSV: TextIoWrapper
-		:return: entier 0 ou code de l'erreur
+		:return: entier 0 ou une description de l'erreur
     """ 
 	if not fichierCSV.readable():
 		return "Error: file content not readable"
 	
-	#test du contenu du fichier (si c'est bien du texte non formatÃ©)
+	#test du contenu du fichier (si c'est bien du texte non formaté)
 	try:
 		fichierCSV.read()
-		fichierCSV.seek(0)	#remise du curseur au dÃ©but
+		fichierCSV.seek(0)	#remise du curseur au début
 	except UnicodeDecodeError:
 		return "Error: not a raw text file"
 	
 	return 0
 
+	
 def ouvrir(chemin):
 	"""
-		FonctionnalitÃ© principale d'ouverture du fichier CSV et de vÃ©rification
+		Fonctionnalité principale d'ouverture du fichier CSV et de vérification
 
 		:param chemin: chemin du fichier
 		:type chemin: str
-		:return: chaÃ®ne de caractÃ¨res signalant le succÃ¨s ou la description de l'erreur
+		:return: le fichier CSV ouvert ou la description de l'erreur rencontrée lors de l'ouverture
     """
 	#test du chemin du fichier
 	codeErreur = verifOuverture(chemin)
@@ -72,16 +76,9 @@ def ouvrir(chemin):
 	#ouverture en lecture
 	fichierCSV = open(chemin, "r", encoding='utf-8')	
 	
-	#test de l'accÃ¨s en lecture
+	#test de l'accès en lecture
 	codeErreur = verifLecture(fichierCSV) 
 	if codeErreur != 0: return codeErreur
 	
 	return fichierCSV
-
-	
-	
-#test independant du module
-if __name__ == "__main__":
-	
-	print(ouvrir("fichier_csv_st_denis.csv"))
 	
