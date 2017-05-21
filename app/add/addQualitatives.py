@@ -6,7 +6,6 @@
 
 
 """
-from flask import Flask
 import os
 import json
 import glob
@@ -25,7 +24,7 @@ def nbElemListeCouple(listeEffectifs):
     i = 0
     for couple in listeEffectifs:
         i += couple[1]
-    return i    
+    return i
 
 def calculEffectifs(listeDonnees):
     """Calcul l'effectifs pour chaque donn�es contenu dans listeDonnees.
@@ -118,27 +117,27 @@ def calculFrequencesCumulees(listeFrequences):
     
 
 def infoSecteurs(listeFrequences):
-    """Stock dans un fichier JSON les informations n�cessaire � la cr�ation d'un diagramme de secteurs.
+	"""Stock dans un fichier JSON les informations n�cessaire � la cr�ation d'un diagramme de secteurs.
 
-    La fonction prend en entr�e le r�sultat du calcul des fr�quences .Elle va cr�er un fichier .json pour y stocker (�crire)
-    les donn�es n�cessaires � la construction du diagramme en secteurs. Pour chaque couple (fr�quence,valeur) elle va associer 
-    un angle compris entre 0�et 360�.
-
-    :param listeFrequences: liste de tuples (donn�e, fr�quence)     
-    """
-    # Construction du dictionnaire qui sera mis dans le .json
-    secteur = {}
-    secteur['bindto'] = '#pie' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #pie
-    secteur['data'] = {}
-    secteur['data']['columns'] = listeFrequences
-    secteur['data']['type'] = 'pie'
-    
-    # Stockage des donn�es pour le diagramme de secteur dans "secteur.json"
-    with open('../interface_web/static/json/secteur.json', 'w', encoding='utf-8') as f:
-        json.dump(secteur, f, indent=4)  
+	La fonction prend en entr�e le r�sultat du calcul des fr�quences .Elle va cr�er un fichier .json pour y stocker (�crire)
+	les donn�es n�cessaires � la construction du diagramme en secteurs. Pour chaque couple (fr�quence,valeur) elle va associer 
+	un angle compris entre 0�et 360�.
+	
+	:param listeFrequences: liste de tuples (donn�e, fr�quence)
+	"""
+	# Construction du dictionnaire qui sera mis dans le .json
+	secteur = {}
+	secteur['bindto'] = '#pie' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #pie
+	secteur['data'] = {}
+	secteur['data']['columns'] = listeFrequences
+	secteur['data']['type'] = 'pie'
+	
+	# Stockage des donn�es pour le diagramme de secteur dans "secteur.json"
+	with open('../interface_web/static/json/secteur.js', 'w', encoding='utf-8') as f:
+		json.dump(secteur, f, indent=4)
 
 def infoHistogramme(listeEffectifs):
-    """Stock dans un fichier JSON les informations n�cessaire � la cr�ation d'un histogramme.
+	"""Stock dans un fichier JSON les informations n�cessaire � la cr�ation d'un histogramme.
 
     La fonction prend en entr�e le r�sultat du calcul des effectifs pr�alablement stock� dans une liste listeEffectifs. Elle 
     va cr�er un fichier .json pour y stocker les donn�es n�cessaires � la construction de l�histogramme.
@@ -146,21 +145,20 @@ def infoHistogramme(listeEffectifs):
     :param listeEffectifs: liste de tuples (donn�e, effectif)     
       """
     # Construction du dictionnaire qui sera mis dans le .json
-    histo = {}
-    histo['bindto'] = '#bar' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #bar
-    histo['data'] = {}
-    histo['data']['columns'] = listeEffectifs
-    histo['data']['type'] = 'bar'  
-    
-    # Stockage des donn�es pour l'histogramme dans "histogramme.json"
-    with open('../interface_web/static/json/histogramme.json', 'w', encoding='utf-8') as f:
-        json.dump(histo, f, indent=4)    
-        
+	histo = {}
+	histo['bindto'] = '#bar' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #bar
+	histo['data'] = {}
+	histo['data']['columns'] = listeEffectifs
+	histo['data']['type'] = 'bar'  
+	
+	# Stockage des donn�es pour l'histogramme dans "histogramme.json"
+	with open('../interface_web/static/json/histogramme.js', 'w', encoding='utf-8') as f:
+		json.dump(histo, f, indent=4)
 
-histo = [("Data1",5),("Data2",23),("Data3",17),("Data4",25),("Data5",1),("Data6",2)]
-sect = [("Data1",0.05),("Data2",0.23),("Data3",0.17),("Data4",0.25),("Data5",0.1),("Data6",0.2)]
-
-infoHistogramme(histo)
-infoSecteurs(sect)
-val = os.path.isfile('../interface_web/static/json/histogramme.json')
-print("val : %s" %val)
+#~ histo = [("Data1",5),("Data2",23),("Data3",17),("Data4",25),("Data5",1),("Data6",2)]
+#~ sect = [("Data1",0.05),("Data2",0.23),("Data3",0.17),("Data4",0.25),("Data5",0.1),("Data6",0.2)]
+#~ 
+#~ infoHistogramme(histo)
+#~ infoSecteurs(sect)
+#~ val = os.path.isfile('../interface_web/static/json/histogramme.json')
+#~ print("val : %s" %val)

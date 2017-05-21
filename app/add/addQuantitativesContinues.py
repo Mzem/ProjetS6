@@ -10,7 +10,9 @@
 from math import log
 from intervalle import Intervalle, rechercheIntervalle
 from addQuantitativesDiscretes import quantileDiscret
+import os
 import json
+import glob
 
 def discretisation(nombreClasses, donneesContinues):
 	"""Discrétise des données continues du paramètre.
@@ -121,7 +123,7 @@ def quantileContinu(ordre, listeFrequencesCumulees, intervalles):
 	
 	return interpolationLineaire(p1, p2, ordre)
 	
-def infoDistributionCumulativeContinue(listeEffectifsCumulees, intervalles):
+def infoDistributionCumulativeContinue(listeEffectifsCumules, intervalles):
 	"""Écriture dans le fichier distributionCumulative.json
 	
 	Format du fihier :
@@ -133,21 +135,22 @@ def infoDistributionCumulativeContinue(listeEffectifsCumulees, intervalles):
 		Fin
 		
 	:param listeEffectifCumules: liste de couples (centre de l'intervalle, effectif cumulé).
-	"""
-	
-	fichierJson = open("data/distributionCumulative.json", 'w')
-
-	strX = str(intervalles[0].borneInf) + ", "
-	strValues = "0, "
+	""" 
+	abscisses = [intervalles[0].borneInf]
+	values = [0]
 	i = 0
 	for couple in listeEffectifsCumules:
 		if couple != listeEffectifsCumules[len(listeEffectifsCumules) - 1]:
-			strX += str(intervalles[i].borneSup) + ", "
-			strValues += str(couple[1]) + ", "
+			abscisses.append(intervalles[i].borneSup)
+			values.append(couple[1])
 		else:
-			strX += str(intervalles[i].borneSup)
-			strValues += str(couple[1])
+			abscisses.append(intervalles[i].borneSup)
+			values.append(couple[1])
 		i += 1
 	
-	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
-	fichierJson.close()
+	distributionC= {}
+	distributionC['x'] = abscisses
+	distributionC['value'] = values
+	
+	with open('../interface_web/static/json/distributionCumulative.js', 'w', encoding='utf-8') as f:
+		json.dump(distributionC, f, indent=4)

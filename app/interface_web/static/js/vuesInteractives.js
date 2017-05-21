@@ -22,7 +22,7 @@ $.getJSON("/distribution", function(json) {
 	});
 });
 
-$.getJSON("/distribution", function(json) {
+$.getJSON("/distributionCumulative", function(json) {
 
 	var distributionCumulative = c3.generate({
 		bindto: '#distributionCumulative',

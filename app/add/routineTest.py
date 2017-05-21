@@ -60,6 +60,17 @@ def main():
 	med = quantileContinu(0.5, listeFrequencesCumulees2, etendueIntervalles)
 	q3 = quantileContinu(0.75, listeFrequencesCumulees2, etendueIntervalles)
 	
+	########## Ecriture des fichier Json : OK (serie tmp à tester aprés format date) ##########################
+	#listeSerieTemporelle = []
+	#for val in donneesContinues:
+	#	listeSerieTemporelle.append(("" + str(i), donnee))
+	
+	infoBoiteTukey(listeEffectifs)
+	infoDistributionCumulativeContinue(listeEffectifsCumules2, etendueIntervalles)
+	#infoDistributionCumulativeDiscrete(listeEffectifsCumules)
+	infoDistributionDiscrete(listeEffectifs)
+	#infoSerieTemporelle(listeSerieTemporelle) a tester quand on  a un format pour la date
+	
 	
 if __name__ == '__main__':
 	main()
