@@ -65,7 +65,7 @@ def remove(file):
 
 @app.route("/calcul/",methods=['POST'])
 def calcul():
-    listeDonnees = request.files["liste"]
+    #listeDonnees = request.files["liste"]
     # Demander à sonny les calcules à faire.
     
     return redirect(url_for("fenetre_resultat_ADD"))

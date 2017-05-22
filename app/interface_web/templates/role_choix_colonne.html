@@ -13,37 +13,52 @@
 	
 	<section>
 		<br />
+		<!-- Affichage du message d'erreur d'ouverture -->
 		{% if msgErreur is defined %} 
 			<h1 id="msgErreur">{{msgErreur}}</h1>
 			<form action="{{ url_for('remove', file=file) }}">
   				<input type="submit" style="text-align:center; background-color: red;" class="submit" value="Go Back" id="upload-button1">
 			</form>
 		
-		{# affichage du contenu du fichier #}
+		<!-- sinon affichage du contenu du fichier -->
 		{% else %}
+		
+		<!-- Message d'attente que le fichier se charge completenet -->
+		<div id="loading">
+			<h1 id="loadingText">Loading file, please wait...</h1>
+		</div>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+		<script>
+			$(document).ready(function(){
+			$("#loading").fadeOut()
+			});
+		</script>
 		
 		<div class="tf_tools">
 		<table id="tableCSV" class="mytable" cellpadding="0" cellspacing="0">
+			
+			<!-- Affichage des lignes des noms et boutons de validation -->
 			<tr>
 				<th>N°</th>
 				{% for nom in descCSV["nom"] %}
-				<th>{{ nom }}</th>
-				{% endfor %}
-			</tr>
-			<tr>
-				<td></td>
-				{% for type in descCSV["type"] %}
-				{% if type == "nombre" %}
-				<td>
-					<input type="button" value="Analyser" 
-						onclick="var colonneValeurs = tf_tableCSV.GetColValues({{loop.index}},true)" 
+				<th>
+					{{ nom }}
+					{% if descCSV["type"][loop.index0] == "nombre" %}
+					<!--<form action="{{url_for('calcul')}}" method="post">-->
+					<input type="image" src="../static/img/goADD.png" Value=submit align="center" width=15px height=15px
+						onclick="
+								var colonneADD = tf_tableCSV.GetColValues({{loop.index}},false);
+								var dateADD = tf_tableCSV.GetColValues(1,false);
+								console.log(colonneADD);
+								console.log(dateADD);
+								"
 					/>
-				</td>
-				{% else %}
-				<td></td>
-				{% endif %}
+					{% endif %}
+				</th>
 				{% endfor %}
 			</tr>
+			
+			<!-- Affichage des lignes de données du fichier -->
 			{% for ligne in lignesCSV %}
 				{% set numLigne = loop.index0 %}
 				<tr>
@@ -61,40 +76,37 @@
 		{% endif %}
 		</div>
 		
-		<!--Dépendances-->
+		<!-- Dépendances javascript -->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/tablefilter/tablefilter_all.js') }}"></script>
 	
-		<!--Filtres-->
-		<script language="javascript" type="text/javascript">  
+		<!-- Affichage des filtres -->
+		<script language="javascript" type="text/javascript">
 			var table_Props =  {  
-							filters_row_index: 1,
-							col_0: "none",
-							col_1: "checklist",
-							col_2: "checklist",
-							col_3: "checklist",
-							display_all_text: "Show all",
-							
-							help_instructions_btn_html:'R',
-							
-							on_change: false,  
-							btn: true,
-							enter_key: true,
-							paging: true,  
-							paging_length: 50,
-							results_per_page: ['ows per page',[50,100,500,1000]],
-							rows_counter: true,  
-							rows_counter_text: "Rows: ",  
-							btn_reset: true,
-							btn_help: false,
-							loader: true,  
-							loader_text: "Filtering data..."
-						};  
+				filters_row_index: 1,
+				col_0: "none",
+				col_1: "checklist",
+				col_2: "checklist",
+				col_3: "checklist",
+				display_all_text: "Show all",
+				help_instructions_btn_html:'R',
+				
+				on_change: false,  
+				btn: true,
+				enter_key: true,
+				paging: true,  
+				paging_length: 50,
+				results_per_page: ['ows per page',[50,100,500,1000,{{lignesCSV|length}}]],
+				rows_counter: true,  
+				rows_counter_text: "Rows: ",  
+				btn_reset: true,
+				btn_help: false,
+				loader: true,  
+				loader_text: "Filtering data..."
+			};  
 			var tf = setFilterGrid("tableCSV",table_Props);
 		</script>
 		
-		<!-- Boutons de choix de colonne --> 
-		<input type="button" value="Analyse" onclick="print(tc.GetColValues(2,false) );" />
-		
+	
 	</section>
 	
 </body>

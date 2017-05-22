@@ -46,3 +46,21 @@ th{
 	text-align: center;
 	text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
 }
+#loading{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    top:0;  
+    opacity:0.5;
+    background-color:#000;
+    color:#fff;
+    z-index:9999;
+}
+#loadingText{
+	margin: 10%;
+	padding: 5%;
+	color: white;
+	text-align: center;
+	text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+}
