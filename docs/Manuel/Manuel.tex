@@ -17,13 +17,43 @@
 	
 \section{Guide Pratique}
 	\subsection{Matériel nécessaire}
-		Navigateur web compatible
+		Navigateur web compatible - (préciser lesquels dans quelle version plus tard)
 	\subsection{Accès à l'application}
 	\subsection{Étape 1-Sélection d'un fichier}
-		- Parler aussi vite fait du format csv (Timestamp - Parent Enfant - Mesures)
-	\subsection{Étape 2-Vérification et validation}
-	\subsection{Étape 3-Choix et filtrage de la colonne}
-	\subsection{Étape 4-Résultats}
+		La première fenêtre rencontrée correspond à l'index de l'application. Elle représente la première étape qui consiste à charger le fichier \lstinline!.csv! pour exécuter l'analyse descriptives de données. 
+		Deux manières se présentent pour le chargement, la première consistant à faire glisser le fichier dans la zone de drop comme le montre l'illustration suivante. \\
 		
+		=================== SCREENSHOT DRAG\&DROP ====================\\
+		  
+		 La seconde correspond à la méthode classique en cliquant sur le symbole \textbf{\textit{+}}, c'est à dire parcourir l'arborescence de fichiers pour trouver le document \lstinline!.csv!.\\
+		 
+		=================== SCREENSHOT SGF ====================\\
 	
+		Les fichiers renseignés doivent décrire un format très précis pour pouvoir continuer vers la prochaine étape. Leurs contenus sont décrit par des colonnes aux types prédéfinies:
+		\begin{itemize}
+		\item Timestamp : jour/mois/année	\lstinline!heure:minute:seconde!
+		\item Père : nom du noeud
+		\item Enfant : nom du noeud
+		\item Mesure (unité) : Valeur
+		\end{itemize}
+		
+		(SCREENSHOT d'un petit bout de tableau?)
+		
+		Après avoir choisi un fichier, la page web va se rediriger vers la deuxième fenêtre de l'application si aucune erreur n'est détectées pour l'extension, l'ouverture et la lecture de ce dernier. Sinon un message d'erreur s'affiche sur la fenêtre.\\
+		
+				
+		=================== SCREENSHOT ERREUR ====================\\		
+	\subsection{Étape 2-Choix et filtrage de la colonne}
+	\subsection{Étape 3-Résultats}
+			(Insérez un screenshot)\\
+		La fenêtre que vous pouvez apercevoir ci-dessus représente la dernière étape du traitement des données, l'étape de consultation des résultats d'analyse descriptive.\\
+		Ces résultats sont constitués de deux catégories d'éléments :
+		\begin{itemize}
+			\item Des valeurs statistiques à consulter directement.
+			\item Des représentations graphiques :\\
+				Il suffit de cliquer sur une miniature pour accéder à une vue précise et interactive du graphe sélectionné.\\
+			(Insérez un screenshot - avant / après le clic)			
+		\end{itemize}
+		Finalement, une fonctionnalité de retour est disponible pour revenir à l'étape 3 et effectuer une autre analyse sans relancer l'applet du début.\\
+			(Insérez un screenshot)
 \end{document}
