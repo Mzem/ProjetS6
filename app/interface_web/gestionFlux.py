@@ -14,7 +14,8 @@ import io
 import json
 import glob
 from interface_web.choixFichier import choixFic
-from chargement_des_donnees.verificationFormatFichier import *
+from chargement_des_donnees.verificationFormatFichier import ouvrir
+from chargement_des_donnees.analyseContenuFichier import analyseFichier
 
 app = Flask(__name__)
 app.register_blueprint(choixFic)
@@ -44,8 +45,8 @@ def fenetre_choix_fichier(file):
         verif = False
     return render_template("choix_fichier.html", file=file, fichierCSV=fichierCSV, verif=verif)
 
-@app.route("/fenetre_role_choix_colonne/<fichierCSV>",methods=['GET','POST'])
-def fenetre_role_choix_colonne(fichierCSV):
+@app.route("/fenetre_role_choix_colonne",methods=['GET','POST'])
+def fenetre_role_choix_colonne():
     """Fonction qui afficher le template "role_choix_colonne.html" lorsque la requette HTTP "/fenetre_role_choix_colonne/" est indiquée avec comme argument
     le fichierCSV.
     
@@ -53,8 +54,14 @@ def fenetre_role_choix_colonne(fichierCSV):
     :type fichierCSV: TextIoWrapper
     :return: retour le template "role_choix_colonne.html"
     """
-    return fichierCSV
-    #return render_template("role_choix_colonne.html", fichierCSV=fichierCSV)
+    fichierCSV = ouvrir("interface_web/static/uploads/sample.csv")
+    
+    if type(fichierCSV) == str:
+        return render_template("role_choix_colonne.html", msgErreur=fichierCSV)
+    
+    lignesCSV, descCSV = analyseFichier(fichierCSV)
+    return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV)
+
 
 @app.route("/fenetre_resultat_ADD/",methods=['GET','POST'])
 def fenetre_resultat_ADD():

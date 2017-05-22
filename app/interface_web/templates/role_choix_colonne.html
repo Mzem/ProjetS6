@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>DCbrain</title>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<title>DCbrain</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/echantillons.css') }}">
 </head>
+
 <body>
 
 	<nav class="nav">
@@ -14,10 +16,52 @@
 		</ul>
 	</nav>
 
-<section>
+	
+	<section>
+		<br />
+		{% if msgErreur is defined %} 
+			<h1 id="msgErreur">{{msgErreur}}</h1>
+		
+		{# affichage du contenu du fichier #}
+		{% else %}
+		
+		<div id="infos">
+			Informations sur l'échantiollon :
+			<br />Nombre de lignes : {{ lignesCSV|length }}
+				
+		</div>		
+		
+		<div id="filtres">
+			Filtres
+		</div>
+		
+		<table>
+			<tr>
+				{% for nom in descCSV["nom"] %}
+				<th>{{ nom }}</th>
+				{% endfor %}
+			</tr>
+			{% for ligne in lignesCSV %}
+				{% set numLigne = loop.index0 %}
+				<tr>
+				{% for donnee in ligne %}
+					{% if descCSV["erreurs"][numLigne][loop.index0] != "correct" %}
+						<td id="erreur">{{ donnee }} <span>{{descCSV["erreurs"][numLigne][loop.index0]}}</span></td>
+					{% else %}
+						<td id="valeur" title="clic to apply filter">{{ donnee }}</td>
+					{% endif %}
+				{% endfor %}
+				</tr>
+			{% endfor %}
+		</table>
+		{% endif %}
 
-{{fichierCSV}}
-
-</section>  
+	</section>
+	
 </body>
+
+<footer>
+	Tous droits réservés - UVSQ 2017
+</footer>
+
 </html>
