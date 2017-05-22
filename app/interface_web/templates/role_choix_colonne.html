@@ -8,19 +8,16 @@
 
 <body>
 
-	<nav class="nav">
-		<ul>
-			<li><a href="{{ url_for('index') }}">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Contact</a></li>
-		</ul>
-	</nav>
+	{% include 'header.html' %}
 
 	
 	<section>
 		<br />
 		{% if msgErreur is defined %} 
 			<h1 id="msgErreur">{{msgErreur}}</h1>
+			<form action="{{ url_for('remove', file=file) }}">
+  				<input type="submit" style="text-align:center; background-color: red;" class="submit" value="Go Back" id="upload-button1">
+			</form>
 		
 		{# affichage du contenu du fichier #}
 		{% else %}
@@ -61,8 +58,6 @@
 	
 </body>
 
-<footer>
-	Tous droits réservés - UVSQ 2017
-</footer>
+{% include 'footer.html' %}
 
 </html>

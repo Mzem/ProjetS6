@@ -78,6 +78,6 @@ def ouvrir(chemin):
 	#test de l'accès en lecture
 	codeErreur = verifLecture(fichierCSV) 
 	if codeErreur != 0: return codeErreur
-	
+
 	return fichierCSV
 	

@@ -13,51 +13,33 @@ import os, io, json, glob
 from interface_web.choixFichier import choixFic
 from chargement_des_donnees.verificationFormatFichier import ouvrir
 from chargement_des_donnees.analyseContenuFichier import analyseFichier
+from add.addQualitatives import *
+
 
 app = Flask(__name__)
 app.register_blueprint(choixFic)
 
-@app.route("/", methods=['GET'])
+@app.route("/fenetre_choix_fichier/", methods=['GET'])
 def index():
-    """Fonction qui afficher le template "index.html" lorsque la requette HTTP "/" est indiquée.
+    """Fonction qui affiche le template "choix_fichier.html" lorsque la requette HTTP "/fenetre_choix_fichier/" est indiquée.
     
-    :return: retour le template "index.html"
+    :return: retourne le template "choix_fichier.html"
     """
-    return render_template("index.html")
+    return render_template("choix_fichier.html")
 
 
-@app.route("/fenetre_choix_fichier/<file>",methods=['GET','POST'])
-def fenetre_choix_fichier(file):
-    """Fonction qui afficher le template "choix_fichier.html" lorsque la requette HTTP "/fenetre_choix_fichier/<file>" est indiquée, et
-    <file> représente le nom du fichier passé en argument de la page.
+@app.route("/fenetre_role_choix_colonne/<file>",methods=['GET','POST'])
+def fenetre_role_choix_colonne(file):
+    """Fonction qui affiche le template "role_choix_colonne.html" lorsque la requette HTTP "/fenetre_role_choix_colonne/" est indiquée.
     
-    :param file: représente le nom du fichier charger
-    :return: retour le template "choix_fichier.html" 
+    :param file: représente le nom du fichier chargé
+    :return: retourne le template "role_choix_colonne.html"
     """
     chemin = '{}{}'.format('interface_web/static/uploads/',file)
-    fichierCSV = ouvrir(chemin) # Ouverture du fichier CSV et vérification
-    if type(fichierCSV) != str:
-        verif = True
-    else:
-        verif = False
-    return render_template("choix_fichier.html", file=file, verif=verif)
-
-
-@app.route("/fenetre_role_choix_colonne",methods=['GET','POST'])
-def fenetre_role_choix_colonne():
-    """Fonction qui afficher le template "role_choix_colonne.html" lorsque la requette HTTP "/fenetre_role_choix_colonne/" est indiquée avec comme argument
-    les lignes du fichier CSV <ligneCSV> et sa description <descCSV>.
-    
-    :param ligneCSV: contient toutes les lignes du fichier CSV
-    :param descCSV: decription du fichier CSV 
-    :type ligneCSV: list
-    :type descCSV: list
-    :return: retour le template "role_choix_colonne.html"
-    """
-    fichierCSV = ouvrir("interface_web/static/uploads/sample.csv")
+    fichierCSV =  ouvrir(chemin)
     
     if type(fichierCSV) == str:
-        return render_template("role_choix_colonne.html", msgErreur=fichierCSV)
+        return render_template("role_choix_colonne.html", msgErreur=fichierCSV, file=file)
     
     lignesCSV, descCSV = analyseFichier(fichierCSV)
     return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV)
@@ -65,9 +47,9 @@ def fenetre_role_choix_colonne():
 
 @app.route("/fenetre_resultat_ADD/",methods=['GET','POST'])
 def fenetre_resultat_ADD():
-    """Fonction qui afficher le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
+    """Fonction qui affiche le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
     
-    :return: retour le template "resultat_ADD.html"
+    :return: retourne le template "resultat_ADD.html"
     """
     return render_template("resultat_ADD.html")
 
@@ -75,11 +57,18 @@ def fenetre_resultat_ADD():
 def remove(file):
     """Fonction qui supprime le fichier uploadé
     
-    :param: file de type str correspond au nom du fichier csv
+    :param: file de type str correspondant au nom du fichier csv
     :return: redirige vers la route index
     """
     os.remove('{}{}'.format('interface_web/static/uploads/',file))
     return redirect(url_for("index"))
+
+@app.route("/calcul/",methods=['POST'])
+def calcul():
+    listeDonnees = request.files["liste"]
+    # Demander à sonny les calcules à faire.
+    
+    return redirect(url_for("fenetre_resultat_ADD"))
 
 @app.route('/infoStats')
 def infoStats():

@@ -10,13 +10,7 @@
 	
 	<body>
 
-		<nav class="nav">
-			<ul>
-				<li><a href="{{ url_for('index') }}">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
-			</ul>
-		</nav>
+	{% include 'header.html' %}
 
 <div class="container2">
 		<nav id="miniatures">
@@ -77,4 +71,7 @@
 		</script>
 		
 	</body>
+
+	{% include 'footer.html' %}
+
 </html>

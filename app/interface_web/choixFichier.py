@@ -20,14 +20,14 @@ UPLOAD_FOLDER = 'interface_web/static/uploads'
 def FileWithSGF():
     """Fonction qui se charge de l'upload d'un fichier lors du parcours dans le système de gestions de fichiers.
     
-    :return: redirige la page web vers la Fenêtre choix fichier avec comme parmètre le chemin du fichier uploader.
+    :return: redirige la page web vers la Fenêtre choix fichier avec comme parmètre le chemin du fichier uploadé.
      """
     if request.method == 'POST':
         file = request.files['file']
         filename = secure_filename(file.filename)
         save_path = "{}/{}".format(UPLOAD_FOLDER, filename)
         file.save(save_path)
-        return redirect(url_for("fenetre_choix_fichier", file=filename))
+        return redirect(url_for("fenetre_role_choix_colonne", file=filename))
     return "error"
 
 # Fonction pour upload fichier avec Drag&Drop
@@ -35,12 +35,12 @@ def FileWithSGF():
 def FileWithDragDrop():
     """Fonction qui se charge de l'upload d'un fichier après avoir déposé ce fichier dans la zone de Drag&Drop.
 
-    :return: redirige la page web vers la Fenêtre choix fichier avec comme parmètre le chemin du fichier uploader.
+    :return: redirige la page web vers la Fenêtre choix fichier avec comme parmètre le chemin du fichier uploadé.
      """    
     if request.method == 'POST':    
         file = request.files["file2upload"]
         filename = secure_filename(file.filename)
         save_path = "{}/{}".format(UPLOAD_FOLDER, filename)
         file.save(save_path)
-        return redirect(url_for("fenetre_choix_fichier", file=filename))
+        return redirect(url_for("fenetre_role_choix_colonne", file=filename))
     return "error"

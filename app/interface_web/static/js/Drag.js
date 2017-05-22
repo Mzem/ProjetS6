@@ -1,6 +1,6 @@
 $(function(){
 
-    var NEXT_URL   = "/fenetre_choix_fichier/";
+    var NEXT_URL   = "/fenetre_role_choix_colonne/";
 
     var fileUploadSuccess = function(data){};
 

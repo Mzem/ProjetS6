@@ -23,7 +23,7 @@ if __name__ == '__main__':
         port=args.port,
         threaded=True,
     )
-    webbrowser.open_new('http://127.0.0.1:2006/')
+    webbrowser.open_new('http://127.0.0.1:2006/fenetre_choix_fichier')
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(**flask_options)
 
