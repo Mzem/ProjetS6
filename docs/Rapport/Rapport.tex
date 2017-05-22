@@ -18,31 +18,205 @@
 \newpage\clearpage\pagenumbering{arabic}
 
 	\section*{Introduction}
-		Motivations du projet : un mix de
-			- Description Sujet (notre premier oral)
-			- Intro et partie 1 cahier charges
 		
-		Plan :
-			- archi appli (cahier charges) + données transitent + fonctionnalités
-			- langages de programmation : découlant des contraintes de l'appli
-			- bilan technique
-			- organisation interne
-			
-		Documents fournis en plus du code :
-			- Manuel
-			- Documentation
-			
-		-> 1 page (Sonny)
+		Ce document est le compte-rendu final de notre travail qui s'inscrit dans le cadre du module \textit{Projet} de la licence informatique de l'UVSQ. Le sujet qu'on nous a remis a été proposé par l'entreprise DCbrain.\\
+		
+		DCbrain développe des outils qui permettent de visualiser ce qui ce passe sur les \textbf{réseaux physiques} afin de trouver les problèmes sur ces réseaux, les prédire dans le but d'optimiser les réssraux.
+		
+		Les réseaux phyiques peuvent être de plusieurs types. Ils peuvent être des réseaux industriels, de fluide ou de distribution, entre autres, c'est pourquoi les clients de DCbrain sont des groupes comme ERDF ou la SNCF.
+		
+		Les données sont collectées à partir des réseaux physiques puis analysées grâce aux technologies du \textbf{Big Data}.\\
+		
+		Ce projet s'inscrit dans un thème d'actualité et a pour but de fournir aux utilisateurs une application web qui se chargera de structurer les données, les analyser et les visualiser, mais aussi de fournir des API pour créer données statistiques synthétiques qui permettront d'alimenter leur base de données dans le but de mieux prévenir la présence d'anomalie sur les réseaux physique.\\
+		
+		L'architecture de l'application sera présentée en première partie. L'organigramme illustre le découpage de lapplication en modules ainsi que les données qui transitent entre les différents modules. Dans cette première partie, des sections sont réservées pour décrire les fonctionnalités du produit ainsi que le type de données que l'apllication peut analyser.
+		
+		On traitera dans une deuxième partie les contraintes sur le projet justifiant les langages de programmation choisis.
+		
+		Enfin nous ferons dans deux parties distintes un bilan technique et un bilan quant à l'organisation interne au sein du groupe.\\
+		
+		Deux documents supplémentaires sont livrés avec le code source, un manuel utilisateur décrivant comment faire fonctionner notre application, et une documentation technique des modules de notre produit.
+		
+		
+		
+		
+		============= Peut-être parler un peu plus du big data, aussi des techniques de graphes mining dans le travail de DC brain, pour présenter le fait que le réseau est assimilé à un graphe ===============
 	
 	\section{Architecture de l'application}
 		\subsection{Organigramme et données échangées}
-			Phrase de présentation -> diagramme -> légende (non modifiée, on la met en accord avec le dernier produit quand on aura finit)
-		\subsection{Format du fichier CSV}
-			une demi-page
-		\subsection{Fonctionnalités des modules}
-			Les fonctionnalités de notre produit final (pas ceux du cahier des charges)
 		
-		-> entre 3 pages (pas plus) pour la partie (Sonny)
+			\begin{figure}[H]
+				\begin{tikzpicture}
+				\begin{scope}[xscale=2,yscale=1.5]	
+					\node (IW) at (0,5) [rectangle,draw,text depth=3cm,minimum width=16cm,minimum height=4cm,font=\textbf\Large] {\begin{tabular}{c}Interface web\end{tabular}};
+					\node (F2) [rectangle,draw,dashed] at ([yshift=0.4cm]IW.center) {\begin{tabular}{c}Fenêtre rôle et choix colonne \end{tabular}};
+					\node (F1) [rectangle,draw,dashed] at ([xshift=-4cm]F2.east) {\begin{tabular}{c}Fenêtre choix fichier\end{tabular}};
+					\node (F3) [rectangle,draw,dashed] at ([xshift=4.1cm]F2.west) {\begin{tabular}{c}Fenêtre résultats ADD\end{tabular}};
+					\node (MAIN) [rectangle,draw,dashed,below=of F2.south,yshift=0cm] {\begin{tabular}{c}Gestion des flux\end{tabular}};
+
+				
+					\node (API1) at (-2.5,0) [rectangle,draw,fill=blue!25,text depth=-3.5cm,minimum width=5cm,minimum height=5cm,font=\textbf\Large] {\begin{tabular}{c}API 1\\Chargement des données\end{tabular}};
+					\node (VERIF) [rectangle,draw,dashed,fill=white] at ([yshift=1cm]API1.center){\begin{tabular}{c}Vérification format\\fichier\end{tabular}};
+					\node (ANALYS) [rectangle,draw,dashed,fill=white,below=of VERIF.south,yshift=0.5cm] {\begin{tabular}{c}Analyse contenu\\fichier\end{tabular}};
+				
+					\node (API2) at (2.5,0) [rectangle,draw,fill=blue!25,text depth=-5cm,minimum width=5cm,minimum height=6.5cm,font=\textbf\Large] {\begin{tabular}{c}API 2\\Analyse descriptive des données\end{tabular}};
+					\node (ADD1) [rectangle,draw,dashed,fill=white] at ([yshift=1.7cm]API2.center){\begin{tabular}{c}ADD qualitatives\end{tabular}};
+					\node (ADD2) [rectangle,draw,dashed,fill=white,below=of ADD1.south,yshift=0.5cm] {\begin{tabular}{c}ADD quantitatives\\discrètes\end{tabular}};
+					\node (ADD3) [rectangle,draw,dashed,fill=white,below=of ADD2.south,yshift=0.5cm] {\begin{tabular}{c}ADD quantitatives\\continues\end{tabular}};
+				
+					\draw[-triangle 45] (F1.south east) -- node[anchor=south,left]{11} (MAIN.north west);
+					\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,left]{12} (F2);
+					\path[->,>=stealth'] (F2) edge[bend left=10] node[anchor=south,right]{13} (MAIN);
+					\path[->,>=stealth'] (MAIN) edge[bend left=10] node[anchor=south,right]{14} (F3);
+					\path[->,>=stealth'] (F3) edge[bend left=10] node[anchor=south,right]{15} (MAIN);
+				
+					\draw[-triangle 45] (MAIN.south west) -- node[anchor=south,left] {1} (VERIF.100);
+					\draw[-triangle 45] (VERIF.80) -- node[anchor=south,right] {2} (MAIN.197);
+					\draw[-triangle 45] (MAIN.210) |- node[anchor=south,left] {3} (ANALYS.5);
+					\draw[-triangle 45] (ANALYS.355) -| node[anchor=south,below] {4} (MAIN.215);			
+				
+					\draw[-triangle 45] (MAIN.south east) -- node[anchor=south,right] {5} (ADD1.80);
+					\draw[-triangle 45] (ADD1.110) -- node[anchor=south,left] {6} (MAIN.343);
+					\draw[-triangle 45] (MAIN.335) |- node[anchor=south,right] {7} (ADD2.175);
+					\draw[-triangle 45] (ADD2.185) -| node[anchor=south,below] {8} (MAIN.330);				
+					\draw[-triangle 45] (MAIN.290) |- node[anchor=north,right] {9} (ADD3.175);
+					\draw[-triangle 45] (ADD3.185) -| node[anchor=south,below] {10} (MAIN.270);
+				
+				\end{scope}
+				%Légende
+				\begin{scope}
+					\node (LEGENDE) at (-7,-5) {\textbf{Légende :}};
+					\node (FAMILLE) at (-4.5,-5) [rectangle,draw] {\begin{tabular}{c}Famille\end{tabular}};
+					\node (MODULE) at (-2,-5) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
+					\path[->,>=stealth'] (0.5,-5.3) edge[bend left=0] node[anchor=south,above]{informations transmises} (3,-5.3);
+				\end{scope}
+				\end{tikzpicture}
+				\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
+			\end{figure}
+				
+			\textbf{Notes :}\\
+				(1) Fichier CSV : lancement de la vérification de son format\\
+				(2) Code d'erreur : fichier OK ou ERREUR\\
+				(3) Fichier CSV : lancement de l'analyse de son contenu\\
+				(4) \textbf{structure 1} : contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure)\\
+				\hspace*{1.5em} \textbf{structure 2} : contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes\\
+				(5) Ensemble de données de type qualitatif\\
+				(6) Erreur ou effectifs, effectifs cumulés, fréquences, fréquences cumulées, diagramme en secteur, histogramme\\
+				(7) Ensemble de données de type quantitatif discret\\
+				(8) Erreur ou indicateurs de tendance central, de dispersion et de forme, les anomalies, la distribution des données, un diagramme à moustaches\\
+				(9) Ensemble de données de type quantitatif continu\\
+				(10) Même données que (8)\\
+				(11) Chemin du fichier CSV importé \\
+				(12) Informations du (4) et ensemble de données contenu dans le fichier CSV \\
+				(13) Signal de validation du choix de la colonne, et noms des colonnes\\
+				(14) Envoi des résultats d'analyses de (6), (8) et (10)\\
+				(15) Signal de contrôle : demande d'exportation des résultats de l'ADD, analyse d'une autre colonne, ou importation d'un autre fichier\\
+			
+			
+			
+			 =========== légende (non modifiée, on la met en accord avec le dernier produit quand on aura finit) ============
+			
+		\subsection{Format du fichier CSV}
+			
+			Le format du fichier est établi par DCbrain. Son contenu est décrit par des colonnes aux types prédéfinies :
+			\begin{center}\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{1cm}|}			
+			\hline \multicolumn{1}{|c|}{\textbf{Timestamp}} & \multicolumn{1}{c|}{\textbf{Père}} & \multicolumn{1}{ c|}{\textbf{Enfant}} & \multicolumn{1}{c|}{\textbf{Mesure 1}} & {\textbf{Mesure 2}} \\
+			\hline 	January 1st 2017, 15:00:00.000 & 102 & 95 & 26644.235 & 176.253\\
+			\end{longtable}\vspace{1em}\end{center}
+			
+			============== Stp malek un peu de mise en page pour le tableau, je suis nul =========================
+			
+			\textbf{Remarques :} le graphe de flux utilisé par DCbrain pour analyser les réseaux de ses clients est orienté, d'où l'utilisation des noeuds \textit{Père - Enfant} numérotés. Ceux-ci permettent de repérer de quelle connexion on parle.\\
+				Les colonnes \textit{Mesure} renseignent sur les données mesurées sur une connexion à un temps donné, le nombre de colonne n'est pas limité et en pratique il ne dépassera pas la dizaine.
+				
+		\subsection{Fonctionnalités des modules}
+		
+			============= Faites un tri dans vos fonctionnalités : réduire le plus possible, pour que tout rentre en 10 pages. Et mettre que les fonctionnalités du produit final.
+			
+			Cette partie a aussi besoin d'un peu de mise en page, il y a trop de marge à droite a cause des enum + itemize + description) ================
+		
+			\begin{description}[style=unboxed,leftmargin=0.2cm]
+			
+				\item\textbf{1. API 1 - Chargement des données}
+				\begin{enumerate}
+				
+					\item Module Vérification format fichier :\\
+					\begin{itemize}
+						\item Vérification de la possibilité d'ouverture du fichier.
+						\item Vérification du contenu:  le fichier est un CSV contenant du texte brut non formaté. (pas de mise en forme avec des balises ou autres marqueurs)
+						\item Vérification de l'accessibilité du fichier en lecture.
+					\end{itemize}
+				
+					\item Module Analyse contenu fichier :\\
+					Ce module comprend deux fonctionnalités principales :
+					\begin{itemize}
+						\item Lecture du contenu du fichier CSV :\\
+						On initialise une première structure (\textbf{structure 1}) pour y sauvegarder le contenu du fichier.\\
+						On lit ligne par ligne des caractères du fichier. A chaque fois qu'on détecte un caractère de séparation (une virgule, un point-virgule ou une tabulation), on stocke les caractères lus (la donnée) dans la structure.\\
+						Cette fonctionnalité fournit la \textbf{structure 1} contenant les données du fichier, le nombre de lignes et le nombre de colonnes (connus à partir de la taille de la structure).\\
+						
+						\item Descriptions préliminaires des données de chaque colonne du fichier CSV :\\
+						On initialise une deuxième structure (\textbf{structure 2}) pour y stocker des informations sur chaque colonne.\\
+						On lit une par une les données de chaque colonne. On vérifie le type de la donnée en le comparant au type attendu. Si le type ne correspond pas, on signale dans la structure que la colonne contient une donnée erronée ou manquante (repérée par sa position dans la colonne). A la fin du parcours d'une colonne, on pourra lui attribuer un rôle/nom.\\
+						Cette fonctionnalité fournit donc la \textbf{structure 2} contenant 3 informations sur chaque colonne : le type, le rôle et les positions des données erronées ou manquantes.
+					\end{itemize}
+					Ce module va donc fournir les deux structures \textbf{structure 1} et \textbf{structure 2} décrites ci-dessus.
+				\end{enumerate}
+				~\\
+				\item\textbf{2. API 2 - Analyse descriptive de données}
+				\begin{enumerate}
+					\item Module ADD qualitatives :
+						\begin{itemize}
+						\item Calcul des effectifs, effectifs cumulés, fréquences et fréquences cumulées des données
+						\item Préparation des représentations graphiques : diagramme en secteur et histogramme
+						\end{itemize}
+					\item Module ADD quantitatives discrètes :
+						\begin{itemize}
+						\item Statistiques : moyenne, quantiles, variance, écart-type, coefficients de symétrie et d'aplatissement de Fisher
+						\item Anomalies de Tukey : toute donnée hors de l'intervalle [Q1 - 1.5*IQ ; Q3 + 1.5*IQ], où Q1 et Q3 sont les quartiles, et IQ l'écart inter-quartiles.
+						\item Préparation des représentations graphiques : fonction de distribution, fonction de distribution cumulative,  boîte à moustaches
+						\end{itemize}
+					\item Module ADD quantitatives continues :
+						\begin{itemize}
+						\item Discrétisation de l'étendue (découpage en classe d'intervalles)
+						\item Calcul des quantiles pour le cas  de données continues
+						\item Préparation des représentations graphiques : fonction de distribution cumulative
+						\end{itemize}
+				\end{enumerate}
+				~\\
+				\item\textbf{3. Interface web}
+				\begin{enumerate}
+					\item Module Gestion des flux :
+						\begin{itemize}
+						\item Lancement de l'application et exécution continue.
+						\item Gestion des branchements : exécution normale ou arrêts pour cause d'erreur.
+						\item Interface entres les différentes fonctionnalités : communique les données nécessaires entre les modules.
+						\end{itemize}
+						
+					\item Module Fenêtre choix fichier :
+						\begin{itemize}
+						\item Récupération un fichier CSV.
+						\item Validation du choix pour passer à la prochaine fenêtre (En renseignant son chemin dans le système de fichier, ou de la manière d'un Drag \& Drop).
+						\end{itemize}
+						
+					\item Module Fenêtre rôle et choix colonne :
+						\begin{itemize}
+						\item Affichera le nombre de lignes/colonnes contenu dans le CSV.
+						\item Affichera le titre du fichier.
+						\item Affichera un échantillon du contenu du CSV (environ les 1000 premières lignes) avec un système de scroll.
+						\item Affichage des lignes erronés (numéro de la ligne + contenu + type d'erreur).
+						\item Mise en place d'un système de navigation sous forme d'onglet (Onglet erreurs, onglet échantillon,...). Cela permettra d'éviter que la fenêtre contienne trop d'informations.
+						\item L'Utilisateur devra sélectionner la colonne avec un clic, puis pourra lancer l'analyse sur celle-ci. 
+						\end{itemize}
+					
+					\item Module Fenêtre résultats ADD :
+						\begin{itemize}
+						\item Affichage des résultats d'analyse descriptive : informations statistiques de l'API 2 et représentations graphiques pour visualiser les données dans leur ensemble.
+						\item Une fonctionnalité de retour en arrière permet de sélectionner une nouvelle colonne sans relancer l'applet.
+						\end{itemize}
+					\end{enumerate}
+				
+			\end{description}
 		
 	\section{Contraintes et Langages de programmation}
 		contraintes :
