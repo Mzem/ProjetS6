@@ -45,15 +45,42 @@
 		-> entre 3 pages (pas plus) pour la partie (Sonny)
 		
 	\section{Contraintes et Langages de programmation}
-		contraintes :
-			-voir cahier des charges : applet, add, ...
-		choix langages et frameworks:
-			-python : justification + flask (voir cahier + ton expérience) -> intègre en plus un module de tests
-			-html / css : easy on fait du web
-			-javascript - jquery et AJAX: UX design tu peux parler vite fait, js donne intéractivité coté client, ajax pour communiquer infos côté serveur entre autres et jquery qui permet de faire tout ca
-			-Sphinx, génération documentation automatique (la doc flask est générée grace a sphinx par ex), si tu sais pas on le fera plus tard, mais faut pas l'oublier
+		\subsection{Contraintes}
+		Le développement de l'application s'accompagne de contraintes imposées. Celles-ci établie par DCbrain au commencement du projet. On peut en énumérer trois, qui sont les suivantes:\\
+		\begin{center}\begin{longtable}{|>{\centering}m{3cm}|>{\raggedright\arraybackslash}m{10cm}|}			
+				\hline \multicolumn{1}{|c}{\textbf{Contrainte}} & \multicolumn{1}{|c|}{\textbf{Fiche}} \\
+				\hline 	1. Le produit doit fournir une application web &
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item{\textbf{Description :}} notre produit sera une application fonctionnant sur un navigateur web, appelée \textbf{\textit{applet}}.
+						\item{\textbf{Justification :}} assure une très grande portabilité et fournit à l'utilisateur une interface interactive.
+						\item{\textbf{Critère de satisfaction :}} on peut lancer l'application sur un navigateur web.
+						\end{description}\\
+				\hline 2. Le produit doit être développé avec un langage de programmation compatible avec l'analyse de données &
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item{\textbf{Description :}} le langage de programmation choisi doit inclure des bibliothèques qui permettent d'analyser les données (taches de data mining et de machine Learning).
+						\item{\textbf{Justification :}} permettre une analyse de données efficace.
+						\item{\textbf{Critère de satisfaction :}} on peut effectuer une analyse descriptive de données.
+						\end{description}\\
+				\hline 3. Le produit doit fournir une API d'analyse de données en sortie &
+						\begin{description}[style=unboxed,leftmargin=0.2cm]
+						\item{\textbf{Description :}} l'application doit intégrer des API d'analyse descriptive de données qui pourront être livrées en sortie au client.
+						\item{\textbf{Justification :}} permettre une réutilisabilité des fonctionnalités majeures du produit.
+						\item{\textbf{Critère de satisfaction :}} on peut exporter une API d'analyse de données en sortie.
+						\end{description}\\
+				\hline
+				\end{longtable}\vspace{1em}\end{center}
 			
-		-> 2 pages (J-D)
+			
+		\subsection{Choix langages et frameworks}
+			Les contraintes appliquées au projet ainsi que les exigences définies nous ont permis de fixer notre choix sur un langage de programmation : \textbf{\textit{Python}}.\\
+			Ce choix est justifié par le fait que \textbf{\textit{Python}} soit compatible pour l'Analyse Descriptive de Données, puisqu'il est doté de nombreux modules permettant d'effectuer du calcul scientifique sur des données, donc l'analyse de données. De même, il est compatible avec le développement d'applications web, grâce aux nombreux frameworks disponibles.\\
+			 Pour ce dernier, notre choix s'est porté sur \textbf{\textit{Flask}}, qui s’efforce d’être le plus simple possible pour une prise en main et le plus petit possible. À l'opposé de Django ou autres, il est donc plus abordable pour une première approche sur le développement d'applications web.\\
+			
+			L'application devant être une applet intégrée dans une page web pour s'exécuter, le recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme de ces pages web étaient nécessaires.\\
+			
+			Ensuite, pour permettre à l'application de faire communiquer les pages web avec un serveur web sans occasionner le rechargement de la page, nous avons eu recours à \textbf{\textit{Ajax}}. Il s'agit d'un concept de programmation web reposant sur plusieurs technologies comme le \textbf{\textit{Javascript}}, qui lui se charge d'établir la connexion entre la page web et serveur. \textbf{\textit{Javascript}} est également employé pour rendre les pages web interactives. \textbf{\textit{Jquery}} est quant à lui utilisé pour faire le lien entre \textbf{\textit{HTML}} et \textbf{\textit{Ajax}}.\\
+			
+			Enfin, pour la génération de la documentation des fonctionnalités du programme, on utilisera le logiciel \textbf{\textit{Sphinx}} qui se charge de généré la docstring à partir des commentaires présents dans le code python.\\
 		
 	\section{Partie technique du projet}
 		Quoi marche (comment ca marche - à l'aide de la partie avant)
@@ -65,24 +92,44 @@
 		
 		Justification des points qui divergent par rapport aux specs et organigramme de départ
 		
-		1 page, plus tard à moins que t'ai déjà des idées
+		1 page, plus tard à moins que t'ai déjà des idées 
+		- (Peut-être rajouté les points délicats de flask/application web sur l'approche et tout ce qui va avec?
 				
 	\section{Organisation interne du groupe}
-		
-		Insérer la répartition des tâches (cahier des charges)
-		
-		-> (J-D)
-		
+		Ci-dessous se trouve le 
+		\begin{center}\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{1cm}|}			
+			\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Malek}} & \multicolumn{1}{ c|}{\textbf{Sonny}} & \multicolumn{1}{c|}{\textbf{Jean-Didier}} & {\textbf{Total}} \\
+			\hline 	Gestion des flux & ~ & ~ & x & 1\\
+			\hline 	Fenêtre choix fenêtre & ~ & ~ & x & 1\\
+			\hline 	Fenêtre rôle et choix colonne & x & ~ & ~ & 1\\
+			\hline 	Fenêtre résultats ADD & ~ & x & ~ & 1\\
+			\hline  ADD qualitatives & ~ & ~ & x & 1\\
+			\hline 	ADD quantitatives discrètes & ~ & x & ~ & 1\\
+			\hline 	ADD quantitative continues &  ~ & x & ~ & 1\\
+			\hline 	Vérification format fichier & x & ~ & ~ & 1\\
+			\hline 	Analyse contenu fichier & x & ~ & ~ & 1\\
+			\hline
+			\end{longtable}\vspace{1em}\end{center}
+			
 		1 page
-		
-		On expliquera plus tard comment ca s'est déroulé concrètement par rapport à ce quiétait prévu.
+		On expliquera plus tard comment ça s'est déroulé concrètement par rapport à ce qui était prévu.
 		
 	\section{Coût}
 		
-		Insérer le tableau des couts, ajouter une colonne (vide) "coût" le final
-		
-		-> J-D
-		1 demi - page
+		\begin{center}\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{3cm}|>{\centering\arraybackslash}m{6cm}|>{\centering}m{1.5cm}|}			
+				\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{c|}{\textbf{Justification}} & \multicolumn{1}{c|}{\textbf{Coût final}}\\
+				\hline 	Gestion des flux & 15 & Mise en forme du main et appel de l'application & \\
+				\hline 	Fenêtre choix fichier & 10 + 20 & Fonctions pour : Drag\& Drop + Système de fichiers &\\
+				\hline 	Fenêtre rôle et choix colonne & 5 + 20 + 10 + 10 + 20 & Communication avec le module application + Affichage de l'interface+ lecteurs des valeurs + 	affichage des valeurs & \\
+				\hline 	Fenêtre résultats ADD & 10 + 3* 30 &  Envoie d'informations au module application + Construction des graphe pour l'ADD pour les 3 types d'analyse & \\
+				\hline  ADD qualitatives  & 20 + 20*3 & Application des formules pour les calculs de fréquences et d'effectifs + calcul des valeurs pour la construction de 3 graphes & \\
+				\hline 	ADD quantitatives discrètes & 60 + 20*2 & Application des formules attaché à l'analyse quantitative discret + calcul des valeurs pour la construction de 2 graphes & \\
+				\hline 	ADD quantitatives continu & 20 + 10 + 10 + 5 + 20*2 & Parcours + choix précision classe d'intervalle + écriture + communication avec les modules+ calcul des valeurs pour la construction de 2 graphes & \\
+				\hline 	Vérification format fichier & 30 & Ouverture fichier + vérification si ouverture en lecture + présence de texte formaté ou non &\\
+				\hline 	Analyse contenu fichier & 20 + 5 + 25 + 10 &  Recopie et vérification + initialisation de la structure+ Parcours du fichiers avec condition + Fonction pour donner nom et type de colonne & \\
+				\hline \textbf{Coût Total} & \textbf{565} & \textbf{Estimation totale du coût} & \\
+				\hline 	
+				\end{longtable}\vspace{1em}\end{center}
 		
 	\section*{Conclusion}
 		
