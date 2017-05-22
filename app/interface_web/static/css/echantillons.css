@@ -13,10 +13,6 @@ th{
 	font-weight: bold;
 	background-color: rgba(118,118,118,0.5);
 }
-td:hover{
-	color: green;
-	cursor: help;
-}
 #erreur{
 	background-color: rgba(200,100,100,0.5);
 }
