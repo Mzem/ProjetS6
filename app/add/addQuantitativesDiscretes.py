@@ -10,7 +10,9 @@
 from math import sqrt
 from intervalle import Intervalle
 from addQualitatives import calculFrequences, calculFrequencesCumulees
+import os
 import json
+import glob
 
 def moyenne(listeEffectifs):
 	"""Calcule la moyenne arithmétique.
@@ -78,7 +80,7 @@ def anomaliesTukey(listeEffectifs):
 	q1 = quantileDiscret(0.25, listeFrequencesCumulees)
 	q3 = quantileDiscret(0.75, listeFrequencesCumulees)
 	iq = q3 - q1
- 	interv = Intervalle(q1 - 1.5 * iq, q3 + 1.5 * iq, True, True)
+	interv = Intervalle(q1 - 1.5 * iq, q3 + 1.5 * iq, True, True)
 	listeAnomalies = []
 	for couple in listeEffectifs:
 		if not interv.contient(couple[0]):
@@ -133,7 +135,7 @@ def aplatissement(listeEffectifs):
 	return  momentCentreOrdre4 / (ecType ** 4)
 
 def infoDistributionDiscrete(listeEffectifs):
-	"""Écriture dans le fichier distribution.json
+	"""Écriture dans le fichier distribution.js
 	
 	Format du fihier :
 		Début
@@ -146,23 +148,21 @@ def infoDistributionDiscrete(listeEffectifs):
 	:param listeEffectifs: liste de couples (valeur, effectif).
 	"""
 	
-	fichierJson = open("data/distribution.json", 'w')
-	
-	strX = str()
-	strValues = str()
+	abscisses = []
+	values = []
 	for couple in listeEffectifs:
-		if couple != listeEffectifs[len(listeEffectifs) - 1]:
-			strX += str(couple[0]) + ", "
-			strValues += str(couple[1]) + ", "
-		else:
-			strX += couple[0]
-			strValues += str(couple[1])
+		abscisses.append(couple[0])
+		values.append(couple[1])
+		
+	distribution = {}
+	distribution['x'] = abscisses
+	distribution['value'] = values
 	
-	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
-	fichierJson.close()
+	with open('../interface_web/static/json/distribution.js', 'w', encoding='utf-8') as f:
+		json.dump(distribution, f, indent=4)
 
 def infoDistributionCumulativeDiscrete(listeEffectifsCumules):
-	"""Écriture dans le fichier distributionCumulative.json
+	"""Écriture dans le fichier distributionCumulative.js
 	
 	Format du fihier :
 		Début
@@ -174,27 +174,56 @@ def infoDistributionCumulativeDiscrete(listeEffectifsCumules):
 		
 	:param listeEffectifCumules: liste de couples (valeur, effectif cumulé).
 	"""
-	
-	fichierJson = open("data/distributionCumulative.json", 'w')
-	
-	strX = str()
-	strValues = str()
+	abscisses = []
+	values = []
 	for couple in listeEffectifsCumules:
-		if couple != listeEffectifsCumules[len(listeEffectifsCumules) - 1]:
-			strX += str(couple[0]) + ", "
-			strValues += str(couple[1]) + ", "
-		else:
-			strX += couple[0]
-			strValues += str(couple[1])
+		abscisses.append(couple[0])
+		values.append(couple[1])
+		
+	distributionC = {}
+	distributionC['x'] = abscisses
+	distributionC['value'] = values
 	
-	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
-	fichierJson.close()
+	with open('../interface_web/static/json/distributionCumulative.js', 'w', encoding='utf-8') as f:
+		json.dump(distributionC, f, indent=4)
 	
 def infoBoiteTukey(listeEffectifs):
-	pass
+	"""Écriture dans le fichier boxplot.js
+	
+	Format du fihier :
+		Début
+		{
+			"q1": premier quartile,
+			"median": mediane,
+			"q3": troisième quartile,
+			"left": extrémité gauche de la moustache (q1 - 1.5*(q3-q1)),
+			"right": extrémité droite de la moustache (q3 + 1.5*(q3-q1)),
+			"outliers": liste des anomalies statistiques
+		}
+		Fin
+		
+	Informations utiles à la création d'une boîte à moustaches de Tukey
+		
+	:param listeEffectifs: liste de couples (valeur, effectif).
+	"""	
+	listeFC = calculFrequencesCumulees(calculFrequences(listeEffectifs))
+	q1 = quantileDiscret(0.25, listeFC)
+	q3 = quantileDiscret(0.75, listeFC)
+	median = quantileDiscret(0.5, listeFC)
+	
+	tukey = {}
+	tukey['q1'] = q1
+	tukey['q3'] = q3
+	tukey['median'] = median
+	tukey['left'] = q1 - 1.5 * (q3 - q1)
+	tukey['right'] = q3 + 1.5 * (q3 - q1)
+	tukey['outliers'] = anomaliesTukey(listeEffectifs)
+		
+	with open('../interface_web/static/json/boxplot.js', 'w', encoding='utf-8') as f:
+		json.dump(tukey, f, indent=4)
 
 def infoSerieTemporelle(listeSerieTemporelle):
-	"""Écriture dans le fichier timeSeries.json
+	"""Écriture dans le fichier timeSeries.js
 	
 	Format du fihier :
 		Début
@@ -206,18 +235,16 @@ def infoSerieTemporelle(listeSerieTemporelle):
 		
 	:param listeSerieTemporelle: liste de couples (Timestamp, valeur), et un Timestamp est une chaîne de caractères.
 	"""
-	
-	fichierJson = open("data/timeSeries.json", 'w')
-	
-	strX = str()
-	strValues = str()
+	timestamps = []
+	values = []
 	for couple in listeSerieTemporelle:
-		if couple != listeSerieTemporelle[len(listeSerieTemporelle) - 1]:
-			strX += couple[0] + ", "
-			strValues += str(couple[1]) + ", "
-		else:
-			strX += couple[0]
-			strValues += str(couple[1])
+		timestamps.append(couple[0])
+		values.append(couple[1])
+		
+	timeSeries = {}
+	timeSeries['x'] = timestamps
+	timeSeries['value'] = values
 	
-	fichierJson.write("{\n\t\"x\": [" + strX + "],\n\t\"value\": [" + strValues + "]\n}")
-	fichierJson.close()
+	with open('../interface_web/static/json/timeSeries.js', 'w', encoding='utf-8') as f:
+		json.dump(timeSeries, f, indent=4)
+

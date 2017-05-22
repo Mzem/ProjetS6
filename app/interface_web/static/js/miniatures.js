@@ -56,7 +56,7 @@ $.getJSON("/distribution", function(json) {
 	});
 });
 
-$.getJSON("/distribution", function(json) {
+$.getJSON("/distributionCumulative", function(json) {
 
 	var distributionCumulativeMini = c3.generate({
 		bindto: '#distributionCumulativeMini',

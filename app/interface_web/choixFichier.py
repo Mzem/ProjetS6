@@ -8,6 +8,8 @@
 """
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, Blueprint
 from werkzeug.utils import secure_filename
+import os, sys
+
 
 
 choixFic = Blueprint('choixFic', __name__, template_folder='templates')

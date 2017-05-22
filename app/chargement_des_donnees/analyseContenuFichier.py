@@ -7,7 +7,6 @@
 
 import csv, ast, re
 from datetime import datetime
-#from verificationFormatFichier import ouvrir
 
 
 def lecture(fichierCSV):
@@ -66,9 +65,9 @@ def typeDeDonnee(chaine):
 	
 	
 def removeDateSuffix(chaineDate):
-    parts = chaineDate.split()
-    parts[1] = parts[1].strip("stndrh")
-    return " ".join(parts)
+	parts = chaineDate.split()
+	parts[1] = parts[1].strip("stndrh")
+	return " ".join(parts)
 	
 def descriptionColonnes(lignesCSV):
 	"""

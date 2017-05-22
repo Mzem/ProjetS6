@@ -6,10 +6,13 @@
 
 
 """
-import unittest 
-import sys
-sys.path[:0] = ['../']
+import unittest, io, sys, os
+from flask_testing import TestCase
+from io import BytesIO
+
+sys.path.append('../')
 from interface_web.choixFichier import *
+from interface_web.gestionFlux import app
 
 class choixFichierTest(unittest.TestCase): 
 
@@ -17,14 +20,14 @@ class choixFichierTest(unittest.TestCase):
     # code that is executed before all tests in one test run
     @classmethod
     def setUpClass(cls):
-        pass 
+        pass
 
     # clean up logic for the test suite declared in the test module
     # code that is executed after all tests in one test run
     @classmethod
     def tearDownClass(cls):
-        pass 
-
+        pass
+    
     # initialization logic
     # code exécuté avant chaque test
     def setUp(self):
@@ -37,10 +40,24 @@ class choixFichierTest(unittest.TestCase):
 
     # test fonctions du module Add_qualitatives 
     def test_FileWithSGF(self):
-        return True
+        tester = app.test_client(self)
+        os.chdir('../')
+        data = {'file': (BytesIO(b'my file contents'), 'test.csv')}
+        response = tester.post('/FileWithSGF', buffered=True,
+                         content_type='multipart/form-data',
+                             data=data)
+        self.assertEqual(response.status_code, 301)  # On vérifie qu'il y a bien redirection
+      
     
     def test_FileWithDragDrop(self):
-        return True
+        tester = app.test_client(self)
+        os.chdir('../')
+        data = {'file': (BytesIO(b'my file contents'), 'test.csv')}
+        response = tester.post('/FileWithDragDrop', buffered=True,
+                    content_type='multipart/form-data',
+                         data=data)
+        self.assertEqual(response.status_code, 301) # On vérifie qu'il y a bien redirection
+               
         
 
 # runs the unit tests in the module
