@@ -45,12 +45,13 @@ def fenetre_role_choix_colonne(file):
     return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV)
 
 
-@app.route("/fenetre_resultat_ADD/",methods=['GET','POST'])
+@app.route("/fenetre_resultat_ADD/",methods=['GET','POST', 'PUT'])
 def fenetre_resultat_ADD():
     """Fonction qui affiche le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
     
     :return: retourne le template "resultat_ADD.html"
     """
+    print(request.json)
     return render_template("resultat_ADD.html")
 
 @app.route("/remove/<file>",methods=['GET','POST'])
@@ -63,11 +64,11 @@ def remove(file):
     os.remove('{}{}'.format('interface_web/static/uploads/',file))
     return redirect(url_for("index"))
 
-@app.route("/calcul/",methods=['POST'])
+@app.route("/calcul/",methods=['PUT'])
 def calcul():
     #listeDonnees = request.files["liste"]
     # Demander à sonny les calcules à faire.
-    
+    print(request.json)
     return redirect(url_for("fenetre_resultat_ADD"))
 
 @app.route('/infoStats')

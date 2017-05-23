@@ -103,6 +103,28 @@
 									console.log(nomColonne);
 									console.log(colonneADD);
 									console.log(dateADD);
+
+									// Envoie des listes
+									var file = new Object();
+									file.nomColonne = nomColonne;
+									file.colonneADD = colonneADD;
+									file.dateADD = dateADD;
+
+									$.ajax({
+            							url: '/fenetre_resultat_ADD/',
+            							type: 'PUT',
+            							data: JSON.stringify(file),
+            							dataType: 'json',
+            							contentType: 'application/json',
+            							error: function(jqXHR,textStatus,errorThrown) {
+            								console.log(jqXHR);
+            								console.log(textStatus);
+            								console.log(errorThrown);
+            							},
+            							success : window.location = '/fenetre_resultat_ADD/' 							      
+        							});
+        							console.log('SORTIIIIIEEE')
+
 									"
 						/>
 					{% endif %}
