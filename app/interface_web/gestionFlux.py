@@ -14,6 +14,8 @@ from interface_web.choixFichier import choixFic
 from chargement_des_donnees.verificationFormatFichier import ouvrir
 from chargement_des_donnees.analyseContenuFichier import analyseFichier
 from add.addQualitatives import *
+from add.addQuantitativesContinues import *
+from add.addQuantitativesDiscretes import *
 
 
 app = Flask(__name__)
@@ -51,8 +53,32 @@ def fenetre_resultat_ADD():
     
     :return: retourne le template "resultat_ADD.html"
     """
-    print(request.json)
-    return render_template("resultat_ADD.html")
+    if request.method == 'PUT':
+        requette = request.get_json()
+        nomColonne = requette['nomColonne']
+        colonneADD = requette['colonneADD']
+        dateADD = requette['dateADD']
+
+        donneesIntervalles, etendueIntervalles = discretisation(calculNombreClasses(colonneADD), colonneADD)
+        donneesContinues = preparationIntervallesAnalyse(donneesIntervalles)
+        
+        listeEffectifs = calculEffectifs(donneesContinues)
+        #listeEffectifsCumules = calculEffectifsCumules(listeEffectifs)
+
+        # infos stats
+        #infoStats(listeEffectifs) 
+        # Série temporelle
+        # 
+        # Distribution cumulative continue
+        #infoDistributionCumulativeContinue(listeEffectifsCumules, etendueIntervalles)
+        # Distribution
+        dataDistrib = infoDistributionDiscrete(listeEffectifs)
+        with open('interface_web/static/json/distribution.js', 'w', encoding='utf-8') as f:
+            json.dumps(distribution, f, indent=4)
+        
+        return render_template("resultat_ADD.html")
+    else:
+        return render_template("resultat_ADD.html")
 
 @app.route("/remove/<file>",methods=['GET','POST'])
 def remove(file):
@@ -64,15 +90,8 @@ def remove(file):
     os.remove('{}{}'.format('interface_web/static/uploads/',file))
     return redirect(url_for("index"))
 
-@app.route("/calcul/",methods=['PUT'])
-def calcul():
-    #listeDonnees = request.files["liste"]
-    # Demander à sonny les calcules à faire.
-    print(request.json)
-    return redirect(url_for("fenetre_resultat_ADD"))
-
-@app.route('/infoStats')
-def infoStats():
+@app.route('/iStats')
+def iStats():
 	stats_path = os.path.join(app.static_folder, 'json/stats.js')
 	with open(stats_path) as json_file:
 		data = json.load(json_file)
