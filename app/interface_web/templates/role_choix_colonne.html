@@ -38,21 +38,62 @@
 		<table id="tableCSV" class="mytable" cellpadding="0" cellspacing="0">
 			
 			<!-- Affichage des lignes des noms et boutons de validation -->
+			
+			<script>
+			//Tableau stockant les lignes ou il y'a des erreurs
+				var lignesErreur = []; 
+			</script>
+			
 			<tr>
 				<th>N°</th>
+				
+				<!-- Position de la colonne de date -->
+				{% for type in descCSV["type"] %}
+					{% if type == "date" %}
+						<script>
+							var indexDate = '{{loop.index}}';
+						</script>
+					{% endif %}
+				{% endfor %}
+				
 				{% for nom in descCSV["nom"] %}
 				<th>
 					{{ nom }}
+					<!-- Bouton de validation pour les colonnes de nombres, avec transmission de données -->
 					{% if descCSV["type"][loop.index0] == "nombre" %}
-					<!--<form action="{{url_for('calcul')}}" method="post">-->
-					<input type="image" src="../static/img/goADD.png" Value=submit align="center" width=15px height=15px
-						onclick="
-								var colonneADD = tf_tableCSV.GetColValues({{loop.index}},false);
-								var dateADD = tf_tableCSV.GetColValues(1,false);
-								console.log(colonneADD);
-								console.log(dateADD);
-								"
-					/>
+						<!--<form action="{{url_for('calcul')}}" method="post">-->
+						<input type="image" src="../static/img/goADD.png" Value=submit align="center" width=15px height=15px
+							onclick="
+									var colonneADD = [];
+									var dateADD = [];
+									var nomColonne = '{{descCSV['nom'][loop.index0]}}';
+									
+									var numLignes = tf_tableCSV.GetColValues(0,true);
+									var colonneFiltree = tf_tableCSV.GetColValues('{{loop.index}}',false);
+									var dateFiltree = tf_tableCSV.GetColValues(indexDate,false);
+									
+									//Nettoyage des données dont les lignes contiennet une erreur
+									var i;
+									for (i = 0 ; i < numLignes.length ; i++){
+										var ligneErronee = 0;
+										var j;
+										for (j = 0; j < lignesErreur.length ; j++){
+											if (numLignes[i] == lignesErreur[j]){
+												ligneErronee = 1;
+											}
+										}
+										if (ligneErronee == 0){
+											colonneADD.push(parseFloat(colonneFiltree[i]));
+											dateADD.push(dateFiltree[i]);
+										}
+									}
+									
+									//Affichages console de test
+									console.log(nomColonne);
+									console.log(colonneADD);
+									console.log(dateADD);
+									"
+						/>
 					{% endif %}
 				</th>
 				{% endfor %}
@@ -66,6 +107,9 @@
 				{% for donnee in ligne %}
 					{% if descCSV["erreurs"][numLigne][loop.index0] != "correct" %}
 						<td id="erreur">{{ donnee }} <span>{{descCSV["erreurs"][numLigne][loop.index0]}}</span></td>
+						<script>
+							lignesErreur.push(parseInt('{{numLigne + 1}}'));	//+1 car va etre comparé avec les numéros de la colonne N°
+						</script>
 					{% else %}
 						<td id="valeur">{{ donnee }}</td>
 					{% endif %}
