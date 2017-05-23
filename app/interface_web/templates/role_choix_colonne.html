@@ -40,11 +40,18 @@
 			<!-- Affichage des lignes des noms et boutons de validation -->
 			
 			<script>
-			//Tableau stockant les lignes ou il y'a des erreurs
-				var lignesErreur = []; 
+				var lignesErreur = [];	//Tableau stockant les lignes ou il y'a des erreurs
+				var nomsColonnes = [];	//Tableau stockant les noms de colonnes (car à modifier)
 			</script>
+
+			<!-- Stockage des noms de colonnes modifiables -->
+			{% for nom in descCSV["nom"] %}
+				<script>
+					nomsColonnes.push('{{nom}}');
+				</script>
+			{% endfor %}
 			
-			<tr>
+			<tr id="titres">
 				<th>N°</th>
 				
 				<!-- Position de la colonne de date -->
@@ -57,16 +64,12 @@
 				{% endfor %}
 				
 				{% for nom in descCSV["nom"] %}
-				<th><div contenteditable="true" id="editor">
+
+				<!-- Noms de colonnes modifiables -->
+				<th><div contenteditable oninput="nomsColonnes['{{loop.index0}}'] = this.innerHTML.trim();" id="editor">
 					{{ nom }}
-					<!-- Noms de colonnes modifiables -->
-					<script>
-						document.getElementById("editor").addEventListener("input", function() {
-							alert("input event fired");
-							console.log("ok");
-						}, false);
-					</script>	
 					</div>
+					
 					<!-- Bouton de validation pour les colonnes de nombres, avec transmission de données -->
 					{% if descCSV["type"][loop.index0] == "nombre" %}
 						<!--<form action="{{url_for('calcul')}}" method="post">-->
@@ -74,7 +77,7 @@
 							onclick="
 									var colonneADD = [];
 									var dateADD = [];
-									var nomColonne = '{{descCSV['nom'][loop.index0]}}';
+									var nomColonne = nomsColonnes['{{loop.index0}}'];
 									
 									var numLignes = tf_tableCSV.GetColValues(0,true);
 									var colonneFiltree = tf_tableCSV.GetColValues('{{loop.index}}',false);
@@ -124,10 +127,13 @@
 				{% endfor %}
 				</tr>
 			{% endfor %}
+
 		</table>
 		{% endif %}
 		</div>
 		
+	</section>
+
 		<!-- Dépendances javascript -->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/tablefilter/tablefilter_all.js') }}"></script>
 	
@@ -156,11 +162,9 @@
 				loader_text: "Filtering data..."
 			};  
 			var tf = setFilterGrid("tableCSV",table_Props);
+			//tf_tableCSV.pagingLength = '{{lignesCSV|length}}';
 		</script>
 		
-	
-	</section>
-	
 </body>
 
 {% include 'footer.html' %}
