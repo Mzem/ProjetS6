@@ -1,4 +1,4 @@
-$.getJSON("/infoStats", function(json) {
+$.getJSON("/iStats", function(json) {
 	var htmlStats = "";
 	var htmlOutliers = "";
 	

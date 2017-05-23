@@ -8,8 +8,8 @@
 """
 
 from math import log
-from intervalle import Intervalle, rechercheIntervalle
-from addQuantitativesDiscretes import quantileDiscret
+from add.intervalle import Intervalle, rechercheIntervalle
+from add.addQuantitativesDiscretes import quantileDiscret
 import os
 import json
 import glob

@@ -8,8 +8,8 @@
 """
 
 from math import sqrt
-from intervalle import Intervalle
-from addQualitatives import calculFrequences, calculFrequencesCumulees
+from add.intervalle import Intervalle
+from add.addQualitatives import calculFrequences, calculFrequencesCumulees
 import os
 import json
 import glob
@@ -158,8 +158,7 @@ def infoDistributionDiscrete(listeEffectifs):
 	distribution['x'] = abscisses
 	distribution['value'] = values
 	
-	with open('../interface_web/static/json/distribution.js', 'w', encoding='utf-8') as f:
-		json.dump(distribution, f, indent=4)
+	return distribution
 
 def infoDistributionCumulativeDiscrete(listeEffectifsCumules):
 	"""Écriture dans le fichier distributionCumulative.js
