@@ -36,36 +36,29 @@
 		
 		<div class="tf_tools">
 		<table id="tableCSV" class="mytable" cellpadding="0" cellspacing="0">
-			
-			<!-- Affichage des lignes des noms et boutons de validation -->
-			
+			<!-- Variables javascript pour la transmission des données -->
 			<script>
-				var lignesErreur = [];	//Tableau stockant les lignes ou il y'a des erreurs
 				var nomsColonnes = [];	//Tableau stockant les noms de colonnes (car à modifier)
+				var lignesErreur = [];	//Tableau stockant les lignes ou il y'a des erreurs
 			</script>
 
-			<!-- Stockage des noms de colonnes modifiables -->
+			<!-- Stockage des noms de colonnes modifiables-->			
 			{% for nom in descCSV["nom"] %}
-				<script>
-					nomsColonnes.push('{{nom}}');
-				</script>
+				<script> nomsColonnes.push('{{nom}}'); </script>
 			{% endfor %}
 			
-			<tr id="titres">
+			<!-- Affichage de la ligne des titres et des boutons de validation -->
+			<tr>
 				<th>N°</th>
-				
 				<!-- Position de la colonne de date -->
 				{% for type in descCSV["type"] %}
 					{% if type == "date" %}
-						<script>
-							var indexDate = '{{loop.index}}';
-						</script>
+						<script>var indexDate = '{{loop.index}}';</script>
 					{% endif %}
 				{% endfor %}
 				
+				<!-- Affichage des noms de colonnes + possibilité de modification -->
 				{% for nom in descCSV["nom"] %}
-
-				<!-- Noms de colonnes modifiables -->
 				<th><div contenteditable oninput="nomsColonnes['{{loop.index0}}'] = this.innerHTML.trim();" id="editor">
 					{{ nom }}
 					</div>
@@ -73,7 +66,7 @@
 					<!-- Bouton de validation pour les colonnes de nombres, avec transmission de données -->
 					{% if descCSV["type"][loop.index0] == "nombre" %}
 						<!--<form action="{{url_for('calcul')}}" method="post">-->
-						<input type="image" src="../static/img/goADD.png" Value=submit align="center" width=15px height=15px
+						<input type="image" src="../static/img/goADD.png" Value=submit align="center" width=30px height=15px
 							onclick="
 									var colonneADD = [];
 									var dateADD = [];
