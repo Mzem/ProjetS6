@@ -1,0 +1,258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>chargement_des_donnees.analyseContenuFichier &#8212; documentation File Rouge 1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Code source de chargement_des_donnees.analyseContenuFichier</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Le module ``Analyse Contenu fichier``</span>
+<span class="sd">	========================================================</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">csv</span><span class="o">,</span> <span class="nn">ast</span><span class="o">,</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+
+
+<div class="viewcode-block" id="lecture"><a class="viewcode-back" href="../../analyseContenuFichier.html#chargement_des_donnees.analyseContenuFichier.lecture">[docs]</a><span class="k">def</span> <span class="nf">lecture</span><span class="p">(</span><span class="n">fichierCSV</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Fonction de lecture du contenu du fichier CSV ligne par ligne</span>
+
+<span class="sd">		:param fichierCSV: fichier CSV ouvert et vérifié</span>
+<span class="sd">		:type fichierCSV: TextIoWrapper</span>
+<span class="sd">		:return: liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+	<span class="n">lignesCSV</span> <span class="o">=</span> <span class="p">[]</span>
+	
+	<span class="c1">#lecture</span>
+	<span class="n">readerCSV</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">fichierCSV</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+	
+	<span class="c1">#remplissage dans une liste</span>
+	<span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">readerCSV</span><span class="p">:</span>
+		<span class="n">lignesCSV</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+	
+	<span class="c1">#fermeture du flux (plus besoin)	</span>
+	<span class="n">fichierCSV</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+	
+	<span class="k">return</span> <span class="n">lignesCSV</span></div>
+
+	
+<div class="viewcode-block" id="typeDeDonnee"><a class="viewcode-back" href="../../analyseContenuFichier.html#chargement_des_donnees.analyseContenuFichier.typeDeDonnee">[docs]</a><span class="k">def</span> <span class="nf">typeDeDonnee</span><span class="p">(</span><span class="n">chaine</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Fonction de detection du type de donnée depuis une chaine de carcteres</span>
+
+<span class="sd">		:param fichierCSV: fichier CSV</span>
+<span class="sd">		:type fichierCSV: TextIoWrapper</span>
+<span class="sd">		:return: liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+	<span class="c1">#retrait des caractères blancs du début et de la fin de la donnée</span>
+	<span class="n">chaine</span> <span class="o">=</span> <span class="n">chaine</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+	
+	<span class="c1">#test des différentes possibilités pour une donnée</span>
+	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chaine</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;VIDE&#39;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="c1">#évaluation et récupération du type de la donnée</span>
+		<span class="n">t</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">chaine</span><span class="p">)</span>
+	<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s1">&#39;TEXTE&#39;</span>
+	<span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
+		<span class="k">return</span> <span class="s1">&#39;TEXTE&#39;</span>
+	<span class="k">else</span><span class="p">:</span>
+		<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+			<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">bool</span><span class="p">:</span>
+				<span class="k">return</span> <span class="s1">&#39;BOOL&#39;</span>
+			<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+				<span class="k">return</span> <span class="s1">&#39;ENTIER&#39;</span>
+			<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">:</span>
+				<span class="k">return</span> <span class="s1">&#39;REEL&#39;</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="s1">&#39;TEXTE&#39;</span></div>
+	
+	
+<div class="viewcode-block" id="removeDateSuffix"><a class="viewcode-back" href="../../analyseContenuFichier.html#chargement_des_donnees.analyseContenuFichier.removeDateSuffix">[docs]</a><span class="k">def</span> <span class="nf">removeDateSuffix</span><span class="p">(</span><span class="n">chaineDate</span><span class="p">):</span>
+	<span class="n">parts</span> <span class="o">=</span> <span class="n">chaineDate</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+	<span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;stndrh&quot;</span><span class="p">)</span>
+	<span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span></div>
+	
+<div class="viewcode-block" id="descriptionColonnes"><a class="viewcode-back" href="../../analyseContenuFichier.html#chargement_des_donnees.analyseContenuFichier.descriptionColonnes">[docs]</a><span class="k">def</span> <span class="nf">descriptionColonnes</span><span class="p">(</span><span class="n">lignesCSV</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Fonction de description du nom, du type et des erreurs des colonnes du fichier CSV</span>
+
+<span class="sd">		:param lignesCSV: lignes du fichier CSV</span>
+<span class="sd">		:type lignesCSV: list</span>
+<span class="sd">		:return: dictionnaire de 3 sous-listes ayant pour clés : &quot;nom&quot;, &quot;type&quot; et &quot;erreurs&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span> 
+	<span class="n">descCSV</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;nom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lignesCSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="k">del</span> <span class="n">lignesCSV</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+	<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span><span class="s2">&quot;entier&quot;</span><span class="p">,</span><span class="s2">&quot;entier&quot;</span><span class="p">,</span><span class="s2">&quot;nombre&quot;</span><span class="p">,</span><span class="s2">&quot;nombre&quot;</span><span class="p">,</span><span class="s2">&quot;nombre&quot;</span><span class="p">,</span><span class="s2">&quot;nombre&quot;</span><span class="p">]</span>
+	<span class="c1">#initialisation d&#39;une liste contenant les descriptions des erreurs avec la meme taille que la liste représentant le fichier</span>
+	<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+	
+	<span class="c1">#recherche des erreurs : comparaison du type attendu avec le type actuel</span>
+	<span class="n">numLigne</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">lignesCSV</span><span class="p">:</span>
+		<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>	<span class="c1">#rajoute une ligne dans la liste d&#39;erreurs</span>
+		<span class="n">numColonne</span> <span class="o">=</span> <span class="mi">0</span>
+		
+		<span class="k">for</span> <span class="n">donnee</span> <span class="ow">in</span> <span class="n">ligne</span><span class="p">:</span>
+			<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;type error&quot;</span><span class="p">)</span>	<span class="c1">#rajoute une colonne dans cette ligne de la liste d&#39;erreurs</span>
+			<span class="n">t</span> <span class="o">=</span> <span class="n">typeDeDonnee</span><span class="p">(</span><span class="n">donnee</span><span class="p">)</span>
+			
+			<span class="c1">#Gestion des données de type date</span>
+			<span class="k">if</span>  <span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;TEXTE&quot;</span><span class="p">:</span> 
+					<span class="k">try</span><span class="p">:</span>
+						<span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">removeDateSuffix</span><span class="p">(</span><span class="n">donnee</span><span class="p">),</span><span class="s1">&#39;%B </span><span class="si">%d</span><span class="s1"> %Y, %H:%M:%S.</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">)</span>
+						<span class="n">lignesCSV</span><span class="p">[</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="n">date</span>
+						<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;correct&quot;</span>
+					<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+						<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;date string format not supported&quot;</span>
+					<span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+						<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;date string format not supported&quot;</span>
+				<span class="k">elif</span> <span class="n">typeDeDonnee</span><span class="p">(</span><span class="n">donnee</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;VIDE&quot;</span><span class="p">:</span>
+					<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;missing value&quot;</span>
+					
+			<span class="k">elif</span>  <span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;entier&quot;</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;ENTIER&quot;</span><span class="p">:</span> 
+					<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;correct&quot;</span>
+					<span class="n">lignesCSV</span><span class="p">[</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">donnee</span><span class="p">)</span>
+				<span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;VIDE&quot;</span><span class="p">:</span>
+					<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;missing value&quot;</span>
+					
+			<span class="k">elif</span>  <span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;nombre&quot;</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;ENTIER&quot;</span> <span class="ow">or</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;REEL&quot;</span><span class="p">:</span> 
+					<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;correct&quot;</span>
+					<span class="n">lignesCSV</span><span class="p">[</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">donnee</span><span class="p">)</span>
+				<span class="k">elif</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;VIDE&quot;</span><span class="p">:</span>
+					<span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">][</span><span class="n">numLigne</span><span class="p">][</span><span class="n">numColonne</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;missing value&quot;</span>
+					
+			<span class="n">numColonne</span><span class="o">+=</span><span class="mi">1</span>
+		<span class="n">numLigne</span><span class="o">+=</span><span class="mi">1</span>
+		
+	<span class="k">return</span> <span class="n">descCSV</span></div>
+	
+	
+<div class="viewcode-block" id="analyseFichier"><a class="viewcode-back" href="../../analyseContenuFichier.html#chargement_des_donnees.analyseContenuFichier.analyseFichier">[docs]</a><span class="k">def</span> <span class="nf">analyseFichier</span><span class="p">(</span><span class="n">fichierCSV</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Fonctionnalité principale d&#39;analyse du contenu du fichier CSV ouvert</span>
+
+<span class="sd">		:param fichierCSV: le fichier CSV ouvert et vérifié</span>
+<span class="sd">		:type fichierCSV: TextIoWrapper</span>
+<span class="sd">		:return: une liste contenant les données du fichier et un dictionnaire décrivant ces données</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+	<span class="n">lignesCSV</span> <span class="o">=</span> <span class="n">lecture</span><span class="p">(</span><span class="n">fichierCSV</span><span class="p">)</span>
+	
+	<span class="n">descCSV</span> <span class="o">=</span> <span class="n">descriptionColonnes</span><span class="p">(</span><span class="n">lignesCSV</span><span class="p">)</span>
+		
+	<span class="k">return</span> <span class="n">lignesCSV</span><span class="p">,</span> <span class="n">descCSV</span></div>
+	
+	
+<span class="c1">#test independant du module</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+	
+	<span class="c1">#JD : il faut appeler la fct ouvrir, voir s&#39;il y&#39;a erreur et ensuite appeler la fct analyse et me renvoyer son résultat</span>
+	<span class="c1">#le problème si je prends juste le chemin pour la fct analyse et que j&#39;ouvre le fichier dedans c&#39;est que tu ne pourras pas faire grand chose avec le message d&#39;erreur</span>
+	
+	<span class="n">fichierCSV</span> <span class="o">=</span> <span class="n">ouvrir</span><span class="p">(</span><span class="s2">&quot;fichier topologie csv st denis.csv&quot;</span><span class="p">)</span>
+	
+	<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fichierCSV</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> 
+		<span class="nb">print</span><span class="p">(</span><span class="n">fichierCSV</span><span class="p">)</span>
+	<span class="k">else</span> <span class="p">:</span>
+		<span class="n">lignesCSV</span><span class="p">,</span> <span class="n">descCSV</span> <span class="o">=</span> <span class="n">analyseFichier</span><span class="p">(</span><span class="n">fichierCSV</span><span class="p">)</span>
+	
+		<span class="c1">#Affichages de test</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">###################################################################################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+		
+		<span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">lignesCSV</span><span class="p">:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+		
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">###################################################################################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+		
+		<span class="nb">print</span><span class="p">(</span><span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;nom&quot;</span><span class="p">])</span>
+		<span class="nb">print</span><span class="p">(</span><span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
+		<span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">descCSV</span><span class="p">[</span><span class="s2">&quot;erreurs&quot;</span><span class="p">]:</span>
+			<span class="nb">print</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, PAILLEUX Jean-Didier, ZEMNI Malek, KLOTZ Sonny.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
