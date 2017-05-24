@@ -6,7 +6,10 @@ Listes des trucs à faire avant de rendre l'appli :
 - REPARER bouton "go back" : la suppression doit etre faite automatiquement car une fois un mauvais fichier uloadé, on peut quitter l'appli ou aller sur une autre page, pas forcément appuyer sur "go back", et du coup le fichier reste
 - .... mettez vos trucs ....
 
-
+Docstring sphinx:
+- Pour mettre à jour la doc, se déplacer dans le repertoire docstring et taper : 
+    => make html pour le format html.
+    => make latexpdf pour le latex.
 
 
 Update lien de la documentation : http://deusyss.developpez.com/tutoriels/Python/SphinxDoc/
