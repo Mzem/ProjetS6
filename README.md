@@ -8,6 +8,7 @@ Listes des trucs à faire avant de rendre l'appli :
 - graphes (meilleur affichage)
 - Fusion About & Contact = About : (lien vers le site de dcbrain)
 - Bouton go back role_choix_colonne.html dans resultat_ADD.html (retour à l'étape précédente)
+- Histogrammes et secteurs
 - .... mettez vos trucs ....
 
 Docstring sphinx:
