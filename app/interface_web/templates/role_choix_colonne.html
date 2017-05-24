@@ -4,7 +4,6 @@
 	<title>DCbrain</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/echantillons.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='js/tablefilter/filtergrid.css') }}">
 </head>
 
 <body>
@@ -12,7 +11,7 @@
 	{% include 'header.html' %}
 	
 	<section>
-		<br />
+
 		<!-- Affichage du message d'erreur d'ouverture -->
 		{% if msgErreur is defined %} 
 			<h1 id="msgErreur">{{msgErreur}}</h1>
@@ -24,9 +23,7 @@
 		{% else %}
 		
 		<!-- Message d'attente que le fichier se charge completenet -->
-		<div id="loading">
-			<h1 id="loadingText">Loading file, please wait...</h1>
-		</div>
+		<div id="loading"><h1 id="loadingText">Loading file, please wait...</h1></div>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
 		<script>
 			$(document).ready(function(){
@@ -34,15 +31,9 @@
 			});
 		</script>
 		
-		<div class="tf_tools">
-		<table id="tableCSV" class="mytable" cellpadding="0" cellspacing="0">
-			<!-- Variables javascript pour la transmission des données -->
-			<script>
-				var nomsColonnes = [];	//Tableau stockant les noms de colonnes (car à modifier)
-				var lignesErreur = [];	//Tableau stockant les lignes ou il y'a des erreurs
-			</script>
-
-			<!-- Stockage des noms de colonnes modifiables-->			
+		<table>
+			<!-- Stockage des noms de colonnes modifiables-->
+			<script>var nomsColonnes = [];</script>			
 			{% for nom in descCSV["nom"] %}
 				<script> nomsColonnes.push('{{nom}}'); </script>
 			{% endfor %}
@@ -57,7 +48,7 @@
 					{% endif %}
 				{% endfor %}
 				
-				<!-- Affichage des noms de colonnes + possibilité de modification -->
+				<!-- Affichage des noms de colonnes + possibilité de modification + envoie analyse -->
 				{% for nom in descCSV["nom"] %}
 				<th><div contenteditable oninput="nomsColonnes['{{loop.index0}}'] = this.innerHTML.trim();" id="editor">
 					{{ nom }}
@@ -65,7 +56,7 @@
 					
 					<!-- Bouton de validation pour les colonnes de nombres, avec transmission de données -->
 					{% if descCSV["type"][loop.index0] == "nombre" %}
-					<input type="image" src="../static/img/goADD.png" Value=submit align="center" width=30px height=15px
+					<input id="btn_analyse" type="submit" Value="Analyse"
 							onclick="
 									var colonneADD = [];
 									var dateADD = [];
@@ -90,13 +81,8 @@
 											dateADD.push(dateFiltree[i]);
 										}
 									}
-									
-									//Affichages console de test
-									console.log(nomColonne);
-									console.log(colonneADD);
-									console.log(dateADD);
 
-									// Envoie des listes
+									//Envoi des données à analyser
 									var file = new Object();
 									file.nomColonne = nomColonne;
 									file.colonneADD = colonneADD;
@@ -115,16 +101,17 @@
             							},
             							success : window.location = '/fenetre_resultat_ADD/' 							      
         							});
-        							console.log('SORTIIIIIEEE')
-
 									"
-						/>
+					/>
 					{% endif %}
 				</th>
 				{% endfor %}
 			</tr>
 			
 			<!-- Affichage des lignes de données du fichier -->
+			
+			<script>var lignesErreur = [];//Tableau stockant les lignes ou il y'a des erreurs</script>
+
 			{% for ligne in lignesCSV %}
 				{% set numLigne = loop.index0 %}
 				<tr>
@@ -141,43 +128,11 @@
 				{% endfor %}
 				</tr>
 			{% endfor %}
-
+			
 		</table>
 		{% endif %}
-		</div>
 		
 	</section>
-
-		<!-- Dépendances javascript -->
-		<script type="text/javascript" src="{{ url_for('static', filename='js/tablefilter/tablefilter_all.js') }}"></script>
-	
-		<!-- Affichage des filtres -->
-		<script language="javascript" type="text/javascript">
-			var table_Props =  {  
-				filters_row_index: 1,
-				col_0: "none",
-				col_1: "checklist",
-				col_2: "checklist",
-				col_3: "checklist",
-				display_all_text: "Show all",
-				help_instructions_btn_html:'R',
-				
-				on_change: false,  
-				btn: true,
-				enter_key: true,
-				paging: true,  
-				paging_length: 50,
-				results_per_page: ['ows per page',[50,100,500,1000,{{lignesCSV|length}}]],
-				rows_counter: true,  
-				rows_counter_text: "Rows: ",  
-				btn_reset: true,
-				btn_help: false,
-				loader: true,  
-				loader_text: "Filtering data..."
-			};  
-			var tf = setFilterGrid("tableCSV",table_Props);
-			//tf_tableCSV.pagingLength = '{{lignesCSV|length}}';
-		</script>
 		
 </body>
 

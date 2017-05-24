@@ -1,6 +1,7 @@
 table{
     border-collapse: collapse;
     margin: auto;
+    table-layout: auto;
 }
 td, th{
     border: 1px solid rgba(255,255,255,0);
@@ -63,4 +64,8 @@ th{
 	color: white;
 	text-align: center;
 	text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+}
+#btn_analyse{
+	font-size: 90%;
+	margin-top: 5%;
 }
