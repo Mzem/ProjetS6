@@ -9,6 +9,7 @@ Listes des trucs à faire avant de rendre l'appli :
 - Fusion About & Contact = About : (lien vers le site de dcbrain)
 - Bouton go back role_choix_colonne.html dans resultat_ADD.html (retour à l'étape précédente)
 - Histogrammes et secteurs
+- script pour que tous les tests se lancent en une ligne de commande (et ajouter dans exe de la doc voir plus bas)
 - .... mettez vos trucs ....
 
 Docstring sphinx:
