@@ -24,4 +24,5 @@ Refactoring (changements qui ne changeront pas le comportement mais qui rendent 
 - js dans dossier js // css dans le dossier css
 - gestionFlux, les routes pour l'add (récup json) dans un autre fichier
 - code plus propre (indentation html / js ; noms de variable ; commentaires ; espaces, tabulation, sauts de ligne)
+- Nettoyer l'appli des docs inutile, arborescence et dossiers
 - .... mettez vos trucs ....
