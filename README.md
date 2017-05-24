@@ -2,9 +2,10 @@ Listes des trucs à faire avant de rendre l'appli :
 - Ajouter favicon logo DCbrain
 - Menu de navigation : traiter les champs "About" et "Contact" + ajouter logo DCbrain tout à gauche
 - Améliorer la page d'acceuil : texte d'acceuil + route (je pense que index.html directement (sans route) c'est mieux que /fenetre_choix_fichier, on essaye de faire un truc propre meme si c'est pas ça dans les specs)
-- Intégrer le manuel dans l'appli (dans la page "About" ou lui créer une page "Help")
+- Intégrer le manuel dans l'appli (dans la page "About" ou lui créer une page "Help") -> lien de dl de notre pdf
 - REPARER bouton "go back" : la suppression doit etre faite automatiquement car une fois un mauvais fichier uloadé, on peut quitter l'appli ou aller sur une autre page, pas forcément appuyer sur "go back", et du coup le fichier reste
 - .... mettez vos trucs ....
+
 
 
 
