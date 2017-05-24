@@ -158,5 +158,4 @@ def infoDistributionCumulativeContinue(listeEffectifsCumules, intervalles):
 	distributionC['x'] = abscisses
 	distributionC['value'] = values
 	
-	with open('../interface_web/static/json/distributionCumulative.js', 'w', encoding='utf-8') as f:
-		json.dump(distributionC, f, indent=4)
+	return distributionC

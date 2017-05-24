@@ -49,36 +49,41 @@ def fenetre_role_choix_colonne(file):
 
 @app.route("/fenetre_resultat_ADD/",methods=['GET','POST', 'PUT'])
 def fenetre_resultat_ADD():
-    """Fonction qui affiche le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
-    
-    :return: retourne le template "resultat_ADD.html"
-    """
-    if request.method == 'PUT':
-        requette = request.get_json()
-        nomColonne = requette['nomColonne']
-        colonneADD = requette['colonneADD']
-        dateADD = requette['dateADD']
+	"""Fonction qui affiche le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
+	
+		:return: retourne le template "resultat_ADD.html"
+	"""
+	if request.method == 'PUT':
+		requette = request.get_json()
+		nomColonne = requette['nomColonne']
+		colonneADD = requette['colonneADD']
+		dateADD = requette['dateADD']
 
-        donneesIntervalles, etendueIntervalles = discretisation(calculNombreClasses(colonneADD), colonneADD)
-        donneesContinues = preparationIntervallesAnalyse(donneesIntervalles)
+		donneesIntervalles, etendueIntervalles = discretisation(calculNombreClasses(colonneADD), colonneADD)
+		donneesContinues = preparationIntervallesAnalyse(donneesIntervalles)
         
-        listeEffectifs = calculEffectifs(donneesContinues)
-        #listeEffectifsCumules = calculEffectifsCumules(listeEffectifs)
+		listeEffectifs = calculEffectifs(donneesContinues)
+		listeEffectifsCumules = calculEffectifsCumules(listeEffectifs)
 
         # infos stats
         #infoStats(listeEffectifs) 
         # Série temporelle
-        # 
-        # Distribution cumulative continue
-        #infoDistributionCumulativeContinue(listeEffectifsCumules, etendueIntervalles)
-        # Distribution
-        dataDistrib = infoDistributionDiscrete(listeEffectifs)
-        with open('interface_web/static/json/distribution.js', 'w', encoding='utf-8') as f:
-            json.dumps(distribution, f, indent=4)
+        #
         
-        return render_template("resultat_ADD.html")
-    else:
-        return render_template("resultat_ADD.html")
+        # Distribution cumulative continue
+		dataDistribCumul = infoDistributionCumulativeContinue(listeEffectifsCumules, etendueIntervalles)
+		with open('interface_web/static/json/distributionCumulative.js', 'w', encoding='utf-8') as f:
+			json.dump(dataDistribCumul, f, indent=4)
+			
+        # Distribution
+		dataDistrib = infoDistributionDiscrete(listeEffectifs)
+        
+		with open('interface_web/static/json/distribution.js', 'w', encoding='utf-8') as f:
+			json.dump(dataDistrib, f, indent=4)
+            
+		return render_template("resultat_ADD.html")
+	else:
+		return render_template("resultat_ADD.html")
 
 @app.route("/remove/<file>",methods=['GET','POST'])
 def remove(file):
