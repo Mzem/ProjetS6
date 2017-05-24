@@ -25,4 +25,5 @@ Refactoring (changements qui ne changeront pas le comportement mais qui rendent 
 - gestionFlux, les routes pour l'add (récup json) dans un autre fichier
 - code plus propre (indentation html / js ; noms de variable ; commentaires ; espaces, tabulation, sauts de ligne)
 - Nettoyer l'appli des docs inutile, arborescence et dossiers
+- Deux arborescenses main et tests dans le dossier app
 - .... mettez vos trucs ....
