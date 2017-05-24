@@ -9,10 +9,6 @@
 {% include 'header.html' %}
 
 <section>
-
-<a href="{{ url_for('fenetre_resultat_ADD') }}" > Pour sonny fenetre ADD </a>
-<br />
-<a href="{{ url_for('sauvegardeResultats') }}">Export</a>
 	
 <form id="upload-form" action="{{ url_for('choixFic.FileWithSGF') }}" method="POST" enctype="multipart/form-data">
 
@@ -35,8 +31,9 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/Drag.js') }}"></script>
-</body>
 
 {% include 'footer.html' %}
+
+</body>
 
 </html>

@@ -9,11 +9,11 @@ $.getJSON("/iStats", function(json) {
 			});
 		}
 		else {
-			htmlStats += "<li>" + key + ": " + value + "</li>";
+			htmlStats += "<li><u>" + key + "</u> : " + value + "</li>";
 		}
 	});
 		
-	$('#stats').after("<ul>" + htmlStats + "</ul>");
-	$('#outliers').after("<ul>" + htmlOutliers + "</ul>");
+	$('#stats').after("<div id='stats2'><h1>Statistics</h1><br> <ul>" + htmlStats + "</ul></div>");
+	$('#outliers').after("<div id='outliers2'><h1>Outliers</h1><br> <ul>" + htmlOutliers + "</ul></div>");
 		
 });
