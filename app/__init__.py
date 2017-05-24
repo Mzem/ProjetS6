@@ -2,6 +2,7 @@
 .. automodule:: add.addQualitatives
 .. automodule:: add.addQuantitativesContinues
 .. automodule:: add.addQuantitativesDiscretes
+.. automodule:: add.intervalle
 .. automodule:: interface_web.gestionFlux
 .. automodule:: interface_web.choixFichier
 .. automodule:: chargement_des_donnees.analyseContenuFichier

@@ -1,5 +1,8 @@
-<nav class="nav"> 
-	<ul> <li><a href="{{ url_for('fenetre_choix_fichier') }}">Home</a></li> 
-		<li><a href="#">User Manual</a></li> 
+<nav class="nav">
+	<div id="logo"><a href=""><img src="{{ url_for('static', filename='img/dcbrain.png') }}" alt="logo_dcbrain"/></a></div>
+	<ul> 
+		<li><a href="{{ url_for('fenetre_choix_fichier') }}">Home</a></li> 
+		<li><a href="http://www.dcbrain.com/accueil/">About</a></li> 
+		<li><a href="{{ url_for('manuel') }}">User Manual</a></li> 
 	</ul> 
 </nav>

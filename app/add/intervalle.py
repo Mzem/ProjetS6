@@ -4,7 +4,7 @@
 	Le module ``intervalle``
 	========================
 	
-	Ce module pour une manipulation réduite des intervalles dans R.
+	Ce module est utilisé pour une manipulation réduite des intervalles dans R.
 	
 	:Example:
 	
