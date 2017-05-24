@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-	Module "Vérification format fichier"
+	Le module ``Vérification format fichier``
 	========================================================
 """
 
@@ -15,7 +15,7 @@ def verifOuverture(chemin):
 		:param chemin: chemin du fichier
 		:type chemin: str
 		:return: entier 0 ou une description de l'erreur
-    """  
+        """  
 	if not os.path.isfile(chemin):
 		print(os.path.isfile(chemin))
 		return "Error: not an existing file"

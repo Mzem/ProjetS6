@@ -15,7 +15,8 @@ import json
 import glob
 
 def moyenne(listeEffectifs):
-	"""Calcule la moyenne arithmétique.
+	"""
+        Calcule la moyenne arithmétique.
 	
 	:param listeEffectifs: liste de couples (valeur, occurences)
 	:return: moyenne arithmétique des valeurs de la liste
@@ -30,7 +31,8 @@ def moyenne(listeEffectifs):
 	return resultat / taille
 	
 def quantileDiscret(ordre, listeFrequencesCumulees):
-	"""Calcule le quantile d'ordre ``ordre``.
+	"""
+        Calcule le quantile d'ordre ``ordre``.
 	
 	:param ordre: Nombre flottant compris entre 0 et 1.
 	:param listeFrequencesCumulees: liste de couples (valeur, frequence cumulee) triée selon les valeurs 
@@ -48,7 +50,9 @@ def quantileDiscret(ordre, listeFrequencesCumulees):
 	return listeFrequencesCumulees[i][0]
 	
 def variance(listeEffectifs):
-	"""Calcule la variance."""
+	"""
+        Calcule la variance.
+        """
 	
 	moy = moyenne(listeEffectifs)
 	resultat, taille = 0, 0
@@ -64,7 +68,8 @@ def ecartType(variance):
 	return sqrt(variance)
 	
 def anomaliesTukey(listeEffectifs):
-	"""Liste les valeurs aberrantes de la liste.
+	"""
+        Liste les valeurs aberrantes de la liste.
 	
 	Une valeur est dite aberrante selon la règle de Tukey si elle n'appartient pas à un intervalle I définit tel que :
 	I = [Q1 - k * IQ ; Q3 + k * IQ] , k constante réelle Q1 et Q3 les quartiles, IQ l'écart inter-quartiles.
@@ -90,7 +95,8 @@ def anomaliesTukey(listeEffectifs):
 	return listeAnomalies
 
 def symetrie(listeEffectifs):
-	"""Calcule le coefficient de symétrie de Fisher.
+	"""
+        Calcule le coefficient de symétrie de Fisher.
 	
 	Si le coefficient est proche 0, la distribution est approximativement symétrique.
 	Si le coefficient est positif, la distribution est étalée sur la droite.
@@ -113,7 +119,8 @@ def symetrie(listeEffectifs):
 	return  momentCentreOrdre3 / (ecType ** 3)
 	
 def aplatissement(listeEffectifs):
-	"""Calcule le coefficient d'aplatissement de Fisher.
+	"""
+        Calcule le coefficient d'aplatissement de Fisher.
 	
 	Si le coefficient est nul, la distribution suit une loi normale centrée réduite.
 	Si le coefficient est inférieur à 3, la distribution est aplatie.
@@ -135,7 +142,8 @@ def aplatissement(listeEffectifs):
 	return  momentCentreOrdre4 / (ecType ** 4)
 
 def infoDistributionDiscrete(listeEffectifs):
-	"""Écriture dans le fichier distribution.js
+	"""
+        Écriture dans le fichier distribution.js
 	
 	Format du fihier :
 		Début
@@ -161,7 +169,8 @@ def infoDistributionDiscrete(listeEffectifs):
 	return distribution
 
 def infoDistributionCumulativeDiscrete(listeEffectifsCumules):
-	"""Écriture dans le fichier distributionCumulative.js
+	"""
+        Écriture dans le fichier distributionCumulative.js
 	
 	Format du fihier :
 		Début
@@ -187,7 +196,8 @@ def infoDistributionCumulativeDiscrete(listeEffectifsCumules):
 		json.dump(distributionC, f, indent=4)
 	
 def infoBoiteTukey(listeEffectifs):
-	"""Écriture dans le fichier boxplot.js
+	"""
+        Écriture dans le fichier boxplot.js
 	
 	Format du fihier :
 		Début
@@ -222,7 +232,8 @@ def infoBoiteTukey(listeEffectifs):
 		json.dump(tukey, f, indent=4)
 
 def infoSerieTemporelle(listeSerieTemporelle):
-	"""Écriture dans le fichier timeSeries.js
+	"""
+        Écriture dans le fichier timeSeries.js
 	
 	Format du fihier :
 		Début

@@ -1,0 +1,348 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>add.addQuantitativesDiscretes &#8212; documentation File Rouge 1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Code source de add.addQuantitativesDiscretes</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Le module ``Analyse de données quantitatives discrètes``</span>
+<span class="sd">	========================================================</span>
+<span class="sd">	</span>
+<span class="sd">	</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+<span class="kn">from</span> <span class="nn">add.intervalle</span> <span class="k">import</span> <span class="n">Intervalle</span>
+<span class="kn">from</span> <span class="nn">add.addQualitatives</span> <span class="k">import</span> <span class="n">calculFrequences</span><span class="p">,</span> <span class="n">calculFrequencesCumulees</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<div class="viewcode-block" id="moyenne"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.moyenne">[docs]</a><span class="k">def</span> <span class="nf">moyenne</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcule la moyenne arithmétique.</span>
+<span class="sd">	</span>
+<span class="sd">	:param listeEffectifs: liste de couples (valeur, occurences)</span>
+<span class="sd">	:return: moyenne arithmétique des valeurs de la liste</span>
+<span class="sd">	</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	
+	<span class="n">resultat</span><span class="p">,</span> <span class="n">taille</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+		<span class="n">resultat</span> <span class="o">+=</span> <span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+		<span class="n">taille</span> <span class="o">+=</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+	<span class="c1">#taille est la somme des effectifs : la taille du jeu de données</span>
+	<span class="k">return</span> <span class="n">resultat</span> <span class="o">/</span> <span class="n">taille</span></div>
+	
+<div class="viewcode-block" id="quantileDiscret"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.quantileDiscret">[docs]</a><span class="k">def</span> <span class="nf">quantileDiscret</span><span class="p">(</span><span class="n">ordre</span><span class="p">,</span> <span class="n">listeFrequencesCumulees</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcule le quantile d&#39;ordre ``ordre``.</span>
+<span class="sd">	</span>
+<span class="sd">	:param ordre: Nombre flottant compris entre 0 et 1.</span>
+<span class="sd">	:param listeFrequencesCumulees: liste de couples (valeur, frequence cumulee) triée selon les valeurs </span>
+<span class="sd">	:return: La première valeur telle que la fréquence cumulée correspondante soit supérieure ou égale à l&#39;ordre.</span>
+<span class="sd">	:rtype: float</span>
+<span class="sd">	</span>
+<span class="sd">	.. note:: La médiane est le quantile d&#39;ordre 1/2. Les quartiles sont les quantiles d&#39;ordre 1/4 et 3/4.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	
+	<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+	<span class="k">while</span> <span class="n">listeFrequencesCumulees</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ordre</span><span class="p">:</span>
+		<span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+		
+	<span class="c1">#A la sortie de la boucle listeFrequencesCumulees[i][1] &gt;= ordre</span>
+	<span class="k">return</span> <span class="n">listeFrequencesCumulees</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+	
+<div class="viewcode-block" id="variance"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.variance">[docs]</a><span class="k">def</span> <span class="nf">variance</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcule la variance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+	
+	<span class="n">moy</span> <span class="o">=</span> <span class="n">moyenne</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">)</span>
+	<span class="n">resultat</span><span class="p">,</span> <span class="n">taille</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+		<span class="n">resultat</span> <span class="o">+=</span> <span class="p">((</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">moy</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+		<span class="n">taille</span> <span class="o">+=</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+	
+	<span class="k">return</span> <span class="n">resultat</span> <span class="o">/</span> <span class="n">taille</span></div>
+	
+<div class="viewcode-block" id="ecartType"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.ecartType">[docs]</a><span class="k">def</span> <span class="nf">ecartType</span><span class="p">(</span><span class="n">variance</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Calcule l&#39;écart-type.&quot;&quot;&quot;</span>
+	
+	<span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span></div>
+	
+<div class="viewcode-block" id="anomaliesTukey"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.anomaliesTukey">[docs]</a><span class="k">def</span> <span class="nf">anomaliesTukey</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Liste les valeurs aberrantes de la liste.</span>
+<span class="sd">	</span>
+<span class="sd">	Une valeur est dite aberrante selon la règle de Tukey si elle n&#39;appartient pas à un intervalle I définit tel que :</span>
+<span class="sd">	I = [Q1 - k * IQ ; Q3 + k * IQ] , k constante réelle Q1 et Q3 les quartiles, IQ l&#39;écart inter-quartiles.</span>
+<span class="sd">	</span>
+<span class="sd">	La constante k est choisie arbitrairement égale à 1,5. La valeur 1.5 est selon Tukey une valeur pragmatique, qui a une raison probabiliste.</span>
+<span class="sd">	Si une variable suit une distribution normale, alors la zone délimitée par la boîte et les moustaches devrait contenir 99,3 % des observations.</span>
+<span class="sd">	</span>
+<span class="sd">	:rtype: list</span>
+<span class="sd">	:return: Collection contenant les données anormales pour la distribution des valeurs.</span>
+<span class="sd">	</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">listeFrequencesCumulees</span> <span class="o">=</span> <span class="n">calculFrequencesCumulees</span><span class="p">(</span><span class="n">calculFrequences</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">))</span>
+	<span class="n">q1</span> <span class="o">=</span> <span class="n">quantileDiscret</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">listeFrequencesCumulees</span><span class="p">)</span>
+	<span class="n">q3</span> <span class="o">=</span> <span class="n">quantileDiscret</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">listeFrequencesCumulees</span><span class="p">)</span>
+	<span class="n">iq</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+	<span class="n">interv</span> <span class="o">=</span> <span class="n">Intervalle</span><span class="p">(</span><span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iq</span><span class="p">,</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iq</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+	<span class="n">listeAnomalies</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">interv</span><span class="o">.</span><span class="n">contient</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+			<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+				<span class="n">listeAnomalies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+	<span class="c1">#On ajoute la valeur dans resultat autant de fois qu&#39;elle est présente dans la série.</span>
+	<span class="k">return</span> <span class="n">listeAnomalies</span></div>
+
+<div class="viewcode-block" id="symetrie"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.symetrie">[docs]</a><span class="k">def</span> <span class="nf">symetrie</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcule le coefficient de symétrie de Fisher.</span>
+<span class="sd">	</span>
+<span class="sd">	Si le coefficient est proche 0, la distribution est approximativement symétrique.</span>
+<span class="sd">	Si le coefficient est positif, la distribution est étalée sur la droite.</span>
+<span class="sd">	Si le coefficient est négatif, la distribution est étalée sur la gauche.</span>
+<span class="sd">	</span>
+<span class="sd">	</span>
+<span class="sd">	:rtype: float</span>
+<span class="sd">		</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">moy</span> <span class="o">=</span> <span class="n">moyenne</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">)</span>
+	
+	<span class="n">somme</span><span class="p">,</span> <span class="n">taille</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+		<span class="n">somme</span> <span class="o">+=</span> <span class="p">((</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">moy</span><span class="p">)</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+		<span class="n">taille</span> <span class="o">+=</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+		
+	<span class="n">momentCentreOrdre3</span> <span class="o">=</span> <span class="n">somme</span> <span class="o">/</span> <span class="n">taille</span>
+	<span class="n">ecType</span> <span class="o">=</span> <span class="n">ecartType</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">))</span>
+	
+	<span class="k">return</span>  <span class="n">momentCentreOrdre3</span> <span class="o">/</span> <span class="p">(</span><span class="n">ecType</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span></div>
+	
+<div class="viewcode-block" id="aplatissement"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.aplatissement">[docs]</a><span class="k">def</span> <span class="nf">aplatissement</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calcule le coefficient d&#39;aplatissement de Fisher.</span>
+<span class="sd">	</span>
+<span class="sd">	Si le coefficient est nul, la distribution suit une loi normale centrée réduite.</span>
+<span class="sd">	Si le coefficient est inférieur à 3, la distribution est aplatie.</span>
+<span class="sd">	Si le coefficient est supérieur à 3, les valeurs de la distribution est concentrée autour de la moyenne.</span>
+<span class="sd">	</span>
+<span class="sd">	:rtype: float</span>
+<span class="sd">	</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">moy</span> <span class="o">=</span> <span class="n">moyenne</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">)</span>
+	
+	<span class="n">somme</span><span class="p">,</span> <span class="n">taille</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+		<span class="n">somme</span> <span class="o">+=</span> <span class="p">((</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">moy</span><span class="p">)</span> <span class="o">**</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+		<span class="n">taille</span> <span class="o">+=</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+		
+	<span class="n">momentCentreOrdre4</span> <span class="o">=</span> <span class="n">somme</span> <span class="o">/</span> <span class="n">taille</span>
+	<span class="n">ecType</span> <span class="o">=</span> <span class="n">ecartType</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">))</span>
+	
+	<span class="k">return</span>  <span class="n">momentCentreOrdre4</span> <span class="o">/</span> <span class="p">(</span><span class="n">ecType</span> <span class="o">**</span> <span class="mi">4</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="infoDistributionDiscrete"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.infoDistributionDiscrete">[docs]</a><span class="k">def</span> <span class="nf">infoDistributionDiscrete</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Écriture dans le fichier distribution.js</span>
+<span class="sd">	</span>
+<span class="sd">	Format du fihier :</span>
+<span class="sd">		Début</span>
+<span class="sd">		{</span>
+<span class="sd">			&quot;x&quot;: [ liste des abscisses ],</span>
+<span class="sd">			&quot;value&quot;: [ liste des ordonnées / effectifs ]</span>
+<span class="sd">		}</span>
+<span class="sd">		Fin</span>
+<span class="sd">		</span>
+<span class="sd">	:param listeEffectifs: liste de couples (valeur, effectif).</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	
+	<span class="n">abscisses</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+		<span class="n">abscisses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+		
+	<span class="n">distribution</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">abscisses</span>
+	<span class="n">distribution</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+	
+	<span class="k">return</span> <span class="n">distribution</span></div>
+
+<div class="viewcode-block" id="infoDistributionCumulativeDiscrete"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.infoDistributionCumulativeDiscrete">[docs]</a><span class="k">def</span> <span class="nf">infoDistributionCumulativeDiscrete</span><span class="p">(</span><span class="n">listeEffectifsCumules</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Écriture dans le fichier distributionCumulative.js</span>
+<span class="sd">	</span>
+<span class="sd">	Format du fihier :</span>
+<span class="sd">		Début</span>
+<span class="sd">		{</span>
+<span class="sd">			&quot;x&quot;: [ liste des abscisses ],</span>
+<span class="sd">			&quot;value&quot;: [ liste des ordonnées / effectifs cumulés ]</span>
+<span class="sd">		}</span>
+<span class="sd">		Fin</span>
+<span class="sd">		</span>
+<span class="sd">	:param listeEffectifCumules: liste de couples (valeur, effectif cumulé).</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">abscisses</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifsCumules</span><span class="p">:</span>
+		<span class="n">abscisses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+		
+	<span class="n">distributionC</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="n">distributionC</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">abscisses</span>
+	<span class="n">distributionC</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+	
+	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../interface_web/static/json/distributionCumulative.js&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">distributionC</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+	
+<div class="viewcode-block" id="infoBoiteTukey"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.infoBoiteTukey">[docs]</a><span class="k">def</span> <span class="nf">infoBoiteTukey</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Écriture dans le fichier boxplot.js</span>
+<span class="sd">	</span>
+<span class="sd">	Format du fihier :</span>
+<span class="sd">		Début</span>
+<span class="sd">		{</span>
+<span class="sd">			&quot;q1&quot;: premier quartile,</span>
+<span class="sd">			&quot;median&quot;: mediane,</span>
+<span class="sd">			&quot;q3&quot;: troisième quartile,</span>
+<span class="sd">			&quot;left&quot;: extrémité gauche de la moustache (q1 - 1.5*(q3-q1)),</span>
+<span class="sd">			&quot;right&quot;: extrémité droite de la moustache (q3 + 1.5*(q3-q1)),</span>
+<span class="sd">			&quot;outliers&quot;: liste des anomalies statistiques</span>
+<span class="sd">		}</span>
+<span class="sd">		Fin</span>
+<span class="sd">		</span>
+<span class="sd">	Informations utiles à la création d&#39;une boîte à moustaches de Tukey</span>
+<span class="sd">		</span>
+<span class="sd">	:param listeEffectifs: liste de couples (valeur, effectif).</span>
+<span class="sd">	&quot;&quot;&quot;</span>	
+	<span class="n">listeFC</span> <span class="o">=</span> <span class="n">calculFrequencesCumulees</span><span class="p">(</span><span class="n">calculFrequences</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">))</span>
+	<span class="n">q1</span> <span class="o">=</span> <span class="n">quantileDiscret</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">listeFC</span><span class="p">)</span>
+	<span class="n">q3</span> <span class="o">=</span> <span class="n">quantileDiscret</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">listeFC</span><span class="p">)</span>
+	<span class="n">median</span> <span class="o">=</span> <span class="n">quantileDiscret</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">listeFC</span><span class="p">)</span>
+	
+	<span class="n">tukey</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="n">tukey</span><span class="p">[</span><span class="s1">&#39;q1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q1</span>
+	<span class="n">tukey</span><span class="p">[</span><span class="s1">&#39;q3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q3</span>
+	<span class="n">tukey</span><span class="p">[</span><span class="s1">&#39;median&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">median</span>
+	<span class="n">tukey</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span><span class="p">)</span>
+	<span class="n">tukey</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span><span class="p">)</span>
+	<span class="n">tukey</span><span class="p">[</span><span class="s1">&#39;outliers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">anomaliesTukey</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">)</span>
+		
+	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../interface_web/static/json/boxplot.js&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tukey</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="infoSerieTemporelle"><a class="viewcode-back" href="../../addQuantitativesDiscretes.html#add.addQuantitativesDiscretes.infoSerieTemporelle">[docs]</a><span class="k">def</span> <span class="nf">infoSerieTemporelle</span><span class="p">(</span><span class="n">listeSerieTemporelle</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Écriture dans le fichier timeSeries.js</span>
+<span class="sd">	</span>
+<span class="sd">	Format du fihier :</span>
+<span class="sd">		Début</span>
+<span class="sd">		{</span>
+<span class="sd">			&quot;x&quot;: [ liste des Timestamp ],</span>
+<span class="sd">			&quot;value&quot;: [ liste des valeurs ]</span>
+<span class="sd">		}</span>
+<span class="sd">		Fin</span>
+<span class="sd">		</span>
+<span class="sd">	:param listeSerieTemporelle: liste de couples (Timestamp, valeur), et un Timestamp est une chaîne de caractères.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">timestamps</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeSerieTemporelle</span><span class="p">:</span>
+		<span class="n">timestamps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+		
+	<span class="n">timeSeries</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="n">timeSeries</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timestamps</span>
+	<span class="n">timeSeries</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+	
+	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../interface_web/static/json/timeSeries.js&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">timeSeries</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Code du module</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, PAILLEUX Jean-Didier, ZEMNI Malek, KLOTZ Sonny.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

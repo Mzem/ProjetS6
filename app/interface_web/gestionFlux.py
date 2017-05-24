@@ -21,8 +21,8 @@ from add.addQuantitativesDiscretes import *
 app = Flask(__name__)
 app.register_blueprint(choixFic)
 
-@app.route("/fenetre_choix_fichier/", methods=['GET'])
-def index():
+@app.route("/", methods=['GET'])
+def fenetre_choix_fichier():
     """Fonction qui affiche le template "choix_fichier.html" lorsque la requette HTTP "/fenetre_choix_fichier/" est indiquée.
     
     :return: retourne le template "choix_fichier.html"
@@ -88,7 +88,7 @@ def remove(file):
     :return: redirige vers la route index
     """
     os.remove('{}{}'.format('interface_web/static/uploads/',file))
-    return redirect(url_for("index"))
+    return redirect(url_for("fenetre_choix_fichier"))
 
 @app.route('/iStats')
 def iStats():

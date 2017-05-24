@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-	Module "Analyse Contenu fichier"
+	Le module ``Analyse Contenu fichier``
 	========================================================
 """
 

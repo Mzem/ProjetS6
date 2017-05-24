@@ -15,7 +15,8 @@ import json
 import glob
 
 def discretisation(nombreClasses, donneesContinues):
-	"""Discrétise des données continues du paramètre.
+	"""
+        Discrétise des données continues du paramètre.
 	
 	La fonction se charge de décomposer l’étendue [min ; max] de l’ensemble de données en ``nombreClasses`` intervalles de même étendue.
 	Ensuite de remplacer les occurrences des données par l’intervalle auquel la donnée appartient.
@@ -48,7 +49,8 @@ def discretisation(nombreClasses, donneesContinues):
 	return donneesContinues, intervalles
 	
 def calculNombreClasses(donneesContinues):
-	"""Calcule le nombre de classes nécessaire à une discrétisation selon la règle de Sturges.
+	"""
+        Calcule le nombre de classes nécessaire à une discrétisation selon la règle de Sturges.
 	
 	:rtype: int
 	
@@ -59,7 +61,8 @@ def calculNombreClasses(donneesContinues):
 	return 1 + int(log(len(donneesContinues), 2))
 	
 def preparationIntervallesAnalyse(listeIntervalles):
-	"""Prépare les données pour l’utilisation des éléments de calcul du module ADD quantitatives discrètes.
+	"""
+        Prépare les données pour l’utilisation des éléments de calcul du module ADD quantitatives discrètes.
 	
 	Pour effectuer les analyses descriptives dans le cas continu, la démarche est la même (sauf quantiles) que pour le cas discret.
 	On utilisera cependant comme données les centres des intervalles.
@@ -75,7 +78,8 @@ def preparationIntervallesAnalyse(listeIntervalles):
 	return listeIntervalles
 	
 def interpolationLineaire(p1, p2, y):
-	"""Calcule l’abscisse par interpolation linéaire
+	"""
+        Calcule l’abscisse par interpolation linéaire
 	
 	Les points ``p1``, ``p2`` nous permettent de définir une fonction linéaire f(x) = pente * x + ordonnée à l'origine (oo).
 	On retrouve ensuite l’abscisse du point d’ordonnée ``y`` se trouvant sur la courbe de la fonction, x = (``y`` - oo) / pente.
@@ -91,7 +95,8 @@ def interpolationLineaire(p1, p2, y):
 	return (y - oo) / pente
 	
 def quantileContinu(ordre, listeFrequencesCumulees, intervalles):
-	"""Calcule les quantiles d'ordre ``ordre`` pour une analyse de données conitnues.
+	"""
+        Calcule les quantiles d'ordre ``ordre`` pour une analyse de données conitnues.
 	
 	Le quantile discret nous permet de retrouver le centre de l'intervalle qui contient le vrai quantile.
 	Ensuite, à partir de l'intervalle et de l'ordre, on en déduit une valeur plus précise par interpolation linéaire.
@@ -124,7 +129,8 @@ def quantileContinu(ordre, listeFrequencesCumulees, intervalles):
 	return interpolationLineaire(p1, p2, ordre)
 	
 def infoDistributionCumulativeContinue(listeEffectifsCumules, intervalles):
-	"""Écriture dans le fichier distributionCumulative.json
+	"""
+        Écriture dans le fichier distributionCumulative.json
 	
 	Format du fihier :
 		Début
