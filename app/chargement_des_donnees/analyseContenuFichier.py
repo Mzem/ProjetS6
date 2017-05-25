@@ -7,7 +7,7 @@
 
 import csv, ast, re
 from datetime import datetime
-
+from chargement_des_donnees.verificationFormatFichier import ouvrir
 
 def lecture(fichierCSV):
 	"""
@@ -22,8 +22,17 @@ def lecture(fichierCSV):
 	#lecture
 	readerCSV = csv.reader(fichierCSV, delimiter=",")
 	
-	#remplissage dans une liste
+	#le nombre de colonnes du fichier CSV est connu à partir des noms données aux colonnes, les valeurs sans noms seront ignorées
+	#remplissage dans une liste homogène
+	firstLine = True
 	for ligne in readerCSV:
+		if (firstLine):
+			nbColonnes = len(ligne)
+			firstLine = False
+		while len(ligne) > nbColonnes:
+			ligne.pop()
+		while len(ligne) < nbColonnes:
+			ligne.append('')
 		lignesCSV.append(ligne)
 	
 	#fermeture du flux (plus besoin)	
@@ -78,13 +87,25 @@ def descriptionColonnes(lignesCSV):
 		:return: dictionnaire de 3 sous-listes ayant pour clés : "nom", "type" et "erreurs"
     """ 
 	descCSV = {}
+	
+	#noms
 	descCSV["nom"] = lignesCSV[0]
 	del lignesCSV[0]
-	descCSV["type"] = ["date","enfant","parent","nombre","nombre","nombre","nombre"]
-	#initialisation d'une liste contenant les descriptions des erreurs avec la meme taille que la liste représentant le fichier
-	descCSV["erreurs"] = []
+	
+	#types attendus des données (selon leurs noms)
+	descCSV["type"] = []
+	for nom in descCSV["nom"]:
+		if "time" in nom.lower() or "temps" in nom.lower() or "date" in nom.lower():
+			descCSV["type"].append("date")
+		elif "parent" in nom.lower() or "root" in nom.lower() or "racine" in nom.lower():
+			descCSV["type"].append("parent")
+		elif "enfant" in nom.lower() or "child" in nom.lower():
+			descCSV["type"].append("enfant")
+		else: descCSV["type"].append("nombre")
 	
 	#recherche des erreurs : comparaison du type attendu avec le type actuel
+	descCSV["erreurs"] = []
+	
 	numLigne = 0
 	for ligne in lignesCSV:
 		descCSV["erreurs"].append([])	#rajoute une ligne dans la liste d'erreurs
@@ -102,9 +123,9 @@ def descriptionColonnes(lignesCSV):
 						lignesCSV[numLigne][numColonne] = date
 						descCSV["erreurs"][numLigne][numColonne] = "correct"
 					except ValueError:
-						descCSV["erreurs"][numLigne][numColonne] = "date string format not supported"
+						descCSV["erreurs"][numLigne][numColonne] = "date string error"
 					except IndexError:
-						descCSV["erreurs"][numLigne][numColonne] = "date string format not supported"
+						descCSV["erreurs"][numLigne][numColonne] = "date string error"
 				elif typeDeDonnee(donnee) == "VIDE":
 					descCSV["erreurs"][numLigne][numColonne] = "missing value"
 					
@@ -149,7 +170,7 @@ if __name__ == "__main__":
 	#JD : il faut appeler la fct ouvrir, voir s'il y'a erreur et ensuite appeler la fct analyse et me renvoyer son résultat
 	#le problème si je prends juste le chemin pour la fct analyse et que j'ouvre le fichier dedans c'est que tu ne pourras pas faire grand chose avec le message d'erreur
 	
-	fichierCSV = ouvrir("fichier topologie csv st denis.csv")
+	fichierCSV = ouvrir("mini.csv")
 	
 	if type(fichierCSV) is str: 
 		print(fichierCSV)
