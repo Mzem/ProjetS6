@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/add.css') }}">
 	</head>
 	
-	<body>
+	<body id="target">
 
 	{% include 'header.html' %}
 <section>
@@ -37,6 +37,7 @@
   			<input type="submit" class="submit" value="Go Back" id="upload-button1">
 		</form>
 </div>
+<div id="export">Pour Jd Export, met nous une petite icone d'imprimante</div>
 
 	{% include 'footer.html' %}
 </section>
@@ -44,15 +45,24 @@
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/c3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
 				
 		<!--Scripts-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/miniatures.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/infoStats.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/vuesInteractives.js') }}"></script>
+<!--
+		<script type="text/javascript" src="{{ url_for('static', filename='js/export.js') }}"></script>
+-->
 		
 		<!--Gestion des évènements-->
 		<script>
-			// On montre par défaut la série temporelle 
+			// Exportation
+			$('#export').click(function() {
+				window.location.replace("/sauvegardeResultats");
+			});
+			
+			// Miniatures : On montre par défaut la série temporelle 
 			$('#distribution').hide();
 			$('#distributionCumulative').hide();
 			
@@ -77,7 +87,8 @@
 				$('#distributionCumulative').show();
 			});
 		</script>
-
+		
+		
 	</body>
 
 </html>

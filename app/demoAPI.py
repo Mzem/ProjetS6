@@ -35,8 +35,8 @@ def routineAdd(donneesContinues):
 	
 	return minimum, maximum, etendue, moy, ecart_type, mediane, iqr
 
-def main(chemin):
-	fichierCSV = ouvrir(chemin)
+def ecrireResultats(entree, sortie):
+	fichierCSV = ouvrir(entree)
 	
 	if type(fichierCSV) is str: 
 		return fichierCSV #erreur
@@ -64,7 +64,7 @@ def main(chemin):
 			
 			
 			
-	with open("sortie.csv", 'w', newline='') as csvfile:
+	with open(sortie, 'w', newline='') as csvfile:
 		fichier = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		#Header du csv : "Stats", "Enfant", "Parent", descCSV["nom"]
 		fichier.writerow(["stats", "enfant", "parent"] + descCSV["nom"][3:])
@@ -95,4 +95,4 @@ def main(chemin):
 			fichier.writerow(["stdDev"]	+ [noeud[0], noeud[1]] + ecart_typeCol)	
 		
 if __name__ == "__main__":
-	main(sys.argv[1])
+	ecrireResultats(sys.argv[1], sys.argv[2])

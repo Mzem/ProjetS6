@@ -7,9 +7,11 @@
 
 """
 
-from flask import Flask, request, redirect, session, url_for, render_template, send_from_directory, jsonify,  Response
+from flask import Flask, request, redirect, session, url_for, render_template, send_from_directory, jsonify, send_file
 from werkzeug.utils import secure_filename
 import os, io, json, glob
+
+from demoAPI import ecrireResultats
 from interface_web.choixFichier import choixFic
 from interface_web.addRoutes import addRoute
 from chargement_des_donnees.verificationFormatFichier import ouvrir
@@ -127,9 +129,8 @@ def sauvegardeResultats():
 
     :return: téléchargement du fichier 'Resultats.csv'.
     """
-    csv = '1,2,3\n4,5,6\n'
-    return Response(
-	    csv,
-	    mimetype="text/csv",
-	    headers={"Content-disposition":
-	             "attachment; filename=Resultats.csv"})    
+    ecrireResultats("interface_web/static/uploads/" + "t300.csv", "interface_web/static/downloads/" + "t300.csv")
+    return send_file('static/downloads/t300.csv',
+                     mimetype='text/csv',
+                     attachment_filename='results_' + 't300.csv',
+                     as_attachment=True)    
