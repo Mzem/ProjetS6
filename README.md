@@ -2,7 +2,6 @@ Listes des trucs à faire avant de rendre l'appli :
 - CENTRER MENUS NAV
 - Envoi echantillon à ADD ajax
 - graphes (meilleur affichage) - Sonny
-- Histogrammes et secteurs - Sonny
 - script pour que tous les tests se lancent en une ligne de commande (et ajouter dans la doc voir plus bas)
 - Times Series et Boxplot graphes
 - màj les docstrings ppour qu'ils soient à jour, plus desc modules
