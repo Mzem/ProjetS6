@@ -30,7 +30,7 @@ def calculEffectifs(listeDonnees):
     """Calcul l'effectifs pour chaque données contenu dans listeDonnees.
 
     La fonction prend en entrée une liste contenant les données à analyser. Elle calculera les effectifs pour chaque valeur à 
-    l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué sur pour ordonner les
+    l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué pour ordonner les
     tuples.
 
     :param listeDonnees: liste contenant les données é analyser
@@ -122,7 +122,18 @@ def infoSecteurs(listeFrequences):
 	La fonction prend en entrée le résultat du calcul des fréquences .Elle va créer un fichier .js pour y stocker (écrire)
 	les données nécessaires à la construction du diagramme en secteurs.
 	
-	:param listeFrequences: liste de tuples (donnée, fréquence)
+	Format du fihier:
+            Début
+            {
+                "bindto": "#pie",
+                "data": {
+                    "columns": [["Data1",0.25],["Data2",0.45],["Data3",0.3]],
+                    "type": "pie"
+                }
+            }
+            Fin
+
+        :param listeFrequences: liste de tuples (donnée, fréquence)
 	"""
 	# Construction du dictionnaire qui sera mis dans le .json
 	secteur = {}
@@ -138,12 +149,23 @@ def infoSecteurs(listeFrequences):
 def infoHistogramme(listeEffectifs):
 	"""Stock dans un fichier .js les informations nécessaire é la création d'un histogramme.
 
-    La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste listeEffectifs. Elle 
-    va créer un fichier .js pour y stocker les données nécessaires à la construction de léhistogramme.
+	La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste listeEffectifs. Elle 
+	va créer un fichier .js pour y stocker les données nécessaires à la construction de l'histogramme.
 
-    :param listeEffectifs: liste de tuples (donnée, effectif)     
-      """
-    # Construction du dictionnaire qui sera mis dans le .json
+        Format du fihier :
+            Début
+            {
+                "bindto": "#bar",
+                "data": {
+                    "columns": [["Data1",123],["Data2",220],["Data3",17]],
+                    "type": "bar"
+                }
+            }
+            Fin
+            
+        :param listeEffectifs: liste de tuples (donnée, effectif)     
+        """
+        # Construction du dictionnaire qui sera mis dans le .json
 	histo = {}
 	histo['bindto'] = '#bar' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #bar
 	histo['data'] = {}

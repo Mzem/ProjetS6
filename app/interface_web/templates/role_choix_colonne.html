@@ -96,8 +96,10 @@
 									console.log(nomColonne);
 									console.log(colonneADD);
 									console.log(dateADD);
+									console.log('{{file}}');
 
 									// Envoie des listes
+									var filename = '{{file}}';
 									var file = new Object();
 									file.nomColonne = nomColonne;
 									file.colonneADD = colonneADD;
@@ -114,7 +116,7 @@
             								console.log(textStatus);
             								console.log(errorThrown);
             							},
-            							success : window.location = '/fenetre_resultat_ADD/' 							      
+            							success : window.location = '/fenetre_resultat_ADD/' + filename						      
         							});
         							console.log('SORTIIIIIEEE')
 
