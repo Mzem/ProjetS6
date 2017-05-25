@@ -1,7 +1,7 @@
 /* FILTERS BAR
 =====================================================*/
 .fltrow{ /* filter grid row appearance */
-	background-color:rgba(200,180,25,0.15);
+	background-color:rgba(72,201,207,0.1);
 }
 .fltrow td, .fltrow th{
 	padding:2px !important; 

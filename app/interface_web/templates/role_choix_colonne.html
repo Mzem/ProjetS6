@@ -135,7 +135,11 @@
 				<td>{{loop.index}}</td>
 				{% for donnee in ligne %}
 					{% if descCSV["erreurs"][numLigne][loop.index0] != "correct" %}
-						<td id="erreur">{{ donnee }} <br/><span>{{descCSV["erreurs"][numLigne][loop.index0]}}</span></td>
+						{% if descCSV["type"][loop.index0] == "date" %}
+							<td id="erreur">{{ donnee }}</td>
+						{% else %}
+							<td id="erreur">{{ donnee }} <span>{{descCSV["erreurs"][numLigne][loop.index0]}}</span></td>
+						{% endif %}
 						<script>
 							lignesErreur.push(parseInt('{{numLigne + 1}}'));	//+1 car va etre comparé avec les numéros de la colonne N°
 						</script>
