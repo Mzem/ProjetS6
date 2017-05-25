@@ -1,4 +1,6 @@
 Listes des trucs à faire avant de rendre l'appli : (** : Ok)
+- CENTRER MENUS NAV
+- Envoi echantillon à ADD ajax
 - **Ajouter favicon logo DCbrain
 - **Menu de navigation : traiter les champs "About" et "Contact" + ajouter logo DCbrain tout à gauche
 
