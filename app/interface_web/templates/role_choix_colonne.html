@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>DCbrain</title>
+	<link rel="icon" href="../static/img/favicon.png" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/echantillons.css') }}">
@@ -69,11 +70,11 @@
 									var enfantADD = [];
 									var nomColonne = nomsColonnes['{{loop.index0}}'];
 									
-									var numLignes = tf_tableCSV.GetColValues(0,true);
-									var colonneFiltree = tf_tableCSV.GetColValues('{{loop.index}}',false);
-									var dateFiltree = tf_tableCSV.GetColValues(indexDate,false);
-									var parentFiltree = tf_tableCSV.GetColValues(indexParent,true);
-									var enfantFiltree = tf_tableCSV.GetColValues(indexEnfant,true);
+									var numLignes = tf_tableCSV.GetFilteredDataCol(0);
+									var colonneFiltree = tf_tableCSV.GetFilteredDataCol('{{loop.index}}');
+									var dateFiltree = tf_tableCSV.GetFilteredDataCol(indexDate);
+									var parentFiltree = tf_tableCSV.GetFilteredDataCol(indexParent);
+									var enfantFiltree = tf_tableCSV.GetFilteredDataCol(indexEnfant);
 									
 									//Nettoyage des données dont les lignes contiennet une erreur
 									var i;
@@ -88,8 +89,8 @@
 										if (ligneErronee == 0){
 											colonneADD.push(parseFloat(colonneFiltree[i]));
 											dateADD.push(dateFiltree[i]);
-											parentADD.push(parentFiltree[i]);
-											enfantADD.push(enfantFiltree[i]);
+											parentADD.push(parseInt(parentFiltree[i]));
+											enfantADD.push(parseInt(enfantFiltree[i]));
 										}
 									}
 									
@@ -184,7 +185,6 @@
 			loader_text: "Filtering data..."
 		};  
 		var tf = setFilterGrid("tableCSV",table_Props);
-		//tf_tableCSV.pagingLength = '{{lignesCSV|length}}';
 	</script>
 	
 	{% include 'footer.html' %}

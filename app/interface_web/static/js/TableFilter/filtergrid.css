@@ -81,10 +81,10 @@ input.reset:hover{ background:#CAD1D6 url(TF_Themes/btn_clear_filters.png) cente
 .inf{ /* div containing left, middle and right divs */
 	clear:both; width:auto; height:25px; 
 	background:#f4f4f4; font-size:12px; 
-	margin-bottom:2.5%; 
+	margin-bottom:3%; 
 	padding:1px 3px 1px 3px; 
 	border:1px solid #ccc; overflow:hidden;
-	margin-top:2.5%;
+	margin-top:3%;
 }
 .ldiv{ /* left div */
 	float:left; width:30%; position:inherit; 
