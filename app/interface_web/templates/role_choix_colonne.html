@@ -13,48 +13,43 @@
 	{% include 'header.html' %}
 	
 	<section>
-		<br />
-		<!-- Affichage du message d'erreur d'ouverture -->
+		
+	<!-- Affichage du message d'erreur d'ouverture -->
 		{% if msgErreur is defined %} 
 			<h1 id="msgErreur">{{msgErreur}}</h1>
 			<form action="{{ url_for('remove', file=file) }}">
   				<input type="submit" class="submit" value="Go Back" id="upload-button1">
 			</form>
 		
-		<!-- sinon affichage du contenu du fichier -->
-		{% else %}
+		{% else %} <!-- sinon affichage du contenu du fichier -->
 		
-		<!-- Message d'attente que le fichier se charge completenet -->
-		<div id="loading">
-			<h1 id="loadingText">Loading file, please wait...</h1>
-		</div>
-		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
-		<script>
-			$(document).ready(function(){
-			$("#loading").fadeOut()
-			});
-		</script>
+	<!-- Message d'attente que le fichier se charge completenet -->
+		<div id="loading"><h1 id="loadingText">Loading file, please wait...</h1></div>
 		
+
+	<!-- Table d'affichage -->
 		<div class="tf_tools">
 		<table id="tableCSV" class="mytable" cellpadding="0" cellspacing="0">
-			<!-- Variables javascript pour la transmission des données -->
-			<script>
-				var nomsColonnes = [];	//Tableau stockant les noms de colonnes (car à modifier)
-				var lignesErreur = [];	//Tableau stockant les lignes ou il y'a des erreurs
-			</script>
-
-			<!-- Stockage des noms de colonnes modifiables-->			
+			
+		<!-- Noms modifiables -->
+			<script>var nomsColonnes = [];//Tableau stockant les noms de colonnes (car à modifier)</script>
 			{% for nom in descCSV["nom"] %}
 				<script> nomsColonnes.push('{{nom}}'); </script>
 			{% endfor %}
 			
-			<!-- Affichage de la ligne des titres et des boutons de validation -->
+	<!-- Affichage de la ligne des titres et des boutons de validation -->
 			<tr>
 				<th>N°</th>
 				<!-- Position de la colonne de date -->
 				{% for type in descCSV["type"] %}
 					{% if type == "date" %}
 						<script>var indexDate = '{{loop.index}}';</script>
+					{% endif %}
+					{% if type == "parent" %}
+						<script>var indexParent = '{{loop.index}}';</script>
+					{% endif %}
+					{% if type == "enfant" %}
+						<script>var indexEnfant = '{{loop.index}}';</script>
 					{% endif %}
 				{% endfor %}
 				
@@ -66,15 +61,19 @@
 					
 					<!-- Bouton de validation pour les colonnes de nombres, avec transmission de données -->
 					{% if descCSV["type"][loop.index0] == "nombre" %}
-					<input type="image" src="../static/img/goADD.png" Value=submit align="center" width=30px height=15px
+					<input id="btn_analyse" type="submit" Value="Analyse"
 							onclick="
 									var colonneADD = [];
 									var dateADD = [];
+									var parentADD = [];
+									var enfantADD = [];
 									var nomColonne = nomsColonnes['{{loop.index0}}'];
 									
 									var numLignes = tf_tableCSV.GetColValues(0,true);
 									var colonneFiltree = tf_tableCSV.GetColValues('{{loop.index}}',false);
 									var dateFiltree = tf_tableCSV.GetColValues(indexDate,false);
+									var parentFiltree = tf_tableCSV.GetColValues(indexParent,true);
+									var enfantFiltree = tf_tableCSV.GetColValues(indexEnfant,true);
 									
 									//Nettoyage des données dont les lignes contiennet une erreur
 									var i;
@@ -89,6 +88,8 @@
 										if (ligneErronee == 0){
 											colonneADD.push(parseFloat(colonneFiltree[i]));
 											dateADD.push(dateFiltree[i]);
+											parentADD.push(parentFiltree[i]);
+											enfantADD.push(enfantFiltree[i]);
 										}
 									}
 									
@@ -96,9 +97,12 @@
 									console.log(nomColonne);
 									console.log(colonneADD);
 									console.log(dateADD);
-									console.log('{{file}}');
+									console.log(parentADD);
+									console.log(enfantADD);
 
-									// Envoie des listes
+									/*
+									//Envoi des listes
+									console.log('{{file}}');
 									var filename = '{{file}}';
 									var file = new Object();
 									file.nomColonne = nomColonne;
@@ -119,7 +123,7 @@
             							success : window.location = '/fenetre_resultat_ADD/' + filename						      
         							});
         							console.log('SORTIIIIIEEE')
-
+									*/
 									"
 						/>
 					{% endif %}
@@ -127,14 +131,15 @@
 				{% endfor %}
 			</tr>
 			
-			<!-- Affichage des lignes de données du fichier -->
+	<!-- Affichage des lignes de données du fichier -->
+			<script>var lignesErreur = [];//Tableau stockant les lignes ou il y'a des erreurs</script>
 			{% for ligne in lignesCSV %}
 				{% set numLigne = loop.index0 %}
 				<tr>
 				<td>{{loop.index}}</td>
 				{% for donnee in ligne %}
 					{% if descCSV["erreurs"][numLigne][loop.index0] != "correct" %}
-						<td id="erreur">{{ donnee }} <span>{{descCSV["erreurs"][numLigne][loop.index0]}}</span></td>
+						<td id="erreur">{{ donnee }} <br/><span>{{descCSV["erreurs"][numLigne][loop.index0]}}</span></td>
 						<script>
 							lignesErreur.push(parseInt('{{numLigne + 1}}'));	//+1 car va etre comparé avec les numéros de la colonne N°
 						</script>
@@ -151,36 +156,36 @@
 		
 	</section>
 
-		<!-- Dépendances javascript -->
-		<script type="text/javascript" src="{{ url_for('static', filename='js/TableFilter/tablefilter_all.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/TableFilter/tablefilter_all.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/echantillons.js') }}"></script>
 	
-		<!-- Affichage des filtres -->
-		<script language="javascript" type="text/javascript">
-			var table_Props =  {  
-				filters_row_index: 1,
-				col_0: "none",
-				col_1: "checklist",
-				col_2: "checklist",
-				col_3: "checklist",
-				display_all_text: "Show all",
-				help_instructions_btn_html:'R',
-				
-				on_change: false,  
-				btn: true,
-				enter_key: true,
-				paging: true,  
-				paging_length: 50,
-				results_per_page: ['ows per page',[50,100,500,1000,{{lignesCSV|length}}]],
-				rows_counter: true,  
-				rows_counter_text: "Rows: ",  
-				btn_reset: true,
-				btn_help: false,
-				loader: true,  
-				loader_text: "Filtering data..."
-			};  
-			var tf = setFilterGrid("tableCSV",table_Props);
-			//tf_tableCSV.pagingLength = '{{lignesCSV|length}}';
-		</script>
+	<!-- Affichage des filtres -->
+	<script language="javascript" type="text/javascript">
+		var table_Props =  {  
+			filters_row_index: 1,
+			col_0: "none",
+			col_1: "checklist",
+			col_2: "checklist",
+			col_3: "checklist",
+			display_all_text: "Show all",
+			help_instructions_btn_html:'R',
+			
+			on_change: false,  
+			btn: true,
+			enter_key: true,
+			paging: true,  
+			paging_length: 50,
+			results_per_page: ['ows per page',[50,100,500,1000,{{lignesCSV|length}}]],
+			rows_counter: true,  
+			rows_counter_text: "Rows: ",  
+			btn_reset: true,
+			loader: true,  
+			loader_text: "Filtering data..."
+		};  
+		var tf = setFilterGrid("tableCSV",table_Props);
+		//tf_tableCSV.pagingLength = '{{lignesCSV|length}}';
+	</script>
 	
 	{% include 'footer.html' %}
 		

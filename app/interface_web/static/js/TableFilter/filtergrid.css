@@ -1,19 +1,14 @@
 /* FILTERS BAR
 =====================================================*/
 .fltrow{ /* filter grid row appearance */
-	height:20px;
-	background-color:rgba(200,180,25,0.3);
+	background-color:rgba(200,180,25,0.15);
 }
 .fltrow td, .fltrow th{
-	padding:3px !important; 
-} 
-.btnflt{ /* button appearance */
-	font-size:11px; vertical-align:middle;
-	margin:0 2px 0 2px; padding:0 1px 0 1px;	
+	padding:2px !important; 
 }
 .btnflt_icon{ /* button appearance when displayIcons is true */
 	width:19px; height:19px; cursor:pointer !important;
-	border:0 !important; vertical-align:middle;
+	border:100 !important; vertical-align:middle;
 	background:transparent url(TF_Themes/btn_filter.png) center center no-repeat !important;
 }
 .flt{ /* filter (input) appearance */
@@ -86,9 +81,10 @@ input.reset:hover{ background:#CAD1D6 url(TF_Themes/btn_clear_filters.png) cente
 .inf{ /* div containing left, middle and right divs */
 	clear:both; width:auto; height:25px; 
 	background:#f4f4f4; font-size:12px; 
-	margin-bottom:1%; 
+	margin-bottom:2.5%; 
 	padding:1px 3px 1px 3px; 
 	border:1px solid #ccc; overflow:hidden;
+	margin-top:2.5%;
 }
 .ldiv{ /* left div */
 	float:left; width:30%; position:inherit; 
@@ -139,8 +135,7 @@ span.keyword{ background-color: #ffcc00;}/*highlighted word*/
 .odd{ background-color:#E5E5E5; }/*row bg alternating color*/
 
 .loader{ /* loader appearance */
-	position:absolute; padding: 5px 10px 5px 10px;
-	margin:20px 0 0 20px; width:auto; 
+	margin:1%; width:auto; 
 	z-index:1000; font-size:12px; font-weight:bold;
 	border:1px solid #666; background:#f4f4f4; 
 	vertical-align:middle;
