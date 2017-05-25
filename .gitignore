@@ -14,3 +14,4 @@
 *.pyc
 *.csv
 docstring/build/
+json
