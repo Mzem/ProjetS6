@@ -10,7 +10,6 @@ import os
 import json
 import glob
 
-# Fonction utilisé pour calculer le nombred'élements utilisé pour construire ListeEffectifs
 def nbElemListeCouple(listeEffectifs):
     """Calcul l'effectif total des données de listeEffectifs.
 
@@ -125,26 +124,19 @@ def infoSecteurs(listeFrequences):
 	Format du fihier:
             Début
             {
-                "bindto": "#pie",
-                "data": {
-                    "columns": [["Data1",0.25],["Data2",0.45],["Data3",0.3]],
-                    "type": "pie"
-                }
+                "donnee1" : frequence1 associee,
+                "donnee2" : frequence3 associee,
+                ...
             }
             Fin
 
         :param listeFrequences: liste de tuples (donnée, fréquence)
 	"""
-	# Construction du dictionnaire qui sera mis dans le .json
 	secteur = {}
-	secteur['bindto'] = '#pie' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #pie
-	secteur['data'] = {}
-	secteur['data']['columns'] = listeFrequences
-	secteur['data']['type'] = 'pie'
+	for couple in listeFrequences:
+		secteur[couple[0]] = couple[1]	
 	
-	# Stockage des données pour le diagramme de secteur dans "secteur.json"
-	with open('../interface_web/static/json/secteur.js', 'w', encoding='utf-8') as f:
-		json.dump(secteur, f, indent=4)
+	return secteur
 
 def infoHistogramme(listeEffectifs):
 	"""Stock dans un fichier .js les informations nécessaire é la création d'un histogramme.
@@ -155,23 +147,22 @@ def infoHistogramme(listeEffectifs):
         Format du fihier :
             Début
             {
-                "bindto": "#bar",
-                "data": {
-                    "columns": [["Data1",123],["Data2",220],["Data3",17]],
-                    "type": "bar"
-                }
+                "x": liste des donnees
+                "value": liste des effectifs respectifs
             }
             Fin
             
         :param listeEffectifs: liste de tuples (donnée, effectif)     
-        """
-        # Construction du dictionnaire qui sera mis dans le .json
+    """
+        
+	abscisses = []
+	values = []
+	for couple in listeEffectifs:
+		abscisses.append(couple[0])
+		values.append(couple[1])
+		
 	histo = {}
-	histo['bindto'] = '#bar' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #bar
-	histo['data'] = {}
-	histo['data']['columns'] = listeEffectifs
-	histo['data']['type'] = 'bar'  
+	histo['x'] = abscisses
+	histo['value'] = values 
 	
-	# Stockage des données pour l'histogramme dans "histogramme.json"
-	with open('../interface_web/static/json/histogramme.js', 'w', encoding='utf-8') as f:
-		json.dump(histo, f, indent=4)
+	return histo
