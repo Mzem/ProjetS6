@@ -64,9 +64,10 @@ def rechercheIntervalle(intervalles, nombre):
 		etendue = [1, 3]
 		l = { [0, 1[ ; [1, 2[ ; [2, 3] }
 				
-	:return: retourne l'intervalle auquel ``nombre`` appartient.
+	:return: retourne l'intervalle auquel ``nombre`` appartient, False sinon
 	
 	"""
 	for elt in intervalles:
 		if elt.contient(nombre):
 			return elt
+	return False 
