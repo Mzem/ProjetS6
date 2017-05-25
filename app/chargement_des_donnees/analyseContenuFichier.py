@@ -80,7 +80,7 @@ def descriptionColonnes(lignesCSV):
 	descCSV = {}
 	descCSV["nom"] = lignesCSV[0]
 	del lignesCSV[0]
-	descCSV["type"] = ["date","entier","entier","nombre","nombre","nombre","nombre"]
+	descCSV["type"] = ["date","noeudEnfant","noeudParent","nombre","nombre","nombre","nombre"]
 	#initialisation d'une liste contenant les descriptions des erreurs avec la meme taille que la liste représentant le fichier
 	descCSV["erreurs"] = []
 	
@@ -108,7 +108,7 @@ def descriptionColonnes(lignesCSV):
 				elif typeDeDonnee(donnee) == "VIDE":
 					descCSV["erreurs"][numLigne][numColonne] = "missing value"
 					
-			elif  descCSV["type"][numColonne] == "entier":
+			elif  descCSV["type"][numColonne] == "noeudParent" or descCSV["type"][numColonne] == "noeudEnfant":
 				if t == "ENTIER": 
 					descCSV["erreurs"][numLigne][numColonne] = "correct"
 					lignesCSV[numLigne][numColonne] = int(donnee)

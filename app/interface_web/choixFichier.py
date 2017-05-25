@@ -27,7 +27,7 @@ def FileWithSGF():
         filename = secure_filename(file.filename)
         save_path = "{}/{}".format(UPLOAD_FOLDER, filename)
         file.save(save_path)
-        return redirect(url_for("fenetre_role_choix_colonne", file=filename))
+        return redirect(url_for("fenetre_role_choix_colonne", file=filename, lignes=50))
     return "error"
 
 # Fonction pour upload fichier avec Drag&Drop
@@ -42,5 +42,5 @@ def FileWithDragDrop():
         filename = secure_filename(file.filename)
         save_path = "{}/{}".format(UPLOAD_FOLDER, filename)
         file.save(save_path)
-        return redirect(url_for("fenetre_role_choix_colonne", file=filename))
+        return redirect(url_for("fenetre_role_choix_colonne", file=filename, lignes=50))
     return "error"

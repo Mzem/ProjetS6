@@ -30,8 +30,8 @@ def index():
     return render_template("choix_fichier.html")
 
 
-@app.route("/fenetre_role_choix_colonne/<file>",methods=['GET','POST'])
-def fenetre_role_choix_colonne(file):
+@app.route("/fenetre_role_choix_colonne/<file>/<lignes>",methods=['GET','POST'])
+def fenetre_role_choix_colonne(file, lignes):
     """Fonction qui affiche le template "role_choix_colonne.html" lorsque la requette HTTP "/fenetre_role_choix_colonne/" est indiquée.
     
     :param file: représente le nom du fichier chargé
@@ -44,7 +44,7 @@ def fenetre_role_choix_colonne(file):
         return render_template("role_choix_colonne.html", msgErreur=fichierCSV, file=file)
     
     lignesCSV, descCSV = analyseFichier(fichierCSV)
-    return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV)
+    return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV, file=file, lignes=lignes)
 
 
 @app.route("/fenetre_resultat_ADD/",methods=['GET','POST', 'PUT'])

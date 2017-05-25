@@ -25,7 +25,8 @@ $(function(){
             data: formData,
             success : function(data) {
                 var file = files[0].name;
-                window.location = NEXT_URL + file;
+                var lignes = 50;
+                window.location = NEXT_URL + file + '/' + lignes;
             }       
         };
 
