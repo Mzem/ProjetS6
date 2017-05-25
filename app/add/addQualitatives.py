@@ -86,34 +86,34 @@ def calculFrequences(listeEffectifs):
     nbElem = nbElemListeCouple(listeEffectifs)
     listeFrequences = []
     i = 0
-    while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
+    while i <  len(listeEffectifs):
         tmp = (listeEffectifs[i][0], listeEffectifs[i][1]/float(nbElem))
         listeFrequences.append(tmp)
         i += 1
         
     return listeFrequences
 
-def calculFrequencesCumulees(listeFrequences):
+def calculFrequencesCumulees(listeEffectifsCumules):
     """Calcul les fréquences cumulés pour une liste de fréquences.
 
-    La fonction prend en entrée la liste des frequences. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeFrequence" en remplaçant la fréquence par la fréquence cumulé.
+    La fonction prend en entrée la liste des effectifs cumulés. Elle calculera dans une nouvelle liste la fréquence à partir 
+    de "listeEffectifsCumules" en calculant la fréquence cumulée grâce à l'effectif total
 
     :param listeFrequences: liste de tuples (donnée, frequence)
     :return: listeFrequences: liste de tuples (donnée, frequence cumulé)
     :rtype: list        
     """
-    # On récupére le nombre d'élements qu'on analyse + définition de listeFrequencesCumules comme étant une liste
-    add = 0
-    listeFrequencesCumules = []
-    
+    # On récupére le nombre d'élements qu'on analyse (situé é la fin de la liste) 
+    # + définition de listeFrequencesCumules comme étant une liste
+    nbElem = listeEffectifsCumules[len(listeEffectifsCumules) - 1][1]
+    listeFrequencesCumulees = []
     i = 0
-    while i <  len(listeFrequences):
-        tmp = (listeFrequences[i][0],listeFrequences[i][1]+add)
-        add += listeFrequences[i][1]
-        listeFrequencesCumules.append(tmp)
+    while i <  len(listeEffectifsCumules):
+        tmp = (listeEffectifsCumules[i][0], listeEffectifsCumules[i][1]/float(nbElem))
+        listeFrequencesCumulees.append(tmp)
         i += 1
-    return listeFrequencesCumules
+        
+    return listeFrequencesCumulees
     
 
 def infoSecteurs(listeFrequences):

@@ -64,3 +64,7 @@ th{
 	text-align: center;
 	text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
 }
+#btn_analyse{
+  font-size: 90%;
+  margin-top: 5%;
+}

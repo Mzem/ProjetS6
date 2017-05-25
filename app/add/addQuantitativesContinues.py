@@ -11,8 +11,6 @@ from math import log
 from add.intervalle import Intervalle, rechercheIntervalle
 from add.addQuantitativesDiscretes import quantileDiscret
 import os
-import json
-import glob
 
 def discretisation(nombreClasses, donneesContinues):
 	"""
@@ -42,11 +40,12 @@ def discretisation(nombreClasses, donneesContinues):
 	tmp = Intervalle(minimum + (nombreClasses - 1) * tailleIntervalle, maximum, True, True)
 	intervalles.append(tmp)
 	
+	listeIntervalles = [None] * len(donneesContinues)
 	#remplacement dans donneesContinues la donnee par l'intervalle auquel il appartient
 	for i in range(len(donneesContinues)):
-		donneesContinues[i] = rechercheIntervalle(intervalles, donneesContinues[i])
+		listeIntervalles[i] = rechercheIntervalle(intervalles, donneesContinues[i])
 		
-	return donneesContinues, intervalles
+	return listeIntervalles, intervalles
 	
 def calculNombreClasses(donneesContinues):
 	"""
