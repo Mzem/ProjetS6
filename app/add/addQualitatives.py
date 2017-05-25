@@ -133,7 +133,7 @@ def infoSecteurs(listeFrequences):
         :param listeFrequences: liste de tuples (donnée, fréquence)
 	"""
 	secteur = {}
-	for couple in listeFrequences
+	for couple in listeFrequences:
 		secteur[couple[0]] = couple[1]	
 	
 	return secteur
