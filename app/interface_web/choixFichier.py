@@ -20,7 +20,7 @@ UPLOAD_FOLDER = 'interface_web/static/uploads'
 def FileWithSGF():
     """Fonction qui se charge de l'upload d'un fichier lors du parcours dans le système de gestions de fichiers.
     
-    :return: redirige la page web vers la Fenêtre choix fichier avec comme parmètre le chemin du fichier uploadé.
+    :return: redirige la page web vers la fenetre_rôle_choix_colonne avec comme parmètre le chemin du fichier uploadé.
      """
     if request.method == 'POST':
         file = request.files['file']
@@ -35,7 +35,7 @@ def FileWithSGF():
 def FileWithDragDrop():
     """Fonction qui se charge de l'upload d'un fichier après avoir déposé ce fichier dans la zone de Drag&Drop.
 
-    :return: redirige la page web vers la Fenêtre choix fichier avec comme parmètre le chemin du fichier uploadé.
+    :return: redirige la page web vers la fenetre_rôle_choix_colonne avec comme parmètre le chemin du fichier uploadé.
      """    
     if request.method == 'POST':    
         file = request.files["file2upload"]

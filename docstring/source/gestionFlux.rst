@@ -16,12 +16,4 @@ gestionFlux.py
 
 .. autofunction:: manuel
 
-.. autofunction:: iStats
-
-.. autofunction:: timeSeries
-
-.. autofunction:: distribution
-
-.. autofunction:: distributionCumulative
-
 .. autofunction:: sauvegardeResultats

@@ -1,6 +1,6 @@
 .. File Rouge documentation master file, created by
 
-Bienvenue sur la documentation du projet File Rouge!
+Bienvenue sur la documentation du projet Fil Rouge!
 ====================================================
 
 .. toctree::
@@ -8,6 +8,7 @@ Bienvenue sur la documentation du projet File Rouge!
 
 	gestionFlux
 	choixFichier
+	addRoutes
 	addQualitatives
 	addQuantitativesContinues
 	addQuantitativesDiscretes
