@@ -11,7 +11,7 @@
 	<body>
 
 	{% include 'header.html' %}
-
+<section>
 <div class="container2">
 		<nav id="miniatures">
 				<h1 id="miniaturesTitle">Miniatures</h1>
@@ -28,10 +28,13 @@
 		</section>
 		
 		<section id="iStats" style= "margin-bottom: 20px;">
-			<h1 class="listeHeader" id="stats">Statistics</h1><br>
-			<h1 class="listeHeader" id="outliers">Outliers</h1>
-		</section>
+			<div class="listeHeader" id="stats"></div>
+			<div class="listeHeader" id="outliers"></div>
+		</section>.
 </div>
+
+	{% include 'footer.html' %}
+</section>
 		<!--Dépendances-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/c3.js') }}"></script>
@@ -69,9 +72,7 @@
 				$('#distributionCumulative').show();
 			});
 		</script>
-		
-	</body>
 
-	{% include 'footer.html' %}
+	</body>
 
 </html>

@@ -12,6 +12,10 @@ gestionFlux.py
 
 .. autofunction:: remove
 
+.. autofunction:: removeFiles
+
+.. autofunction:: manuel
+
 .. autofunction:: iStats
 
 .. autofunction:: timeSeries

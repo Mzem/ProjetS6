@@ -10,9 +10,12 @@
 
 <section>
 
-<a href="{{ url_for('fenetre_resultat_ADD') }}" > Pour sonny fenetre ADD </a>
-<br />
-<a href="{{ url_for('sauvegardeResultats') }}">Export</a>
+
+<div class="container">
+	<div class="upload_form_cont">
+		<h2 style="font-style: Times;">Welcome, <br>please choose a file to continue to the analysis.</h2>
+	</div>
+</div>
 	
 <form id="upload-form" action="{{ url_for('choixFic.FileWithSGF') }}" method="POST" enctype="multipart/form-data">
 
@@ -35,8 +38,9 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/Drag.js') }}"></script>
-</body>
 
 {% include 'footer.html' %}
+
+</body>
 
 </html>

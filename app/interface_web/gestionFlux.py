@@ -21,13 +21,35 @@ from add.addQuantitativesDiscretes import *
 app = Flask(__name__)
 app.register_blueprint(choixFic)
 
+
+def removeFiles():
+    """
+    Fonction qui se charge simplement de vider le fichier contenant les fichiers chargé.
+
+    """
+    files = os.listdir('interface_web/static/uploads/')
+    for i in range(0,len(files)):
+        if files[i] != '.dummy':
+            os.remove('interface_web/static/uploads/'+files[i])
+
 @app.route("/", methods=['GET'])
 def fenetre_choix_fichier():
-    """Fonction qui affiche le template "choix_fichier.html" lorsque la requette HTTP "/fenetre_choix_fichier/" est indiquée.
+    """Fonction qui affiche le template "choix_fichier.html" lorsque la requette HTTP "/" est indiquée.
     
     :return: retourne le template "choix_fichier.html"
     """
+    
+    removeFiles()
     return render_template("choix_fichier.html")
+
+@app.route("/manuel/", methods=['GET'])
+def manuel():
+    """Fonction qui affiche le template manuel.html" lorsque la requette HTTP "/manuel/" est indiquée. 
+    Ce template contiend le pdf du manuel utilisateur.
+
+    :return: retourne le template "manuel.html"
+    """
+    return render_template("manuel.html")
 
 
 @app.route("/fenetre_role_choix_colonne/<file>",methods=['GET','POST'])
@@ -50,8 +72,9 @@ def fenetre_role_choix_colonne(file):
 @app.route("/fenetre_resultat_ADD/",methods=['GET','POST', 'PUT'])
 def fenetre_resultat_ADD():
 	"""Fonction qui affiche le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
+        Cette fonction se charge également défectuer tout les calculs autour de l'analyse descriptives de données avant l'affichage de la page.
 	
-		:return: retourne le template "resultat_ADD.html"
+	:return: retourne le template "resultat_ADD.html"
 	"""
 	if request.method == 'PUT':
 		requette = request.get_json()
@@ -87,14 +110,14 @@ def fenetre_resultat_ADD():
 
 @app.route("/remove/<file>",methods=['GET','POST'])
 def remove(file):
-    """Fonction qui supprime le fichier uploadé
+    """Fonction qui supprime le fichier mis en paramètre qui se situe dans le dossier des fichiers chargé.
     
     :param: file de type str correspondant au nom du fichier csv
     :return: redirige vers la route index
     """
     os.remove('{}{}'.format('interface_web/static/uploads/',file))
     return redirect(url_for("fenetre_choix_fichier"))
-
+	
 @app.route('/iStats')
 def iStats():
 	stats_path = os.path.join(app.static_folder, 'json/stats.js')

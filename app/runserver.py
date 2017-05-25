@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import sys
+import sys, os
 import argparse
 import webbrowser
 from interface_web.gestionFlux import app
