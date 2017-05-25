@@ -11,6 +11,7 @@ Listes des trucs à faire avant de rendre l'appli : (** : Ok)
 - **Histogrammes et secteurs
 - script pour que tous les tests se lancent en une ligne de commande (et ajouter dans exe de la doc voir plus bas)
 - Times Series à faire dans resultat_ADD
+- Placer l'export dans la fenetre ADD
 - .... mettez vos trucs ....
 
 Docstring sphinx:
