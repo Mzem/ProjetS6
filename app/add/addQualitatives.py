@@ -30,7 +30,7 @@ def calculEffectifs(listeDonnees):
     """Calcul l'effectifs pour chaque données contenu dans listeDonnees.
 
     La fonction prend en entrée une liste contenant les données à analyser. Elle calculera les effectifs pour chaque valeur à 
-    l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué sur pour ordonner les
+    l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué pour ordonner les
     tuples.
 
     :param listeDonnees: liste contenant les données é analyser
@@ -86,34 +86,34 @@ def calculFrequences(listeEffectifs):
     nbElem = nbElemListeCouple(listeEffectifs)
     listeFrequences = []
     i = 0
-    while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
+    while i <  len(listeEffectifs):
         tmp = (listeEffectifs[i][0], listeEffectifs[i][1]/float(nbElem))
         listeFrequences.append(tmp)
         i += 1
         
     return listeFrequences
 
-def calculFrequencesCumulees(listeFrequences):
+def calculFrequencesCumulees(listeEffectifsCumules):
     """Calcul les fréquences cumulés pour une liste de fréquences.
 
-    La fonction prend en entrée la liste des frequences. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeFrequence" en remplaçant la fréquence par la fréquence cumulé.
+    La fonction prend en entrée la liste des effectifs cumulés. Elle calculera dans une nouvelle liste la fréquence à partir 
+    de "listeEffectifsCumules" en calculant la fréquence cumulée grâce à l'effectif total
 
     :param listeFrequences: liste de tuples (donnée, frequence)
     :return: listeFrequences: liste de tuples (donnée, frequence cumulé)
     :rtype: list        
     """
-    # On récupére le nombre d'élements qu'on analyse + définition de listeFrequencesCumules comme étant une liste
-    add = 0
-    listeFrequencesCumules = []
-    
+    # On récupére le nombre d'élements qu'on analyse (situé é la fin de la liste) 
+    # + définition de listeFrequencesCumules comme étant une liste
+    nbElem = listeEffectifsCumules[len(listeEffectifsCumules) - 1][1]
+    listeFrequencesCumulees = []
     i = 0
-    while i <  len(listeFrequences):
-        tmp = (listeFrequences[i][0],listeFrequences[i][1]+add)
-        add += listeFrequences[i][1]
-        listeFrequencesCumules.append(tmp)
+    while i <  len(listeEffectifsCumules):
+        tmp = (listeEffectifsCumules[i][0], listeEffectifsCumules[i][1]/float(nbElem))
+        listeFrequencesCumulees.append(tmp)
         i += 1
-    return listeFrequencesCumules
+        
+    return listeFrequencesCumulees
     
 
 def infoSecteurs(listeFrequences):
@@ -122,7 +122,18 @@ def infoSecteurs(listeFrequences):
 	La fonction prend en entrée le résultat du calcul des fréquences .Elle va créer un fichier .js pour y stocker (écrire)
 	les données nécessaires à la construction du diagramme en secteurs.
 	
-	:param listeFrequences: liste de tuples (donnée, fréquence)
+	Format du fihier:
+            Début
+            {
+                "bindto": "#pie",
+                "data": {
+                    "columns": [["Data1",0.25],["Data2",0.45],["Data3",0.3]],
+                    "type": "pie"
+                }
+            }
+            Fin
+
+        :param listeFrequences: liste de tuples (donnée, fréquence)
 	"""
 	# Construction du dictionnaire qui sera mis dans le .json
 	secteur = {}
@@ -138,12 +149,23 @@ def infoSecteurs(listeFrequences):
 def infoHistogramme(listeEffectifs):
 	"""Stock dans un fichier .js les informations nécessaire é la création d'un histogramme.
 
-    La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste listeEffectifs. Elle 
-    va créer un fichier .js pour y stocker les données nécessaires à la construction de léhistogramme.
+	La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste listeEffectifs. Elle 
+	va créer un fichier .js pour y stocker les données nécessaires à la construction de l'histogramme.
 
-    :param listeEffectifs: liste de tuples (donnée, effectif)     
-      """
-    # Construction du dictionnaire qui sera mis dans le .json
+        Format du fihier :
+            Début
+            {
+                "bindto": "#bar",
+                "data": {
+                    "columns": [["Data1",123],["Data2",220],["Data3",17]],
+                    "type": "bar"
+                }
+            }
+            Fin
+            
+        :param listeEffectifs: liste de tuples (donnée, effectif)     
+        """
+        # Construction du dictionnaire qui sera mis dans le .json
 	histo = {}
 	histo['bindto'] = '#bar' # Dans le template "resultatADD", l'histogramme sera placer dans la zone s'appellant #bar
 	histo['data'] = {}

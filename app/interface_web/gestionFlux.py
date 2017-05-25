@@ -11,6 +11,7 @@ from flask import Flask, request, redirect, session, url_for, render_template, s
 from werkzeug.utils import secure_filename
 import os, io, json, glob
 from interface_web.choixFichier import choixFic
+from interface_web.addRoutes import addRoute
 from chargement_des_donnees.verificationFormatFichier import ouvrir
 from chargement_des_donnees.analyseContenuFichier import analyseFichier
 from add.addQualitatives import *
@@ -20,11 +21,11 @@ from add.addQuantitativesDiscretes import *
 
 app = Flask(__name__)
 app.register_blueprint(choixFic)
-
+app.register_blueprint(addRoute)
 
 def removeFiles():
     """
-    Fonction qui se charge simplement de vider le fichier contenant les fichiers chargé.
+    Fonction qui se charge simplement de vider le dossier contenant les fichiers chargé.
 
     """
     files = os.listdir('interface_web/static/uploads/')
@@ -34,7 +35,8 @@ def removeFiles():
 
 @app.route("/", methods=['GET'])
 def fenetre_choix_fichier():
-    """Fonction qui affiche le template "choix_fichier.html" lorsque la requette HTTP "/" est indiquée.
+    """Fonction qui affiche le template "choix_fichier.html" lorsque la requette HTTP "/" est indiquée. Elle se charge également de vider le 
+    dossier 'uploads/' avec la fonction removeFiles()
     
     :return: retourne le template "choix_fichier.html"
     """
@@ -55,6 +57,7 @@ def manuel():
 @app.route("/fenetre_role_choix_colonne/<file>",methods=['GET','POST'])
 def fenetre_role_choix_colonne(file):
     """Fonction qui affiche le template "role_choix_colonne.html" lorsque la requette HTTP "/fenetre_role_choix_colonne/" est indiquée.
+    Le template affiche un message d'erreur si le fichier 'file' n'est pas valide, sinon elle affiche son contenu.
     
     :param file: représente le nom du fichier chargé
     :return: retourne le template "role_choix_colonne.html"
@@ -66,11 +69,11 @@ def fenetre_role_choix_colonne(file):
         return render_template("role_choix_colonne.html", msgErreur=fichierCSV, file=file)
     
     lignesCSV, descCSV = analyseFichier(fichierCSV)
-    return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV)
+    return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV, file=file)
 
 
-@app.route("/fenetre_resultat_ADD/",methods=['GET','POST', 'PUT'])
-def fenetre_resultat_ADD():
+@app.route("/fenetre_resultat_ADD/<file>",methods=['GET','POST', 'PUT'])
+def fenetre_resultat_ADD(file):
 	"""Fonction qui affiche le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
         Cette fonction se charge également défectuer tout les calculs autour de l'analyse descriptives de données avant l'affichage de la page.
 	
@@ -104,50 +107,26 @@ def fenetre_resultat_ADD():
 		with open('interface_web/static/json/distribution.js', 'w', encoding='utf-8') as f:
 			json.dump(dataDistrib, f, indent=4)
             
-		return render_template("resultat_ADD.html")
+		return render_template("resultat_ADD.html", file=file)
 	else:
-		return render_template("resultat_ADD.html")
+		return render_template("resultat_ADD.html", file=file)
 
 @app.route("/remove/<file>",methods=['GET','POST'])
 def remove(file):
-    """Fonction qui supprime le fichier mis en paramètre qui se situe dans le dossier des fichiers chargé.
+    """Fonction qui supprime le fichier 'file' mis en paramètre qui se situe dans le dossier 'uploads/'.
     
     :param: file de type str correspondant au nom du fichier csv
     :return: redirige vers la route index
     """
     os.remove('{}{}'.format('interface_web/static/uploads/',file))
     return redirect(url_for("fenetre_choix_fichier"))
-	
-@app.route('/iStats')
-def iStats():
-	stats_path = os.path.join(app.static_folder, 'json/stats.js')
-	with open(stats_path) as json_file:
-		data = json.load(json_file)
-	return jsonify(data)
-
-@app.route('/timeSeries')
-def timeSeries():
-	stats_path = os.path.join(app.static_folder, 'json/timeSeries.js')
-	with open(stats_path) as json_file:
-		data = json.load(json_file)
-	return jsonify(data)
-	
-@app.route('/distribution')
-def distribution():
-	stats_path = os.path.join(app.static_folder, 'json/distribution.js')
-	with open(stats_path) as json_file:
-		data = json.load(json_file)
-	return jsonify(data)
-	
-@app.route('/distributionCumulative')
-def distributionCumulative():
-	stats_path = os.path.join(app.static_folder, 'json/distributionCumulative.js')
-	with open(stats_path) as json_file:
-		data = json.load(json_file)
-	return jsonify(data)
 
 @app.route("/sauvegardeResultats")
 def sauvegardeResultats():
+    """Fonction qui sauvegarde les résultats de l'analyse descriptives dans un fichier .csv, et lance ainsi son téléchargement.
+
+    :return: téléchargement du fichier 'Resultats.csv'.
+    """
     csv = '1,2,3\n4,5,6\n'
     return Response(
 	    csv,

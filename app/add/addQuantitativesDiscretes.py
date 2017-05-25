@@ -11,8 +11,6 @@ from math import sqrt
 from add.intervalle import Intervalle
 from add.addQualitatives import calculFrequences, calculFrequencesCumulees
 import os
-import json
-import glob
 
 def moyenne(listeEffectifs):
 	"""
@@ -33,6 +31,8 @@ def moyenne(listeEffectifs):
 def quantileDiscret(ordre, listeFrequencesCumulees):
 	"""
         Calcule le quantile d'ordre ``ordre``.
+        
+	Quantile non défini si l'ordre n'est pas compris entre 0 exclus et 1 exclus
 	
 	:param ordre: Nombre flottant compris entre 0 et 1.
 	:param listeFrequencesCumulees: liste de couples (valeur, frequence cumulee) triée selon les valeurs 
@@ -41,6 +41,9 @@ def quantileDiscret(ordre, listeFrequencesCumulees):
 	
 	.. note:: La médiane est le quantile d'ordre 1/2. Les quartiles sont les quantiles d'ordre 1/4 et 3/4.
 	"""
+	
+	if ordre >= 1 or ordre <= 0:
+		return float('nan')
 	
 	i = 0
 	while listeFrequencesCumulees[i][1] < ordre:
@@ -102,6 +105,10 @@ def symetrie(listeEffectifs):
 	Si le coefficient est positif, la distribution est étalée sur la droite.
 	Si le coefficient est négatif, la distribution est étalée sur la gauche.
 	
+	En théorie si l'écart-type est égal à 0, la symétrie n'est pas définie.
+	Cependant un écart-type égal à 0 s'interprète :
+		Si toutes les valeurs de la distribution sont égales à la moyenne, notre écart-type va être nul.
+		On peut alors considérer la distribution parfaitement symétrique, toutes les données sont regroupées en un point, la moyenne.
 	
 	:rtype: float
 		
@@ -116,15 +123,20 @@ def symetrie(listeEffectifs):
 	momentCentreOrdre3 = somme / taille
 	ecType = ecartType(variance(listeEffectifs))
 	
-	return  momentCentreOrdre3 / (ecType ** 3)
+	if ecType == 0:
+		return 0
+	else:	
+		return  momentCentreOrdre3 / (ecType ** 3)
 	
 def aplatissement(listeEffectifs):
 	"""
         Calcule le coefficient d'aplatissement de Fisher.
 	
-	Si le coefficient est nul, la distribution suit une loi normale centrée réduite.
+	Si le coefficient est égal à 3, la distribution suit une loi normale centrée réduite.
 	Si le coefficient est inférieur à 3, la distribution est aplatie.
 	Si le coefficient est supérieur à 3, les valeurs de la distribution est concentrée autour de la moyenne.
+	
+	Non défini si l'écart-type est nul
 	
 	:rtype: float
 	
@@ -139,7 +151,10 @@ def aplatissement(listeEffectifs):
 	momentCentreOrdre4 = somme / taille
 	ecType = ecartType(variance(listeEffectifs))
 	
-	return  momentCentreOrdre4 / (ecType ** 4)
+	if ecType == 0:
+		return float('nan')
+	else:
+		return  momentCentreOrdre4 / (ecType ** 4)
 
 def infoDistributionDiscrete(listeEffectifs):
 	"""
@@ -192,8 +207,7 @@ def infoDistributionCumulativeDiscrete(listeEffectifsCumules):
 	distributionC['x'] = abscisses
 	distributionC['value'] = values
 	
-	with open('../interface_web/static/json/distributionCumulative.js', 'w', encoding='utf-8') as f:
-		json.dump(distributionC, f, indent=4)
+	return distributionC
 	
 def infoBoiteTukey(listeEffectifs):
 	"""
@@ -215,7 +229,7 @@ def infoBoiteTukey(listeEffectifs):
 		
 	:param listeEffectifs: liste de couples (valeur, effectif).
 	"""	
-	listeFC = calculFrequencesCumulees(calculFrequences(listeEffectifs))
+	listeFC = calculFrequencesCumulees(calculEffectifsCumules(listeEffectifs))
 	q1 = quantileDiscret(0.25, listeFC)
 	q3 = quantileDiscret(0.75, listeFC)
 	median = quantileDiscret(0.5, listeFC)
@@ -228,8 +242,7 @@ def infoBoiteTukey(listeEffectifs):
 	tukey['right'] = q3 + 1.5 * (q3 - q1)
 	tukey['outliers'] = anomaliesTukey(listeEffectifs)
 		
-	with open('../interface_web/static/json/boxplot.js', 'w', encoding='utf-8') as f:
-		json.dump(tukey, f, indent=4)
+	return tukey
 
 def infoSerieTemporelle(listeSerieTemporelle):
 	"""
@@ -255,6 +268,5 @@ def infoSerieTemporelle(listeSerieTemporelle):
 	timeSeries['x'] = timestamps
 	timeSeries['value'] = values
 	
-	with open('../interface_web/static/json/timeSeries.js', 'w', encoding='utf-8') as f:
-		json.dump(timeSeries, f, indent=4)
+	return timeSeries
 

@@ -6,7 +6,6 @@
 \pagenumbering{gobble}\clearpage
 \maketitle\vspace{9em}
 \begin{center}\includegraphics[scale=0.7]{../Cahier/logo.png}\end{center}
-\begin{flushright}Module \textit{Projet}\end{flushright}
 \newpage
 \tableofcontents
 \newpage\clearpage\pagenumbering{arabic}
@@ -23,11 +22,11 @@
 		La première fenêtre rencontrée correspond à l'index de l'application. Elle représente la première étape qui consiste à charger le fichier \lstinline!.csv! pour exécuter l'analyse descriptives de données. 
 		Deux manières se présentent pour le chargement, la première consistant à faire glisser le fichier dans la zone de drop comme le montre l'illustration suivante. \\
 		
-		=================== SCREENSHOT DRAG\&DROP ====================\\
+	\begin{center}\includegraphics[scale=0.45]{fenetreDragDrop.png}\end{center}
 		  
 		 La seconde correspond à la méthode classique en cliquant sur le symbole \textbf{\textit{+}}, c'est à dire parcourir l'arborescence de fichiers pour trouver le document \lstinline!.csv!.\\
 		 
-		=================== SCREENSHOT SGF ====================\\
+	\begin{center}\includegraphics[scale=0.45]{fenetreSGF.png}\end{center}
 	
 		Les fichiers renseignés doivent décrire un format très précis pour pouvoir continuer vers la prochaine étape. Leurs contenus sont décrit par des colonnes aux types prédéfinies:
 		\begin{itemize}
@@ -36,24 +35,26 @@
 		\item Enfant : nom du noeud
 		\item Mesure (unité) : Valeur
 		\end{itemize}
-		
-		(SCREENSHOT d'un petit bout de tableau?)
+		Exemple :
+		\begin{center}\includegraphics[scale=0.52]{exampleCSV.png}\end{center}
 		
 		Après avoir choisi un fichier, la page web va se rediriger vers la deuxième fenêtre de l'application si aucune erreur n'est détectées pour l'extension, l'ouverture et la lecture de ce dernier. Sinon un message d'erreur s'affiche sur la fenêtre.\\
 		
 				
-		=================== SCREENSHOT ERREUR ====================\\		
+	\begin{center}\includegraphics[scale=0.45]{fenetreErreur.png}\end{center}
+			
 	\subsection{Étape 2-Choix et filtrage de la colonne}
 	\subsection{Étape 3-Résultats}
-			(Insérez un screenshot)\\
+			\begin{center}\includegraphics[scale=0.45]{fenetre3.png}\end{center}
+			
 		La fenêtre que vous pouvez apercevoir ci-dessus représente la dernière étape du traitement des données, l'étape de consultation des résultats d'analyse descriptive.\\
 		Ces résultats sont constitués de deux catégories d'éléments :
 		\begin{itemize}
 			\item Des valeurs statistiques à consulter directement.
 			\item Des représentations graphiques :\\
 				Il suffit de cliquer sur une miniature pour accéder à une vue précise et interactive du graphe sélectionné.\\
-			(Insérez un screenshot - avant / après le clic)			
+			\begin{center}\includegraphics[scale=0.40]{fenetre3-2.png}\end{center}		
 		\end{itemize}
-		Finalement, une fonctionnalité de retour est disponible pour revenir à l'étape 3 et effectuer une autre analyse sans relancer l'applet du début.\\
+		Finalement, une fonctionnalité de retour est disponible pour revenir à l'étape 2 et effectuer une autre analyse sans relancer l'applet du début.\\
 			(Insérez un screenshot)
 \end{document}
