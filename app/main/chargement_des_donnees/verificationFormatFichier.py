@@ -1,21 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-	Le module ``Vérification format fichier``
-	========================================================
-"""
 
 import os, csv
 
-
 def verifExistence(chemin):
-	"""
-		Fonctionnalité de vérification de l'existance du fichier pour l'ouverture
+	"""Vérifie l'existance du fichier pour l'ouverture.
 
-		:param chemin: chemin du fichier
-		:type chemin: str
-		:return: entier 0 ou une description de l'erreur
-        """  
+	:param chemin: chemin du fichier
+	:type chemin: str
+	:return: entier 0 ou une erreur ``not an existing file``
+	"""  
 	if not os.path.isfile(chemin):
 		print(os.path.isfile(chemin))
 		return "Error: not an existing file"
@@ -23,12 +17,11 @@ def verifExistence(chemin):
 
 	
 def verifExtension(chemin):
-	"""
-		Fonctionnalité de vérification de l'extension du fichier
+	"""Vérification l'extension du fichier.
 
-		:param chemin: chemin du fichier
-		:type chemin: str
-		:return: entier 0 ou une description de l'erreur
+	:param chemin: chemin du fichier
+	:type chemin: str
+	:return: entier 0 ou une erreur ``file extension not .csv``
     """ 
 	if os.path.splitext(chemin)[1] != ".csv":
 		return "Error: file extension not .csv"
@@ -36,12 +29,11 @@ def verifExtension(chemin):
 
 	
 def verifLecture(fichierCSV):
-	"""
-		Fonctionnalité de vérification de l'accès au contenu du fichier et de sa nature
+	"""Vérifie l'accès au contenu du fichier ainsi que sa nature.
 
-		:param fichierCSV: le fichier CSV ouvert
-		:type fichierCSV: TextIoWrapper
-		:return: entier 0 ou une description de l'erreur
+	:param fichierCSV: le fichier CSV ouvert
+	:type fichierCSV: TextIoWrapper
+	:return: entier 0, une erreur ``not a raw text file`` ou ``file content not readable``
     """ 
 	if not fichierCSV.readable():
 		return "Error: file content not readable"
@@ -57,12 +49,13 @@ def verifLecture(fichierCSV):
 
 	
 def verifCSV(fichierCSV):
-	"""
-		Fonctionnalité de vérification si le fichier CSV présumé est assez strucutré (contient délimiteur)
+	"""Vérifie si le fichier CSV présumé est strucutré.
+	
+	Examine si le fichier contient bien un caractère délimitant les valeurs entre elles.
 
-		:param fichierCSV: le fichier CSV ouvert
-		:type fichierCSV: TextIoWrapper
-		:return: entier 0 ou une description de l'erreur
+	:param fichierCSV: le fichier CSV ouvert
+	:type fichierCSV: TextIoWrapper
+	:return: entier 0 ou une erreur ``not a structured CSV file``
     """ 
 	text = fichierCSV.read()
 	fichierCSV.seek(0)
@@ -74,12 +67,11 @@ def verifCSV(fichierCSV):
 	return 0
 	
 def ouvrir(chemin):
-	"""
-		Fonctionnalité principale d'ouverture du fichier CSV et de vérification
+	"""Fonctionnalité principale d'ouverture du fichier CSV et de vérification
 
-		:param chemin: chemin du fichier
-		:type chemin: str
-		:return: le fichier CSV ouvert ou la description de l'erreur rencontrée lors de l'ouverture
+	:param chemin: chemin du fichier
+	:type chemin: str
+	:return: le fichier CSV ouvert ou la description de l'erreur rencontrée lors de l'ouverture
     """
 	#test du chemin du fichier
 	codeErreur = verifExistence(chemin)

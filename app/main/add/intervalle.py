@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-	Le module ``intervalle``
-	========================
-	
+	Description
+	============	
 	Ce module est utilisé pour une manipulation réduite des intervalles dans \ **R**\.
 	
 	.. code-block:: python
