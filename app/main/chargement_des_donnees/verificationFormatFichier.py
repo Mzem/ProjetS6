@@ -8,7 +8,7 @@
 import os
 
 
-def verifOuverture(chemin):
+def verifExistence(chemin):
 	"""
 		Fonctionnalité de vérification de l'existance du fichier pour l'ouverture
 
@@ -65,7 +65,7 @@ def ouvrir(chemin):
 		:return: le fichier CSV ouvert ou la description de l'erreur rencontrée lors de l'ouverture
     """
 	#test du chemin du fichier
-	codeErreur = verifOuverture(chemin)
+	codeErreur = verifExistence(chemin)
 	if codeErreur != 0: return codeErreur
 	
 	#test du l'extension sur le chemin du fichier

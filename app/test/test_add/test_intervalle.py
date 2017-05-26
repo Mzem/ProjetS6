@@ -8,10 +8,10 @@
 """
 import unittest, sys
 
-sys.path.append('../')
+sys.path.append('../../main')
 from add.intervalle import *
 
-class intervalleTest(unittest.TestCase): 
+class test_intervalle(unittest.TestCase): 
 
 	@classmethod
 	def setUpClass(cls):

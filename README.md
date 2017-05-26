@@ -1,4 +1,5 @@
 Listes des trucs à faire avant de rendre l'appli :
+- Placer docstring dans le répertoire app
 - CENTRER MENUS NAV
 - Envoi echantillon à ADD ajax
 - graphes (meilleur affichage) - Sonny

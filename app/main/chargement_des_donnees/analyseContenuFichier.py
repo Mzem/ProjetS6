@@ -9,7 +9,7 @@ import csv, ast, re
 from datetime import datetime
 from chargement_des_donnees.verificationFormatFichier import ouvrir
 
-def lecture(fichierCSV):
+def lecture(fichierCSV,toClose):
 	"""
 		Fonction de lecture du contenu du fichier CSV ligne par ligne
 
@@ -35,8 +35,9 @@ def lecture(fichierCSV):
 			ligne.append('')
 		lignesCSV.append(ligne)
 	
-	#fermeture du flux (plus besoin)	
-	fichierCSV.close()
+	#fermeture du flux (plus besoin)
+	if toClose:
+		fichierCSV.close()
 	
 	return lignesCSV
 
@@ -157,7 +158,7 @@ def analyseFichier(fichierCSV):
 		:type fichierCSV: TextIoWrapper
 		:return: une liste contenant les données du fichier et un dictionnaire décrivant ces données
     """
-	lignesCSV = lecture(fichierCSV)
+	lignesCSV = lecture(fichierCSV,True)
 	
 	descCSV = descriptionColonnes(lignesCSV)
 		

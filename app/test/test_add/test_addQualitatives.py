@@ -8,11 +8,11 @@
 """
 import unittest 
 import sys
-sys.path[:0] = ['../']
+sys.path[:0] = ['../../main']
 from add.addQualitatives import *
 
 
-class addQualitativesTest(unittest.TestCase): 
+class test_addQualitatives(unittest.TestCase): 
 
     # initialization logic for the test suite declared in the test module
     # code that is executed before all tests in one test run

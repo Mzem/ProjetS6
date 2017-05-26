@@ -8,13 +8,13 @@
 """
 import unittest, sys, random
 
-sys.path.append('../')
+sys.path.append('../../main')
 
 from add.addQualitatives import *
 from add.addQuantitativesDiscretes import *
 from add.addQuantitativesContinues import *
 
-class addQuantitativesContinuesTest(unittest.TestCase):
+class test_addQuantitativesContinues(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls):
 		pass

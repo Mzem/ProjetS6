@@ -8,13 +8,13 @@
 """
 import unittest, sys
 
-sys.path.append('../')
+sys.path.append('../../main')
 
 from add.addQualitatives import *
 from add.addQuantitativesDiscretes import *
 from add.addQuantitativesContinues import *
 
-class addQuantitativesDiscretesTest(unittest.TestCase):
+class test_addQuantitativesDiscretes(unittest.TestCase):
 	@classmethod
 	def setUpClass(cls):
 		cls.serieConstante10 = [7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,]

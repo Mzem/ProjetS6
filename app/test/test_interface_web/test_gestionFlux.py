@@ -7,13 +7,12 @@
 
 """
 import unittest, sys, os
-from flask_testing import TestCase, LiveServerTestCase
 from shutil import copy2
 
-sys.path[:0] = ['../']
+sys.path[:0] = ['../../main']
 from interface_web.gestionFlux import app
 
-class gestionFluxTest(unittest.TestCase): 
+class test_gestionFlux(unittest.TestCase): 
 
     # initialization logic for the test suite declared in the test module
     # code that is executed before all tests in one test run

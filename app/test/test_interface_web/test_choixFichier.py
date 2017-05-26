@@ -7,14 +7,13 @@
 
 """
 import unittest, io, sys, os
-from flask_testing import TestCase
 from io import BytesIO
 
-sys.path.append('../')
+sys.path.append('../../main')
 from interface_web.choixFichier import *
 from interface_web.gestionFlux import app
 
-class choixFichierTest(unittest.TestCase): 
+class test_choixFichier(unittest.TestCase): 
 
     # initialization logic for the test suite declared in the test module
     # code that is executed before all tests in one test run
