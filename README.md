@@ -1,4 +1,5 @@
 Listes des trucs à faire avant de rendre l'appli :
+- LES TESTS NE MARCHE PLUS !!!
 - AFFICHE LE NOM DE LA COLONNE SONNNNNNY
 - CSS NAV: qui colle pas en haut et à gauche sur d'autres page
 graphes (meilleur affichage légendes) - Sonny
