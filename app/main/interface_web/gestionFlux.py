@@ -91,27 +91,32 @@ def fenetre_resultat_ADD(file):
 		listeEffectifs = calculEffectifs(donneesContinues)
 		listeEffectifsCumules = calculEffectifsCumules(listeEffectifs)
 		
-        # infos stats
+		# infos stats
 		dataSummary = infoStats(listeEffectifs, etendueIntervalles)
 		dataSummary["nomColonne"] = nomColonne
 		with safe_open_w('interface_web/static/json/stats.js') as f:
 			json.dump(dataSummary, f, indent=4)
 
-        # Série temporelle
-        #
+		# Série temporelle
+		#
         
-        # Distribution cumulative continue
+		# Distribution cumulative continue
 		dataDistribCumul = infoDistributionCumulativeContinue(listeEffectifsCumules, etendueIntervalles)
 		with safe_open_w('interface_web/static/json/distributionCumulative.js') as f:
 			json.dump(dataDistribCumul, f, indent=4)
 			
-        # Distribution
-		dataDistrib = infoDistributionDiscrete(listeEffectifs)
+		# Distribution
+		dataDistrib = infoDistribution(listeEffectifs)
 		with safe_open_w('interface_web/static/json/distribution.js') as f:
 			json.dump(dataDistrib, f, indent=4)
-            
+			
+		# Boîte à moustaches de Tukey : à décommenter si utilisé
+		#dataTukey = infoBoiteTukeyContinu(listeEffectifs, etendueIntervalles)
+		#with safe_open_w('interface_web/static/json/boxplot.js') as f:
+		#	json.dump(dataTukey, f, indent=4)
+		
 		return render_template("resultat_ADD.html", file=file, nomColonne=nomColonne)
-	else:
+	else:	
 		return render_template("resultat_ADD.html", file=file)
 
 @app.route("/remove/<file>",methods=['GET','POST'])

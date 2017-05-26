@@ -1,20 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-	Le module ``Analyse de données qualitatives``
-	========================================================
 
-
-"""
 import os
 import json
 import glob
 
 def nbElemListeCouple(listeEffectifs):
-    """Calcul l'effectif total des données de listeEffectifs.
+    """Calcul l'effectif total des données de ``listeEffectifs``.
 
-    La fonction se charge simplement de calculer l'effectif total des données contenu danslisteEffectifs en sommant 
-    l'effectif de chaque tuple (couple[1]).
+    La fonction se charge simplement de calculer l'effectif total des données contenu dans ``listeEffectifs`` en sommant 
+    l'effectif de chaque tuple : ``couple[1]``.
 
     :param listeEffectifs: liste de tuples (donnée, effectif)
     :return: l'effectif total des données de listeEffectifs
@@ -26,18 +21,20 @@ def nbElemListeCouple(listeEffectifs):
     return i
 
 def calculEffectifs(listeDonnees):
-    """Calcule l'effectifs pour chaque données contenu dans listeDonnees.
+    """Calcule l'effectifs pour chaque données contenu dans ``listeDonnees``.
 
     La fonction prend en entrée une liste contenant les données à analyser. Elle calculera les effectifs pour chaque valeur à 
-    l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué pour ordonner les
+    l'aide d'un dictionnaire.
+    
+    Ce dictionnaire sera converti en liste de tuples et un tri sera effectué pour ordonner les
     tuples.
 
     :param listeDonnees: liste contenant les données à analyser
-    :return: listeEffectifs: liste de tuples (donnée, effectif)
+    :return: liste de tuples (donnée, effectif)
     :rtype: list
     """   
-    # Création d'un dictionnaire oé chaque clé correspond é une valeur de listeDonnees, 
-    # et dont la veleur est initialisé é 0.
+    # Création d'un dictionnaire où chaque clé correspond à une valeur de listeDonnees, 
+    # et dont la veleur est initialisé à 0.
     effectifs = {}.fromkeys(set(listeDonnees),0)
     
     for valeur in listeDonnees:
@@ -48,13 +45,13 @@ def calculEffectifs(listeDonnees):
     return listeEffectifs
 
 def calculEffectifsCumules(listeEffectifs):
-    """Calcule les effectifs cumulés avec l'aide de listeEffectifs.
+    """Calcule les effectifs cumulés avec l'aide de ``listeEffectifs``.
 
     La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste les effectifs cumulés à partir 
-    de "listeEffectifs" en remplaçant l'effectif par l'effectif cumulé correspondant.
+    de ``listeEffectifs`` en remplaçant l'effectif par l'effectif cumulé correspondant.
 
     :param listeEffectifs: liste de tuples (donnée, effectif)
-    :return: listeEffectifsCumules: liste de tuples (donnée, effectif cumulé)
+    :return: liste de tuples (donnée, effectif cumulé)
     :rtype: list
     """   
     # Variables : somme contiendra la valeur cumulée é chaque itération
@@ -73,10 +70,10 @@ def calculFrequences(listeEffectifs):
     """Calcule les fréquences d'apparition des valeurs.
 
     La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeEffectifs" en divisant l'effectif par la taille du jeu de données.
+    de ``listeEffectifs`` en divisant l'effectif par la taille du jeu de données.
 
     :param listeEffectifs: liste de tuples (donnée, effectif)
-    :return: listeFrequences: liste de tuples (donnée, frequence)
+    :return: liste de tuples (donnée, frequence)
     :rtype: list    
     """
     nbElem = nbElemListeCouple(listeEffectifs)
@@ -93,10 +90,10 @@ def calculFrequencesCumulees(listeEffectifsCumules):
     """Calcule les fréquences cumulées.
 
     La fonction prend en entrée la liste des effectifs cumulés. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeEffectifsCumules" en divisant l'effectif cumulé par l'effectif total.
+    de ``listeEffectifsCumules`` en divisant l'effectif cumulé par l'effectif total.
 
     :param listeFrequences: liste de tuples (donnée, frequence)
-    :return: listeFrequences: liste de tuples (donnée, frequence cumulée)
+    :return: liste de tuples (donnée, frequence cumulée)
     :rtype: list        
     """
     nbElem = listeEffectifsCumules[-1][1]
@@ -112,14 +109,15 @@ def calculFrequencesCumulees(listeEffectifsCumules):
 
 def infoSecteurs(listeFrequences):
 	"""Création d'un dictionnaire pour les informations d'un diagramme de secteurs.
-
-	La fonction prend en entrée le résultat du calcul des fréquences. Elle va créer un dictionnaire pour y stocker
-	les données nécessaires à la construction du diagramme en secteurs.
 	
-	Un dictionnaire est utilisé pour obtenir un objet sérialisable, et donc, facilement convertible en un objet javascript par exemple.
-	Ainsi, l'utilisation de ces objets pour transporter les donnée peut-être multi-plateforme.
+	Couples (clé, valeur):
+		* donnée1 : fréquence d'apparition de la donnée 1
+		* donnée2 : fréquence d'apparition de la donnée 2
 	
+	Il y a autant d'éléments que de données distinctes.
+		
 	:param listeFrequences: liste de tuples (donnée, fréquence)
+	:rtype: dict
 	"""
 	secteur = {}
 	for couple in listeFrequences:
@@ -129,13 +127,13 @@ def infoSecteurs(listeFrequences):
 
 def infoHistogramme(listeEffectifs):
 	"""Création d'un dictionnaire pour les informations d'un histogramme (diagramme en batons).
-
-	La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste ``listeEffectifs``. Elle va créer un dictionnaire pour y stocker
-	les données nécessaires à la construction de l'histogramme.
 	
-	:Example:
+	Couples (clé, valeur):
+		* "x" : liste des abscisses, les données
+		* "value" : liste des ordonnées, les effectifs respectifs
 	
-	:param listeEffectifs: liste de tuples (donnée, effectif)     
+	:param listeEffectifs: liste de tuples (donnée, effectif)
+	:rtype: dict 
     """
         
 	abscisses = []

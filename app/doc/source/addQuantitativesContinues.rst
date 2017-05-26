@@ -14,4 +14,10 @@ addQuantitativesContinues.py
 
 .. autofunction:: quantileContinu
 
+.. autofunction:: anomaliesTukeyContinu
+
 .. autofunction:: infoDistributionCumulativeContinue
+
+.. autofunction:: infoBoiteTukeyContinu
+
+.. autofunction:: infoStats
