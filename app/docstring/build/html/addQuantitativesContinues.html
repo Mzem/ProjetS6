@@ -1,0 +1,296 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>addQuantitativesContinues.py &#8212; documentation Fil Rouge 1.0</title>
+    
+    <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="addQuantitativesDiscretes.py" href="addQuantitativesDiscretes.html" />
+    <link rel="prev" title="addQualitatives.py" href="addQualitatives.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="addQuantitativesDiscretes.html" title="addQuantitativesDiscretes.py"
+             accesskey="N">suivant</a> |</li>
+        <li class="right" >
+          <a href="addQualitatives.html" title="addQualitatives.py"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentation Fil Rouge 1.0</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    index.html" class="text-logo">Project Name</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table des Matières</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gestionFlux.html">gestionFlux.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choixFichier.html">choixFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addRoutes.html">addRoutes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addQualitatives.html">addQualitatives.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">addQuantitativesContinues.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#le-module-analyse-de-donnees-quantitatives-continues">Le module <code class="docutils literal"><span class="pre">Analyse</span> <span class="pre">de</span> <span class="pre">données</span> <span class="pre">quantitatives</span> <span class="pre">continues</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="addQuantitativesDiscretes.html">addQuantitativesDiscretes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intervalle.html">intervalle.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verificationFormatFichier.html">verificationFormatFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analyseContenuFichier.html">analyseContenuFichier.py</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="index.html">Docs</a></li>
+              
+              <li>addQuantitativesContinues.py</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-add.addQuantitativesContinues">
+<span id="addquantitativescontinues-py"></span><h1>addQuantitativesContinues.py<a class="headerlink" href="#module-add.addQuantitativesContinues" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="le-module-analyse-de-donnees-quantitatives-continues">
+<h2>Le module <code class="docutils literal"><span class="pre">Analyse</span> <span class="pre">de</span> <span class="pre">données</span> <span class="pre">quantitatives</span> <span class="pre">continues</span></code><a class="headerlink" href="#le-module-analyse-de-donnees-quantitatives-continues" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<dl class="function">
+<dt id="add.addQuantitativesContinues.discretisation">
+<code class="descclassname">add.addQuantitativesContinues.</code><code class="descname">discretisation</code><span class="sig-paren">(</span><em>nombreClasses</em>, <em>donneesContinues</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/add/addQuantitativesContinues.html#discretisation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#add.addQuantitativesContinues.discretisation" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Discrétise des données continues du paramètre.</p>
+<p>La fonction se charge de décomposer l’étendue [min ; max] de l’ensemble de données en <code class="docutils literal"><span class="pre">nombreClasses</span></code> intervalles de même étendue.
+Ensuite de remplacer les occurrences des données par l’intervalle auquel la donnée appartient.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>donneesContinues</strong> – liste de nombres flottants</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">liste d’intervalles, et étendue discrétisée</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="add.addQuantitativesContinues.calculNombreClasses">
+<code class="descclassname">add.addQuantitativesContinues.</code><code class="descname">calculNombreClasses</code><span class="sig-paren">(</span><em>donneesContinues</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/add/addQuantitativesContinues.html#calculNombreClasses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#add.addQuantitativesContinues.calculNombreClasses" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Calcule le nombre de classes nécessaire à une discrétisation selon la règle de Sturges.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type retourné:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(disponible dans Python v2.7)">int</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Avertissement</p>
+<p class="last">Si la distribution n’est pas symétrique, le nombre de classes ne sera pas optimal.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="add.addQuantitativesContinues.preparationIntervallesAnalyse">
+<code class="descclassname">add.addQuantitativesContinues.</code><code class="descname">preparationIntervallesAnalyse</code><span class="sig-paren">(</span><em>listeIntervalles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/add/addQuantitativesContinues.html#preparationIntervallesAnalyse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#add.addQuantitativesContinues.preparationIntervallesAnalyse" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Prépare les données pour l’utilisation des éléments de calcul du module ADD quantitatives discrètes.</p>
+<p>Pour effectuer les analyses descriptives dans le cas continu, la démarche est la même (sauf quantiles) que pour le cas discret.
+On utilisera cependant comme données les centres des intervalles.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>listeIntervalles</strong> – liste issue de la discrétisation des valeurs.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">liste de flottants.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="add.addQuantitativesContinues.interpolationLineaire">
+<code class="descclassname">add.addQuantitativesContinues.</code><code class="descname">interpolationLineaire</code><span class="sig-paren">(</span><em>p1</em>, <em>p2</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/add/addQuantitativesContinues.html#interpolationLineaire"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#add.addQuantitativesContinues.interpolationLineaire" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Calcule l’abscisse par interpolation linéaire</p>
+<p>Les points <code class="docutils literal"><span class="pre">p1</span></code>, <code class="docutils literal"><span class="pre">p2</span></code> nous permettent de définir une fonction linéaire f(x) = pente * x + ordonnée à l’origine (oo).
+On retrouve ensuite l’abscisse du point d’ordonnée <code class="docutils literal"><span class="pre">y</span></code> se trouvant sur la courbe de la fonction, x = (<code class="docutils literal"><span class="pre">y</span></code> - oo) / pente.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">abscisse de l’ordonnée <code class="docutils literal"><span class="pre">y</span></code> par rapport à la droite (<code class="docutils literal"><span class="pre">p1</span></code>, <code class="docutils literal"><span class="pre">p2</span></code>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type retourné:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#float" title="(disponible dans Python v2.7)">float</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="add.addQuantitativesContinues.quantileContinu">
+<code class="descclassname">add.addQuantitativesContinues.</code><code class="descname">quantileContinu</code><span class="sig-paren">(</span><em>ordre</em>, <em>listeFrequencesCumulees</em>, <em>intervalles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/add/addQuantitativesContinues.html#quantileContinu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#add.addQuantitativesContinues.quantileContinu" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Calcule les quantiles d’ordre <code class="docutils literal"><span class="pre">ordre</span></code> pour une analyse de données conitnues.</p>
+<p>Le quantile discret nous permet de retrouver le centre de l’intervalle qui contient le vrai quantile.
+Ensuite, à partir de l’intervalle et de l’ordre, on en déduit une valeur plus précise par interpolation linéaire.</p>
+<p>La fonction linéaire est définie à l’aide des bornes de l’intervalle, on  a besoin de deux points :
+L’ordonnée de la borne supérieure est la fréquence cumulée du centre de l’intervalle ( 1 si borne = max )
+L’ordonnée de la borne inférieur est la fréquence cumulée du centre de l’intervalle précédent ( 0 si borne = min )</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Retourne:</th><td class="field-body">le quantile d’ordre <code class="docutils literal"><span class="pre">ordre</span></code></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="add.addQuantitativesContinues.infoDistributionCumulativeContinue">
+<code class="descclassname">add.addQuantitativesContinues.</code><code class="descname">infoDistributionCumulativeContinue</code><span class="sig-paren">(</span><em>listeEffectifsCumules</em>, <em>intervalles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/add/addQuantitativesContinues.html#infoDistributionCumulativeContinue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#add.addQuantitativesContinues.infoDistributionCumulativeContinue" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Écriture dans le fichier distributionCumulative.json</p>
+<dl class="docutils">
+<dt>Format du fihier :</dt>
+<dd><p class="first">Début
+{</p>
+<blockquote>
+<div>«&nbsp;x&nbsp;»: [&nbsp;liste des abscisses / bornes des intervalles ],
+«&nbsp;value&nbsp;»: [ liste des ordonnées / effectifs cumulés ]</div></blockquote>
+<p class="last">}
+Fin</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>listeEffectifCumules</strong> – liste de couples (centre de l’intervalle, effectif cumulé).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="addQualitatives.html" title="Chapitre précédent (use the left arrow)">addQualitatives.py</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="addQuantitativesDiscretes.html" title="Chapitre suivant (use the right arrow)">addQuantitativesDiscretes.py</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="addQuantitativesDiscretes.html" title="addQuantitativesDiscretes.py"
+             >suivant</a> |</li>
+        <li class="right" >
+          <a href="addQualitatives.html" title="addQualitatives.py"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentation Fil Rouge 1.0</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2017, PAILLEUX Jean-Didier - ZEMNI Malek - KLOTZ Sonny. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>add.intervalle &#8212; documentation Fil Rouge 1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">documentation Fil Rouge 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Code du module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../../index.html" class="text-logo">Project Name</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table des Matières</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gestionFlux.html">gestionFlux.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../choixFichier.html">choixFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addRoutes.html">addRoutes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addQualitatives.html">addQualitatives.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addQuantitativesContinues.html">addQuantitativesContinues.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addQuantitativesDiscretes.html">addQuantitativesDiscretes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intervalle.html">intervalle.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../verificationFormatFichier.html">verificationFormatFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analyseContenuFichier.html">analyseContenuFichier.py</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../index.html">Docs</a></li>
+              
+                <li><a href="../index.html">Code du module</a></li>
+              
+              <li>add.intervalle</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Code source de add.intervalle</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Le module ``intervalle``</span>
+<span class="sd">	========================</span>
+<span class="sd">	</span>
+<span class="sd">	Ce module est utilisé pour une manipulation réduite des intervalles dans R.</span>
+<span class="sd">	</span>
+<span class="sd">	:Example:</span>
+<span class="sd">	</span>
+<span class="sd">	&gt;&gt;&gt;from add import intervalle</span>
+<span class="sd">	&gt;&gt;&gt;i = Intervalle(0, 1, true ,false)</span>
+<span class="sd">	&gt;&gt;&gt;i.contient(0.8)</span>
+<span class="sd">	True</span>
+<span class="sd">	</span>
+<span class="sd">	L&#39;intervalle i de l&#39;exemple sert à représenter [0, 1[ en notation mathématiques.</span>
+<span class="sd">	</span>
+<span class="sd">	</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Intervalle</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Ensemble d&#39;objets pour représenter les intervalles de R.</span>
+<span class="sd">	</span>
+<span class="sd">	Attributs:</span>
+<span class="sd">		borneInf (float): borne inférieure de l&#39;intervalle</span>
+<span class="sd">		borneSup (float): borne supérieure de l&#39;intervalle</span>
+<span class="sd">		infInclus (boolean): indique si la borne inférieure est comprise ou non dans l&#39;intervalle</span>
+<span class="sd">		supInclus (boolean): indique si la borne supérieure est comprise ou non dans l&#39;intervalle</span>
+<span class="sd">		centre (float): centre de l&#39;intervalle</span>
+<span class="sd">		</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borneInf</span><span class="p">,</span> <span class="n">borneSup</span><span class="p">,</span> <span class="n">infInclus</span><span class="p">,</span> <span class="n">supInclus</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Constructeur de la classe.</span>
+<span class="sd">		</span>
+<span class="sd">		Initialise les attributs des paramètres données.</span>
+<span class="sd">		</span>
+<span class="sd">		Calcule le centre de l&#39;intervalle et initialise l&#39;attribut ``centre`` avec cette valeur.</span>
+<span class="sd">		</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">borneInf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">borneInf</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">borneSup</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">borneSup</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">infInclus</span> <span class="o">=</span> <span class="n">infInclus</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">supInclus</span> <span class="o">=</span> <span class="n">supInclus</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">centre</span> <span class="o">=</span> <span class="p">(</span><span class="n">borneInf</span> <span class="o">+</span> <span class="n">borneSup</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+		
+	<span class="k">def</span> <span class="nf">contient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;Retourne vrai si l&#39;argument appartient à l&#39;intervalle, faux sinon&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">nombre</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">borneInf</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">infInclus</span>
+		<span class="k">elif</span> <span class="n">nombre</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">borneSup</span><span class="p">:</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">supInclus</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">nombre</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">borneInf</span> <span class="ow">and</span> <span class="n">nombre</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">borneSup</span>
+
+<div class="viewcode-block" id="rechercheIntervalle"><a class="viewcode-back" href="../../intervalle.html#add.intervalle.rechercheIntervalle">[docs]</a><span class="k">def</span> <span class="nf">rechercheIntervalle</span><span class="p">(</span><span class="n">intervalles</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Retrouve l&#39;intervalle contenant un nombre en parmaètre</span>
+<span class="sd">	</span>
+<span class="sd">	Les intervalles de la liste sont distincts.</span>
+<span class="sd">	Les intervalles de la liste forment une partition de l&#39;étendue qu&#39;ils représentent et sont triés.</span>
+<span class="sd">	Ainsi, le nombre (on suppose qu&#39;il appartient à l&#39;étendue) appartient à un unique intervalle de la liste.</span>
+<span class="sd">	</span>
+<span class="sd">	Exemple:</span>
+<span class="sd">		etendue = [1, 3]</span>
+<span class="sd">		l = { [0, 1[ ; [1, 2[ ; [2, 3] }</span>
+<span class="sd">				</span>
+<span class="sd">	:return: retourne l&#39;intervalle auquel ``nombre`` appartient, False sinon</span>
+<span class="sd">	</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="n">intervalles</span><span class="p">:</span>
+		<span class="k">if</span> <span class="n">elt</span><span class="o">.</span><span class="n">contient</span><span class="p">(</span><span class="n">nombre</span><span class="p">):</span>
+			<span class="k">return</span> <span class="n">elt</span>
+	<span class="k">return</span> <span class="kc">False</span> </div>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">documentation Fil Rouge 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Code du module</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2017, PAILLEUX Jean-Didier - ZEMNI Malek - KLOTZ Sonny. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

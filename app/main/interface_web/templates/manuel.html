@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DCbrain</title>
+<link rel="icon" href="../static/img/favicon.png" />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
+</head>
+
+<body>
+
+{% include 'header.html' %}
+
+<section>
+	<div class="container3">
+    	<div class="upload_form_cont">
+    		<iframe src="{{ url_for('static', filename='img/Manuel.pdf') }}"></iframe>
+    	</div>
+    </div>
+</section>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+
+{% include 'footer.html' %}
+
+</body>
+
+</html>

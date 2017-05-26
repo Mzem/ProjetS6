@@ -1,0 +1,244 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>verificationFormatFichier.py &#8212; documentation Fil Rouge 1.0</title>
+    
+    <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="analyseContenuFichier.py" href="analyseContenuFichier.html" />
+    <link rel="prev" title="intervalle.py" href="intervalle.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="analyseContenuFichier.html" title="analyseContenuFichier.py"
+             accesskey="N">suivant</a> |</li>
+        <li class="right" >
+          <a href="intervalle.html" title="intervalle.py"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentation Fil Rouge 1.0</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    index.html" class="text-logo">Project Name</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table des Matières</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gestionFlux.html">gestionFlux.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choixFichier.html">choixFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addRoutes.html">addRoutes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addQualitatives.html">addQualitatives.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addQuantitativesContinues.html">addQuantitativesContinues.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addQuantitativesDiscretes.html">addQuantitativesDiscretes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intervalle.html">intervalle.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">verificationFormatFichier.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#le-module-verification-format-fichier">Le module <code class="docutils literal"><span class="pre">Vérification</span> <span class="pre">format</span> <span class="pre">fichier</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="analyseContenuFichier.html">analyseContenuFichier.py</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="index.html">Docs</a></li>
+              
+              <li>verificationFormatFichier.py</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-chargement_des_donnees.verificationFormatFichier">
+<span id="verificationformatfichier-py"></span><h1>verificationFormatFichier.py<a class="headerlink" href="#module-chargement_des_donnees.verificationFormatFichier" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="le-module-verification-format-fichier">
+<h2>Le module <code class="docutils literal"><span class="pre">Vérification</span> <span class="pre">format</span> <span class="pre">fichier</span></code><a class="headerlink" href="#le-module-verification-format-fichier" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<dl class="function">
+<dt id="chargement_des_donnees.verificationFormatFichier.verifExistence">
+<code class="descclassname">chargement_des_donnees.verificationFormatFichier.</code><code class="descname">verifExistence</code><span class="sig-paren">(</span><em>chemin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/verificationFormatFichier.html#verifExistence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.verificationFormatFichier.verifExistence" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonctionnalité de vérification de l’existance du fichier pour l’ouverture</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>chemin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(disponible dans Python v2.7)"><em>str</em></a>) – chemin du fichier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">entier 0 ou une description de l’erreur</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chargement_des_donnees.verificationFormatFichier.verifExtension">
+<code class="descclassname">chargement_des_donnees.verificationFormatFichier.</code><code class="descname">verifExtension</code><span class="sig-paren">(</span><em>chemin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/verificationFormatFichier.html#verifExtension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.verificationFormatFichier.verifExtension" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonctionnalité de vérification de l’extension du fichier</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>chemin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(disponible dans Python v2.7)"><em>str</em></a>) – chemin du fichier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">entier 0 ou une description de l’erreur</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chargement_des_donnees.verificationFormatFichier.verifLecture">
+<code class="descclassname">chargement_des_donnees.verificationFormatFichier.</code><code class="descname">verifLecture</code><span class="sig-paren">(</span><em>fichierCSV</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/verificationFormatFichier.html#verifLecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.verificationFormatFichier.verifLecture" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonctionnalité de vérification de l’accès au contenu du fichier et de sa nature</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fichierCSV</strong> (<em>TextIoWrapper</em>) – le fichier CSV ouvert</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">entier 0 ou une description de l’erreur</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chargement_des_donnees.verificationFormatFichier.ouvrir">
+<code class="descclassname">chargement_des_donnees.verificationFormatFichier.</code><code class="descname">ouvrir</code><span class="sig-paren">(</span><em>chemin</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/verificationFormatFichier.html#ouvrir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.verificationFormatFichier.ouvrir" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonctionnalité principale d’ouverture du fichier CSV et de vérification</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>chemin</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(disponible dans Python v2.7)"><em>str</em></a>) – chemin du fichier</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">le fichier CSV ouvert ou la description de l’erreur rencontrée lors de l’ouverture</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="intervalle.html" title="Chapitre précédent (use the left arrow)">intervalle.py</a>
+      </div>
+    
+      <div class="pull-right">
+        <a class="btn btn-default" href="analyseContenuFichier.html" title="Chapitre suivant (use the right arrow)">analyseContenuFichier.py</a>
+      </div>
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="analyseContenuFichier.html" title="analyseContenuFichier.py"
+             >suivant</a> |</li>
+        <li class="right" >
+          <a href="intervalle.html" title="intervalle.py"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentation Fil Rouge 1.0</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2017, PAILLEUX Jean-Didier - ZEMNI Malek - KLOTZ Sonny. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>
