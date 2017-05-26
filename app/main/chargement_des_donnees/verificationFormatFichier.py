@@ -5,7 +5,7 @@
 	========================================================
 """
 
-import os
+import os, csv
 
 
 def verifExistence(chemin):
@@ -56,6 +56,23 @@ def verifLecture(fichierCSV):
 	return 0
 
 	
+def verifCSV(fichierCSV):
+	"""
+		Fonctionnalité de vérification si le fichier CSV présumé est assez strucutré (contient délimiteur)
+
+		:param fichierCSV: le fichier CSV ouvert
+		:type fichierCSV: TextIoWrapper
+		:return: entier 0 ou une description de l'erreur
+    """ 
+	text = fichierCSV.read()
+	fichierCSV.seek(0)
+	try:
+		csv.Sniffer().sniff(text)
+	except csv.Error:
+		return "Error: not a structured CSV file"
+		
+	return 0
+	
 def ouvrir(chemin):
 	"""
 		Fonctionnalité principale d'ouverture du fichier CSV et de vérification
@@ -79,7 +96,12 @@ def ouvrir(chemin):
 	codeErreur = verifLecture(fichierCSV) 
 	if codeErreur != 0: 
 		fichierCSV.close()
+		return codeErreur	
+		
+	#test de la strucutre du fichier
+	codeErreur = verifCSV(fichierCSV) 
+	if codeErreur != 0: 
+		fichierCSV.close()
 		return codeErreur
-
-	return fichierCSV
 	
+	return fichierCSV

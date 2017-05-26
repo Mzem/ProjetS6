@@ -15,3 +15,7 @@
 *.csv
 build
 json
+!testDELIM.csv
+!testOK.csv
+!testRAW.csv
+!testSTRUCT.csv
