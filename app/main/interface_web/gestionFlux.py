@@ -90,10 +90,12 @@ def fenetre_resultat_ADD(file):
 		donneesContinues = preparationIntervallesAnalyse(donneesIntervalles)
 		listeEffectifs = calculEffectifs(donneesContinues)
 		listeEffectifsCumules = calculEffectifsCumules(listeEffectifs)
-		print(colonneADD)
 		
         # infos stats
-        #infoStats(listeEffectifs) 
+		dataSummary = infoStats(listeEffectifs, etendueIntervalles)
+		with open('interface_web/static/js/stats.js', 'w', encoding='utf-8') as f:
+			json.dump(dataSummary, f, indent=4)
+
         # Série temporelle
         #
         
@@ -104,7 +106,6 @@ def fenetre_resultat_ADD(file):
 			
         # Distribution
 		dataDistrib = infoDistributionDiscrete(listeEffectifs)
-        
 		with open('interface_web/static/js/distribution.js', 'w', encoding='utf-8') as f:
 			json.dump(dataDistrib, f, indent=4)
             

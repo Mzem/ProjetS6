@@ -13,5 +13,5 @@
 *.pdfsyn
 *.pyc
 *.csv
-docstring/build/
+app/docstring/build/
 json

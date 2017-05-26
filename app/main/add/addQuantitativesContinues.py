@@ -9,7 +9,8 @@
 
 from math import log
 from add.intervalle import Intervalle, rechercheIntervalle
-from add.addQuantitativesDiscretes import quantileDiscret
+from add.addQuantitativesDiscretes import quantileDiscret, moyenne, ecartType, variance, anomaliesTukey
+from add.addQualitatives import calculFrequencesCumulees, calculEffectifsCumules
 import os
 
 def discretisation(nombreClasses, donneesContinues):
@@ -158,3 +159,31 @@ def infoDistributionCumulativeContinue(listeEffectifsCumules, intervalles):
 	distributionC['value'] = values
 	
 	return distributionC
+	
+def infoStats(listeEffectifs, etendueIntervalles):
+	"""
+        Écriture dans le fichier distributionCumulative.json
+	
+	Format du fihier :
+		Début
+		{
+			"x": [ liste des abscisses / bornes des intervalles ],
+			"value": [ liste des ordonnées / effectifs cumulés ]
+		}
+		Fin
+		
+	:param listeEffectifCumules: liste de couples (centre de l'intervalle, effectif cumulé).
+	""" 
+	listeFrequencesCumulees = calculFrequencesCumulees(calculEffectifsCumules(listeEffectifs))
+	
+	stats = {}
+	stats["Min"] = listeEffectifs[0][0]
+	stats["Max"] = listeEffectifs[-1][0]
+	stats["Range"] = stats["Max"] - stats["Min"]
+	stats["IQR"] = quantileContinu(0.75, listeFrequencesCumulees, etendueIntervalles) - quantileContinu(0.25, listeFrequencesCumulees, etendueIntervalles)
+	stats["Mean"] = moyenne(listeEffectifs)
+	stats["Median"] = quantileContinu(0.5, listeFrequencesCumulees, etendueIntervalles)
+	stats["StdDev"] = ecartType(variance(listeEffectifs))
+	stats["Outliers"] = anomaliesTukey(listeEffectifs)
+	
+	return stats
