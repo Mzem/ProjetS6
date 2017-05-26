@@ -93,6 +93,7 @@ def fenetre_resultat_ADD(file):
 		
         # infos stats
 		dataSummary = infoStats(listeEffectifs, etendueIntervalles)
+		dataSummary["nomColonne"] = nomColonne
 		with safe_open_w('interface_web/static/json/stats.js') as f:
 			json.dump(dataSummary, f, indent=4)
 

@@ -3,7 +3,10 @@ $.getJSON("/iStats", function(json) {
 	var htmlOutliers = "";
 	
 	$.each(json, function(key, value){
-		if(key === "Outliers") {
+		if (key === "nomColonne") {
+			$("#nomColonne").text('Results for ' + value)
+		}
+		else if(key === "Outliers") {
 			$.each(value, function(index, outlier) {
 				htmlOutliers += "<li>" + outlier + "</li>";
 			});
