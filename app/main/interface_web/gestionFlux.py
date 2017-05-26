@@ -11,7 +11,7 @@ from flask import Flask, request, redirect, session, url_for, render_template, s
 from werkzeug.utils import secure_filename
 import os, io, json, glob
 
-from demoAPI import ecrireResultats
+from demoAPI import ecrireResultats, safe_open_w
 from interface_web.choixFichier import choixFic
 from interface_web.addRoutes import addRoute
 from chargement_des_donnees.verificationFormatFichier import ouvrir
@@ -93,7 +93,7 @@ def fenetre_resultat_ADD(file):
 		
         # infos stats
 		dataSummary = infoStats(listeEffectifs, etendueIntervalles)
-		with open('interface_web/static/js/stats.js', 'w', encoding='utf-8') as f:
+		with safe_open_w('interface_web/static/json/stats.js') as f:
 			json.dump(dataSummary, f, indent=4)
 
         # Série temporelle
@@ -101,12 +101,12 @@ def fenetre_resultat_ADD(file):
         
         # Distribution cumulative continue
 		dataDistribCumul = infoDistributionCumulativeContinue(listeEffectifsCumules, etendueIntervalles)
-		with open('interface_web/static/js/distributionCumulative.js', 'w', encoding='utf-8') as f:
+		with safe_open_w('interface_web/static/json/distributionCumulative.js') as f:
 			json.dump(dataDistribCumul, f, indent=4)
 			
         # Distribution
 		dataDistrib = infoDistributionDiscrete(listeEffectifs)
-		with open('interface_web/static/js/distribution.js', 'w', encoding='utf-8') as f:
+		with safe_open_w('interface_web/static/json/distribution.js') as f:
 			json.dump(dataDistrib, f, indent=4)
             
 		return render_template("resultat_ADD.html", file=file, nomColonne=nomColonne)

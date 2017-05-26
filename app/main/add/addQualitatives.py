@@ -26,13 +26,13 @@ def nbElemListeCouple(listeEffectifs):
     return i
 
 def calculEffectifs(listeDonnees):
-    """Calcul l'effectifs pour chaque données contenu dans listeDonnees.
+    """Calcule l'effectifs pour chaque données contenu dans listeDonnees.
 
     La fonction prend en entrée une liste contenant les données à analyser. Elle calculera les effectifs pour chaque valeur à 
     l'aide d'un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué pour ordonner les
     tuples.
 
-    :param listeDonnees: liste contenant les données é analyser
+    :param listeDonnees: liste contenant les données à analyser
     :return: listeEffectifs: liste de tuples (donnée, effectif)
     :rtype: list
     """   
@@ -48,40 +48,37 @@ def calculEffectifs(listeDonnees):
     return listeEffectifs
 
 def calculEffectifsCumules(listeEffectifs):
-    """Calcul l'effectifs cumulés avec l'aide de listeEffectifs.
+    """Calcule les effectifs cumulés avec l'aide de listeEffectifs.
 
-    La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste l'effectifs cumulés à partir 
-    de "listeEffectifs" en remplaçant l'effectif par l'effectif cumulés.
+    La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste les effectifs cumulés à partir 
+    de "listeEffectifs" en remplaçant l'effectif par l'effectif cumulé correspondant.
 
     :param listeEffectifs: liste de tuples (donnée, effectif)
     :return: listeEffectifsCumules: liste de tuples (donnée, effectif cumulé)
     :rtype: list
     """   
-    # Variables : add contiendra la valeur cumulée é chaque itération + définition de listeEffectifsCumules comme étant une liste
-    add = 0
+    # Variables : somme contiendra la valeur cumulée é chaque itération
+    somme = 0
     listeEffectifsCumules = []
     
-    # Pour chaque couple on remplace l'effectif par l'effectif cumulée
     i = 0
-    while i <  len(listeEffectifs): # Le dernier élément de listeEffectifs est le nombre d'éléments
-        tmp = (listeEffectifs[i][0], listeEffectifs[i][1] + add)
+    while i <  len(listeEffectifs):
+        tmp = (listeEffectifs[i][0], listeEffectifs[i][1] + somme)
         listeEffectifsCumules.append(tmp)
-        add += listeEffectifs[i][1]    # Mise é jour de add
+        somme += listeEffectifs[i][1]
         i += 1
     return listeEffectifsCumules
 
 def calculFrequences(listeEffectifs):
-    """Calcul les fréquences d'apparitions des valeurs.
+    """Calcule les fréquences d'apparition des valeurs.
 
     La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeEffectifs" en remplaçant l'effectif par la fréquence.
+    de "listeEffectifs" en divisant l'effectif par la taille du jeu de données.
 
     :param listeEffectifs: liste de tuples (donnée, effectif)
     :return: listeFrequences: liste de tuples (donnée, frequence)
     :rtype: list    
     """
-    # On récupére le nombre d'élements qu'on analyse (situé é la fin de la liste) 
-    # + définition de listeFrequencesCumules comme étant une liste
     nbElem = nbElemListeCouple(listeEffectifs)
     listeFrequences = []
     i = 0
@@ -93,18 +90,16 @@ def calculFrequences(listeEffectifs):
     return listeFrequences
 
 def calculFrequencesCumulees(listeEffectifsCumules):
-    """Calcul les fréquences cumulés pour une liste de fréquences.
+    """Calcule les fréquences cumulées.
 
     La fonction prend en entrée la liste des effectifs cumulés. Elle calculera dans une nouvelle liste la fréquence à partir 
-    de "listeEffectifsCumules" en calculant la fréquence cumulée grâce à l'effectif total
+    de "listeEffectifsCumules" en divisant l'effectif cumulé par l'effectif total.
 
     :param listeFrequences: liste de tuples (donnée, frequence)
-    :return: listeFrequences: liste de tuples (donnée, frequence cumulé)
+    :return: listeFrequences: liste de tuples (donnée, frequence cumulée)
     :rtype: list        
     """
-    # On récupére le nombre d'élements qu'on analyse (situé é la fin de la liste) 
-    # + définition de listeFrequencesCumules comme étant une liste
-    nbElem = listeEffectifsCumules[len(listeEffectifsCumules) - 1][1]
+    nbElem = listeEffectifsCumules[-1][1]
     listeFrequencesCumulees = []
     i = 0
     while i <  len(listeEffectifsCumules):
@@ -116,21 +111,15 @@ def calculFrequencesCumulees(listeEffectifsCumules):
     
 
 def infoSecteurs(listeFrequences):
-	"""Stock dans un fichier .js les informations nécessaire à la création d'un diagramme de secteurs.
+	"""Création d'un dictionnaire pour les informations d'un diagramme de secteurs.
 
-	La fonction prend en entrée le résultat du calcul des fréquences .Elle va créer un fichier .js pour y stocker (écrire)
+	La fonction prend en entrée le résultat du calcul des fréquences. Elle va créer un dictionnaire pour y stocker
 	les données nécessaires à la construction du diagramme en secteurs.
 	
-	Format du fihier:
-            Début
-            {
-                "donnee1" : frequence1 associee,
-                "donnee2" : frequence3 associee,
-                ...
-            }
-            Fin
-
-        :param listeFrequences: liste de tuples (donnée, fréquence)
+	Un dictionnaire est utilisé pour obtenir un objet sérialisable, et donc, facilement convertible en un objet javascript par exemple.
+	Ainsi, l'utilisation de ces objets pour transporter les donnée peut-être multi-plateforme.
+	
+	:param listeFrequences: liste de tuples (donnée, fréquence)
 	"""
 	secteur = {}
 	for couple in listeFrequences:
@@ -139,20 +128,14 @@ def infoSecteurs(listeFrequences):
 	return secteur
 
 def infoHistogramme(listeEffectifs):
-	"""Stock dans un fichier .js les informations nécessaire é la création d'un histogramme.
+	"""Création d'un dictionnaire pour les informations d'un histogramme (diagramme en batons).
 
-	La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste listeEffectifs. Elle 
-	va créer un fichier .js pour y stocker les données nécessaires à la construction de l'histogramme.
-
-        Format du fihier :
-            Début
-            {
-                "x": liste des donnees
-                "value": liste des effectifs respectifs
-            }
-            Fin
-            
-        :param listeEffectifs: liste de tuples (donnée, effectif)     
+	La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste ``listeEffectifs``. Elle va créer un dictionnaire pour y stocker
+	les données nécessaires à la construction de l'histogramme.
+	
+	:Example:
+	
+	:param listeEffectifs: liste de tuples (donnée, effectif)     
     """
         
 	abscisses = []

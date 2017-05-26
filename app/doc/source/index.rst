@@ -3,6 +3,12 @@
 Bienvenue sur la documentation du projet Fil Rouge!
 ====================================================
 
+Lancer l'application
+---------------------
+
+Modules
+-------
+
 .. toctree::
 	:maxdepth: 2
 

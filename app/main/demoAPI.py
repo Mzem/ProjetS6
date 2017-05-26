@@ -8,7 +8,7 @@ from add.addQualitatives import *
 from add.addQuantitativesDiscretes import moyenne, ecartType, variance
 from add.addQuantitativesContinues import discretisation, calculNombreClasses, preparationIntervallesAnalyse, quantileContinu
 
-import sys, csv
+import sys, csv, errno
 
 def mkdir_p(path):
     try:
