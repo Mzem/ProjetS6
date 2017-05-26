@@ -7,7 +7,7 @@
 
 import csv, ast, re
 from datetime import datetime
-from chargement_des_donnees.verificationFormatFichier import ouvrir
+#from verificationFormatFichier import ouvrir
 
 def lecture(fichierCSV,toClose):
 	"""
@@ -19,8 +19,13 @@ def lecture(fichierCSV,toClose):
     """ 
 	lignesCSV = []
 	
+	#determination du délimiteur
+	text = fichierCSV.read()
+	fichierCSV.seek(0)
+	delim = csv.Sniffer().sniff(text)
+	
 	#lecture
-	readerCSV = csv.reader(fichierCSV, delimiter=",")
+	readerCSV = csv.reader(fichierCSV, delim)
 	
 	#le nombre de colonnes du fichier CSV est connu à partir des noms données aux colonnes, les valeurs sans noms seront ignorées
 	#remplissage dans une liste homogène
@@ -165,13 +170,13 @@ def analyseFichier(fichierCSV):
 	return lignesCSV, descCSV
 	
 	
-#test independant du module
+#test independant du module (import à vérifier avant)
 if __name__ == "__main__":
 	
 	#JD : il faut appeler la fct ouvrir, voir s'il y'a erreur et ensuite appeler la fct analyse et me renvoyer son résultat
 	#le problème si je prends juste le chemin pour la fct analyse et que j'ouvre le fichier dedans c'est que tu ne pourras pas faire grand chose avec le message d'erreur
 	
-	fichierCSV = ouvrir("mini.csv")
+	fichierCSV = ouvrir("test.csv")
 	
 	if type(fichierCSV) is str: 
 		print(fichierCSV)

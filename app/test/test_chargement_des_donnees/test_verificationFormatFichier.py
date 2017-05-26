@@ -30,11 +30,19 @@ class test_verificationFormatFichier(unittest.TestCase):
 		with open("testOK.csv", "r", encoding='utf-8') as fichierCSV:
 			self.assertEqual(verifLecture(fichierCSV),0)	
 
+	def test_verifCSV(self):
+		"""Test le fonctionnement de la fonction 'verifCSV'."""
+		with open("testSTRUCT.csv", "r", encoding='utf-8') as fichierCSV:
+			self.assertEqual(verifCSV(fichierCSV),"Error: not a structured CSV file")
+		with open("testDELIM.csv", "r", encoding='utf-8') as fichierCSV:
+			self.assertEqual(verifCSV(fichierCSV),0)
+		
 	def test_ouvrir(self):
 		"""Test le fonctionnement de la fonction 'ouvrir'."""
 		self.assertEqual(ouvrir("iDontExist.csv"),"Error: not an existing file")
 		self.assertEqual(ouvrir("testEXT.txt"),"Error: file extension not .csv")
 		self.assertEqual(ouvrir("testRAW.csv"),"Error: not a raw text file")
+		self.assertEqual(ouvrir("testSTRUCT.csv"),"Error: not a structured CSV file")
 		fichierCSV = ouvrir("testOK.csv")
 		self.assertTrue(isinstance(fichierCSV,io.IOBase))
 		fichierCSV.close()

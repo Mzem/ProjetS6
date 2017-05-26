@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>DCbrain</title>
-		<link rel="icon" href="../static/img/favicon.png" />
+		<link rel="icon" href="../static/ressources/favicon.png" />
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
@@ -36,7 +36,7 @@
 		</section>
 
 		<form action="{{ url_for('sauvegardeResultats', file=file) }}" style='float: right;'>
-  			<input type="image" name="download" src="{{ url_for('static', filename='img/download.png') }}" width="42">
+  			<input type="image" name="download" src="{{ url_for('static', filename='ressources/download.png') }}" width="42">
 		</form>
 		<form action="{{ url_for('fenetre_role_choix_colonne', file=file) }}">
   			<input type="submit" class="submit" value="Previous Page" id="upload-button1">
