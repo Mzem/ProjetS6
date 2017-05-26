@@ -17,3 +17,13 @@ Refactoring (changements qui ne changeront pas le comportement mais qui rendent 
 - Nettoyer l'appli des docs inutile, arborescence et dossiers
 - Relecture code plus propre (fonctions ; indentation html / js ; noms de vars; commentaires ; espaces, tabulation, sauts de ligne)
 - .... mettez vos trucs ....
+
+
+Consignes :
+- Pour exécuter l'application, il préalablement installer Flask :
+  - Linux : # apt-get install python python-pip
+            # pip install flask
+  - Windows : easy_install pip
+              pip install flask 
+- Pour lancer les tests, se positionner sur le répertoire des tests : 
+  - python -m unittest
