@@ -4,22 +4,22 @@
 	Le module ``intervalle``
 	========================
 	
-	Ce module est utilisé pour une manipulation réduite des intervalles dans R.
+	Ce module est utilisé pour une manipulation réduite des intervalles dans \ **R**\.
 	
-	:Example:
-	
-	>>>from add import intervalle
-	>>>i = Intervalle(0, 1, true ,false)
-	>>>i.contient(0.8)
-	True
+	.. code-block:: python
+		
+		>>>from add import intervalle
+		>>>i = Intervalle(0, 1, true ,false)
+		>>>i.contient(0.8)
+		True
 	
 	L'intervalle i de l'exemple sert à représenter [0, 1[ en notation mathématiques.
 	
-	
+	Son utilisation dans l'application permet d'avoir des objets simples à manipuler lors de la discrétisation de données continues.
 """
 
 class Intervalle(object):
-	"""Ensemble d'objets pour représenter les intervalles de R.
+	"""Ensemble d'objets pour représenter les intervalles de \ **R**\.
 	
 	Attributs:
 		borneInf (float): borne inférieure de l'intervalle
@@ -60,9 +60,11 @@ def rechercheIntervalle(intervalles, nombre):
 	Les intervalles de la liste forment une partition de l'étendue qu'ils représentent et sont triés.
 	Ainsi, le nombre (on suppose qu'il appartient à l'étendue) appartient à un unique intervalle de la liste.
 	
-	Exemple:
-		etendue = [1, 3]
-		l = { [0, 1[ ; [1, 2[ ; [2, 3] }
+	:Example:
+		
+	etendue = [1, 3]
+	
+	patition =  [0, 1[ U [1, 2[ U [2, 3]
 				
 	:return: retourne l'intervalle auquel ``nombre`` appartient, False sinon
 	

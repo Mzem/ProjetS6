@@ -13,7 +13,7 @@
 *.pdfsyn
 *.pyc
 *.csv
-build
+app/docstring/build/
 json
 !testDELIM.csv
 !testOK.csv

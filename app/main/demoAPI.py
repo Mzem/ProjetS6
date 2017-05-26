@@ -10,6 +10,18 @@ from add.addQuantitativesContinues import discretisation, calculNombreClasses, p
 
 import sys, csv
 
+def mkdir_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else: raise
+
+def safe_open_w(path):
+    mkdir_p(os.path.dirname(path))
+    return open(path, 'w')
+
 def ligneOK(tab, i):
 	for verif in tab[i]:
 		if verif != "correct":
@@ -60,11 +72,7 @@ def ecrireResultats(entree, sortie):
 					j += 1
 		i += 1
 			
-			
-			
-			
-			
-	with open(sortie, 'w', newline='') as csvfile:
+	with safe_open_w(sortie) as csvfile:
 		fichier = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 		#Header du csv : "Stats", "Enfant", "Parent", descCSV["nom"]
 		fichier.writerow(["stats", "enfant", "parent"] + descCSV["nom"][3:])
@@ -85,7 +93,6 @@ def ecrireResultats(entree, sortie):
 				ecart_typeCol.append(e)
 				medianeCol.append(med)
 				iqrCol.append(i)
-			
 			fichier.writerow(["min"]	+ [noeud[0], noeud[1]] + minimumCol)	
 			fichier.writerow(["max"]	+ [noeud[0], noeud[1]] + maximumCol)
 			fichier.writerow(["range"]	+ [noeud[0], noeud[1]] + etendueCol)
