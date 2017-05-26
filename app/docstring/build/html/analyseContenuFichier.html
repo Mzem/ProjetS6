@@ -1,0 +1,239 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>analyseContenuFichier.py &#8212; documentation Fil Rouge 1.0</title>
+    
+    <link rel="stylesheet" href="_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="verificationFormatFichier.py" href="verificationFormatFichier.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="verificationFormatFichier.html" title="verificationFormatFichier.py"
+             accesskey="P">précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentation Fil Rouge 1.0</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    index.html" class="text-logo">Project Name</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table des Matières</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gestionFlux.html">gestionFlux.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="choixFichier.html">choixFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addRoutes.html">addRoutes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addQualitatives.html">addQualitatives.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addQuantitativesContinues.html">addQuantitativesContinues.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="addQuantitativesDiscretes.html">addQuantitativesDiscretes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intervalle.html">intervalle.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="verificationFormatFichier.html">verificationFormatFichier.py</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">analyseContenuFichier.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#le-module-analyse-contenu-fichier">Le module <code class="docutils literal"><span class="pre">Analyse</span> <span class="pre">Contenu</span> <span class="pre">fichier</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="index.html">Docs</a></li>
+              
+              <li>analyseContenuFichier.py</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <div class="section" id="module-chargement_des_donnees.analyseContenuFichier">
+<span id="analysecontenufichier-py"></span><h1>analyseContenuFichier.py<a class="headerlink" href="#module-chargement_des_donnees.analyseContenuFichier" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="le-module-analyse-contenu-fichier">
+<h2>Le module <code class="docutils literal"><span class="pre">Analyse</span> <span class="pre">Contenu</span> <span class="pre">fichier</span></code><a class="headerlink" href="#le-module-analyse-contenu-fichier" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<dl class="function">
+<dt id="chargement_des_donnees.analyseContenuFichier.lecture">
+<code class="descclassname">chargement_des_donnees.analyseContenuFichier.</code><code class="descname">lecture</code><span class="sig-paren">(</span><em>fichierCSV</em>, <em>toClose</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/analyseContenuFichier.html#lecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.analyseContenuFichier.lecture" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction de lecture du contenu du fichier CSV ligne par ligne</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fichierCSV</strong> (<em>TextIoWrapper</em>) – fichier CSV ouvert et vérifié</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chargement_des_donnees.analyseContenuFichier.typeDeDonnee">
+<code class="descclassname">chargement_des_donnees.analyseContenuFichier.</code><code class="descname">typeDeDonnee</code><span class="sig-paren">(</span><em>chaine</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/analyseContenuFichier.html#typeDeDonnee"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.analyseContenuFichier.typeDeDonnee" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction de detection du type de donnée depuis une chaine de carcteres</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fichierCSV</strong> (<em>TextIoWrapper</em>) – fichier CSV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chargement_des_donnees.analyseContenuFichier.removeDateSuffix">
+<code class="descclassname">chargement_des_donnees.analyseContenuFichier.</code><code class="descname">removeDateSuffix</code><span class="sig-paren">(</span><em>chaineDate</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/analyseContenuFichier.html#removeDateSuffix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.analyseContenuFichier.removeDateSuffix" title="Lien permanent vers cette définition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="chargement_des_donnees.analyseContenuFichier.descriptionColonnes">
+<code class="descclassname">chargement_des_donnees.analyseContenuFichier.</code><code class="descname">descriptionColonnes</code><span class="sig-paren">(</span><em>lignesCSV</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/analyseContenuFichier.html#descriptionColonnes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.analyseContenuFichier.descriptionColonnes" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonction de description du nom, du type et des erreurs des colonnes du fichier CSV</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>lignesCSV</strong> (<em>list</em>) – lignes du fichier CSV</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">dictionnaire de 3 sous-listes ayant pour clés : «&nbsp;nom&nbsp;», «&nbsp;type&nbsp;» et «&nbsp;erreurs&nbsp;»</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chargement_des_donnees.analyseContenuFichier.analyseFichier">
+<code class="descclassname">chargement_des_donnees.analyseContenuFichier.</code><code class="descname">analyseFichier</code><span class="sig-paren">(</span><em>fichierCSV</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chargement_des_donnees/analyseContenuFichier.html#analyseFichier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chargement_des_donnees.analyseContenuFichier.analyseFichier" title="Lien permanent vers cette définition">¶</a></dt>
+<dd><p>Fonctionnalité principale d’analyse du contenu du fichier CSV ouvert</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Paramètres:</th><td class="field-body"><strong>fichierCSV</strong> (<em>TextIoWrapper</em>) – le fichier CSV ouvert et vérifié</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Retourne:</th><td class="field-body">une liste contenant les données du fichier et un dictionnaire décrivant ces données</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+            
+  <div class="footer-relations">
+    
+      <div class="pull-left">
+        <a class="btn btn-default" href="verificationFormatFichier.html" title="Chapitre précédent (use the left arrow)">verificationFormatFichier.py</a>
+      </div>
+    
+    </div>
+    <div class="clearer"></div>
+  
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="verificationFormatFichier.html" title="verificationFormatFichier.py"
+             >précédent</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">documentation Fil Rouge 1.0</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2017, PAILLEUX Jean-Didier - ZEMNI Malek - KLOTZ Sonny. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

@@ -7,3 +7,6 @@ choixFichier.py
 .. autofunction:: FileWithSGF
 
 .. autofunction:: FileWithDragDrop
+
+.. raw:: latex
+    \clearpage

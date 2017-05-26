@@ -19,7 +19,9 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../app/'))
+import sphinx_rtd_theme
+sys.path.insert(0, os.path.abspath('../../main/'))
+
 
 
 # -- General configuration ------------------------------------------------
@@ -90,7 +92,19 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+import guzzle_sphinx_theme
+
+html_theme_path = guzzle_sphinx_theme.html_theme_path()
+html_theme = 'guzzle_sphinx_theme'
+
+# Register the theme as an extension to generate a sitemap.xml
+extensions.append("guzzle_sphinx_theme")
+
+# Guzzle theme options (see theme.conf for more information)
+html_theme_options = {
+    # Set the name of the project to appear in the sidebar
+    "project_nav_name": "Project Name",
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -113,6 +127,7 @@ htmlhelp_basename = 'FilRougedoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
+    'classoptions': ',openany,oneside'
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',
@@ -123,7 +138,7 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
+    # 'preamble': ,
 
     # Latex figure (float) alignment
     #

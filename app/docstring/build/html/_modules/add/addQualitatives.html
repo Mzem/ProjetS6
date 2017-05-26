@@ -1,0 +1,318 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+  
+  <!-- Licensed under the Apache 2.0 License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/open-sans/stylesheet.css" />
+  <!-- Licensed under the SIL Open Font License -->
+  <link rel="stylesheet" type="text/css" href="../../_static/fonts/source-serif-pro/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../_static/css/bootstrap-theme.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>add.addQualitatives &#8212; documentation Fil Rouge 1.0</title>
+    
+    <link rel="stylesheet" href="../../_static/guzzle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/translations.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" />
+  
+   
+
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Index général"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">documentation Fil Rouge 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Code du module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="container-wrapper">
+
+      <div id="mobile-toggle">
+        <a href="#"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></a>
+      </div>
+  <div id="left-column">
+    <div class="sphinxsidebar">
+        <a href="
+    ../../index.html" class="text-logo">Project Name</a>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <h2>Table des Matières</h2>
+  </div>
+  <div class="sidebar-toc">
+    
+    
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gestionFlux.html">gestionFlux.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../choixFichier.html">choixFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addRoutes.html">addRoutes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addQualitatives.html">addQualitatives.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addQuantitativesContinues.html">addQuantitativesContinues.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../addQuantitativesDiscretes.html">addQuantitativesDiscretes.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intervalle.html">intervalle.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../verificationFormatFichier.html">verificationFormatFichier.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analyseContenuFichier.html">analyseContenuFichier.py</a></li>
+</ul>
+
+    
+  </div>
+</div>
+        
+<div class="sidebar-block">
+  <div class="sidebar-wrapper">
+    <div id="main-search">
+      <form class="form-inline" action="../../search.html" method="GET" role="form">
+        <div class="input-group">
+          <input name="q" type="text" class="form-control" placeholder="Search...">
+        </div>
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+        <div id="right-column">
+          
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ol class="breadcrumb">
+              <li><a href="../../index.html">Docs</a></li>
+              
+                <li><a href="../index.html">Code du module</a></li>
+              
+              <li>add.addQualitatives</li>
+            </ol>
+          </div>
+          
+          <div class="document clearer body">
+            
+  <h1>Code source de add.addQualitatives</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Le module ``Analyse de données qualitatives``</span>
+<span class="sd">	========================================================</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<div class="viewcode-block" id="nbElemListeCouple"><a class="viewcode-back" href="../../addQualitatives.html#add.addQualitatives.nbElemListeCouple">[docs]</a><span class="k">def</span> <span class="nf">nbElemListeCouple</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcul l&#39;effectif total des données de listeEffectifs.</span>
+
+<span class="sd">    La fonction se charge simplement de calculer l&#39;effectif total des données contenu danslisteEffectifs en sommant </span>
+<span class="sd">    l&#39;effectif de chaque tuple (couple[1]).</span>
+
+<span class="sd">    :param listeEffectifs: liste de tuples (donnée, effectif)</span>
+<span class="sd">    :return: l&#39;effectif total des données de listeEffectifs</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">i</span></div>
+
+<div class="viewcode-block" id="calculEffectifs"><a class="viewcode-back" href="../../addQualitatives.html#add.addQualitatives.calculEffectifs">[docs]</a><span class="k">def</span> <span class="nf">calculEffectifs</span><span class="p">(</span><span class="n">listeDonnees</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcul l&#39;effectifs pour chaque données contenu dans listeDonnees.</span>
+
+<span class="sd">    La fonction prend en entrée une liste contenant les données à analyser. Elle calculera les effectifs pour chaque valeur à </span>
+<span class="sd">    l&#39;aide d&#39;un dictionnaire. Ce dictionnaire sera converti en liste de tuples et un tri sera effectué pour ordonner les</span>
+<span class="sd">    tuples.</span>
+
+<span class="sd">    :param listeDonnees: liste contenant les données é analyser</span>
+<span class="sd">    :return: listeEffectifs: liste de tuples (donnée, effectif)</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="c1"># Création d&#39;un dictionnaire oé chaque clé correspond é une valeur de listeDonnees, </span>
+    <span class="c1"># et dont la veleur est initialisé é 0.</span>
+    <span class="n">effectifs</span> <span class="o">=</span> <span class="p">{}</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">listeDonnees</span><span class="p">),</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">valeur</span> <span class="ow">in</span> <span class="n">listeDonnees</span><span class="p">:</span>
+        <span class="n">effectifs</span><span class="p">[</span><span class="n">valeur</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="c1"># On retoune le dictionnaire converti en liste de couple (valeur, effectif) et trié par ordre croissant de valeur.</span>
+    <span class="n">listeEffectifs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">effectifs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>    
+    <span class="k">return</span> <span class="n">listeEffectifs</span></div>
+
+<div class="viewcode-block" id="calculEffectifsCumules"><a class="viewcode-back" href="../../addQualitatives.html#add.addQualitatives.calculEffectifsCumules">[docs]</a><span class="k">def</span> <span class="nf">calculEffectifsCumules</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcul l&#39;effectifs cumulés avec l&#39;aide de listeEffectifs.</span>
+
+<span class="sd">    La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste l&#39;effectifs cumulés à partir </span>
+<span class="sd">    de &quot;listeEffectifs&quot; en remplaçant l&#39;effectif par l&#39;effectif cumulés.</span>
+
+<span class="sd">    :param listeEffectifs: liste de tuples (donnée, effectif)</span>
+<span class="sd">    :return: listeEffectifsCumules: liste de tuples (donnée, effectif cumulé)</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>   
+    <span class="c1"># Variables : add contiendra la valeur cumulée é chaque itération + définition de listeEffectifsCumules comme étant une liste</span>
+    <span class="n">add</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">listeEffectifsCumules</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Pour chaque couple on remplace l&#39;effectif par l&#39;effectif cumulée</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span>  <span class="nb">len</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span> <span class="c1"># Le dernier élément de listeEffectifs est le nombre d&#39;éléments</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">listeEffectifs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">listeEffectifs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">add</span><span class="p">)</span>
+        <span class="n">listeEffectifsCumules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="n">add</span> <span class="o">+=</span> <span class="n">listeEffectifs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>    <span class="c1"># Mise é jour de add</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">listeEffectifsCumules</span></div>
+
+<div class="viewcode-block" id="calculFrequences"><a class="viewcode-back" href="../../addQualitatives.html#add.addQualitatives.calculFrequences">[docs]</a><span class="k">def</span> <span class="nf">calculFrequences</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcul les fréquences d&#39;apparitions des valeurs.</span>
+
+<span class="sd">    La fonction prend en entrée la liste des effectifs. Elle calculera dans une nouvelle liste la fréquence à partir </span>
+<span class="sd">    de &quot;listeEffectifs&quot; en remplaçant l&#39;effectif par la fréquence.</span>
+
+<span class="sd">    :param listeEffectifs: liste de tuples (donnée, effectif)</span>
+<span class="sd">    :return: listeFrequences: liste de tuples (donnée, frequence)</span>
+<span class="sd">    :rtype: list    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># On récupére le nombre d&#39;élements qu&#39;on analyse (situé é la fin de la liste) </span>
+    <span class="c1"># + définition de listeFrequencesCumules comme étant une liste</span>
+    <span class="n">nbElem</span> <span class="o">=</span> <span class="n">nbElemListeCouple</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">)</span>
+    <span class="n">listeFrequences</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span>  <span class="nb">len</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">listeEffectifs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">listeEffectifs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nbElem</span><span class="p">))</span>
+        <span class="n">listeFrequences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="k">return</span> <span class="n">listeFrequences</span></div>
+
+<div class="viewcode-block" id="calculFrequencesCumulees"><a class="viewcode-back" href="../../addQualitatives.html#add.addQualitatives.calculFrequencesCumulees">[docs]</a><span class="k">def</span> <span class="nf">calculFrequencesCumulees</span><span class="p">(</span><span class="n">listeEffectifsCumules</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calcul les fréquences cumulés pour une liste de fréquences.</span>
+
+<span class="sd">    La fonction prend en entrée la liste des effectifs cumulés. Elle calculera dans une nouvelle liste la fréquence à partir </span>
+<span class="sd">    de &quot;listeEffectifsCumules&quot; en calculant la fréquence cumulée grâce à l&#39;effectif total</span>
+
+<span class="sd">    :param listeFrequences: liste de tuples (donnée, frequence)</span>
+<span class="sd">    :return: listeFrequences: liste de tuples (donnée, frequence cumulé)</span>
+<span class="sd">    :rtype: list        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># On récupére le nombre d&#39;élements qu&#39;on analyse (situé é la fin de la liste) </span>
+    <span class="c1"># + définition de listeFrequencesCumules comme étant une liste</span>
+    <span class="n">nbElem</span> <span class="o">=</span> <span class="n">listeEffectifsCumules</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">listeEffectifsCumules</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">listeFrequencesCumulees</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span>  <span class="nb">len</span><span class="p">(</span><span class="n">listeEffectifsCumules</span><span class="p">):</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">listeEffectifsCumules</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">listeEffectifsCumules</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nbElem</span><span class="p">))</span>
+        <span class="n">listeFrequencesCumulees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="k">return</span> <span class="n">listeFrequencesCumulees</span></div>
+    
+
+<div class="viewcode-block" id="infoSecteurs"><a class="viewcode-back" href="../../addQualitatives.html#add.addQualitatives.infoSecteurs">[docs]</a><span class="k">def</span> <span class="nf">infoSecteurs</span><span class="p">(</span><span class="n">listeFrequences</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Stock dans un fichier .js les informations nécessaire à la création d&#39;un diagramme de secteurs.</span>
+
+<span class="sd">	La fonction prend en entrée le résultat du calcul des fréquences .Elle va créer un fichier .js pour y stocker (écrire)</span>
+<span class="sd">	les données nécessaires à la construction du diagramme en secteurs.</span>
+<span class="sd">	</span>
+<span class="sd">	Format du fihier:</span>
+<span class="sd">            Début</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;donnee1&quot; : frequence1 associee,</span>
+<span class="sd">                &quot;donnee2&quot; : frequence3 associee,</span>
+<span class="sd">                ...</span>
+<span class="sd">            }</span>
+<span class="sd">            Fin</span>
+
+<span class="sd">        :param listeFrequences: liste de tuples (donnée, fréquence)</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">secteur</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeFrequences</span><span class="p">:</span>
+		<span class="n">secteur</span><span class="p">[</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>	
+	
+	<span class="k">return</span> <span class="n">secteur</span></div>
+
+<div class="viewcode-block" id="infoHistogramme"><a class="viewcode-back" href="../../addQualitatives.html#add.addQualitatives.infoHistogramme">[docs]</a><span class="k">def</span> <span class="nf">infoHistogramme</span><span class="p">(</span><span class="n">listeEffectifs</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Stock dans un fichier .js les informations nécessaire é la création d&#39;un histogramme.</span>
+
+<span class="sd">	La fonction prend en entrée le résultat du calcul des effectifs préalablement stocké dans une liste listeEffectifs. Elle </span>
+<span class="sd">	va créer un fichier .js pour y stocker les données nécessaires à la construction de l&#39;histogramme.</span>
+
+<span class="sd">        Format du fihier :</span>
+<span class="sd">            Début</span>
+<span class="sd">            {</span>
+<span class="sd">                &quot;x&quot;: liste des donnees</span>
+<span class="sd">                &quot;value&quot;: liste des effectifs respectifs</span>
+<span class="sd">            }</span>
+<span class="sd">            Fin</span>
+<span class="sd">            </span>
+<span class="sd">        :param listeEffectifs: liste de tuples (donnée, effectif)     </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+        
+	<span class="n">abscisses</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+	<span class="k">for</span> <span class="n">couple</span> <span class="ow">in</span> <span class="n">listeEffectifs</span><span class="p">:</span>
+		<span class="n">abscisses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+		<span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">couple</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+		
+	<span class="n">histo</span> <span class="o">=</span> <span class="p">{}</span>
+	<span class="n">histo</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">abscisses</span>
+	<span class="n">histo</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span> 
+	
+	<span class="k">return</span> <span class="n">histo</span></div>
+</pre></div>
+
+          </div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="Index général"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Index des modules Python"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">documentation Fil Rouge 1.0</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Code du module</a> &#187;</li> 
+      </ul>
+    </div>
+<script type="text/javascript">
+  $("#mobile-toggle a").click(function () {
+    $("#left-column").toggle();
+  });
+</script>
+<script type="text/javascript" src="../../_static/js/bootstrap.js"></script>
+  <div class="footer">
+    &copy; Copyright 2017, PAILLEUX Jean-Didier - ZEMNI Malek - KLOTZ Sonny. Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  </body>
+</html>

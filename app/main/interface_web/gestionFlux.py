@@ -108,7 +108,7 @@ def fenetre_resultat_ADD(file):
 		with open('interface_web/static/js/distribution.js', 'w', encoding='utf-8') as f:
 			json.dump(dataDistrib, f, indent=4)
             
-		return render_template("resultat_ADD.html", file=file)
+		return render_template("resultat_ADD.html", file=file, nomColonne=nomColonne)
 	else:
 		return render_template("resultat_ADD.html", file=file)
 

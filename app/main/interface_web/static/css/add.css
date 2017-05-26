@@ -60,7 +60,10 @@ section#iStats div#outliers2 li, section#iStats div#stats2 li{
 	list-style-type:none; 
 	text-align: left;
 	width:200;
-	margin-left: 37%;
+	margin-left: 40%;
+}
+section#iStats div#outliers2 ul {
+	margin-left: 30px;
 }
 
 body{

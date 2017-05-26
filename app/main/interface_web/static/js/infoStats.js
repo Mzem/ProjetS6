@@ -13,7 +13,7 @@ $.getJSON("/iStats", function(json) {
 		}
 	});
 		
-	$('#stats').after("<div id='stats2'><h1>Statistics</h1><br> <ul>" + htmlStats + "</ul></div>");
-	$('#outliers').after("<div id='outliers2'><h1>Outliers</h1><br> <ul>" + htmlOutliers + "</ul></div>");
+	$('#stats').after("<div id='stats2'><h1>Statistics</h1><br> <ul>" + htmlStats + "</ul><br></div>");
+	$('#outliers').after("<div id='outliers2'><h1>Outliers</h1><br> <ul>" + htmlOutliers + "</ul><br></div>");
 		
 });
