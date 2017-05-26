@@ -101,30 +101,25 @@
 									console.log(parentADD);
 									console.log(enfantADD);
 
-									/*
+									
 									//Envoi des listes
-									console.log('{{file}}');
 									var filename = '{{file}}';
 									var file = new Object();
 									file.nomColonne = nomColonne;
 									file.colonneADD = colonneADD;
 									file.dateADD = dateADD;
+									file.parentADD = parentADD;
+									file.enfantADD = enfantADD;
 
 									$.ajax({
-            							url: '/fenetre_resultat_ADD/',
+            							url: '/fenetre_resultat_ADD/' + filename,
             							type: 'PUT',
             							data: JSON.stringify(file),
             							dataType: 'json',
             							contentType: 'application/json',
-            							error: function(jqXHR,textStatus,errorThrown) {
-            								console.log(jqXHR);
-            								console.log(textStatus);
-            								console.log(errorThrown);
-            							},
-            							success : window.location = '/fenetre_resultat_ADD/' + filename						      
-        							});
-        							console.log('SORTIIIIIEEE')
-									*/
+            							success: window.location = '/fenetre_resultat_ADD/' + filename,
+            							error: function(jqXHR,textStatus,errorThrown) {}		      
+        							});									
 									"
 						/>
 					{% endif %}

@@ -86,13 +86,12 @@ def fenetre_resultat_ADD(file):
 		nomColonne = requette['nomColonne']
 		colonneADD = requette['colonneADD']
 		dateADD = requette['dateADD']
-
 		donneesIntervalles, etendueIntervalles = discretisation(calculNombreClasses(colonneADD), colonneADD)
 		donneesContinues = preparationIntervallesAnalyse(donneesIntervalles)
-        
 		listeEffectifs = calculEffectifs(donneesContinues)
 		listeEffectifsCumules = calculEffectifsCumules(listeEffectifs)
-
+		print(colonneADD)
+		
         # infos stats
         #infoStats(listeEffectifs) 
         # Série temporelle
@@ -100,13 +99,13 @@ def fenetre_resultat_ADD(file):
         
         # Distribution cumulative continue
 		dataDistribCumul = infoDistributionCumulativeContinue(listeEffectifsCumules, etendueIntervalles)
-		with open('interface_web/static/json/distributionCumulative.js', 'w', encoding='utf-8') as f:
+		with open('interface_web/static/js/distributionCumulative.js', 'w', encoding='utf-8') as f:
 			json.dump(dataDistribCumul, f, indent=4)
 			
         # Distribution
 		dataDistrib = infoDistributionDiscrete(listeEffectifs)
         
-		with open('interface_web/static/json/distribution.js', 'w', encoding='utf-8') as f:
+		with open('interface_web/static/js/distribution.js', 'w', encoding='utf-8') as f:
 			json.dump(dataDistrib, f, indent=4)
             
 		return render_template("resultat_ADD.html", file=file)
@@ -123,14 +122,14 @@ def remove(file):
     os.remove('{}{}'.format('interface_web/static/uploads/',file))
     return redirect(url_for("fenetre_choix_fichier"))
 
-@app.route("/sauvegardeResultats")
-def sauvegardeResultats():
+@app.route("/sauvegardeResultats/<file>")
+def sauvegardeResultats(file):
     """Fonction qui sauvegarde les résultats de l'analyse descriptives dans un fichier .csv, et lance ainsi son téléchargement.
 
     :return: téléchargement du fichier 'Resultats.csv'.
     """
-    ecrireResultats("interface_web/static/uploads/" + "t300.csv", "interface_web/static/downloads/" + "t300.csv")
-    return send_file('static/downloads/t300.csv',
+    ecrireResultats("interface_web/static/uploads/" + file, "interface_web/static/downloads/" + file)
+    return send_file('static/downloads/' + file,
                      mimetype='text/csv',
-                     attachment_filename='results_' + 't300.csv',
+                     attachment_filename='results_' + file,
                      as_attachment=True)    

@@ -20,7 +20,7 @@ def iStats():
 
     :return jsonify(data): data sérialisé en dictionnaire, où data contient les informations de 'stat.js'
     """
-    stats_path = os.path.join(addRoute.static_folder, 'json/stats.js')
+    stats_path = os.path.join(addRoute.static_folder, 'js/stats.js')
     with open(stats_path) as json_file:
         data = json.load(json_file)
     return jsonify(data)
@@ -32,7 +32,7 @@ def timeSeries():
 
     :return jsonify(data): data sérialisé en dictionnaire, où data contient les informations de 'timeSeries.js'
     """
-    stats_path = os.path.join(addRoute.static_folder, 'json/timeSeries.js')
+    stats_path = os.path.join(addRoute.static_folder, 'js/timeSeries.js')
     with open(stats_path) as json_file:
         data = json.load(json_file)
     return jsonify(data)
@@ -44,7 +44,7 @@ def distribution():
 
     :return jsonify(data): data sérialisé en dictionnaire, où data contient les informations de 'distribution.js'
     """
-    stats_path = os.path.join(addRoute.static_folder, 'json/distribution.js')
+    stats_path = os.path.join(addRoute.static_folder, 'js/distribution.js')
     with open(stats_path) as json_file:
         data = json.load(json_file)
     return jsonify(data)
@@ -56,7 +56,7 @@ def distributionCumulative():
 
     :return jsonify(data): data sérialisé en dictionnaire, où data contient les informations de 'distributionCumulative.js'
     """
-    stats_path = os.path.join(addRoute.static_folder, 'json/distributionCumulative.js')
+    stats_path = os.path.join(addRoute.static_folder, 'js/distributionCumulative.js')
     with open(stats_path) as json_file:
         data = json.load(json_file)
     return jsonify(data)

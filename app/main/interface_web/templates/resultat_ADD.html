@@ -5,6 +5,7 @@
 		<link rel="icon" href="../static/img/favicon.png" />
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/c3.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/add.css') }}">
 	</head>
@@ -31,13 +32,17 @@
 		<section id="iStats" style= "margin-bottom: 20px;">
 			<div class="listeHeader" id="stats"></div>
 			<div class="listeHeader" id="outliers"></div>
-		</section>.
+		</section>
 
-		<form action="{{ url_for('fenetre_role_choix_colonne', file=file) }}">
-  			<input type="submit" class="submit" value="Go Back" id="upload-button1">
+		<form action="{{ url_for('sauvegardeResultats', file=file) }}" style='float: right;'>
+  			<input type="image" name="download" src="{{ url_for('static', filename='img/download.png') }}" width="42">
 		</form>
+		<form action="{{ url_for('fenetre_role_choix_colonne', file=file) }}">
+  			<input type="submit" class="submit" value="Previous Page" id="upload-button1">
+		</form>
+
 </div>
-<div id="export">Pour Jd Export, met nous une petite icone d'imprimante</div>
+		
 
 	{% include 'footer.html' %}
 </section>
@@ -45,7 +50,7 @@
 		<script type="text/javascript" src="{{ url_for('static', filename='js/d3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/c3.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
-		<script type="text/javascript" src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>
+		<!--<script type="text/javascript" src="{{ url_for('static', filename='js/html2canvas.js') }}"></script>-->
 				
 		<!--Scripts-->
 		<script type="text/javascript" src="{{ url_for('static', filename='js/miniatures.js') }}"></script>
