@@ -7,7 +7,7 @@
 
 import csv, ast, re
 from datetime import datetime
-#from verificationFormatFichier import ouvrir
+from chargement_des_donnees.verificationFormatFichier import ouvrir
 
 def lecture(fichierCSV,toClose):
 	"""
