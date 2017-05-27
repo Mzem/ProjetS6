@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-	Le module ``intervalle``
-	========================
-	
+	Description
+	============	
 	Ce module est utilisé pour une manipulation réduite des intervalles dans \ **R**\.
 	
 	.. code-block:: python
 		
-		>>>from add import intervalle
-		>>>i = Intervalle(0, 1, true ,false)
-		>>>i.contient(0.8)
+		>>> from add import intervalle
+		>>> i = Intervalle(0, 1, true ,false)
+		>>> i.contient(0.8)
 		True
 	
-	L'intervalle i de l'exemple sert à représenter [0, 1[ en notation mathématiques.
+	L'intervalle i de l'exemple sert à représenter ``[0, 1[`` en notation mathématiques.
 	
 	Son utilisation dans l'application permet d'avoir des objets simples à manipuler lors de la discrétisation de données continues.
 """
@@ -22,11 +21,11 @@ class Intervalle(object):
 	"""Ensemble d'objets pour représenter les intervalles de \ **R**\.
 	
 	Attributs:
-		borneInf (float): borne inférieure de l'intervalle
-		borneSup (float): borne supérieure de l'intervalle
-		infInclus (boolean): indique si la borne inférieure est comprise ou non dans l'intervalle
-		supInclus (boolean): indique si la borne supérieure est comprise ou non dans l'intervalle
-		centre (float): centre de l'intervalle
+		* borneInf ``float``: borne inférieure de l'intervalle
+		* borneSup ``float``: borne supérieure de l'intervalle
+		* infInclus ``boolean``: indique si la borne inférieure est comprise ou non dans l'intervalle
+		* supInclus ``boolean``: indique si la borne supérieure est comprise ou non dans l'intervalle
+		* centre ``float``: centre de l'intervalle
 		
 	"""
 	
@@ -58,15 +57,10 @@ def rechercheIntervalle(intervalles, nombre):
 	
 	Les intervalles de la liste sont distincts.
 	Les intervalles de la liste forment une partition de l'étendue qu'ils représentent et sont triés.
+	
 	Ainsi, le nombre (on suppose qu'il appartient à l'étendue) appartient à un unique intervalle de la liste.
-	
-	:Example:
-		
-	etendue = [1, 3]
-	
-	patition =  [0, 1[ U [1, 2[ U [2, 3]
 				
-	:return: retourne l'intervalle auquel ``nombre`` appartient, False sinon
+	:return: l'intervalle auquel ``nombre`` appartient, ``False`` sinon
 	
 	"""
 	for elt in intervalles:

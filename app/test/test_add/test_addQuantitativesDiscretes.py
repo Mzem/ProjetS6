@@ -75,13 +75,13 @@ class test_addQuantitativesDiscretes(unittest.TestCase):
 		self.assertEqual(variance(self.effectifsSC10k),		0)
 		self.assertEqual(variance(self.effectifsSC100k),	0)
 			
-	def test_anomaliesTukey(self):
+	def test_anomaliesTukeyDiscret(self):
 		#Pas d'anomalies statistiques dans une série uniforme
-		self.assertEqual(anomaliesTukey(self.effectifsSC10),	[])
-		self.assertEqual(anomaliesTukey(self.effectifsSC100),	[])
-		self.assertEqual(anomaliesTukey(self.effectifsSC1k),	[])
-		self.assertEqual(anomaliesTukey(self.effectifsSC10k),	[])
-		self.assertEqual(anomaliesTukey(self.effectifsSC100k),	[])
+		self.assertEqual(anomaliesTukeyDiscret(self.effectifsSC10),	[])
+		self.assertEqual(anomaliesTukeyDiscret(self.effectifsSC100),	[])
+		self.assertEqual(anomaliesTukeyDiscret(self.effectifsSC1k),	[])
+		self.assertEqual(anomaliesTukeyDiscret(self.effectifsSC10k),	[])
+		self.assertEqual(anomaliesTukeyDiscret(self.effectifsSC100k),	[])
 
 
 	def test_symetrie(self):
@@ -99,10 +99,6 @@ class test_addQuantitativesDiscretes(unittest.TestCase):
 		self.assertEqual(str(aplatissement(self.effectifsSC1k)),	'nan')
 		self.assertEqual(str(aplatissement(self.effectifsSC10k)),	'nan')
 		self.assertEqual(str(aplatissement(self.effectifsSC100k)),	'nan')
-
-	def test_infoSerieTemporelle(self):
-		print("info serie temporelle, a voir si on fait les tst, a supprimer sinon")
-		pass
 
 if __name__ == '__main__':
     unittest.main()

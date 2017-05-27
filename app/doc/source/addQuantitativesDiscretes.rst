@@ -12,16 +12,16 @@ addQuantitativesDiscretes.py
 
 .. autofunction:: ecartType
 
-.. autofunction:: anomaliesTukey
+.. autofunction:: anomaliesTukeyDiscret
 
 .. autofunction:: symetrie
 
 .. autofunction:: aplatissement
 
-.. autofunction:: infoDistributionDiscrete
+.. autofunction:: infoDistribution
 
 .. autofunction:: infoDistributionCumulativeDiscrete
 
-.. autofunction:: infoBoiteTukey
+.. autofunction:: infoBoiteTukeyDiscret
 
 .. autofunction:: infoSerieTemporelle

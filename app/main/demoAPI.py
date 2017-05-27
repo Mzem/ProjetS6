@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+ #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from chargement_des_donnees.verificationFormatFichier import ouvrir
@@ -11,16 +11,19 @@ from add.addQuantitativesContinues import discretisation, calculNombreClasses, p
 import sys, csv, errno
 
 def mkdir_p(path):
-    try:
-        os.makedirs(path)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST and os.path.isdir(path):
-            pass
-        else: raise
+	try:
+		os.makedirs(path)
+	except OSError as exc:
+		if exc.errno == errno.EEXIST and os.path.isdir(path):
+			pass
+		else: raise
 
 def safe_open_w(path):
-    mkdir_p(os.path.dirname(path))
-    return open(path, 'w')
+	"""
+	Ouverture du fichier en écriture et création des dossiers du chemin s'ils n'existent pas.
+	"""
+	mkdir_p(os.path.dirname(path))
+	return open(path, 'w')
 
 def ligneOK(tab, i):
 	for verif in tab[i]:
@@ -29,7 +32,6 @@ def ligneOK(tab, i):
 	return True
 	
 def routineAdd(donneesContinues):
-	
 	donneesIntervalles, etendueIntervalles = discretisation(calculNombreClasses(donneesContinues), donneesContinues)
 	donneesPretes = preparationIntervallesAnalyse(donneesIntervalles)
 	
@@ -48,6 +50,12 @@ def routineAdd(donneesContinues):
 	return minimum, maximum, etendue, moy, ecart_type, mediane, iqr
 
 def ecrireResultats(entree, sortie):
+	"""Analyses descriptives sur le fichier au chemin ``entree`` écriture des résultats dans ``sortie``
+	
+	Cette fonction reprend les fonctionnalités de l'API chargement des données pour ouvrir un fichier ``.csv`` et obtenir son contenu ainsi qu'une description des données.
+	
+	La description des données est utilisée pour réaliser les analyses descriptives uniquement sur les données valides.
+	"""
 	fichierCSV = ouvrir(entree)
 	
 	if type(fichierCSV) is str: 
@@ -92,7 +100,7 @@ def ecrireResultats(entree, sortie):
 				moyenneCol.append(moy)
 				ecart_typeCol.append(e)
 				medianeCol.append(med)
-				iqrCol.append(i)
+				iqrCol.append(iqr)
 			fichier.writerow(["min"]	+ [noeud[0], noeud[1]] + minimumCol)	
 			fichier.writerow(["max"]	+ [noeud[0], noeud[1]] + maximumCol)
 			fichier.writerow(["range"]	+ [noeud[0], noeud[1]] + etendueCol)

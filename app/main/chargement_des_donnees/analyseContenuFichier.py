@@ -1,21 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-	Le module ``Analyse Contenu fichier``
-	========================================================
-"""
 
 import csv, ast, re
 from datetime import datetime
 from chargement_des_donnees.verificationFormatFichier import ouvrir
 
 def lecture(fichierCSV,toClose):
-	"""
-		Fonction de lecture du contenu du fichier CSV ligne par ligne
+	"""Lit le contenu du fichier CSV ligne par ligne.
+	
+	Lors du parcours du fichier ``fichierCSV``, la fonction se charge de remplir une structure contenant les données du fichier.
 
-		:param fichierCSV: fichier CSV ouvert et vérifié
-		:type fichierCSV: TextIoWrapper
-		:return: liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier
+	:param fichierCSV: fichier CSV ouvert et vérifié
+	:type fichierCSV: TextIoWrapper
+	:return: liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier.
     """ 
 	lignesCSV = []
 	
@@ -27,7 +24,7 @@ def lecture(fichierCSV,toClose):
 	#lecture
 	readerCSV = csv.reader(fichierCSV, delim)
 	
-	#le nombre de colonnes du fichier CSV est connu à partir des noms données aux colonnes, les valeurs sans noms seront ignorées
+	#le nombre de colonnes du fichier CSV est connu à partir des noms donnés aux colonnes, les valeurs sans nom seront ignorées
 	#remplissage dans une liste homogène
 	firstLine = True
 	for ligne in readerCSV:
@@ -48,12 +45,11 @@ def lecture(fichierCSV,toClose):
 
 	
 def typeDeDonnee(chaine):
-	"""
-		Fonction de detection du type de donnée depuis une chaine de carcteres
+	"""Détecte le type des données depuis une chaine de caractères.
 
-		:param fichierCSV: fichier CSV
-		:type fichierCSV: TextIoWrapper
-		:return: liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier
+	:param fichierCSV: fichier CSV
+	:type fichierCSV: TextIoWrapper
+	:return: liste dont chaque élément est une sous-liste contenant les données d’une ligne du fichier
     """ 
 	#retrait des caractères blancs du début et de la fin de la donnée
 	chaine = chaine.strip()
@@ -80,17 +76,28 @@ def typeDeDonnee(chaine):
 	
 	
 def removeDateSuffix(chaineDate):
+	"""Supprime les suffixes des jours du mois dans une chaine de caractères représentant une date
+	
+	:param chaineDate: chaine de caractères représentant une date
+	:type lignesCSV: str
+	:return: chaine de caractères de la date sans suffixes
+	"""
 	parts = chaineDate.split()
 	parts[1] = parts[1].strip("stndrh")
 	return " ".join(parts)
 	
 def descriptionColonnes(lignesCSV):
-	"""
-		Fonction de description du nom, du type et des erreurs des colonnes du fichier CSV
+	"""Renseignement des descriptions du nom, du type et des erreurs des colonnes du fichier CSV.
+	
+	On va enregistrer dans un dictionnaire ``descCSV`` des informations concernant :
+	
+	* Le nom des colonnes.
+	* Le type attendu pour chacune des colonnes.
+	* Un mention d'erreur ou ``correct`` pour chaque donnée du fichier par rapport au type attendu.
 
-		:param lignesCSV: lignes du fichier CSV
-		:type lignesCSV: list
-		:return: dictionnaire de 3 sous-listes ayant pour clés : "nom", "type" et "erreurs"
+	:param lignesCSV: lignes du fichier CSV
+	:type lignesCSV: list
+	:return: dictionnaire de 3 sous-listes ayant pour clés : "nom", "type" et "erreurs"
     """ 
 	descCSV = {}
 	
@@ -156,42 +163,19 @@ def descriptionColonnes(lignesCSV):
 	
 	
 def analyseFichier(fichierCSV):
-	"""
-		Fonctionnalité principale d'analyse du contenu du fichier CSV ouvert
+	"""Fonctionnalité principale d'analyse du contenu du fichier CSV ouvert.
+	
+	Cette fonctionnalité réutilise deux fonctions, ``lecture`` et ``descriptionColonnes``.
+	
+	Objectifs:
+		* Lire les données présentes dans le fichier ``.csv``.
+		* Fournir un description de ce fichier : nom des colonnes, type des données, erreurs relevées.
 
-		:param fichierCSV: le fichier CSV ouvert et vérifié
-		:type fichierCSV: TextIoWrapper
-		:return: une liste contenant les données du fichier et un dictionnaire décrivant ces données
+	:param fichierCSV: le fichier CSV ouvert et vérifié
+	:type fichierCSV: TextIoWrapper
+	:return: un couple (données du fichier, description de ces données)
     """
 	lignesCSV = lecture(fichierCSV,True)
-	
 	descCSV = descriptionColonnes(lignesCSV)
 		
 	return lignesCSV, descCSV
-	
-	
-#test independant du module (import à vérifier avant)
-if __name__ == "__main__":
-	
-	#JD : il faut appeler la fct ouvrir, voir s'il y'a erreur et ensuite appeler la fct analyse et me renvoyer son résultat
-	#le problème si je prends juste le chemin pour la fct analyse et que j'ouvre le fichier dedans c'est que tu ne pourras pas faire grand chose avec le message d'erreur
-	
-	fichierCSV = ouvrir("test.csv")
-	
-	if type(fichierCSV) is str: 
-		print(fichierCSV)
-	else :
-		lignesCSV, descCSV = analyseFichier(fichierCSV)
-	
-		#Affichages de test
-		print("\n###################################################################################\n")
-		
-		for ligne in lignesCSV:
-			print(ligne)
-		
-		print("\n###################################################################################\n")
-		
-		print(descCSV["nom"])
-		print(descCSV["type"])
-		for ligne in descCSV["erreurs"]:
-			print(ligne)
