@@ -19,13 +19,15 @@ test: test-add test-chargement_des_donnees test-interface_web
 run:
 	cd main/; python runserver.py
 
-#Règle pour générer la documentation au format html
+#Règle pour générer et afficher la documentation au format html
 doc-html:
 	cd doc/; make html
+	google-chrome doc/build/html/index.html
 
 #Règle pour générer la documentation au format latex
 doc-latexpdf:
 	cd doc/; make latexpdf
+	xdg-open doc/build/latex/FilRouge.pdf &
 
 #Règle pour néttoyer des fichiers de compilation
 clean-pyc:
