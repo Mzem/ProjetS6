@@ -10,9 +10,7 @@ echo *************************************************
 echo PREREQUISITE:
 echo Have MinGW installed on your computer
 
-pause
-
-call make
+call make run
 
 echo Now your driver is ready
 
