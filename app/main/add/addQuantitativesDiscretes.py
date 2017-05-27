@@ -3,7 +3,7 @@
 
 from math import sqrt
 from add.intervalle import Intervalle
-from add.addQualitatives import calculFrequences, calculFrequencesCumulees
+from add.addQualitatives import calculEffectifs, calculEffectifsCumules, calculFrequences, calculFrequencesCumulees
 import os
 
 def moyenne(listeEffectifs):
