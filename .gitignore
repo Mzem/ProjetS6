@@ -15,6 +15,7 @@
 *.csv
 build
 json
+downloads
 !testDELIM.csv
 !testOK.csv
 !testRAW.csv

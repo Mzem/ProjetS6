@@ -32,5 +32,3 @@ clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
-
-# Voir si il ne faut pas mettre une règle pour installer les packages and python.
