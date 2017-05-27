@@ -76,6 +76,12 @@ def typeDeDonnee(chaine):
 	
 	
 def removeDateSuffix(chaineDate):
+	"""Supprime les suffixes des jours du mois dans une chaine de caractères représentant une date
+	
+	:param chaineDate: chaine de caractères représentant une date
+	:type lignesCSV: str
+	:return: chaine de caractères de la date sans suffixes
+	"""
 	parts = chaineDate.split()
 	parts[1] = parts[1].strip("stndrh")
 	return " ".join(parts)

@@ -40,33 +40,32 @@
 	background-color: #fefefe;
 }
 
-section#iStats {
+#iStats {
 	display: flex;
+	max-height: 200px;
+	overflow: auto;
 }
-
-section#iStats div#stats, section#iStats div#outliers {
-	position:relative;
-	width:0%;
-}
-section#iStats div#stats2, section#iStats div#outliers2 {
+#stats2, #outliers2 {
 	position:relative;
 	width:50%;
-	border-right: solid 1px; 
 	margin:auto;
+	padding-top: 2%;
 	text-align: center;
 }
-section#iStats div#outliers2 li, section#iStats div#stats2 li{
-	position: relative;
-	list-style-type:none; 
+#stats2{border-right: 1px solid;}
+#outliers2 li, #stats2 li{
 	text-align: left;
-	width:200;
-	margin-left: 40%;
-}
-section#iStats div#outliers2 ul {
-	margin-left: 30px;
+	margin-left:30%; 
 }
 
-body{
-	margin: 0 auto;
+#nomColonne{
+	color: rgba(0,0,0,1);
+    overflow: hidden;
+    margin:2%;
+    padding: 1%;
+    background-color: rgba(72,201,207,0.2);
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    text-shadow: rgba(255,255,255,0.5) 0.5px 0.5px, rgba(255,255,255,0.5) -0.5px 0.5px, rgba(255,255,255,0.5) -0.5px -0.5px, rgba(255,255,255,0.5) 0.5px -0.5px;
 }
 

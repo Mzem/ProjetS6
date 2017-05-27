@@ -1,10 +1,8 @@
-<div class="container4">
-	<div id="logo"><a href=""><img src="{{ url_for('static', filename='ressources/dcbrain.png') }}" alt="logo_dcbrain" style="z-index:2; position: absolute;"/></a></div>
-	<nav class="nav" style="width: 100%; z-index:1; ">
+<div id="logo"><a href=""><img src="{{ url_for('static', filename='ressources/dcbrain.png') }}" alt="logo_dcbrain" style="z-index:2; position: absolute;"/></a></div>
+	<nav class="nav" style="z-index:1; ">
 		<ul> 
 			<li><a href="{{ url_for('fenetre_choix_fichier') }}">Home</a></li> 
 			<li><a href="http://www.dcbrain.com/accueil/">About</a></li> 
 			<li><a href="{{ url_for('manuel') }}">User Manual</a></li> 
 		</ul> 
 	</nav>
-</div>
