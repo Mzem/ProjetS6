@@ -98,8 +98,8 @@ def fenetre_resultat_ADD(file):
 		# Séries temporelles
 		dataTimeSeries = {}
 		dataTimeSeries["timestamps"] = requette["dateADD"]
-		#dataTimeSeries["enfant"] = requette["enfantADD"]
-		#dataTimeSeries["parent"] = requette["parentADD"]
+		dataTimeSeries["enfant"] = requette["enfantADD"]
+		dataTimeSeries["parent"] = requette["parentADD"]
 		dataTimeSeries["value"] = colonneADD
 		with safe_open_w('interface_web/static/json/timeSeries.js') as f:
 			json.dump(dataTimeSeries, f, indent=4)
@@ -119,7 +119,7 @@ def fenetre_resultat_ADD(file):
 		#with safe_open_w('interface_web/static/json/boxplot.js') as f:
 		#	json.dump(dataTukey, f, indent=4)
 		
-		return render_template("resultat_ADD.html", file=file, nomColonne=nomColonne)
+		return render_template("resultat_ADD.html", file=file, nomColonne=requette["nomColonne"])
 	else:	
 		return render_template("resultat_ADD.html", file=file)
 
