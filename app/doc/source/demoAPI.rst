@@ -41,6 +41,10 @@ Enfin, l'image ci-dessous sert d'example pour ``maSortie.csv``. On peut toujours
 Fonctions réutilisées
 =====================
 
+Les résultats satisfaisants de ce script nous ont inscités à réutiliser ses fonctionnalités au sein même de notre application:
+	* ``safe_open_w`` : garantit la création des dossiers après eventuels clean up.
+	* ``ecrireResultats`` : pour le téléchargement des résultats d'analyse descriptive.
+
 .. automodule:: demoAPI
 
 .. autofunction:: safe_open_w

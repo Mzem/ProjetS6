@@ -6,6 +6,31 @@
 .fltrow td, .fltrow th{
 	padding:2px !important; 
 }
+.fltrow td div ul {
+	background-color: #D3DFE0;
+    box-shadow: 0px 2px 5px #1c1a19;
+}
+
+input[type='checkbox']:after{
+    line-height: 1.5em;
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-top: -4px;
+    margin-left: -4px;
+    border: 1px solid rgb(192,192,192);
+    border-radius: 0.40em;
+    background: #FFFFFF;
+}
+
+input[type='checkbox']:checked:after {
+	content: '✔';
+  	font-size: 15px;
+ 	color: #09ad7e;
+  	transition: all .2s;
+}
+
 .btnflt_icon{ /* button appearance when displayIcons is true */
 	width:19px; height:19px; cursor:pointer !important;
 	border:100 !important; vertical-align:middle;

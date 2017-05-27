@@ -1,10 +1,8 @@
 Listes des trucs à faire avant de rendre l'appli :
 - graphes (meilleur affichage légendes) - Sonny
-- Times Series graph + infoTimeSeries
 - Boxplot graph
-- Documentation Introduction (installation et exécution)
 - Relecture des documents
-- exécution runserver, tests, documentation, tout depuis dossier app
+- css pour les balises \<span class="arcTimeSeries">
 - .... mettez vos trucs ....
 
 Refactoring (changements qui ne changeront pas le comportement mais qui rendent l'appli plus propre) :

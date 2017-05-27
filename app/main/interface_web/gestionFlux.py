@@ -70,7 +70,7 @@ def fenetre_role_choix_colonne(file):
     return render_template("role_choix_colonne.html", lignesCSV=lignesCSV, descCSV=descCSV, file=file)
 
 
-@app.route("/fenetre_resultat_ADD/<file>",methods=['GET','POST', 'PUT'])
+@app.route("/fenetre_resultat_ADD/<file>",methods=['GET', 'PUT'])
 def fenetre_resultat_ADD(file):
 	"""
 	Affiche le template "resultat_ADD.html" lorsque la requette HTTP "/fenetre_resultat_ADD/" est indiquée.
@@ -80,10 +80,10 @@ def fenetre_resultat_ADD(file):
 	:return: le rendu du template ``resultat_ADD.html``
 	"""
 	if request.method == 'PUT':
+		
 		requette = request.get_json()
-		nomColonne = requette['nomColonne']
+		
 		colonneADD = requette['colonneADD']
-		dateADD = requette['dateADD']
 		donneesIntervalles, etendueIntervalles = discretisation(calculNombreClasses(colonneADD), colonneADD)
 		donneesContinues = preparationIntervallesAnalyse(donneesIntervalles)
 		listeEffectifs = calculEffectifs(donneesContinues)
@@ -91,13 +91,19 @@ def fenetre_resultat_ADD(file):
 		
 		# infos stats
 		dataSummary = infoStats(listeEffectifs, etendueIntervalles)
-		dataSummary["nomColonne"] = nomColonne
+		dataSummary["nomColonne"] = requette["nomColonne"]
 		with safe_open_w('interface_web/static/json/stats.js') as f:
 			json.dump(dataSummary, f, indent=4)
 
-		# Série temporelle
-		#
-        
+		# Séries temporelles
+		dataTimeSeries = {}
+		dataTimeSeries["timestamps"] = requette["dateADD"]
+		dataTimeSeries["enfant"] = requette["enfantADD"]
+		dataTimeSeries["parent"] = requette["parentADD"]
+		dataTimeSeries["value"] = colonneADD
+		with safe_open_w('interface_web/static/json/timeSeries.js') as f:
+			json.dump(dataTimeSeries, f, indent=4)
+		
 		# Distribution cumulative continue
 		dataDistribCumul = infoDistributionCumulativeContinue(listeEffectifsCumules, etendueIntervalles)
 		with safe_open_w('interface_web/static/json/distributionCumulative.js') as f:
@@ -113,7 +119,7 @@ def fenetre_resultat_ADD(file):
 		#with safe_open_w('interface_web/static/json/boxplot.js') as f:
 		#	json.dump(dataTukey, f, indent=4)
 		
-		return render_template("resultat_ADD.html", file=file, nomColonne=nomColonne)
+		return render_template("resultat_ADD.html", file=file, nomColonne=requette["nomColonne"])
 	else:	
 		return render_template("resultat_ADD.html", file=file)
 

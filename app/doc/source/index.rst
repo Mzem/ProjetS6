@@ -35,26 +35,56 @@ Cette application fonctionne à l'aide d'outils à installer préalablement :
  * `Sphinx 1.6.1 <http://www.sphinx-doc.org/en/stable/index.html>`_: génération automatique de documentation.
  * `sphinx_rtd_theme, et guzzle_sphinx_theme` : templates pour sphinx
  
-Applet sur serveur local
-========================
+Applet : interface web
+======================
 
 L'instruction qui permet de lancer l'appli est :
 
- * `make run`
-	
-Applet sur serveur distant
-==========================
+.. code-block:: console
 
-connexion ssh sur une machine à distance, est-ce qu'on le met?
+	make run
 
 Tests unitaires
 ===============
 
-Commande à lancer dans le dossier 'app/'
- * `make test` : éxécute tout les tests.
- * `make test-interface_web`: éxécute tout les tests du module interface_web.
- * `make test-add` : éxécute tout les tests du module add.
- * `make test-chargement_des_donnes` : éxécute tout les tests du module chargement_des_donnees.
+Exécuter tous les tests :
+
+.. code-block:: console
+
+	make test
+
+Exécuter les tests du module interface_web :
+
+.. code-block:: console
+
+	make test-interface_web
+	
+Exécuter les tests du module chargement_des_donnes :
+
+.. code-block:: console
+
+	make test-chargement_des_donnees
+	
+Exécuter les tests du module add :
+
+.. code-block:: console
+
+	make test-add
+	
+Génération et lancement de la documentation
+===========================================
+
+Générer et lancer la documentation au format html :
+
+.. code-block:: console
+
+	make doc-html
+	
+Générer et lancer la documentation au format pdf :
+
+.. code-block:: console
+
+	make doc-latexpdf
 
 
 Documentation

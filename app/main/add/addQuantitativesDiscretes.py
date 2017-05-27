@@ -240,28 +240,5 @@ def infoBoiteTukeyDiscret(listeEffectifs):
 	tukey['outliers'] = anomaliesTukeyDiscret(listeEffectifs)
 		
 	return tukey
-
-def infoSerieTemporelle(listeSerieTemporelle):
-	"""Création d'un dictionnaire pour la série temporelle.
 	
-	Cette fonction est compatible pour les données discrètes et continues.
-	
-	Couples (clé, valeur):
-		* "x" : liste des abscisses, les données
-		* "value" : liste des ordonnées, les effectifs cumulés respectifs
-        	
-	:param listeSerieTemporelle: liste de couples (Timestamp, valeur), et un Timestamp est une chaîne de caractères.
-	:rtype: dict
-	"""
-	timestamps = []
-	values = []
-	for couple in listeSerieTemporelle:
-		timestamps.append(couple[0])
-		values.append(couple[1])
-		
-	timeSeries = {}
-	timeSeries['x'] = timestamps
-	timeSeries['value'] = values
-	
-	return timeSeries
 
