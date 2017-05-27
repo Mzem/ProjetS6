@@ -3,9 +3,15 @@ $.getJSON("/timeSeries", function(json) {
 	var timeSeries = c3.generate({
 		bindto: '#timeSeries',
 		data: {
-			x: 'x',
-			type: 'spline',
-			json: json
+			x: 'timestamps',
+			xFormat: '%Y-%m-%d %H:%M:%S',
+			json: json,
+			type: 'spline'
+		},
+		axis: {
+			x: {
+				type: 'timeseries'
+			}
 		}
 	});
 });

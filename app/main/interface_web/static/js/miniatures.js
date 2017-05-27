@@ -3,12 +3,14 @@ $.getJSON("/timeSeries", function(json) {
 	var timeSeriesMini = c3.generate({
 		bindto: '#timeSeriesMini',
 		data: {
-			x: 'x',
+			x: 'timestamps',
+			xFormat: '%Y-%m-%d %H:%M:%S',
 			type: 'spline',
 			json: json
 		},
 		axis: {
 			x: {
+				type: 'timeseries',
 				show: false
 			},
 			y: {

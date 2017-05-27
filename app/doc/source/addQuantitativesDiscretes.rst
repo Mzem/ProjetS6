@@ -23,5 +23,3 @@ addQuantitativesDiscretes.py
 .. autofunction:: infoDistributionCumulativeDiscrete
 
 .. autofunction:: infoBoiteTukeyDiscret
-
-.. autofunction:: infoSerieTemporelle
