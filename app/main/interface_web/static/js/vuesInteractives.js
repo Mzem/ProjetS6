@@ -99,21 +99,24 @@ $.getJSON("/timeSeries", function(json) {
 	//Gestion des évènements (déchargement de l'ancienne série, chargement de la nouvelle)
 	$("#timeSeries .arcTimeSeries").each( function(index) {
 		$(this).click(function() {
-			timeSeries.unload();
-			timeSeriesMini.unload();
+			//~ timeSeries.unload({
+				//~ ids: ["timestamps", "value"]
+			//~ });
+			//~ timeSeriesMini.unload({
+				//~ ids: ["timestamps", "value"]
+			//~ });
 			
 			currentTimeSeries["value"] = dataTimeSeries["value"][index];
 			currentTimeSeries["timestamps"] = dataTimeSeries["timestamps"][index];
 			
 			timeSeries.load({
+				unload: ["timestamps", "value"],
 				json: currentTimeSeries
 			});
 			timeSeriesMini.load({
+				unload: ["timestamps", "value"],
 				json: currentTimeSeries
 			});
-			
-			console.log(currentTimeSeries);
-			console.log(dataTimeSeries);
 		});
 	});
 });
