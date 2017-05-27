@@ -69,13 +69,29 @@
     text-shadow: rgba(255,255,255,0.5) 0.5px 0.5px, rgba(255,255,255,0.5) -0.5px 0.5px, rgba(255,255,255,0.5) -0.5px -0.5px, rgba(255,255,255,0.5) 0.5px -0.5px;
 }
 
-#timeSeries .arcTimeSeries{
+#time .arcTimeSeries{
 	color: rgba(0,0,0,1);
+	position: relative;
+	font-size: 14px;
     overflow: hidden;
-    margin:2%;
-    padding: 1%;
-    background-color: rgba(72,201,207,0.2);
-    box-shadow: 0px 2px 5px #1c1a19;
-    border-radius: 5px;
+    border-bottom: solid 0.5px;
     text-shadow: rgba(255,255,255,0.5) 0.5px 0.5px, rgba(255,255,255,0.5) -0.5px 0.5px, rgba(255,255,255,0.5) -0.5px -0.5px, rgba(255,255,255,0.5) 0.5px -0.5px;
+}
+
+#time {
+	box-shadow: 0px 2px 5px #1c1a19;
+	background-color:  rgba(72,201,207,0.2);
+    border-radius: 3px;
+	margin-top:10px;
+	margin-bottom: 5px;
+	text-align: center; 
+	border: solid 0.5px;
+	height: 35px;
+	width: 180px;
+	vertical-align: center;
+	overflow: auto;
+	position: relative;
+    position: center;
+    margin:auto;
+    margin-bottom: 10px;
 }
