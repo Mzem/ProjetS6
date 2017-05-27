@@ -1,0 +1,21 @@
+.PHONY: clean-pyc ext-test test tox-test test-with-mem upload-docs docs audit
+
+include doc/Makefile
+
+all: clean-pyc test
+
+test:
+	python -m unittest discover
+
+run:
+	python main/runserver.py
+
+doc-html:
+
+doc-latexpdf:
+
+clean-pyc:
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '*~' -exec rm -f {} +
+
