@@ -33,18 +33,14 @@ Cette application fonctionne à l'aide d'outils à installer préalablement :
  * `Python 3+ <https://www.python.org/>`_ : langage de programmation principal.
  * `Flask 0.12.x <http://flask.pocoo.org/>`_ : framework d'applciations web en Python.	
  * `Sphinx 1.6.1 <http://www.sphinx-doc.org/en/stable/index.html>`_: génération automatique de documentation.
+ * `sphinx_rtd_theme, et guzzle_sphinx_theme` : templates pour sphinx
  
 Applet sur serveur local
 ========================
 
-Commande + description
+L'instruction qui permet de lancer l'appli est :
 
-L'instruction qui lance l'appli (à modifier avec les bons chemins)
-D'ailleurs est-ce que runserver c'est du local, je comprends pas trop tout ça
-
-.. code-block:: console
-	
-	python runserver.py
+ * `make run`
 	
 Applet sur serveur distant
 ==========================
@@ -54,7 +50,11 @@ connexion ssh sur une machine à distance, est-ce qu'on le met?
 Tests unitaires
 ===============
 
-Commande
+Commande à lancer dans le dossier 'app/'
+ * `make test` : éxécute tout les tests.
+ * `make test-interface_web`: éxécute tout les tests du module interface_web.
+ * `make test-add` : éxécute tout les tests du module add.
+ * `make test-chargement_des_donnes` : éxécute tout les tests du module chargement_des_donnees.
 
 
 Documentation
