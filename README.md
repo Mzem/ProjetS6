@@ -1,6 +1,5 @@
 Listes des trucs à faire avant de rendre l'appli :
 - graphes (meilleur affichage légendes) - Sonny
-- Boxplot graph
 - Relecture des documents
 - css pour les balises \<span class="arcTimeSeries">
 - .... mettez vos trucs ....
