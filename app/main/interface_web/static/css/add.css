@@ -36,7 +36,7 @@
     border-radius: 4px;
 }
 
-.container2 nav div, #iStats, #graphePrincipal {
+.container2 nav div, #iStats, #graphePrincipal, #NavArcTimeSeries {
 	background-color: #fefefe;
 }
 
@@ -69,16 +69,16 @@
     text-shadow: rgba(255,255,255,0.5) 0.5px 0.5px, rgba(255,255,255,0.5) -0.5px 0.5px, rgba(255,255,255,0.5) -0.5px -0.5px, rgba(255,255,255,0.5) 0.5px -0.5px;
 }
 
-#time .arcTimeSeries{
-	color: rgba(0,0,0,1);
-	position: relative;
-	font-size: 14px;
-    overflow: hidden;
-    border-bottom: solid 0.5px;
-    text-shadow: rgba(255,255,255,0.5) 0.5px 0.5px, rgba(255,255,255,0.5) -0.5px 0.5px, rgba(255,255,255,0.5) -0.5px -0.5px, rgba(255,255,255,0.5) 0.5px -0.5px;
+#navTimeSeries{
+	height: 100px;
+	overflow: auto;
 }
 
-#time {
+form #Arc {
+	display: inline-block;
+}
+
+#Arc {
 	box-shadow: 0px 2px 5px #1c1a19;
 	background-color:  rgba(72,201,207,0.2);
     border-radius: 3px;
@@ -86,12 +86,18 @@
 	margin-bottom: 5px;
 	text-align: center; 
 	border: solid 0.5px;
-	height: 35px;
+	height: 20px;
 	width: 200px;
 	vertical-align: center;
-	overflow: auto;
 	position: relative;
     position: center;
     margin:auto;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#Arc b, #Arc input {
+    vertical-align: middle;        
 }

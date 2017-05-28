@@ -1,17 +1,66 @@
-cls
+
 @echo off
 
-setlocal
-set PATH=%PATH%;C:\mingw\bin;C:\mingw\msys\1.0\bin
+if "%1" == "run" goto :run
+if "%1" == "test-interface_web" goto :test-interface_web
+if "%1" == "test-add" goto :test-add
+if "%1" == "test-chargement_des_donnees" goto :test-chargement_des_donnees
+if "%1" == "test" goto :test
+if "%1" == "html" goto :html
+if "%1" == "latexpdf" goto :latexpdf
+if "%1" == "clean-pyc" goto :clean-pyc
+goto :end
 
-echo *************************************************
-echo This script compile you Windows  project
-echo *************************************************
-echo PREREQUISITE:
-echo Have MinGW installed on your computer
 
-call make run
+REM Règle pour le lancement de l'application
+:run
+cd main\
+python runserver.py & cd ..
+goto :end
 
-echo Now your driver is ready
+REM Règles pour le lancement des tests
+:test-interface_web
+cd test\test_interface_web
+python -m unittest discover
+cd ..\..
+goto :end
 
-pause
+:test-add
+cd test\test_add
+python -m unittest discover
+cd ..\..
+goto :end
+
+:test-chargement_des_donnees
+cd test\test_chargement_des_donnees
+python -m unittest discover
+cd ..\..
+goto :end
+
+:test
+cd test\test_interface_web
+python -m unittest discover
+cd ..\test_add
+python -m unittest discover
+cd..\test_chargement_des_donnees
+python -m unittest discover
+cd ..\..
+goto :end
+
+REM Règle pour générer et afficher la documentation au format html
+:html
+cd doc/
+make html & cd ..
+goto :end
+
+REM Règle pour générer la documentation au format latex
+:latexpdf
+cd doc/
+make latexpdf & cd ..
+goto :end
+
+:clean-pyc
+del /s *.pyc
+del /s *.pyo
+del /s *~
+:end

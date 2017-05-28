@@ -93,7 +93,7 @@ $.getJSON("/timeSeries", function(json) {
 	var formArc = "<form>";
 	while(i < dataTimeSeries["value"].length){
 		//Parent->Enfant
-		formArc += "<input type='radio' class='arcTimeSeries' name='Arc'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>";
+		formArc += "<div id='Arc'><input type='radio' class='arcTimeSeries' name='Arc'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b></div>";
 		//$("#time").append("<input type='radio' class='arcTimeSeries'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>");
 		i++;
 	}

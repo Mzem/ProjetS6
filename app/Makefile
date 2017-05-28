@@ -1,8 +1,5 @@
 .PHONY: clean-pyc test 
 
-# Règle pour le lancement des tests et du nettoyage
-all: clean-pyc test
-
 # Règles pour le lancement des tests
 test-interface_web:
 	cd test/test_interface_web; python -m unittest discover
