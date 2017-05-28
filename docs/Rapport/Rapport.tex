@@ -201,24 +201,20 @@
 	Nous dédions cette partie pour expliquer les concepts informatiques qui nous ont posé le plus de problèmes. Ces concepts n'étaient pas maîtrisés voire inconnus avant d'aborder le projet, ils ont donc grandement faussé notre estimation quant à la charge de travail que représente le projet car ils ont mal été pris en compte, ou pas du tout.
 	%aidez)vous des intros de openclassroom pour faire ces partie
 	\subsection{Le paradigme client serveur}
-		client : navigateur web
+		1) 	client : navigateur web
 		serveur : là où est hébergé notre code source et nos templates.
 		client fait requête au serveur, le serveur répond en envoyant la page web demandant (html).
 		
-		serveur, il y a du code : on fait template html dont les rendus sont obtenus après avoir effectuer certains code (souvent langages interprétés comme php ou python)
+		2)	serveur, il y a du code : on fait template html dont les rendus sont obtenus après avoir effectuer certains code (souvent langages interprétés comme php ou python)
 		
-		Pb / transition : Comment dynamismer la page? sinon, a chaque event client, il faut renvoyer une nouvelle page web?
+		Pb / transition : Comment dynamismer la page? sinon, a chaque requete client, il faut renvoyer une nouvelle page web?
 	\subsection{Les applets}
-		balise script, et javascript, qui contiennent du code source exécuté côté client (par le navgateur web).
-		Dès lors qu'il y a dynamisme avec un script on peut parler d'application web ou applet.
-		
-		Pb / transition: Comment utiliser nos outils et nos données stockées sur serveur avec une applet dynamique? On peut avoir un code, mais mtn si on veut communiquer avec le serveur, on va toujours demander une page web entière ??
+		Ce sont des applications côté client exécutées par le navigateur. HTML met en place des balises spéciales, \lstinline!<script>! dans lequel du code va être exécuter une fois la page chargée.
+		\paragraph{}Pour résumer nous avons d'un côté du code côté serveur qui permet de rendre des templates formatés, et d'autre part du code sur le navigateur qui peut s'exécuter pour obtenir des pages dynamiques. Cela dit, ce sont deux parties indépendantes, pour obtenir une communication de données entre ces deux entités, sans avoir à faire une requête de page web entière, il faut comprendre \textbf{Ajax}.
 		
 	\subsection{Ajax}
 		Asynchronous JavaScript And XML. Requêtes et envoi uniquement des données nécessaire (pas toute une page web), donc raffraichissement partiel de la page. Code plus léger et moins de chargement.
-		
-	% Si vous voyez des trucs pertinents à dire dedans allez-y, on peut se baser majoriairement sur cette partie pour justifier nos problèmes, donc ne pas tout réexpliquer en dessous !
-	
+			
 	\section{Fonctionnement de l'application}
 	% On avait oblié cette partie au début, elle est dans les recommandations
 	\subsection{Format du fichier CSV}
