@@ -93,19 +93,13 @@ $.getJSON("/timeSeries", function(json) {
 
 	while(i < dataTimeSeries["value"].length){
 		//Parent->Enfant
-		$("#time").append("<input type='radio' class='arcTimeSeries'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>");
+		$("#navTimeSeries").append("<input type='radio' class='arcTimeSeries'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>");
 		i++;
 	}
 	
 	//Gestion des évènements (déchargement de l'ancienne série, chargement de la nouvelle)
 	$("#time .arcTimeSeries").each( function(index) {
 		$(this).click(function() {
-			//~ timeSeries.unload({
-				//~ ids: ["timestamps", "value"]
-			//~ });
-			//~ timeSeriesMini.unload({
-				//~ ids: ["timestamps", "value"]
-			//~ });
 			
 			currentTimeSeries["value"] = dataTimeSeries["value"][index];
 			currentTimeSeries["timestamps"] = dataTimeSeries["timestamps"][index];
