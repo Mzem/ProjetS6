@@ -25,10 +25,7 @@
 	\paragraph{}Notre client, \textit{\textbf{DCbrain}}, emploie une appore basée sur une représentation des \textbf{réseaux physiques} de leur client en \textbf{graphes de flux}. Les graphes de flux permettent de représenter les données liées au flux du réseau, repérer les anomalies sur le réseau et simuler les évolutions de celui-ci.
 	
 	Les graphes de flux peuvent être utilisés pour tout réseau physique de fluide, tels les réseaux électriqueset c’est pourquoi les clients de DCbrain sont des groupes comme ERDF ou la SNCF. Par exemple, on pourra représenter les canaux qui acheminent l'électricité par des arcs et les connections par des noeuds.
-	\paragraph{}Fournir aux utilisateurs une application web est l'objectif du projet. Le produit représente un outil complémentaire au travail de DCbrain et ses fonctionnalités permettent aux utilisateurs de charger des données, les visualiser et les analyser.
-	
-	Deux documents supplémentaires sont livrés avec le code source, un manuel utilisateur décrivant comment faire fonctionner notre application, et une documentation technique des modules de notre produit.
-	\paragraph{}
+	\paragraph{}Fournir aux utilisateurs une application web est l'objectif du projet. Le produit représente un outil complémentaire au travail de DCbrain et ses fonctionnalités permettent aux utilisateurs de charger des données, les visualiser et les analyser. 
 	% Quelqu'un fait l'annonce de plan svp
 	% 1 architecture de l'application : organigramme, donnnées qui criculent entre les modules, fonctionnalités
 	% 2 contraintes et choix des outils de programmation
@@ -37,6 +34,15 @@
 	% 5 bilan technique
 	% 6 bilan de l'organisation interne
 	% 7 bilan comparatif des coûts présumés et des coûts finaux de notre produit
+	
+		\paragraph{}Dans une première partie de ce document, on présentera l'architecture de notre application, illustrée par un organigramme qui a été préalablement établi. Cet organigramme représente un découpage de l'application en modules avec les différentes informations qui circulent entre ces modules.\\
+	Dans une deuxième partie, on parlera des différents langages de programmation choisis pour réaliser l'application et des contraintes qui ont justifié ces choix.\\
+	Ensuite, dans une troisième partie, on évoquera les points délicats du projet, autrement dit les concepts informatiques qui nous ont posés des problèmes.\\
+	Puis, dans une quatrième partie, le fonctionnement de l'application y sera décrit.\\
+	Ensuite, dans une cinquième partie, on traitera la partie technique de notre projet, c'est à dire, l'application, son fonctionnement et ses problèmes.\\
+	Dans une sixième et une septième partie, l'organisation interne du groupe ainsi que le coût y seront expliqués.
+	Finalement, dans les deux dernières parties, on établira un bilan quant à l'organisation interne au sein du groupe et un bilan comparatif des coûts présumés et des coûts finaux de notre produit.\\
+
 	
 	% nos trois dernieres parties ont aussi un rôle conclusif, donc on peut faire très court pour notre vraie conclusion.
 	\section{Architecture de l'application}
@@ -110,7 +116,7 @@
 			\textbf{(10)} Informations du (2) et ensemble de données contenu dans le fichier CSV \\
 			\textbf{(11)} Signal de validation du choix de la colonne, et noms des colonnes\\
 			\textbf{(12)} Envoi des résultats d'analyses de (4), (6) et (8)\\
-			\textbf{(13)} Signal de contrôle : demande d'exportation des résultats de l'ADD, analyse d'une autre colonne, ou importation d'un autre fichier\\		
+			\textbf{(13)} Signal de demande d'exportation des résultats de l'ADD ou analyse d'une autre colonne\\		
 		
 		\subsection{Fonctionnalités des modules}
 		%Malek stp, corrige ça ou augmente les marges du cahier : Cette partie a aussi besoin d'un peu de mise en page, il y a trop de marge à droite a cause des enum + itemize + description)
@@ -190,7 +196,7 @@
 		\begin{itemize}[leftmargin=*]
 			\item \textbf{Python :} d'une part, ce langage est adapté pour l'ADD, puisqu'il est doté de nombreux modules permettant d'effectuer du calcul scientifique. D'autre part, \textbf{\textit{Python}} est compatible avec le développement d’applications web avec l'aide de frameworks dediés. Nous avons choisi \textbf{\textit{Flask}}, une bibliothèque qui s’efforce d’être la plus simple possible pour une prise en main, à l'opposé d'autres bibliothèques. C'est donc plus abordable pour une première expérience sur le développement d'applications web.
 			\item \textbf{HTML et CSS :} l'application web nécessite le recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme des pages web.
-			\time \textbf{JavaScript :} c'est le langage qui nous permet de dynamiser nos pages web rendues côté client, c'est pour cela qu'on parle d'application web.
+			\item \textbf{JavaScript :} c'est le langage qui nous permet de dynamiser nos pages web rendues côté client, c'est pour cela qu'on parle d'application web.
 			\item \textbf{jQuery :} librairie JavaScript pour la une manipulation simplifiée de concepts avancés, dont la gestion des évènements et \textbf{\textit{Ajax}} (concept détaillé dans la prochaine partie).
 			\item \textbf{c3js :} module de représentations graphiques JavaScript réutilisables. Il est basé sur \textbf{\textit{d3js}}, une librairie JavaScript pour une manipulation de documents dirigée par les données.
 			\item \textbf{Sphinx :} framework Python pour la génération de documentation. Sa puissance vient de la génération automatique directement à partir du code source.
