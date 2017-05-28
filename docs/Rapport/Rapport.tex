@@ -37,7 +37,7 @@
 	\section{Architecture de l'application}
 		\subsection{Organigramme et données échangées}
 		Cet organigramme a été préalablement établi dans le cahier des charges du produit. Il représente la décomposition en modules de l'application, ainsi que les informations qui circulent entre ces modules.\\
-		\textbf{Remarque :} on pourra noter quelques légers arrangements dans la représentation des informations transmises entre les modules de l'organigramme. Ces arrangements sont principalement effectués pour des fins d'optimisation et seront explicitement justifiés.
+		\textbf{Remarque :} on pourra noter quelques légers arrangements dans la représentation des informations transmises entre les modules de l'organigramme. Ces arrangements sont principalement effectués pour des fins de compatibilité avec les outils utilisés et seront explicitement justifiés.
 		\begin{figure}[H]
 			\begin{tikzpicture}
 			\begin{scope}[xscale=2,yscale=1.5]	
@@ -93,7 +93,7 @@
 				\item soit un message d'erreur signalant un problème lié au fichier
 				\item soit deux structures, l'une contenant les données du fichier, et l'autre contenant une description du nom, du type, et des erreurs de chaque colonne de données du fichier
 			\end{itemize}
-			{\color{red}Justification de l'optimisation :} lors de la phase d'enchaînement entre les différents modules de l'application, on a remarqué qu'il était plus judicieux d'établir une communication à une seule passe avec le package de chargement des données, au lieu de faire le va et vient sur ses différents modules. De cette manière, ce package devient indépendant et assure ainsi une facilité lors du débogage et de la maintenance.\\
+			{\color{red}Justification de la modification :} les outils utilisés pour faire communiquer les modules ne permettait pas la transmission d'un certain type d'objets, dont les objets représentant les fichiers. On a donc décidé de récupérer directement les résultats de l'analyse du fichier et d'y inclure la gestion des potentielles erreurs.\\
 			\textbf{(3)} Ensemble de données de type qualitatif\\
 			\textbf{(4)} Erreur ou effectifs, effectifs cumulés, fréquences, fréquences cumulées, diagramme en secteur, histogramme\\
 			\textbf{(5)} Ensemble de données de type quantitatif discret\\
@@ -108,7 +108,7 @@
 		
 		\subsection{Format du fichier CSV}
 		Le format du fichier a été établi par le client \textbf{\textit{DCbrain}}. Son contenu est assez structuré et est décrit par des colonnes aux types prédéfinies :
-		\begin{center}\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{2cm}|}			
+		\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{2cm}|}			
 			\hline \multicolumn{1}{|c|}{\textbf{timestamp}} & \multicolumn{1}{c|}{\textbf{parent}} & \multicolumn{1}{ c|}{\textbf{enfant}} & \multicolumn{1}{c|}{\textbf{mesure 1}} & {\textbf{mesure 2}} \\
 			\hline 	January 1st 2017, 15:00:00.000 & 102 & 95 & 26644.235 & 176.253\\
 			\hline
@@ -195,7 +195,7 @@
 		\begin{itemize}[leftmargin=*]
 			\item \textbf{Python :} d'une part, ce langage est adapté pour l'analyse descriptives de données, puisqu'il est doté de nombreux modules permettant d'effectuer du calcul scientifique sur des données, donc l'analyse de données. D'autre part, \textbf{\textit{Python}} est compatible avec le développement d’applications web grâce aux bibliothèques web qui permettent cela, dont \textbf{\textit{Flask}} qu'on a utilisé. En effet, \textbf{\textit{Flask}} est une bibliothèque qui s’efforce d’être la plus simple possible pour une prise en main, à l'opposé d'autres bibliothèques. C'est donc plus abordable pour une première expérience sur le développement d'applications web.
 			\item \textbf{Langages de programmation web :} l'application devant être une applet intégrée dans une page web pour s'exécuter, le recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme de ces pages web était nécessaire.\\
-			Ensuite, pour permettre à l'application de faire communiquer les pages web avec un serveur web sans occasionner le rechargement de la page, nous avons eu recours à \textbf{\textit{Ajax}}. Il s'agit d'un concept de programmation web reposant sur plusieurs technologies comme le \textbf{\textit{Javascript}}, qui lui se charge d'établir la connexion entre la page web et serveur. \textbf{\textit{Javascript}} est également employé pour rendre les pages web interactives. \textbf{\textit{Jquery}} est quant à lui utilisé pour faire le lien entre \textbf{\textit{HTML}} et \textbf{\textit{Ajax}}.
+			Ensuite, pour permettre à l'application de faire communiquer les pages web avec un serveur web sans occasionner le rechargement de la page, nous avons eu recours à \textbf{\textit{Ajax}}. Il s'agit d'un concept de programmation web reposant sur plusieurs technologies comme le \textbf{\textit{Javascript}}, qui lui se charge d'établir la connexion entre la page web et serveur. \textbf{\textit{JavaScript}} est également employé pour rendre les pages web interactives. \textbf{\textit{Jquery}} est quant à lui utilisé pour faire le lien entre \textbf{\textit{HTML}} et \textbf{\textit{Ajax}}.
 			\item \textbf{Autres outils :} pour la génération de la documentation des fonctionnalités du programme, on a utilisé le logiciel \textbf{\textit{Sphinx}} qui se charge de générer une \textit{docstring} à partir des commentaires présents dans le code python.
 		\end{itemize}
 		
@@ -207,30 +207,36 @@
 			\item Chargement des données du fichier et visualisation des valeurs, avec possibilité d'application de filtres. 
 			\item Résultats de l'analyse d'un colonne choisie du fichier avec des graphes et des informations statistiques.
 		\end{itemize}
-		\paragraph{Tests :} les principales fonctionnalités de notre application ont été testées avec plusieurs cas de tests différents. Ces tests ont traité plusieurs cas d'utilisation de ces fonctionnalités et nous ont permis de trouver quelques erreurs et ainsi les corriger. La décomposition en différents modules de l'application nous a permis de tester ces modules indépendamment, sans qu'il n'y ait d'impact sur les autres modules lorsqu'une erreur se produit. 
+		\paragraph{Tests :} les principales fonctionnalités de notre application ont été testées avec plusieurs cas de tests différents. Ces tests ont traité plusieurs cas d'utilisation de ces fonctionnalités et nous ont permis de trouver quelques erreurs et ainsi les corriger. La décomposition en différents modules de l'application nous a permis de tester ces modules indépendamment, sans qu'il n'y ait d'impact sur les autres modules lorsqu'une erreur se produit.
 		
-		\paragraph{Verrous techniques (levés) :} langages de prog nouveaux, points délicats de flask/application web sur l'approche et tout ce qui va avec
-	
-	%mettez vos trucs (Sonny si tu veux parler de certains de tes trucs qui fonctionnent pas)
-	%Quoi marche (comment ca marche - à l'aide de la partie avant)
-	%QUoi marche pas (pb et et resolution si trouvee)
+		\colorbox{yellow}{Mettez vos trucs qui marchent pas si vous voulez}
 		
 		\subsection{Problèmes rencontrés}
-			\subsubsection*{Problèmes résolus :} gestion des routes avec flask, application de flitres sur les données et pagination, traitement de fichiers mal structurés, Objet TextIOWrapper non sérialisable, 
-			
-			\subsubsection*{Problèmes non résolus :}
-				- perfs tab echantillonage (données trop grandes)
-				- sonny graphs
+			\subsubsection*{Problèmes résolus :} 
+			Lors de la réalisation de l'application, on a été confrontés à plusieurs problèmes, principalement des verrous techniques, qui ont perturbé le bon déroulement de notre travail : 
+			\begin{itemize}[leftmargin=*]
+				\item les premiers verrous rencontrés sont liés aux outils et aux langages de programmation utilisés. En effet, la majorité de ces outils sont nouveaux pour nous, ce qui a nécessité un temps d'apprentissage et d'adaptation. Cependant, on a finalement réussi à maîtriser ses outils, assez pour assurer la réalisation de notre application.
+				\item ensuite, lors de la manipulation de ces outils, on a rencontré quelques problèmes de compatibilité lors de l'interaction entre les différents langages de programmation utilisés. Un des problèmes principaux était le type de données transférées entre les différents modules. Par exemple, la bibliothèque \textit{\textbf{Flask}} ne permettait pas la transmission d'objets qu'elle considérait comme non sérialisable, ce qui a nécessité quelques aménagement dans le schéma de transfert d'informations pour régler ce problème.
+				\item les autres verrous rencontrés concernent la partie algorithmique de notre travail. \colorbox{yellow}{Sonny développe}
+			\end{itemize}
+				\colorbox{yellow}{... mettez vos trucs ...}
 				
-			\subsubsection*{Points divergent :}
-			Justification des points qui divergent par rapport aux specs et organigramme de départ.
-			- FileWithSGF/ FileWithDragDrop se charge d'upload et nom de retourner un chemin.
-			- Pas d'écriture dans des json mais dans des js?? 
+			\subsubsection*{Problèmes non résolus :}
+				Certains problèmes rencontrés n'ont pas été entièrement résolus. Ces problèmes ne sont pas déterminants pour l'acceptabilité de notre produit et sont surtout liés aux performances et aux algorithmes implémentés :
+				\begin{itemize}[leftmargin=*]
+					\item lors du chargement du fichier, un certain temps est nécessaire pour que le système d'affichage des données et de filtrage soit opérationnel. Cette opération est d'autant plus longue que le fichier est grand.
+					\item \colorbox{yellow}{sonny tes graphs}
+				\end{itemize}
+				
+			\subsubsection*{Points divergents :}
+			Certains points du produit final divergent légèrement avec ce qui a été établi dans l'organigramme du cahier des charges et dans les spécifications. Les points concernant l'organigramme ont été précédemment explicités et justifiés lors du rappel de ce dernier. Concernant les spécifications, certaines fonctionnalités on été réarrangées pour retourner une valeur de type différent que celui qui a été établi. Ces modifications sont encore liées aux problèmes de compatibilité lors de l'interaction entre les différents langages de programmation utilisés.
+			%FileWithSGF/ FileWithDragDrop se charge d'upload et nom de retourner un chemin.
+			%Pas d'écriture dans des json mais dans des js?? 
 		
 				
 	\section{Organisation interne du groupe}
-	Ci-dessous se trouve le tableau de la répartition des modules pour chaque membre du groupe établie avant le commencement du développement:
-	\begin{center}\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{1cm}|}			
+	Ce tableau établi dans le cahier des charge, illustre l'assignation des modules pour chaque membre du groupe :
+	\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{1cm}|}			
 		\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Malek}} & \multicolumn{1}{ c|}{\textbf{Sonny}} & \multicolumn{1}{c|}{\textbf{Jean-Didier}} & {\textbf{Total}} \\
 		\hline 	Gestion des flux & ~ & ~ & x & 1\\
 		\hline 	Fenêtre choix fenêtre & ~ & ~ & x & 1\\
@@ -242,29 +248,33 @@
 		\hline 	Vérification format fichier & x & ~ & ~ & 1\\
 		\hline 	Analyse contenu fichier & x & ~ & ~ & 1\\
 		\hline
-		\end{longtable}\vspace{1em}\end{center}
-		
-	1 page
-	On expliquera plus tard comment ça s'est déroulé concrètement par rapport à ce qui était prévu.
-		
-	\section{Coût}
-	Tableau indiquant l'estimation et le coût final en nombre de lignes de code, pour chaque module:
-	\begin{center}\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{3cm}|>{\centering\arraybackslash}m{7cm}|>{\centering}m{1.5cm}|}			
+	\end{longtable}\vspace{-2em}\end{center}
+	Cette répartition a été parfaitement respectée. Elle nous a permis de travailler efficacement et assez indépendamment, ce qui prouve que l'assignation des modules a été judicieusement faite.
+	
+	\section{Coûts}
+	Ce tableau indique les coûts estimés lors de l'établissement du cahier des charges et le coûts finaux, en nombre de lignes de code et pour chaque module :
+	\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{1.5cm}|}			
 		\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{c|}{\textbf{Justification}} & \multicolumn{1}{c|}{\textbf{Coût final}}\\
 		\hline 	Gestion des flux & 15 & Mise en forme du main et appel de l'application & \\
 		\hline 	Fenêtre choix fichier & 10 + 20 & Fonctions pour : Drag\& Drop + Système de fichiers &\\
-		\hline 	Fenêtre rôle et choix colonne & 5 + 20 + 10 + 10 + 20 & Communication avec le module application + Affichage de l'interface+ lecteurs des valeurs + 	affichage des valeurs & \\
-		\hline 	Fenêtre résultats ADD & 10 + 3* 30 &  Envoie d'informations au module application + Construction des graphe pour l'ADD pour les 3 types d'analyse & \\
+		\hline 	Fenêtre rôle et choix colonne & 5 + 20 + 10 + 10 + 20 & Communication avec le module application + Affichage de l'interface + lecteurs des valeurs + affichage des valeurs & 180\\
+		\hline 	Fenêtre résultats ADD & 10 + 3* 30 & Envoi d'informations au module application + Construction des graphe pour l'ADD pour les 3 types d'analyse & \\
 		\hline  ADD qualitatives  & 20 + 20*3 & Application des formules pour les calculs de fréquences et d'effectifs + calcul des valeurs pour la construction de 3 graphes & \\
 		\hline 	ADD quantitatives discrètes & 60 + 20*2 & Application des formules attaché à l'analyse quantitative discret + calcul des valeurs pour la construction de 2 graphes & \\
 		\hline 	ADD quantitatives continu & 20 + 10 + 10 + 5 + 20*2 & Parcours + choix précision classe d'intervalle + écriture + communication avec les modules+ calcul des valeurs pour la construction de 2 graphes & \\
-		\hline 	Vérification format fichier & 30 & Ouverture fichier + vérification si ouverture en lecture + présence de texte formaté ou non &\\
-		\hline 	Analyse contenu fichier & 20 + 5 + 25 + 10 &  Recopie et vérification + initialisation de la structure+ Parcours du fichiers avec condition + Fonction pour donner nom et type de colonne & \\
+		\hline 	Vérification format fichier & 30 & Ouverture fichier + vérification si ouverture en lecture + présence de texte formaté ou non & 35\\
+		\hline 	Analyse contenu fichier & 20 + 5 + 25 + 10 &  Recopie et vérification + initialisation de la structure + Parcours du fichiers avec condition + Fonction pour donner nom et type de colonne & 70\\
 		\hline \textbf{Coût Total} & \textbf{565} & \textbf{Estimation totale du coût} & \\
 		\hline 	
-	\end{longtable}\vspace{1em}\end{center}
-		
+	\end{longtable}\vspace{-2em}\end{center}
+	Les coûts estimés pour les modules effectuant de simples calculs sont assez respectés. Par contre, la majorité des modules de type fenêtre ont plus de lignes que prévu. Ceci est du à l'implémentation de fonctionnalités d'affichage dynamique dans nos fenêtres, principalement réalisés dans le langage \textit{\textbf{JavaScript}}.\\
+	\colorbox{yellow}{Je vous laisse compléter le tab et vos justifications}
+	
+	
 	\section*{Conclusion}
-	1 demi-page, plus tard
+	Ce document résume tout ce qui a été établi avant, pendant et après la réalisation de notre œuvre. Cette œuvre est une application web de visualisation et d'analyse de données. Son développement a été réparti en plusieurs modules indépendants, ce qui facilite sa maintenance et permet ainsi au client d'étendre ses différentes fonctionnalités.
+	\paragraph{} Dans le point où l'on est actuellement, on peut revoir, avec du recul, la manière avec laquelle notre produit a été réalisé. En effet, la majorité des problèmes et des verrous rencontrés auraient pu être aisément résolus ou même évités si on avait choisi certains outils au détriment d'autres. Il s'agit d'outils plus complets, qui offrent une très grande flexibilité lors du traitement de certaines informations. Cependant, et dans le cadre pédagogique de ce projet, les délais imposait ne laissaient pas suffisamment de marge pour l'appréhension de ces très vastes outils.
+	\paragraph{} Ce travail a été réalisé par un groupe de 3 personnes. Le sujet a été très bien appréhendé par les membre du groupe et l'entente a été excellente. Grâce aux informations préalablement établies dans le cahier des charges et dans les spécifications, le travail au sein du groupe a pu être mené de façon assez indépendante, sans générer de conflits ou de problèmes d'organisation.
+	\paragraph{} Cette épreuve constitue donc une expérience enrichissante pour nous, non seulement sur le plan compétence, mais aussi sur le plan de travail collectif, qui nous inspirera probablement pour de futurs projets.
 		
 \end{document}
