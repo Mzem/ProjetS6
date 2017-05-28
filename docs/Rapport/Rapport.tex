@@ -25,7 +25,7 @@
 	Les techniques utilisées pour répondre au poroblèmes sont empruntées aux statistiques et l'on va parler d'\textit{\textbf{analyse descriptive de données}}\footnote{On utilisera l'acronyme ADD par la suite pour parle d'analyse descriptive de données.}: une branche des statistiques qui étudie les données par le biais d'informations synthétiques, sans supposer qu'elles suivent un comportement particulier.
 	\paragraph{}Notre client, \textit{\textbf{DCbrain}}, emploie une appore basée sur une représentation des \textbf{réseaux physiques} de leur client en \textbf{graphes de flux}. Les graphes de flux permettent de représenter les données liées au flux du réseau, repérer les anomalies sur le réseau et simuler les évolutions de celui-ci.
 	
-	Les graphes de flux peuvent être utilisés pour tout réseau physique de fluide, tels les réseaux électriqueset c’est pourquoi les clients de DCbrain sont des groupes comme ERDF ou la SNCF. Par exemple, on pourra représenter les canaux qui acheminent l'électricité par des arcs et les connections par des noeuds.
+	Les graphes de flux peuvent être utilisés pour tout réseau physique de fluide, tels les réseaux électriques et c’est pourquoi les clients de DCbrain sont des groupes comme ERDF ou la SNCF. Par exemple, on pourra représenter les canaux qui acheminent l'électricité par des arcs et les connexions par des noeuds.
 	\paragraph{}Fournir aux utilisateurs une application web est l'objectif du projet. Le produit représente un outil complémentaire au travail de DCbrain et ses fonctionnalités permettent aux utilisateurs de charger des données, les visualiser et les analyser. 
 
 	\paragraph{}Dans la première partie de ce document, on présentera l'architecture de notre application, illustrée par un organigramme qui a été préalablement établi. Cet organigramme représente un découpage de l'application en modules avec les différentes informations qui circulent entre ces modules.
@@ -37,6 +37,7 @@
 	
 	Finalement, dans les deux dernières parties, on établira un bilan quant à l'organisation interne au sein du groupe et un bilan comparatif des coûts présumés et des coûts finaux de notre produit.
 	
+	\paragraph{}En addition du code source, un manuel utilisateur et une documentation sont livrés. La documentation se présente sous deux formes, pdf et html. La version html est plus lisible grâce à l'utilisation de thèmes disponibles avec l'outil qui nous a permis de générer ce document.
 	\section{Architecture de l'application}
 		\subsection{Organigramme et données échangées}
 		Cet organigramme a été préalablement établi dans le cahier des charges du produit. Il représente la décomposition en modules de l'application, ainsi que les informations qui circulent entre ces modules.
