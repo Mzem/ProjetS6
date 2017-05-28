@@ -78,13 +78,13 @@ Générer et lancer la documentation au format html :
 
 .. code-block:: console
 
-	make doc-html
+	make html
 	
 Générer et lancer la documentation au format pdf :
 
 .. code-block:: console
 
-	make doc-latexpdf
+	make latexpdf
 
 
 Documentation

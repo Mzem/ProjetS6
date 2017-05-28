@@ -17,14 +17,14 @@ run:
 	cd main/; python runserver.py
 
 #Règle pour générer et afficher la documentation au format html
-doc-html:
+html:
 	cd doc/; make html
 	
 run-html:
 	google-chrome doc/build/html/index.html
 
 #Règle pour générer la documentation au format latex
-doc-latexpdf:
+latexpdf:
 	cd doc/; make latexpdf
 
 run-latexpdf:

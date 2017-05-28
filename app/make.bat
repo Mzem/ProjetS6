@@ -8,9 +8,12 @@ if "%1" == "test-chargement_des_donnees" goto :test-chargement_des_donnees
 if "%1" == "test" goto :test
 if "%1" == "html" goto :html
 if "%1" == "latexpdf" goto :latexpdf
+if "%1" == "run-html" goto :run-html
+if "%1" == "run-latexpdf" goto :run-latexpdf
 if "%1" == "clean-pyc" goto :clean-pyc
-goto :end
 
+REM Commande non reconnue!
+goto :end
 
 REM Règle pour le lancement de l'application
 :run
@@ -49,13 +52,23 @@ goto :end
 
 REM Règle pour générer et afficher la documentation au format html
 :html
-cd doc/
+cd doc\
 make html & cd ..
+goto :end
+
+:run-html
+cd doc\build\html\
+index.html & cd ..\..\..\
+goto :end
+
+:run-latexpdf
+cd doc\build\latex\
+FilRouge.pdf & cd ..\..\..\
 goto :end
 
 REM Règle pour générer la documentation au format latex
 :latexpdf
-cd doc/
+cd doc\
 make latexpdf & cd ..
 goto :end
 
