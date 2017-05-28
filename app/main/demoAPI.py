@@ -9,6 +9,7 @@ from add.addQuantitativesDiscretes import moyenne, ecartType, variance
 from add.addQuantitativesContinues import discretisation, calculNombreClasses, preparationIntervallesAnalyse, quantileContinu
 
 import sys, csv, errno
+from math import sin, log
 
 def mkdir_p(path):
 	try:
