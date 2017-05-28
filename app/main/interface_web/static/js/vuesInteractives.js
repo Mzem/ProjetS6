@@ -90,14 +90,15 @@ $.getJSON("/timeSeries", function(json) {
 	//Création des éléments pour sélectionner la série à afficher
 	// <span>nom de l'arc<span/> dans <div id = "timeSeries">
 	i = 0;
+
 	while(i < dataTimeSeries["value"].length){
 		//Parent->Enfant
-		$("#timeSeries").append("<span class='arcTimeSeries'>" + dataTimeSeries["parent"][i] + "->" + dataTimeSeries["enfant"][i] + "<span/>");
+		$("#time").append("<input type='radio' class='arcTimeSeries'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>");
 		i++;
 	}
-	$("Times").append($("#timeSeries"))
+	
 	//Gestion des évènements (déchargement de l'ancienne série, chargement de la nouvelle)
-	$("#timeSeries .arcTimeSeries").each( function(index) {
+	$("#time .arcTimeSeries").each( function(index) {
 		$(this).click(function() {
 			//~ timeSeries.unload({
 				//~ ids: ["timestamps", "value"]
