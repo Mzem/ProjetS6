@@ -18,26 +18,32 @@
 \newpage\clearpage\pagenumbering{arabic}
 
 	\section*{Introduction}
-	Ce document est le compte-rendu final de notre travail qui s'inscrit dans le cadre du module \textit{Projet} de la licence informatique de l' \textit{\textbf{UVSQ}}. Le sujet de ce projet a été proposé par l'entreprise \textit{\textbf{DCbrain}}.\\
+	\paragraph{}Ce document est le compte-rendu final de notre travail qui s'inscrit dans le cadre du module \textit{Projet} de la licence informatique de l' \textit{\textbf{UVSQ}}. Le sujet de ce projet a été proposé par l'entreprise \textit{\textbf{DCbrain}}.
+	\paragraph{}Ce projet s’inscrit dans un thème d’actualité, le \textbf{Big Data}. La notion Big Data fait référence aux masses de données collectées et l'enjeu consiste à extraire de ces données une valeur ajoutée.
+
+	Les techniques utilisées pour répondre au poroblèmes sont empruntées aux statistiques et l'on va parler d'\textit{\textbf{analyse descriptive de données}}\footnote{On utilisera l'acronyme ADD par la suite pour parle d'analyse descriptive de données.}: une branche des statistiques qui étudie les données par le biais d'informations synthétiques, sans supposer qu'elles suivent un comportement particulier.
+	\paragraph{}Notre client, \textit{\textbf{DCbrain}}, emploie une appore basée sur une représentation des \textbf{réseaux physiques} de leur client en \textbf{graphes de flux}. Les graphes de flux permettent de représenter les données liées au flux du réseau, repérer les anomalies sur le réseau et simuler les évolutions de celui-ci.
 	
-	Notre client, \textit{\textbf{DCbrain}}, développe des outils qui permettent de visualiser le comportement des \textbf{réseaux physiques} afin de prédire et trouver les problèmes de ces réseaux dans le but de les optimiser. Ces réseaux physiques sont principalement les réseaux industriels, de fluide ou de distribution, tels les réseaux électriques. Des données sont collectées à partir de ces réseaux puis analysées grâce aux technologies du \textbf{Big Data}. Le but est d'en extraire une valeur ajoutée.\\
+	Les graphes de flux peuvent être utilisés pour tout réseau physique de fluide, tels les réseaux électriqueset c’est pourquoi les clients de DCbrain sont des groupes comme ERDF ou la SNCF. Par exemple, on pourra représenter les canaux qui acheminent l'électricité par des arcs et les connections par des noeuds.
+	\paragraph{}Fournir aux utilisateurs une application web est l'objectif du projet. Le produit représente un outil complémentaire au travail de DCbrain et ses fonctionnalités permettent aux utilisateurs de charger des données, les visualiser et les analyser.
 	
-	Notre tâche correspond au travail indispensable d’analyse préliminaire de ces données, afin de faciliter leur exploitation. Ce projet a donc pour objectif de fournir aux utilisateurs une application web qui permettra de charger les données collectées, les visualiser et enfin les analyser.\\
+	Deux documents supplémentaires sont livrés avec le code source, un manuel utilisateur décrivant comment faire fonctionner notre application, et une documentation technique des modules de notre produit.
+	\paragraph{}
+	% Quelqu'un fait l'annonce de plan svp
+	% 1 architecture de l'application : organigramme, donnnées qui criculent entre les modules, fonctionnalités
+	% 2 contraintes et choix des outils de programmation
+	% 3 fonctionnement de l'application
+	% 4 points délicats
+	% 5 bilan technique
+	% 6 bilan de l'organisation interne
+	% 7 bilan comparatif des coûts présumés et des coûts finaux de notre produit
 	
-	Dans une première partie de ce document, on présentera l'architecture de notre application, illustrée par un organigramme qui a été préalablement établi. Cet organigramme représente un découpage de l'application en modules avec les différentes informations qui circulent entre ces modules.\\
-	Dans une deuxième partie, on parlera des différents langages de programmation choisis pour réaliser l'application et des contraintes qui ont justifié ces choix.\\
-	Ensuite, dans une troisième partie, on traitera la partie technique de notre projet, c'est à dire, l'application, son fonctionnement et ses problèmes.\\
-	Finalement, dans les deux dernières parties, on établira un bilan quant à l'organisation interne au sein du groupe et un bilan comparatif des coûts présumés et des coûts finaux de notre produit.\\
-	
-	%PAS ICI 
-	%Deux documents supplémentaires sont livrés avec l'application, un manuel utilisateur décrivant comment faire fonctionner notre application, et une documentation technique des modules de notre produit.
-			
-	%Peut-être parler un peu plus du big data, aussi des techniques de graphes mining dans le travail de DC brain, pour présenter le fait que le réseau est assimilé à un graphe =============== oh no c bcp
-	
+	% nos trois dernieres parties ont aussi un rôle conclusif, donc on peut faire très court pour notre vraie conclusion.
 	\section{Architecture de l'application}
 		\subsection{Organigramme et données échangées}
-		Cet organigramme a été préalablement établi dans le cahier des charges du produit. Il représente la décomposition en modules de l'application, ainsi que les informations qui circulent entre ces modules.\\
-		\textbf{Remarque :} on pourra noter quelques légers arrangements dans la représentation des informations transmises entre les modules de l'organigramme. Ces arrangements sont principalement effectués pour des fins de compatibilité avec les outils utilisés et seront explicitement justifiés.
+		Cet organigramme a été préalablement établi dans le cahier des charges du produit. Il représente la décomposition en modules de l'application, ainsi que les informations qui circulent entre ces modules.
+		
+		On notera les arrangements faits dans la représentation des informations transmises entre les modules de l'organigramme. Ces arrangements sont principalement effectués pour des fins de compatibilité avec les outils utilisés et seront explicitement justifiés.
 		\begin{figure}[H]
 			\begin{tikzpicture}
 			\begin{scope}[xscale=2,yscale=1.5]	
@@ -80,7 +86,7 @@
 				\node (FAMILLE) at (-4.5,-5) [rectangle,draw] {\begin{tabular}{c}Package\end{tabular}};
 				\node (MODULE) at (-2,-5) [rectangle,draw,dashed] {\begin{tabular}{c}Module\end{tabular}};
 				\path[->,>=stealth'] (0.5,-5.3) edge[bend left=0] node[anchor=south,above]{informations transmises} (3,-5.3);
-				\path[->,>=stealth',red] (0.5,-6.3) edge[bend left=0] node[anchor=south,above]{optimisation} (3,-6.3);
+				\path[->,>=stealth',red] (0.5,-6.3) edge[bend left=0] node[anchor=south,above]{correction} (3,-6.3);
 			\end{scope}
 			\end{tikzpicture}
 			\caption{Organigramme des différents modules du logiciel}\label{fig:M1}
@@ -95,7 +101,7 @@
 			\end{itemize}
 			{\color{red}Justification de la modification :} les outils utilisés pour faire communiquer les modules ne permettait pas la transmission d'un certain type d'objets, dont les objets représentant les fichiers. On a donc décidé de récupérer directement les résultats de l'analyse du fichier et d'y inclure la gestion des potentielles erreurs.\\
 			\textbf{(3)} Ensemble de données de type qualitatif\\
-			\textbf{(4)} Erreur ou effectifs, effectifs cumulés, fréquences, fréquences cumulées, diagramme en secteur, histogramme\\
+			\textbf{(4)} Erreur ou effectifs, effectifs cumulés, fréquences, fréquences cumulées\\
 			\textbf{(5)} Ensemble de données de type quantitatif discret\\
 			\textbf{(6)} Erreur ou indicateurs de tendance central, de dispersion et de forme, les anomalies, la distribution des données, un diagramme à moustaches\\
 			\textbf{(7)} Ensemble de données de type quantitatif continu\\
@@ -104,21 +110,10 @@
 			\textbf{(10)} Informations du (2) et ensemble de données contenu dans le fichier CSV \\
 			\textbf{(11)} Signal de validation du choix de la colonne, et noms des colonnes\\
 			\textbf{(12)} Envoi des résultats d'analyses de (4), (6) et (8)\\
-			\textbf{(13)} Signal de contrôle : demande d'exportation des résultats de l'ADD, analyse d'une autre colonne, ou importation d'un autre fichier\\
-		
-		\subsection{Format du fichier CSV}
-		Le format du fichier a été établi par le client \textbf{\textit{DCbrain}}. Son contenu est assez structuré et est décrit par des colonnes aux types prédéfinies :
-		\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{2cm}|}			
-			\hline \multicolumn{1}{|c|}{\textbf{timestamp}} & \multicolumn{1}{c|}{\textbf{parent}} & \multicolumn{1}{ c|}{\textbf{enfant}} & \multicolumn{1}{c|}{\textbf{mesure 1}} & {\textbf{mesure 2}} \\
-			\hline 	January 1st 2017, 15:00:00.000 & 102 & 95 & 26644.235 & 176.253\\
-			\hline
-		\end{longtable}\vspace{-2em}\end{center}
-		\textbf{Remarque :} le graphe de flux utilisé par \textbf{\textit{DCbrain}} pour analyser les réseaux de ses clients est orienté, d'où l'utilisation des nœuds \textit{parent - enfant} numérotés. Ceux-ci permettent d'identifier une connexion précise. Les colonnes \textit{mesure} représentent des données mesurées sur une connexion à un temps donné. Le nombre de ces colonne n'est pas limité et en pratique il ne dépassera pas la dizaine.
-				
+			\textbf{(13)} Signal de contrôle : demande d'exportation des résultats de l'ADD, analyse d'une autre colonne, ou importation d'un autre fichier\\		
 		
 		\subsection{Fonctionnalités des modules}
-		%Faites un tri dans vos fonctionnalités : réduire le plus possible, pour que tout rentre en 10 pages. Et mettre que les fonctionnalités du produit final.
-		%Cette partie a aussi besoin d'un peu de mise en page, il y a trop de marge à droite a cause des enum + itemize + description)
+		%Malek stp, corrige ça ou augmente les marges du cahier : Cette partie a aussi besoin d'un peu de mise en page, il y a trop de marge à droite a cause des enum + itemize + description)
 	
 			\subsubsection*{Package Chargement des données}
 			\begin{enumerate}
@@ -127,9 +122,9 @@
 				\item Module Analyse contenu fichier :\\
 				Ce module comprend deux fonctionnalités principales :
 				\begin{itemize}[leftmargin=*]
-					\item Lecture du contenu du fichier CSV : on détermine le délimiteur de données du fichier, puis on lit ses données ligne par ligne. Ces données sont stockées dans une (\textbf{première structure}.
+					\item Lecture du contenu du fichier CSV : on détermine le délimiteur de données du fichier, puis on lit ses données ligne par ligne. Ces données sont stockées dans une \textbf{première structure}.
 					\item Description des données de chaque colonne du fichier CSV : on stocke les noms des colonnes fournis dans le fichier, ensuite on détermine les types de données attendus à partir de ces noms, et finalement, on parcourt la structure contenant les données du fichier en comparant le type de ces données au type attendu. Si ces types ne correspondent pas, on indique une description de l'erreur.\\
-					Ces trois informations (nom, type et erreurs) sont stockées dans une (\textbf{deuxième structure}.
+					Ces trois informations (nom, type et erreurs) sont stockées dans une \textbf{deuxième structure}.
 				\end{itemize}
 				Ce module va donc fournir les deux structures décrites ci-dessus.
 			\end{enumerate}
@@ -182,56 +177,100 @@
 		
 	\section{Outils et langages de programmation}
 		\subsection{Contraintes}
-		Lors de la réalisation de l'application, des contraintes ont du être respectées. Ces contraintes ont été imposées par notre client \textbf{\textit{DCbrain}} lors de la remise du sujet du projet. On peut en énumérer trois, qui sont les suivantes:
+		Lors de la réalisation de l'application, des contraintes ont dû être respectées. Ces contraintes ont été imposées par notre client \textbf{\textit{DCbrain}} lors de la remise du sujet du projet. On peut en énumérer trois:
 		\begin{enumerate}
 			\item Le produit doit fournir une application web : notre produit sera une application fonctionnant sur un navigateur web, appelée \textbf{\textit{applet}}.
 			\item Le produit doit être développé avec un langage de programmation compatible avec l'analyse de données : le langage de programmation choisi doit inclure des bibliothèques qui permettent d'analyser les données (taches de data mining et de machine Learning).
-			\item Le produit doit fournir une API (ensemble de packages) d'analyse de données : le code source de l'application doit intégrer des API d'analyse descriptive de données qui pourront être réutilisés par le client.
+			\item Le produit doit fournir des API (ensemble de packages) pour le chargement et l'analyse de données : le code source de l'application doit intégrer des API d'analyse descriptive de données qui pourront être réutilisés par le client.
 		\end{enumerate}	
 		Ces contraintes se sont avérées déterminantes pour les choix techniques que l'on a fait, et en l'occurrence, le choix des langages de programmation. 
 		
 		\subsection{Choix des outils et des langages}
 		Les contraintes imposées par le client ainsi que les exigences définies nous ont permis de fixer nos choix sur plusieurs langages de programmation qui vont interagir ensemble : 
 		\begin{itemize}[leftmargin=*]
-			\item \textbf{Python :} d'une part, ce langage est adapté pour l'analyse descriptives de données, puisqu'il est doté de nombreux modules permettant d'effectuer du calcul scientifique sur des données, donc l'analyse de données. D'autre part, \textbf{\textit{Python}} est compatible avec le développement d’applications web grâce aux bibliothèques web qui permettent cela, dont \textbf{\textit{Flask}} qu'on a utilisé. En effet, \textbf{\textit{Flask}} est une bibliothèque qui s’efforce d’être la plus simple possible pour une prise en main, à l'opposé d'autres bibliothèques. C'est donc plus abordable pour une première expérience sur le développement d'applications web.
-			\item \textbf{Langages de programmation web :} l'application devant être une applet intégrée dans une page web pour s'exécuter, le recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme de ces pages web était nécessaire.\\
-			Ensuite, pour permettre à l'application de faire communiquer les pages web avec un serveur web sans occasionner le rechargement de la page, nous avons eu recours à \textbf{\textit{Ajax}}. Il s'agit d'un concept de programmation web reposant sur plusieurs technologies comme le \textbf{\textit{Javascript}}, qui lui se charge d'établir la connexion entre la page web et serveur. \textbf{\textit{JavaScript}} est également employé pour rendre les pages web interactives. \textbf{\textit{Jquery}} est quant à lui utilisé pour faire le lien entre \textbf{\textit{HTML}} et \textbf{\textit{Ajax}}.
-			\item \textbf{Autres outils :} pour la génération de la documentation des fonctionnalités du programme, on a utilisé le logiciel \textbf{\textit{Sphinx}} qui se charge de générer une \textit{docstring} à partir des commentaires présents dans le code python.
+			\item \textbf{Python :} d'une part, ce langage est adapté pour l'ADD, puisqu'il est doté de nombreux modules permettant d'effectuer du calcul scientifique. D'autre part, \textbf{\textit{Python}} est compatible avec le développement d’applications web avec l'aide de frameworks dediés. Nous avons choisi \textbf{\textit{Flask}}, une bibliothèque qui s’efforce d’être la plus simple possible pour une prise en main, à l'opposé d'autres bibliothèques. C'est donc plus abordable pour une première expérience sur le développement d'applications web.
+			\item \textbf{HTML et CSS :} l'application web nécessite le recours à des langages de balisage comme \textbf{\textit{HTML}} pour la présentation et \textbf{\textit{CSS}} pour la mise en forme des pages web.
+			\time \textbf{JavaScript :} c'est le langage qui nous permet de dynamiser nos pages web rendues côté client, c'est pour cela qu'on parle d'application web.
+			\item \textbf{jQuery :} librairie JavaScript pour la une manipulation simplifiée de concepts avancés, dont la gestion des évènements et \textbf{\textit{Ajax}} (concept détaillé dans la prochaine partie).
+			\item \textbf{c3js :} module de représentations graphiques JavaScript réutilisables. Il est basé sur \textbf{\textit{d3js}}, une librairie JavaScript pour une manipulation de documents dirigée par les données.
+			\item \textbf{Sphinx :} framework Python pour la génération de documentation. Sa puissance vient de la génération automatique directement à partir du code source.
 		\end{itemize}
+		
+	\section{Points délicats}
+	Nous dédions cette partie pour expliquer les concepts informatiques qui nous ont posé le plus de problèmes. Ces concepts n'étaient pas maîtrisés voire inconnus avant d'aborder le projet, ils ont donc grandement faussé notre estimation quant à la charge de travail que représente le projet car ils ont mal été pris en compte, ou pas du tout.
+	
+	\subsection{Le paradigme client serveur}
+		client : navigateur web
+		serveur : là où est hébergé notre code source et nos templates.
+		client fait requête au serveur, le serveur répond en envoyant la page web demandant (html).
+		
+		Pb : Comment dynamismer la page?
+	\subsection{Les applets}
+		balise script, et javascript, qui contiennent du code source exécuté côté client (par le navgateur web).
+		
+		Pb : Comment utiliser nos outils et nos données stockées sur serveur avec une applet dynamique.
+		
+	\subsection{Ajax}
+		Asynchronous JavaScript And XML. Requêtes et envoi uniquement des données nécessaire (pas toute une page web), donc raffraichissement partiel de la page. Code plus léger et moins de chargement.
+		
+	% Si vous voyez des trucs pertinents à dire dedans allez-y, on peut se baser majoriairement sur cette partie pour justifier nos problèmes, donc ne pas tout réexpliquer en dessous !
+	
+	\section{Fonctionnement de l'application}
+	% On avait oblié cette partie au début, elle est dans les recommandations
+	\subsection{Format du fichier CSV}
+		Le format du fichier a été établi par le client \textbf{\textit{DCbrain}}. Son contenu est assez structuré et est décrit par des colonnes aux types prédéfinies :
+		\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{2cm}|}			
+			\hline \multicolumn{1}{|c|}{\textbf{timestamp}} & \multicolumn{1}{c|}{\textbf{parent}} & \multicolumn{1}{ c|}{\textbf{enfant}} & \multicolumn{1}{c|}{\textbf{mesure 1}} & {\textbf{mesure 2}} \\
+			\hline 	January 1st 2017, 15:00:00.000 & 102 & 95 & 26644.235 & 176.253\\
+			\hline
+		\end{longtable}\vspace{-2em}\end{center}
+		\paragraph{} Le graphe de flux utilisé par \textbf{\textit{DCbrain}} pour analyser les réseaux de ses clients est orienté, d'où l'utilisation des nœuds \textit{parent - enfant} numérotés. Ceux-ci permettent d'identifier une connexion précise. Les colonnes \textit{mesure} représentent des données mesurées sur une connexion à un temps donné. Le nombre de ces colonne n'est pas limité et en pratique il ne dépassera pas la dizaine.
+
+	\subsection{Interface web}
+		Notre applet est destiné à des utilisateurs n'ayant pas de connaissances avancées pré-requises pour sa manipulation. En effet, uniquement des capacités à interpréter des informations statistiques basiques et à lire de représentations graphiques sont demandées. Son utilité va être déterminée par des graphiques et une présentation des valeurs intuitifs qui vont guider l'utilisateur dans l'interprétation des résultats.
+		
+		\paragraph{}Le scénario standard d'utilisation est simple. Une première fenêtre laisse le choix à l'utilisateur de sélectionner un fichier au format défini à la sous-partie précédente.
+		\paragraph{}Si le fichier n'est pas au bon format, il ne sera pas traité et il faudra sélectionner un autre fichier. Sinon, la deuxième fenêtre peut être affichée.  Sur cette fenêtre sont affichées dans un tableau les données du fichier qui peuvent être soumis à différents traitements : renommage de l'en-tête des colonnes et filtrage des valeurs. Ensuite, on peut valider l'analyse sur les valeurs filtrées pour passer à la dernière fenêtre. Cette fenêtre dispose d'un système de navigation entre les différents graphiques disponibles, et un compte-rendu synthétique des analyses descriptives.
+		\paragraph{}Finalement, on a le choix de revenir à la fenêtre de filtrage des valeurs, ou bien de télécharger des résultats complets d'ADD sur notre ordinateur.
+		
+	\subsection{API de chargement des données et d'analyses descriptives}
+		Une partie de notre travail consiste à fournir des paquets réutilisables pour le chargement des données et l'ADD. Pour mettre en avant nos résultats, nous avons décidé d'écrire un script en réutilisant les fonctionnalités de nos API.
+		\paragraph{}Son principe est d'effectuer des analyses descriptives sur chaque colonne pour chaque arc distinct d'un fichier toujours au format présenté plus tôt. Ce script écrit dans un nouveau fichier \lstinline!.csv! eb sortie dans un format similaire pour permettre une réutilisation et une interprétation facile.
+		\paragraph{}Les résultats satisfaisants de ce script nous ont inscité à le réutiliser pour la fonctionnalité de téléchargement des analyses de notre applet.
 		
 	\section{Bilan technique du projet}
-		\subsection{Comportement de l'application}
-		Notre produit final, c'est à dire l'application, se comporte comme prévu : l'application est fonctionnelle, la liaison entre ses différents modules réussi bien et les différentes fonctionnalités fournissent le résultat attendu. Voici un descriptif du comportement typique de notre application après lancement :
-		\begin{itemize}
-			\item Importation du fichier à analyser par un parcourant d'arborescence ou par un Drag \& Drop.
-			\item Chargement des données du fichier et visualisation des valeurs, avec possibilité d'application de filtres. 
-			\item Résultats de l'analyse d'une colonne choisie du fichier avec des graphes et des informations statistiques.
-		\end{itemize}
-		\paragraph{Tests :} les principales fonctionnalités de notre application ont été testées avec plusieurs cas de tests différents. Ces tests ont traité plusieurs cas d'utilisation de ces fonctionnalités et nous ont permis de trouver quelques erreurs et ainsi les corriger. La décomposition en différents modules de l'application nous a permis de tester ces modules indépendamment, sans qu'il n'y ait d'impact sur les autres modules lorsqu'une erreur se produit.
-		
-		\colorbox{yellow}{Mettez vos trucs qui marchent pas si vous voulez}
+	% J'ai retiré un bout de la partie compportement, pcq elle est faite plus précisément au-dessus
+		Notre produit final, c'est à dire l'application, se comporte comme prévu : l'application est fonctionnelle, la liaison entre ses différents modules réussit bien et les différentes fonctionnalités fournissent le résultat attendu.\\
+		Cependant, nous aurions souhaité enrichir
+		\paragraph{Tests unitaires:}Les modules de notre application ont été testé et le code des tests est disponible avec notre code source.
+		%des tests unitaires l'indépendance c'est le critère de base, pas besoin de réexpliquer ça.
+		%on détaille après quels pbs exactement ils ont aidé à résoudre.
 		
 		\subsection{Problèmes rencontrés}
 			\subsubsection*{Problèmes résolus :} 
 			Lors de la réalisation de l'application, on a été confrontés à plusieurs problèmes, principalement des verrous techniques, qui ont perturbé le bon déroulement de notre travail : 
 			\begin{itemize}[leftmargin=*]
-				\item les premiers verrous rencontrés sont liés aux outils et aux langages de programmation utilisés. En effet, la majorité de ces outils sont nouveaux pour nous, ce qui a nécessité un temps d'apprentissage et d'adaptation. Cependant, on a finalement réussi à maîtriser ses outils, assez pour assurer la réalisation de notre application.
-				\item ensuite, lors de la manipulation de ces outils, on a rencontré quelques problèmes de compatibilité lors de l'interaction entre les différents langages de programmation utilisés. Un des problèmes principaux était le type de données transférées entre les différents modules. Par exemple, la bibliothèque \textit{\textbf{Flask}} ne permettait pas la transmission d'objets qu'elle considérait comme non sérialisable, ce qui a nécessité quelques aménagement dans le schéma de transfert d'informations pour régler ce problème.
-				\item les autres verrous rencontrés concernent la partie algorithmique de notre travail. \colorbox{yellow}{Sonny développe}
+				\item Les premiers verrous rencontrés sont liés aux outils et aux langages de programmation utilisés. En effet, la majorité de ces outils sont nouveaux pour nous, ce qui a nécessité un temps d'apprentissage et d'adaptation. Cependant, on a finalement réussi à assez maîtriser ses outils pour assurer la réalisation de notre application.
+				\item Lors de la manipulation de ces outils, on a rencontré des problèmes de compatibilité lors de l'interaction entre les différents langages de programmation utilisés. Un des problèmes principaux était le type de données transférées entre les différents modules.\\
+					Par exemple, la bibliothèque \textit{\textbf{Flask}} ne permet pas la transmission d'objets qu'elle considérait comme non sérialisable (en particulier les fichiers) et ceci a demandé des aménagements dans le schéma de transfert d'informations. Les fonctions manipulant des fichiers ont dû être modifiées pour utiliser d'autres structures compatibles (divergence avec les spécifications).
+				\item Les tests ont pu mettre un lumière un défaut de précision des nombres flottants. Les frèquences cumulées étaient calculées en additionnant plusiseurs fois les fréquences d'apparition, ce qui propage les imprécisions de calcul.  Ce problème a été résolu en passant par les effectifs cumulés pour n'avoir qu'un calcul flottant à effectuer.
+				\item Un dernier problème concerne le graphe des séries temporelles réalisé avec c3js.\\
+					Nous ne pouvons pas avoir de représentation logique si plusieurs valeurs sont mesurées au même instant.\\
+					Cela dit, sur un même arc la série temporelle est cohérente,et nous avons pu résoudre le problème en mettant à disposition une série temporelle par connexion différente.
 			\end{itemize}
 				\colorbox{yellow}{... mettez vos trucs ...}
 				
 			\subsubsection*{Problèmes non résolus :}
-				Certains problèmes rencontrés n'ont pas été entièrement résolus. Ces problèmes ne sont pas déterminants pour l'acceptabilité de notre produit et sont surtout liés aux performances et aux algorithmes implémentés :
+				Certains problèmes rencontrés n'ont pas été entièrement résolus. Ces problèmes ne sont pas déterminants pour l'acceptabilité de notre produit et sont surtout liés aux performances:
 				\begin{itemize}[leftmargin=*]
-					\item lors du chargement du fichier, un certain temps est nécessaire pour que le système d'affichage des données et de filtrage soit opérationnel. Cette opération est d'autant plus longue que le fichier est grand.
-					\item \colorbox{yellow}{sonny tes graphs}
+					\item Lors du chargement d'un fichier de grand volume, un temps est nécessaire pour que le système d'affichage des données et de filtrage soit opérationnel. L'augmentation du temps d'attente n'est pas linéaire en la taille du jeu de données mais moins performant. Nous aurions aimé atteindre des bonnes performances sur des gros volumes pour avoir une apllication compétitive.
+					\item Une représentation graphique, aurait été un réel atout pour notre application, les boîtes à moustaches de Tukey.\\
+						Alors même qu'il est annocé dans les spécifications, il n'est cependant pas disponible dans la librairie c3js, et donc n'a pu être réalisé dans les délais.\\
+						Nous avons dans notre travail préparé toutes les données nécessaires à cette représentation, y compris les requêtes Ajax pour envoyer ces données au navigateur.\\
+						Cela dit, le code JavaScript nécessite la maîtrise d'une librairie telle d3js pour faire du graphisme. Malgré la puissance de ce type de librairie, nous n'avons pas pu être assez performant avec pour obtenir des graphismes présentables et intéractivfs originaux. D'où le retrait de la fonctionnalité.
 				\end{itemize}
 				
-			\subsubsection*{Points divergents :}
-			Certains points du produit final divergent légèrement avec ce qui a été établi dans l'organigramme du cahier des charges et dans les spécifications. Les points concernant l'organigramme ont été précédemment explicités et justifiés lors du rappel de ce dernier. Concernant les spécifications, certaines fonctionnalités on été réarrangées pour retourner une valeur de type différent que celui qui a été établi. Ces modifications sont encore liées aux problèmes de compatibilité lors de l'interaction entre les différents langages de programmation utilisés.
-			%FileWithSGF/ FileWithDragDrop se charge d'upload et nom de retourner un chemin.
-			%Pas d'écriture dans des json mais dans des js?? 
+			%J'ai retiré, points divergents, j'ai expliqué quand tu parles des trucs serialisables de flask. tout vient de la, et le nom d'une extension c'est pas grave haha (j'espère), mais c'est as la peine de le mentionner
 		
 				
 	\section{Organisation interne du groupe}
@@ -250,30 +289,29 @@
 		\hline
 	\end{longtable}\vspace{-2em}\end{center}
 	Cette répartition a été parfaitement respectée. Elle nous a permis de travailler efficacement et assez indépendamment, ce qui prouve que l'assignation des modules a été judicieusement faite.
+	\paragraph{} Nous sommes également restés en contact pendant toute la phase de développement pour s'entraider pour la prise en main des nouveaux outils.
 	
 	\section{Coûts}
 	Ce tableau indique les coûts estimés lors de l'établissement du cahier des charges et les coûts finaux, en nombre de lignes de code et pour chaque module :
 	\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{1.5cm}|}			
 		\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{c|}{\textbf{Justification}} & \multicolumn{1}{c|}{\textbf{Coût final}}\\
-		\hline 	Gestion des flux & 15 & Mise en forme du main, appel de l'application, gestion des routes pour flask et des échanges de données avec ajax & 98\\
-		\hline 	Fenêtre choix fichier & 10 + 20 & Fonctions pour : Drag\& Drop + Système de fichiers & 72\\
-		\hline 	Fenêtre rôle et choix colonne & 5 + 20 + 10 + 10 + 20 & Communication avec le module application + Affichage de l'interface + lecteurs des valeurs + affichage des valeurs & 180\\
-		\hline 	Fenêtre résultats ADD & 10 + 3* 30 & Envoi d'informations au module application + Construction des graphe pour l'ADD pour les 3 types d'analyse & \\
-		\hline  ADD qualitatives  & 20 + 20*2 & Application des formules pour les calculs de fréquences, fréquences cumulées, effectifs et effectifs cumulés + calcul des valeurs pour la construction de 2 graphes & 53\\
-		\hline 	ADD quantitatives discrètes & 60 + 20*2 & Application des formules attaché à l'analyse quantitative discret + calcul des valeurs pour la construction de 2 graphes & \\
-		\hline 	ADD quantitatives continu & 20 + 10 + 10 + 5 + 20*2 & Parcours + choix précision classe d'intervalle + écriture + communication avec les modules+ calcul des valeurs pour la construction de 2 graphes & \\
+		\hline 	Gestion des flux & 15 & Mise en forme du main, appel de l'application, gestion des routes pour flask et des échanges de données avec ajax & \textbf{98}\\
+		\hline 	Fenêtre choix fichier & 30 & Fonctions pour : Drag\& Drop + Système de fichiers & \textbf{72}\\
+		\hline 	Fenêtre rôle et choix colonne & 65 & Communication avec le module application + Affichage de l'interface + lecteurs des valeurs + affichage des valeurs & \textbf{180}\\
+		\hline 	Fenêtre résultats ADD & 100 & Envoi d'informations au module application + Construction des graphes d'ADD & \textbf{200}\\
+		\hline  ADD qualitatives  & 60 & Fonctionnalités pur occurrences et fréquences + données des graphes & 53\\
+		\hline 	ADD quantitatives discrètes & 100 & Formules attachées à l'ADD quantitatives discrètes + données des graphes & 89\\
+		\hline 	ADD quantitatives continues & 85 & Formules attachées à l'ADD quantitatives continues + données des graphes & 93\\
 		\hline 	Vérification format fichier & 30 & Ouverture fichier + vérification si ouverture en lecture + présence de texte formaté ou non & 35\\
-		\hline 	Analyse contenu fichier & 20 + 5 + 25 + 10 &  Recopie et vérification + initialisation de la structure + Parcours du fichiers avec condition + Fonction pour donner nom et type de colonne & 70\\
-		\hline \textbf{Coût Total} & \textbf{565} & \textbf{Estimation totale du coût} & \\
+		\hline 	Analyse contenu fichier & 60 &  Recopie et vérification + initialisation de la structure + Parcours du fichiers avec condition + Fonction pour donner nom et type de colonne & 70\\
+		\hline \textbf{Coût Total} & \textbf{545} & \textbf{Estimation totale du coût} & \textbf{850}\\
 		\hline 	
 	\end{longtable}\vspace{-2em}\end{center}
-	Les coûts estimés pour les modules effectuant de simples calculs sont assez respectés. Par contre, la majorité des modules de type fenêtre ont plus de lignes que prévu. Ceci est du à l'implémentation de fonctionnalités d'affichage dynamique dans nos fenêtres, principalement réalisés dans le langage \textit{\textbf{JavaScript}}.\\
-	\colorbox{yellow}{Je vous laisse compléter le tab et vos justifications}
-	
+	Les coûts estimés pour les modules effectuant de simples calculs sont respectés. Par contre, les modules de l'interface web ont plus de lignes que prévu. Ceci est dû à l'implémentation de fonctionnalités d'affichage dynamique dans nos fenêtres et les échanges de données Ajax qui ont allourdi le code source sans que nous ayons réussi à le prédire.
 	
 	\section*{Conclusion}
 	Ce document résume tout ce qui a été établi avant, pendant et après la réalisation de notre œuvre. Cette œuvre est une application web de visualisation et d'analyse de données. Son développement a été réparti en plusieurs modules indépendants, ce qui facilite sa maintenance et permet ainsi au client d'étendre ses différentes fonctionnalités.
-	\paragraph{} Dans le point où l'on est actuellement, on peut revoir, avec du recul, la manière avec laquelle notre produit a été réalisé. En effet, la majorité des problèmes et des verrous rencontrés auraient pu être aisément résolus ou même évités si on avait choisi certains outils au détriment d'autres. Il s'agit d'outils plus complets, qui offrent une très grande flexibilité lors du traitement de certaines informations. Cependant, et dans le cadre pédagogique de ce projet, les délais imposait ne laissaient pas suffisamment de marge pour l'appréhension de ces très vastes outils.
+	\paragraph{} Dans le point où l'on est actuellement, on peut revoir, avec du recul, la manière avec laquelle notre produit a été réalisé. En effet, les verrous majoritaires concernent les échanges Ajax et les représentations graphiques sur un site web. Privilégier le langage JavaScript au détriment de Python pour le traitement des données limiterait les échanges avec le serveur (ce qui augmente aussi les performances). Néanmoins, et dans le cadre pédagogique de ce projet, les délais imposés ne laissent pas suffisamment de marge pour une maîtrise de ces vastes outils dont la prise en main n'est pas rapide.
 	\paragraph{} Ce travail a été réalisé par un groupe de 3 personnes. Le sujet a été très bien appréhendé par les membre du groupe et l'entente a été excellente. Grâce aux informations préalablement établies dans le cahier des charges et dans les spécifications, le travail au sein du groupe a pu être mené de façon assez indépendante, sans générer de conflits ou de problèmes d'organisation.
 	\paragraph{} Cette épreuve constitue donc une expérience enrichissante pour nous, non seulement sur le plan compétence, mais aussi sur le plan de travail collectif, qui nous inspirera probablement pour de futurs projets.
 		
