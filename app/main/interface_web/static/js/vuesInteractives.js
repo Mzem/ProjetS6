@@ -90,13 +90,14 @@ $.getJSON("/timeSeries", function(json) {
 	//Création des éléments pour sélectionner la série à afficher
 	// <span>nom de l'arc<span/> dans <div id = "timeSeries">
 	i = 0;
-
+	var formArc = "<form>";
 	while(i < dataTimeSeries["value"].length){
 		//Parent->Enfant
-		$("#time").append("<input type='radio' class='arcTimeSeries'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>");
+		formArc += "<input type='radio' class='arcTimeSeries' name='Arc'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>";
+		//$("#time").append("<input type='radio' class='arcTimeSeries'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>");
 		i++;
 	}
-	
+	$("#time").append(formArc);
 	//Gestion des évènements (déchargement de l'ancienne série, chargement de la nouvelle)
 	$("#time .arcTimeSeries").each( function(index) {
 		$(this).click(function() {
