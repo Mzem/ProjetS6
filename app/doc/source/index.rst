@@ -35,14 +35,22 @@ Cette application fonctionne à l'aide d'outils à installer préalablement :
  * `Sphinx 1.6.1 <http://www.sphinx-doc.org/en/stable/index.html>`_: génération automatique de documentation.
  * `sphinx_rtd_theme, et guzzle_sphinx_theme` : templates pour sphinx
  
+Les cibles makefile peuvent s'exécuter sous linux et windows (fichiers Makefile et make.bat présents)
+ 
 Applet : interface web
-======================
+=======================
 
 L'instruction qui permet de lancer l'appli est :
 
 .. code-block:: console
 
 	make run
+	
+.. note::
+	
+	Veuillez vérifier la version de Python avec l'instruction en ligne de commande. Sous certaines versions linux, il existe deux commandes différentes ``python`` et ``python3`` pour lancer les scripts Python.
+	
+	Dans le cas où la version n'est pas 3 ou supérieure, veuillez modifier le Makefile manuellement (voir commentaires).
 
 Tests unitaires
 ===============
@@ -73,19 +81,21 @@ Exécuter les tests du module add :
 	
 Génération et lancement de la documentation
 ===========================================
+On rappelle que pour générer la documentation, il faut installer Sphinx et ses modules.
 
 Générer et lancer la documentation au format html :
 
 .. code-block:: console
 
 	make html
+	make run-html
 	
 Générer et lancer la documentation au format pdf :
 
 .. code-block:: console
 
 	make latexpdf
-
+	make run-latexpdf
 
 Documentation
 -------------
