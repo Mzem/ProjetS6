@@ -12,7 +12,7 @@
     margin-top: 0px;
     background: #48C9CF;     
     box-shadow: 0px 2px 5px #1c1a19;
-    
+    z-index:9999;
 }
 
 .nav ul { 
@@ -50,7 +50,6 @@ body {
 
 section {
     float: center;
-    position: relative;
     position: center;
     text-align: center;
     margin-left: auto;

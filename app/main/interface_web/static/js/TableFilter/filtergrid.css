@@ -65,7 +65,7 @@ select.flt_multi{ /* multiple select filter */
 	color:#999;
 }
 .div_checklist{ /* div containing checklist  */
-	white-space: nowrap;
+	white-space: wrap;
 	width:100%; height:70px;
 	border:1px solid #ccc;
 	overflow:auto; 

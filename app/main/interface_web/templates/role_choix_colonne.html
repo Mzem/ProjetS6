@@ -127,11 +127,7 @@
 				<td>{{loop.index}}</td>
 				{% for donnee in ligne %}
 					{% if descCSV["erreurs"][numLigne][loop.index0] != "correct" %}
-						{% if descCSV["type"][loop.index0] == "date" %}
-							<td id="erreur">{{ donnee }}</td>
-						{% else %}
-							<td id="erreur">{{ donnee }} <span>{{descCSV["erreurs"][numLigne][loop.index0]}}</span></td>
-						{% endif %}
+						<td id="erreur">{{ donnee }} <span>{{descCSV['erreurs'][numLigne][loop.index0]}}</span></td>
 						<script>
 							lignesErreur.push(parseInt('{{numLigne + 1}}'));	//+1 car va etre comparé avec les numéros de la colonne N°
 						</script>
@@ -161,8 +157,8 @@
 			col_2: "checklist",
 			col_3: "checklist",
 			display_all_text: "Show all",
+
 			help_instructions_btn_html:'R',
-			
 			on_change: true,  
 			btn: true,
 			enter_key: true,
