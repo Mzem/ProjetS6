@@ -36,7 +36,7 @@
     border-radius: 4px;
 }
 
-.container2 nav div, #iStats, #graphePrincipal {
+.container2 nav div, #iStats, #graphePrincipal, #NavArcTimeSeries {
 	background-color: #fefefe;
 }
 
