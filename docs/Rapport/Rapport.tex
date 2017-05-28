@@ -205,7 +205,7 @@
 		\begin{itemize}
 			\item Importation du fichier à analyser par un parcourant d'arborescence ou par un Drag \& Drop.
 			\item Chargement des données du fichier et visualisation des valeurs, avec possibilité d'application de filtres. 
-			\item Résultats de l'analyse d'un colonne choisie du fichier avec des graphes et des informations statistiques.
+			\item Résultats de l'analyse d'une colonne choisie du fichier avec des graphes et des informations statistiques.
 		\end{itemize}
 		\paragraph{Tests :} les principales fonctionnalités de notre application ont été testées avec plusieurs cas de tests différents. Ces tests ont traité plusieurs cas d'utilisation de ces fonctionnalités et nous ont permis de trouver quelques erreurs et ainsi les corriger. La décomposition en différents modules de l'application nous a permis de tester ces modules indépendamment, sans qu'il n'y ait d'impact sur les autres modules lorsqu'une erreur se produit.
 		
@@ -239,7 +239,7 @@
 	\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{5cm}|>{\centering}m{2cm}|>{\centering}m{2cm}|>{\centering}m{2.5cm}|>{\centering\arraybackslash}m{1cm}|}			
 		\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Malek}} & \multicolumn{1}{ c|}{\textbf{Sonny}} & \multicolumn{1}{c|}{\textbf{Jean-Didier}} & {\textbf{Total}} \\
 		\hline 	Gestion des flux & ~ & ~ & x & 1\\
-		\hline 	Fenêtre choix fenêtre & ~ & ~ & x & 1\\
+		\hline 	Fenêtre choix fichier & ~ & ~ & x & 1\\
 		\hline 	Fenêtre rôle et choix colonne & x & ~ & ~ & 1\\
 		\hline 	Fenêtre résultats ADD & ~ & x & ~ & 1\\
 		\hline  ADD qualitatives & ~ & ~ & x & 1\\
@@ -252,14 +252,14 @@
 	Cette répartition a été parfaitement respectée. Elle nous a permis de travailler efficacement et assez indépendamment, ce qui prouve que l'assignation des modules a été judicieusement faite.
 	
 	\section{Coûts}
-	Ce tableau indique les coûts estimés lors de l'établissement du cahier des charges et le coûts finaux, en nombre de lignes de code et pour chaque module :
+	Ce tableau indique les coûts estimés lors de l'établissement du cahier des charges et les coûts finaux, en nombre de lignes de code et pour chaque module :
 	\begin{center}\footnotesize\begin{longtable}{|>{\centering}m{3cm}|>{\centering}m{3cm}|>{\centering}m{7cm}|>{\centering\arraybackslash}m{1.5cm}|}			
 		\hline \multicolumn{1}{|c|}{\textbf{Module}} & \multicolumn{1}{c|}{\textbf{Nombre de lignes}} & \multicolumn{1}{c|}{\textbf{Justification}} & \multicolumn{1}{c|}{\textbf{Coût final}}\\
-		\hline 	Gestion des flux & 15 & Mise en forme du main et appel de l'application & \\
-		\hline 	Fenêtre choix fichier & 10 + 20 & Fonctions pour : Drag\& Drop + Système de fichiers &\\
+		\hline 	Gestion des flux & 15 & Mise en forme du main, appel de l'application, gestion des routes pour flask et des échanges de données avec ajax & 98\\
+		\hline 	Fenêtre choix fichier & 10 + 20 & Fonctions pour : Drag\& Drop + Système de fichiers & 72\\
 		\hline 	Fenêtre rôle et choix colonne & 5 + 20 + 10 + 10 + 20 & Communication avec le module application + Affichage de l'interface + lecteurs des valeurs + affichage des valeurs & 180\\
 		\hline 	Fenêtre résultats ADD & 10 + 3* 30 & Envoi d'informations au module application + Construction des graphe pour l'ADD pour les 3 types d'analyse & \\
-		\hline  ADD qualitatives  & 20 + 20*3 & Application des formules pour les calculs de fréquences et d'effectifs + calcul des valeurs pour la construction de 3 graphes & \\
+		\hline  ADD qualitatives  & 20 + 20*2 & Application des formules pour les calculs de fréquences, fréquences cumulées, effectifs et effectifs cumulés + calcul des valeurs pour la construction de 2 graphes & 53\\
 		\hline 	ADD quantitatives discrètes & 60 + 20*2 & Application des formules attaché à l'analyse quantitative discret + calcul des valeurs pour la construction de 2 graphes & \\
 		\hline 	ADD quantitatives continu & 20 + 10 + 10 + 5 + 20*2 & Parcours + choix précision classe d'intervalle + écriture + communication avec les modules+ calcul des valeurs pour la construction de 2 graphes & \\
 		\hline 	Vérification format fichier & 30 & Ouverture fichier + vérification si ouverture en lecture + présence de texte formaté ou non & 35\\
