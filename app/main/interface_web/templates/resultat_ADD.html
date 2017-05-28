@@ -27,9 +27,12 @@
 		<section id="graphePrincipal">
 				<h1 id="mainViewTitle">Time Series</h1>
 			<div class="mainView" id="timeSeries"></div>
-			<div class="mainView" id="time"></div>
 			<div class="mainView" id="distribution"></div>
 			<div class="mainView" id="distributionCumulative"></div>
+		</section>
+
+		<section id="graphePrincipal">
+			<div id="navTimeSeries"></div>
 		</section>
 
 		<section id="iStats" style= "margin-bottom: 20px;">
@@ -72,8 +75,8 @@
 			
 			$('#timeSeriesMini').click(function() {
 				$('#mainViewTitle').text('Time Series');
-				$('#timeSeries').show();
-				$('#time').show();				
+				$('#navTimeSeries').show();
+				$('#navTimeSeries').show();				
 				$('#distribution').hide();
 				$('#distributionCumulative').hide();
 			});
@@ -81,7 +84,7 @@
 			$('#distributionMini').click(function(){
 				$('#mainViewTitle').text('Distribution');
 				$('#timeSeries').hide();
-				$('#time').hide();
+				$('#navTimeSeries').hide();
 				$('#distribution').show();
 				$('#distributionCumulative').hide();
 			});
@@ -89,7 +92,7 @@
 			$('#distributionCumulativeMini').click(function(){
 				$('#mainViewTitle').text('Cumulative Distribution');
 				$('#timeSeries').hide();
-				$('#time').hide();
+				$('#navTimeSeries').hide();
 				$('#distribution').hide();
 				$('#distributionCumulative').show();
 			});

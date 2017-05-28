@@ -93,20 +93,16 @@ $.getJSON("/timeSeries", function(json) {
 	var formArc = "<form>";
 	while(i < dataTimeSeries["value"].length){
 		//Parent->Enfant
-		formArc += "<input type='radio' class='arcTimeSeries' name='Arc'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>";
+		formArc += "<div id='Arc'><input type='radio' class='arcTimeSeries' name='Arc'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b></div>";
 		//$("#time").append("<input type='radio' class='arcTimeSeries'><b>" + dataTimeSeries["parent"][i] + " -> " + dataTimeSeries["enfant"][i] + "</b><br>");
 		i++;
 	}
-	$("#time").append(formArc);
+	$("#navTimeSeries").append(formArc);
+	//t'as refermé le formulaire ??
+	
 	//Gestion des évènements (déchargement de l'ancienne série, chargement de la nouvelle)
-	$("#time .arcTimeSeries").each( function(index) {
+	$("#navTimeSeries .arcTimeSeries").each( function(index) {
 		$(this).click(function() {
-			//~ timeSeries.unload({
-				//~ ids: ["timestamps", "value"]
-			//~ });
-			//~ timeSeriesMini.unload({
-				//~ ids: ["timestamps", "value"]
-			//~ });
 			
 			currentTimeSeries["value"] = dataTimeSeries["value"][index];
 			currentTimeSeries["timestamps"] = dataTimeSeries["timestamps"][index];
