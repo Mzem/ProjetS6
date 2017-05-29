@@ -45,7 +45,7 @@ On rappelle que pour générer la documentation, il faut installer Sphinx et ses m
 
 Générer et lancer la documentation au format html :
 -	make html
--	make run-html
+-	make run-html (Sur windows lance par défaut sur google chrome, si vous utilisez un autre navigateur veuillez le changer dans make.bat)
 	
 Générer et lancer la documentation au format pdf :
 -	make latexpdf

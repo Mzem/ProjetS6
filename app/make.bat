@@ -1,4 +1,4 @@
-
+﻿
 @echo off
 
 if "%1" == "run" goto :run
@@ -58,7 +58,7 @@ goto :end
 
 :run-html
 cd doc\build\html\
-index.html & cd ..\..\..\
+start chrome.exe index.html & cd ..\..\..\
 goto :end
 
 :run-latexpdf
