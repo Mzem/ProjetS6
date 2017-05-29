@@ -5,78 +5,106 @@
 \begin{document}
 \pagenumbering{gobble}\clearpage
 \maketitle\vspace{9em}
-\begin{center}\includegraphics[scale=0.7]{../Cahier/logo.png}\end{center}
 \begin{center}\includegraphics[scale=3]{dcbrain.png}\end{center}
+\begin{center}\includegraphics[scale=0.7]{../Cahier/logo.png}\end{center}
 \newpage
 \tableofcontents
 \newpage\clearpage\pagenumbering{arabic}
 
 \section{Introduction}
-	L'applet est un outil d'analyses descriptives de données. Elle se manipule à l'aide d'un navigateur web et de fichiers \lstinline!.csv! compatibles.\\
-	La navaigation entre les différentes fonctionnalités de l'applet ainsi que le format des fichiers compatibles pour les analyses sont précisées dans ce document.
+	Cette application web est un outil de visualisation et d'analyse descriptive de données provenant de fichiers CSV structurés. Elle s'utilise via un navigateur web.
+	
+	L'utilisation des différentes fonctionnalités de l'application ainsi que le format des fichiers compatibles pour les traitements sont précisées dans ce document.
 	
 \section{Guide Pratique}
-	\subsection{Étape 1-Sélection d'un fichier}
-		La première fenêtre rencontrée correspond à l'index de l'application. Elle représente la première étape qui consiste à charger le fichier \lstinline!.csv! pour exécuter l'analyse descriptives de données. 
-		Deux manières se présentent pour le chargement, la première consistant à faire glisser le fichier dans la zone de drop comme le montre l'illustration suivante. \\
+	\subsection{Étape 1 : sélection d'un fichier}
+		La première étape est par réalisée par une fenêtre principale qui permet de charger un fichier CSV pour exécuter la visualisation et ensuite l'analyse descriptives de ses données. 
+		
+		Deux manières sont possibles pour le chargement du fichier.\\
+		La première consistant à glisser le fichier dans la zone de drop comme le montre l'illustration suivante :
 		
 	\begin{center}\includegraphics[scale=0.45]{fenetreDragDrop.png}\end{center}
 		  
-		 La seconde correspond à la méthode classique en cliquant sur le symbole \textbf{\textit{+}}, c'est à dire parcourir l'arborescence de fichiers pour trouver le document \lstinline!.csv!.\\
+		 La seconde correspond à la méthode classique de parcours de l'arborescence de fichiers pour récupérer le fichier CSV, en cliquant sur l'icône \textbf{+} comme le montre l'illustration suivante :
 		 
 	\begin{center}\includegraphics[scale=0.45]{fenetreSGF.png}\end{center}
 	
-		Les fichiers renseignés doivent décrire un format très précis pour pouvoir continuer vers la prochaine étape. Leurs contenus sont décrit par des colonnes aux types prédéfinies:
+		Le fichier sélectionné doit respecter certains critères pour pouvoir continuer vers la prochaine étape avec succès :
 		\begin{itemize}
-		\item Timestamp : jour/mois/année	\lstinline!heure:minute:seconde!
-		\item Père : nom du noeud
-		\item Enfant : nom du noeud
-		\item Mesure (unité) : Valeur
+			\item Nom ne contenant pas d'espaces
+			\item Extension \lstinline!.csv!
+			\item Contenu lisible (non formaté)
+			\item Contenu assez structuré : bien que l'application s'efforce de gérer des fichiers assez quelconques, il vaut mieux que leurs contenus soient assez structurés, c'est à dire, décrit par des colonnes aux types prédéfinies, et dans l'ordre suivant :
+			\begin{itemize}
+				\item timestamp : mois jour année, \lstinline!heure:minute:seconde!
+				\item parent : index du nœud parent
+				\item enfant : index du nœud enfant
+				\item mesure (unité) : valeur
+			\end{itemize}
 		\end{itemize}
 		Exemple :
 		\begin{center}\includegraphics[scale=0.52]{exampleCSV.png}\end{center}
 		
-		Après avoir choisi un fichier, la page web va se rediriger vers la deuxième fenêtre si aucune erreur(s) n'est détectée(s) pour l'extension, l'ouverture et la lecture de ce dernier. Sinon un message d'erreur s'affiche sur la fenêtre comme ci-dessous.\\
+		Après avoir choisi un fichier, l'application va se rediriger vers une deuxième fenêtre si aucune erreur n'est détectée. Sinon, un message d'erreur s'affiche sur la fenêtre comme ci-dessous.
 		
 				
-	\begin{center}\includegraphics[scale=0.45]{fenetreErreur.png}\end{center}
+		\begin{center}\includegraphics[scale=0.45]{fenetreErreur.png}\end{center}
 			
-	\subsection{Étape 2-Choix et filtrage de la colonne}
-	
-		La fenêtre suivante représente l'étape suivante de l'application. Cette étape sert à visualiser le contenu du fichier \lstinline!.csv! chargé dans précédemment. Si le format de ce dernier est bien respecté, vous devriez obtenir un résultat comme celui-ci:\\
+	\subsection{Étape 2 : affichage, filtrage et choix des données}
+		Cette étape permet à visualiser le contenu du fichier \lstinline!.csv! chargé précédemment. Si le format de ce fichier est bien respecté, on doit obtenir un résultat comme celui-ci :
 		\begin{center}\includegraphics[scale=0.45]{fenetre2.png}\end{center}
 		
-		Une case contenant une erreur est mise en rouge pour l'indiquer à l'utilisateur. Le type de l'erreur sera renseigné au moment du passage de la souris sur cette case: \\
+		Une case contenant une donnée erronée ou manquante est surlignée en rouge pour l'indiquer à l'utilisateur. Une information sur l'erreur sera affichée lors du survol de cette case :
 		
 		\begin{center}\includegraphics[scale=0.45]{fenetre2Erreur.png}\end{center}
 		
-		Les zones représentées ci-dessous contiennent les filtres possibles pour les données de chaque colonne (sélection d'un filtre ou recherche textuelle). Après le choix d'un filtre, l'affichage sera automatiquement mis à jour :\\
+		Les zones représentées ci-dessous contiennent les filtres applicables sur les données de chaque colonne (sélection d'un filtre ou recherche textuelle). Après le choix d'un filtre, l'affichage sera automatiquement mis à jour :
 		
 		\begin{center}\includegraphics[scale=0.45]{fenetre2Filtre.png}\end{center}
 		
-		Une fonctionnalité pour l'exécution de l'analyse descriptives de données d'une colonne sera disponible en dessous du nom de celui-ci:   \\
+		Dans la zone de recherche textuelle, des \textbf{filtres par plages de valeurs} sont possible, par l'utilisation des opérateurs suivants :
+		
+		\begin{center}\vspace{-1em}\footnotesize\begin{longtable}{|>{\centering}m{2cm}|>{\centering}m{9cm}|>{\centering\arraybackslash}m{3cm}|}			
+			
+			\hline \multicolumn{1}{|c|}{\textbf{Opérateur}} & \multicolumn{1}{c|}{\textbf{Description}} & \multicolumn{1}{c|}{\textbf{Exemple}}\\
+			
+			\hline	< & Valeurs inférieures à celle indiquée & < 1000\\
+			\hline	<= & Valeurs inférieures ou égales à celle indiquée & <= 1000\\
+			\hline	> & Valeurs supérieures à celle indiquée & > 1000\\
+			\hline	>= & Valeurs supérieures ou égales à celle indiquée & >= 1000\\
+			\hline	>= & Valeurs supérieures ou égales à celle indiquée & >= 1000\\
+			\hline	! & Valeurs différentes de celle indiquée & !1000\\
+			\hline	\&\& & ET logique & > 1000 \&\& < 2000\\
+			\hline	|| & OU logique & < 1000 || > 2000\\
+			\hline
+			
+		\end{longtable}\vspace{-1em}\end{center}
+		
+		Il est aussi possible de \textbf{renommer les colonnes} en cliquant sur leur nom.\\
+		~\\
+		Un bouton pour l'exécution de l'analyse descriptives de données sur colonne est disponible en dessous du nom de celui-ci :
 		
 		\begin{center}\includegraphics[scale=0.45]{fenetre2Analyse.png}\end{center}
 		
 		
-	\subsection{Étape 3-Résultats}
-			\begin{center}\includegraphics[scale=0.45]{fenetre3.png}\end{center}
+	\subsection{Étape 3 : résultats de l'analyse}
+		
+		\begin{center}\includegraphics[scale=0.45]{fenetre3.png}\end{center}
 			
-		La fenêtre que vous pouvez apercevoir ci-dessus représente la dernière étape du traitement des données, l'étape de consultation des résultats d'analyse descriptive.\\
-		Ces résultats sont constitués de deux catégories d'éléments :
+		La fenêtre ci-dessus représente la dernière étape du traitement des données, l'étape de consultation des résultats d'analyse descriptive. Ces résultats sont constitués de deux catégories d'éléments :
 		\begin{itemize}
 			\item Des valeurs statistiques à consulter directement.
-			\item Des représentations graphiques :\\
-				Il suffit de cliquer sur une miniature pour accéder à une vue précise et interactive du graphe sélectionné.\\
-			\begin{center}\includegraphics[scale=0.40]{fenetre3-2.png}\end{center}		
+			\item Des représentations graphiques : il suffit de cliquer sur une miniature pour accéder à une vue précise et interactive du graphe sélectionné :
+			\begin{center}\includegraphics[scale=0.40]{fenetre3-2.png}\end{center}\vspace{4em}	
 		\end{itemize}
 		
-		Pour le cas des séries temporelles, il y a un graphe disponible par arc différent. Afin de consulter la série temporelle voulue, il faut cliquer sur le bouton radio correspondant.
-		\begin{center}\includegraphics[scale=0.40]{fenetre3Arcs.png}\end{center}
+		Pour le cas des séries temporelles, un graphe est disponible par arc différent. Afin de consulter la série temporelle voulue, il faut cliquer sur le bouton radio correspondant :
+		\begin{center}\includegraphics[scale=0.40]{fenetre3Arcs.png}\end{center}\vspace{4em}
 		
-		Une fonctionnalité de retour est disponible pour revenir à l'étape 2 et effectuer une autre analyse sans relancer l'applet du début.\\
-			\begin{center}\includegraphics[scale=0.50]{fenetre3prec.png}\end{center}
-		Enfin, il est possible d'exporter les résultats de l'analyse dans un fichier \lstinline!.csv! grâce à une fonctionnalité de téléchargement.\\
-			\begin{center}\includegraphics[scale=0.50]{fenetre3Download.png}\end{center}
+		Une fonctionnalité de retour est disponible pour revenir à l'étape 2 et effectuer une autre analyse sans relancer l'application depuis le départ :
+		\begin{center}\includegraphics[scale=0.50]{fenetre3prec.png}\end{center}\vspace{4em}
+			
+		Enfin, il est possible d'exporter les résultats de l'analyse dans un fichier CSV grâce à une fonctionnalité de téléchargement :
+		\begin{center}\includegraphics[scale=0.50]{fenetre3Download.png}\end{center}
 
 \end{document}
