@@ -1,3 +1,42 @@
+Plan démo (15:00) :
+- Présentation de l'appli, annonce du plan : démo de l'appli, de la doc et des tests (00:30) JD
+(JD passe sur l'ordi)
+- Démo, montrer les qualités de l'appli :
+	
+	- Manuel et about
+	- Un cas idéal : drag drop (2:00) MALEK
+	
+	
+	Mainenant je vais expliquer plus en détails ma fenetre
+	- Différents types de fichiers CSV (1:00) MALEK
+	- Parler des filtres : charger le fichierDemo MALEK (3:00)
+	
+	- Decrire ta fenetre, à partir des filtres (03:00)
+	- Export et présentation du script (01:00)
+	
+- Documentation (02:00)
+- Tests (02:00)
+
+- Conclusion (00:30)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Lancer l'application
 --------------------
@@ -45,7 +84,7 @@ On rappelle que pour générer la documentation, il faut installer Sphinx et ses m
 
 Générer et lancer la documentation au format html :
 -	make html
--	make run-html
+-	make run-html (Sur windows lance par défaut sur google chrome, si vous utilisez un autre navigateur veuillez le changer dans make.bat)
 	
 Générer et lancer la documentation au format pdf :
 -	make latexpdf
