@@ -22,11 +22,11 @@
 	\paragraph{}Ce document est le compte-rendu final de notre travail qui s'inscrit dans le cadre du module \textit{Projet} de la licence informatique de l'\textit{\textbf{UVSQ}}. Le sujet de ce projet a été proposé par l'entreprise \textit{\textbf{DCbrain}}.
 	\paragraph{}Ce projet découle d'un thème d’actualité, le \textbf{Big Data}. La notion Big Data fait référence aux masses de données collectées et l'enjeu consiste à extraire une valeur ajoutée de ces données.
 
-	Les techniques utilisées pour répondre au problèmes sont empruntées aux statistiques et l'on va parler d'\textit{\textbf{analyse descriptive de données}}\footnote{On utilisera l'acronyme ADD par la suite pour parle d'analyse descriptive de données.}: une branche des statistiques qui étudie les données par le biais d'informations synthétiques, sans supposer qu'elles suivent un comportement particulier.
+	Les techniques utilisées pour répondre au problème sont empruntées aux statistiques et l'on va parler d'\textit{\textbf{analyse descriptive de données}}\footnote{On utilisera l'acronyme ADD par la suite pour parle d'analyse descriptive de données.}: une branche des statistiques qui étudie les données par le biais d'informations synthétiques, sans supposer qu'elles suivent un comportement particulier.
 	\paragraph{}Notre client, \textit{\textbf{DCbrain}}, emploie une approche basée sur une représentation des \textbf{réseaux physiques} de leurs clients en \textbf{graphes de flux}. Les graphes de flux permettent de représenter les données liées au flux du réseau, repérer les anomalies sur le réseau et simuler les évolutions de celui-ci.
 	
 	Les graphes de flux peuvent être utilisés pour tout réseau physique de fluide, tels les réseaux électriques et c’est pourquoi les clients de \textit{\textbf{DCbrain}} sont des groupes comme ERDF ou la SNCF. Par exemple, on pourra représenter les canaux qui acheminent l'électricité par des arcs et les connexions par des nœuds.
-	\paragraph{}L'objectif de ce projet est de fournir aux utilisateurs une application web. Ce produit représente un outil complémentaire au travail de \textit{\textbf{DCbrain}}, dont fonctionnalités permettent aux utilisateurs de charger des données, les visualiser et les analyser. 
+	\paragraph{}L'objectif de ce projet est de fournir aux utilisateurs une application web. Ce produit représente un outil complémentaire au travail de \textit{\textbf{DCbrain}}, dont les fonctionnalités permettent aux utilisateurs de charger des données, les visualiser et les analyser. 
 
 	\paragraph{}Dans la première partie de ce document, on présentera l'architecture de notre application, illustrée par un organigramme qui a été préalablement établi. Cet organigramme représente un découpage de l'application en modules avec les différentes informations qui circulent entre ces modules.
 	
@@ -34,7 +34,7 @@
 	
 	La troisième partie du compte-rendu évoquera les points délicats du projet, autrement dit les concepts informatiques complexes utilisés.
 	Le fonctionnement de l'application sera décrit dans la quatrième partie.
-	Après cela, on traitera la partie technique de notre projet, c'est à dire, l'application, son fonctionnement et ses problèmes.
+	Après cela, on fera le bilan technique de notre projet, c'est à dire, l'application, son fonctionnement et ses problèmes.
 	
 	Finalement, dans les deux dernières parties, on établira un bilan quant à l'organisation interne au sein du groupe et un bilan comparatif des coûts présumés et des coûts finaux de notre produit.
 	
@@ -189,10 +189,10 @@
 		Les contraintes imposées par le client ainsi que les exigences définies nous ont permis de fixer nos choix sur plusieurs langages de programmation qui vont interagir ensemble : 
 		\begin{itemize}[leftmargin=*]
 			\item \textbf{Python :} d'une part, ce langage est adapté pour l'ADD, puisqu'il est doté de nombreux modules permettant d'effectuer du calcul scientifique. D'autre part, \textbf{\textit{Python}} est compatible avec le développement d’applications web avec l'aide de frameworks dédiés.
-			\item \textbf{Flask :} framework web qui s’efforce d’être la plus simple possible pour une prise en main, à l'opposé d'autres bibliothèques. C'est donc plus abordable pour une première expérience sur le développement d'applications web.
+			\item \textbf{Flask :} framework web qui s’efforce d’être la plus simple possible, à l'opposé d'autres bibliothèques plus complètes. C'est donc plus abordable pour une première expérience sur le développement d'applications web.
 			\item \textbf{HTML et CSS :} l'application web nécessite le recours au langage de balisage \textbf{\textit{HTML}} pour la présentation et à \textbf{\textit{CSS}} pour la mise en forme des pages web.
 			\item \textbf{JavaScript :} c'est le langage qui nous permet de dynamiser nos pages web rendues côté client, c'est pour cela qu'on parle d'application web.
-			\item \textbf{jQuery :} librairie \textbf{JavaScript} pour la une manipulation simplifiée de concepts avancés, dont la gestion des évènements et \textbf{\textit{Ajax}} (concept détaillé dans la prochaine partie).
+			\item \textbf{jQuery :} librairie \textbf{JavaScript} pour une manipulation simplifiée de concepts avancés, dont la gestion des évènements et \textbf{\textit{Ajax}} (concept détaillé dans la prochaine partie).
 			\item \textbf{c3js :} module de représentations graphiques \textbf{JavaScript} réutilisable. Il est basé sur \textbf{\textit{d3js}}, une librairie \textbf{JavaScript} pour une manipulation de documents dirigée par les données.
 			\item \textbf{Sphinx :} framework \textbf{Python} pour la génération de documentation. Sa puissance vient de la génération automatique de la documentation à partir du code source.
 		\end{itemize}
@@ -232,16 +232,22 @@
 		
 		Nous aurions souhaité enrichir les résultats d'analyses descriptives avec des graphes originaux. Cependant, leur conception nécessite une connaissance avancée d'outils graphiques pour le web, ce que nous avons pas eu le temps d'approfondir.
 		\paragraph{Tests unitaires:} les modules de notre application ont été testé et le code des tests est disponible avec notre code source. Dans la partie suivante, on va détailler certains problèmes qui ont été résolus grâce à ces tests.
+		\subsection{Points délicats:}
+	La majorité des outils et des langages de programmation utilisés étaient nouveaux pour nous, ce qui a nécessité un temps d'apprentissage et d'adaptation. Cependant, on a finalement réussi à se familiariser avec ces outils pour assurer la réalisation de notre application.\\
+	
+	Dans le cadre de cette application web, le paradigme client serveur était un point assez délicat à traiter. Le client est considéré ici comme le navigateur, et envoie des requêtes au serveur qui héberge le site. Le serveur répond en renvoyant la page web demandée. 
+	Ce sont des applications côté client exécutées par le navigateur. HTML met en place des balises spéciales, \lstinline!<script>! dans lequel du code va être exécuter une fois la page chargée.
+		\paragraph{}Pour résumer nous avons d'un côté du code côté serveur qui permet de rendre des templates formatés, et d'autre part du code sur le navigateur qui peut s'exécuter pour obtenir des pages dynamiques. Cela dit, ce sont deux parties indépendantes, pour obtenir une communication de données entre ces deux entités, sans avoir à faire une requête de page web entière, il faut comprendre \textbf{Ajax}.\\
+		Pour obtenir \textbf{Ajax} (Asynchronous JavaScript And XML).Ce sont des requêtes qui envoi uniquement des données au format XML nécessaire (pas toute une page web), donc raffraichissement partiel de la page. Code plus léger et moins de chargement.
 		
+
 		\subsection{Problèmes rencontrés}
 			\subsubsection*{Problèmes résolus :} 
 			Lors de la réalisation de l'application, on a été confrontés à plusieurs problèmes et points délicats, principalement des verrous techniques, qui ont perturbé le bon déroulement de notre travail :
 			\begin{itemize}[leftmargin=*]
-				\item Les premiers verrous rencontrés sont liés aux concepts informatiques. Ces concepts n'étaient pas maîtrisés voire inconnus avant d'aborder le projet, ils ont donc grandement faussé l'estimation quant à la charge de travail que représente le projet. En effet, la majorité des outils et des langages de programmation utilisés étaient nouveaux pour nous, ce qui a nécessité un temps d'apprentissage et d'adaptation. Cependant, on a finalement réussi à se familiariser avec ces outils pour assurer la réalisation de notre application.
+				\item Les premiers verrous rencontrés sont liés aux concepts informatiques. Ces concepts n'étaient pas maîtrisés voire inconnus avant d'aborder le projet, ils ont donc grandement faussé l'estimation quant à la charge de travail que représente le projet. 
 				\item Lors de la manipulation de ces outils, on a rencontré des problèmes de compatibilité lors de l'interaction entre les différents langages de programmation utilisés. Un des problèmes principaux était le type de données transférées entre les différents modules.\\
 				Par exemple, la bibliothèque \textit{\textbf{Flask}} ne permet pas la transmission d'objets qu'elle considérait comme non sérialisable (en particulier les fichiers) et ceci a demandé des aménagements dans le schéma de transfert d'informations. Les fonctions manipulant des fichiers ont dû être modifiées pour utiliser d'autres structures compatibles (d'où une divergence avec les spécifications).
-				\item Dans le cadre de cette application web, le paradigme client serveur était un point assez délicat à traiter. Le client utilise notre application via son navigateur, et envoie des requêtes au serveur qui héberge l'application. Le serveur répond en renvoyant la page web demandée de l'application. Notre défi ici était de dynamiser le chargement des pages web à chaque requête du client, au lieu de recharger la page à chaque fois. Ce défi à été levé par l'utilisation d'outils de développement de pages dynamiques comme \textbf{\textit{JavaScript}}.\\
-				De plus, on a d'un côté, du code sur le serveur qui permet de rendre des \textit{templates} (pages html) formatés, et d'un autre côté du code sur le navigateur qui peut s'exécuter pour obtenir des pages dynamiques. Ce sont deux parties indépendantes. Pour obtenir une communication de données entre ces deux entités, sans avoir à faire une requête de page web entière, on a du se pencher sur \textbf{Ajax}.
 				\item Les tests ont pu mettre révéler un défaut de précision des nombres flottants. Les fréquences cumulées étaient calculées en additionnant plusieurs fois les fréquences d'apparition, ce qui propage les imprécisions de calcul. Ce problème a été résolu en passant par les effectifs cumulés pour n'avoir qu'un calcul flottant à effectuer.
 				\item Un dernier problème concerne le graphe des séries temporelles réalisé avec \textit{\textbf{c3js}}. Nous ne pouvons pas avoir de représentation logique si plusieurs valeurs sont mesurées au même instant. Cela dit, sur un même arc la série temporelle est cohérente, et nous avons pu résoudre le problème en mettant à disposition une série temporelle par connexion différente.
 			\end{itemize}
