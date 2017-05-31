@@ -13,16 +13,20 @@
 		\begin{frame}
 			Projet de L3 informatique UVSQ, remis par DCbrain.\\~\\
 		\begin{itemize}
-		\item Projet découlant d'un thème: le \textbf{Big Data}.
-		\item Analyse descriptives de données répond au problème du \textbf{Big Data}.
-		\item DCbrain emploie une approche basée sur la représentation des réseaux physiques en graphe de flux. Permet la déctection d'anomalies sur le réseau + simuler les évolutions.
-		\item Objectif : Fournir application web, outils complémentaire au travail de DCbrain.
+		\item Projet découlant d'un thème: le \textbf{Big Data}.\vspace{0.4cm}
+		\item Analyse descriptives de données pour répondre au problème du \textbf{Big Data}.\vspace{0.4cm}
+		\item Utilisation de graphe de flux par DCbrain pour visualiser le réseau (détections d'erreurs, optimisation).\vspace{0.4cm}
+		\item \textbf{Objectif :} Fournir application web, outils permettent de charger des données, de les visualiser et les analyser.
 		\end{itemize}
 		\end{frame}
 	
 	\section{Architecture}
-			\begin{frame}
-		\begin{center}\includegraphics[scale=0.5]{org2.png}\end{center}
+	\begin{frame}
+		\begin{center}\includegraphics[scale=0.5]{org.png}\end{center}
+	\end{frame}		
+	
+	\begin{frame}
+		\begin{center}\includegraphics[scale=0.6]{org2.png}\end{center}
 	\end{frame}
 	
 	\begin{frame}
@@ -36,47 +40,47 @@
 		\vspace{1cm}
 		\textit{Analyse contenu fichier :}
 		\begin{itemize}
-			\item  Lecture des données du fichier ligne par ligne + stockage de ces données dans une \textbf{structure 1} 
+			\item Lecture des données du fichier ligne par ligne + stockage de ces données dans une \textbf{structure 1} 
 			\item Description des données de chaque colonne: type, nom et données erronées + stockage dans une \textbf{structure 2}.
 		\end{itemize}		 		
 	\end{frame}
 	
 	\begin{frame}
-		\begin{center}\includegraphics[scale=0.5]{org2.png}\end{center}
+		\begin{center}\includegraphics[scale=0.6]{org2.png}\end{center}
 	\end{frame}
 	
 	\begin{frame}
-		\textbf{API 2 :} Analyse descriptive des données\\
+		\textbf{API 2 :} Analyse descriptives des données\\
 		\begin{itemize}
-			\item \textbf{Données :} Données d'une colonne
-			\item \textbf{Retour :} Informations statistiques et représentations graphiques
-			\item \textbf{ADD quantitatives continues :} Discrétisation des valeurs
+			\item \textbf{Données à analyser:} Données d'une colonne (Avec un possible filtrage).
+			\item \textbf{Retours de l'analyse :} Informations statistiques et représentations graphiques.
+			\item \textbf{ADD quantitatives continues :} Discrétisation des valeurs.
 		\end{itemize}	
 	\end{frame}
 	
 	\begin{frame}
-		\begin{center}\includegraphics[scale=0.5]{org2.png}\end{center}
+		\begin{center}\includegraphics[scale=0.6]{org2.png}\end{center}
 	\end{frame}
 	
 	\begin{frame}
 		\textbf{Interface web}\\
 		\textit{Gestion des flux :}
 		\begin{itemize}
-			\item Flux d'exéction : Branchements et arrêts de l'application
-			\item Flux de données : Rôle d'interface pour communiquer les données
+			\item \textbf{Flux d'exécution :} Gestion des branchements et arrêts de l'application en cas d'erreur(s).
+			\item \textbf{Flux de données :} Rôle d'interface pour communiquer les données entre les différents modules
 		\end{itemize} \pause
 		 \vspace{1cm}
 		 
 		\textit{Fenêtre choix fichier :}
 		\begin{itemize}
-			\item Choix du fichier :Parcours de l'arborescence de fichiers - Drag \& Drop.
+			\item \textbf{Choix du fichier :} Parcours de l'arborescence de fichiers - Drag\&Drop.
 		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}
 		\textit{Fenêtre rôle et choix colonne :}
 		\begin{itemize}
-		\item Nom des colonnes - Nombre de lignes et colonnes - Échantillon - Navigation.
+		\item Affiche sous forme d'un tableau : nom des colonnes - nombre de lignes et de colonnes - un échantillon grâce à une navigation.
 		\item Affichage des données erronés + description.
 		\item Sélection et envoi d'une colonne de mesures pour analyse. 
 		\end{itemize} \pause
@@ -84,9 +88,9 @@
 		 
 		\textit{Fenêtre résultats ADD :}
 		\begin{itemize}
-		\item Affichage des résultats d'analyse descriptive : informations statistiques de l'API 2 + représentations graphiques pour visualiser les données.
+		\item Affichage des résultats d'analyse descriptive : informations statistiques + représentations graphiques.
 		\item Fonctionnalité de retour en arrière pour analyser une nouvelle colonne.
-		\item Téléchargement des résultats au format \lstinline!.csv!
+		\item Fonctionnalité de téléchargement des résultats au format \lstinline!.csv!
 		\end{itemize}
 	\end{frame}
 	
@@ -139,8 +143,7 @@
 				\textbf{Dynamisme} : Animations, programmation évènementielle, Html modifié en direct.
 				
 				\begin{block}{Enjeu}
-				Client / Serveur : Ressources indépendantes.\\
-				Circulation des données nécessaire.
+				Circulation des données nécessaire : Côté client <=> Côté serveur.
 				\end{block}
 		\end{frame}
 		
@@ -165,9 +168,9 @@
 				\hspace{1em} Solution : envoi Ajax.
 				
 			\item \textbf{Séries temporelles}\\
-				\hspace{1em} Problème : \\
-				\hspace{1em} Caractéristique : \\
-				\hspace{1em} Solution :
+				\hspace{1em} Problème : Affichage incohérent.\\
+				\hspace{1em} Caractéristique : Plusieurs mesures à un temps donné.\\
+				\hspace{1em} Solution : Une série temporelle par arc distinct.
 				
 			\item \textbf{Performances (non résolu)}\\
 				\hspace{1em} Problème : Affichage du jeu de données.\\
@@ -224,14 +227,24 @@
 			\vspace{1em}
 			\textbf{Séries temporelles} : Deux fonctionnalités supplémentaires.\\
 			\vspace{1em}
-			\textbf{Filtrage} : des valeurs Demandées après l'écriture du cahier des charges.
+			\textbf{Filtrage des valeurs} : Demandées après l'écriture du cahier des charges.
 			\vspace{1em}
 			\end{block}
 		\end{frame}
 	
 	\section{Conclusion}
 		\begin{frame}
-			Sonny (1:00)
+			\underline{\textbf{Support}} :\\
+				\hspace{1em}Masse de données collectées sur un \textbf{\textit{réseau physique}} assimilé à un \textbf{\textit{graphe de flux}}.\\
+			\vspace{1em}
+			\underline{\textbf{Applet}} :\\
+				\hspace{1em}Traitement des données à l'aide d'analyses descriptives.\\
+				\hspace{1em}Résultats : statistiques et visuels.\\
+			\vspace{1em}
+			\underline{\textbf{Améliorations possibles}} :\\
+				\hspace{1em}Interface-web : performances de l'affichage.\\
+				\hspace{1em}API extensibles :
+					\hspace{1em}\begin{itemize}\item ADD : analyses multidimensionnelles et nouvelles représentations graphiques.\end{itemize}
 		\end{frame}
 	
 \end{document}

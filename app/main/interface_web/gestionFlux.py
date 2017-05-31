@@ -19,11 +19,17 @@ app.register_blueprint(choixFic)
 app.register_blueprint(addRoute)
 
 def removeFiles():
-    """Vide le dossier ``uploads`` contenant les fichiers chargé."""
+    """Vide le dossier ``uploads``  et ``downloads`` contenant les fichiers chargé."""
     files = os.listdir('interface_web/static/uploads/')
     for i in range(0,len(files)):
         if files[i] != '.dummy':
             os.remove('interface_web/static/uploads/'+files[i])
+
+    files = os.listdir('interface_web/static/downloads/')
+    for i in range(0,len(files)):
+        if files[i] != '.dummy':
+            os.remove('interface_web/static/downloads/'+files[i])
+
 
 @app.route("/", methods=['GET'])
 def fenetre_choix_fichier():
