@@ -24,7 +24,8 @@ goto :end
 REM Règles pour le lancement des tests
 :test-interface_web
 cd test\test_interface_web
-python -m unittest discover
+python test_gestionFlux.py
+python test_choixFichier.py
 cd ..\..
 goto :end
 
@@ -42,7 +43,8 @@ goto :end
 
 :test
 cd test\test_interface_web
-python -m unittest discover
+python test_gestionFlux.py
+python test_choixFichier.py
 cd ..\test_add
 python -m unittest discover
 cd..\test_chargement_des_donnees
