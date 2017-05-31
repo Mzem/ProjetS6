@@ -2,8 +2,8 @@
 
 # Règles pour le lancement des tests
 test-interface_web:
-	cd test/test_interface_web; python -m unittest discover
-	#cd test/test_interface_web; python3 -m unittest discover
+	cd test/test_interface_web; python test_gestionFlux.py; python test_choixFichier.py
+	#cd test/test_interface_web; python3 test_gestionFlux.py; python3 test_choixFichier.py
 
 test-add:
 	cd test/test_add; python -m unittest discover

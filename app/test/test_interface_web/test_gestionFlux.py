@@ -11,7 +11,6 @@ from shutil import copy
 
 sys.path[:0] = ['../../main']
 from interface_web.gestionFlux import app
-from interface_web.gestionFlux import removeFiles
 
 class test_gestionFlux(unittest.TestCase): 
 
@@ -41,9 +40,8 @@ class test_gestionFlux(unittest.TestCase):
     
     def test_fenetre_choix_fichier(self):
         tester = app.test_client(self)
-        os.chdir('../../main')
         response = tester.get('/', content_type='html/text')
-        self.assertEqual(response.status_code, 500) # Erreur 500 causé par la fonction removeFiles(), mais la fonctionnalité reste valide.
+        self.assertEqual(response.status_code, 200) 
 
     def test_fenetre_role_choix_colonne(self):
         tester = app.test_client(self)
@@ -68,4 +66,6 @@ class test_gestionFlux(unittest.TestCase):
 
 # runs the unit tests in the module
 if __name__ == '__main__':
+
+    os.chdir('../../main')
     unittest.main()
