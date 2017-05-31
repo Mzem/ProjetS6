@@ -13,15 +13,19 @@
 		\begin{frame}
 			Projet de L3 informatique UVSQ, remis par DCbrain.\\~\\
 		\begin{itemize}
-		\item Projet découlant d'un thème: le \textbf{Big Data}.
-		\item Analyse descriptives de données répond au problème du \textbf{Big Data}.
-		\item DCbrain emploie une approche basée sur la représentation des réseaux physiques en graphe de flux. Permet la déctection d'anomalies sur le réseau + simuler les évolutions.
-		\item Objectif : Fournir application web, outils complémentaire au travail de DCbrain.
+		\item Projet découlant d'un thème: le \textbf{Big Data}.\vspace{0.2cm}
+		\item Analyse descriptives de données pour répondre au problème du \textbf{Big Data}.\vspace{0.2cm}
+		\item DCbrain emploie la représentation des réseaux physiques en graphe de flux. Permet de représenter les données du flux du réseau, la déctection d'anomalies + simuler les évolutions.\vspace{0.25cm}
+		\item \textbf{Objectif :} Fournir application web, outils complémentaire au travail de DCbrain permettent aux utilisateurs de charger des données, de les visualiser et les analyser. .
 		\end{itemize}
 		\end{frame}
 	
 	\section{Architecture}
-			\begin{frame}
+	\begin{frame}
+		\begin{center}\includegraphics[scale=0.5]{org.png}\end{center}
+	\end{frame}		
+	
+	\begin{frame}
 		\begin{center}\includegraphics[scale=0.5]{org2.png}\end{center}
 	\end{frame}
 	
@@ -36,7 +40,7 @@
 		\vspace{1cm}
 		\textit{Analyse contenu fichier :}
 		\begin{itemize}
-			\item  Lecture des données du fichier ligne par ligne + stockage de ces données dans une \textbf{structure 1} 
+			\item Lecture des données du fichier ligne par ligne + stockage de ces données dans une \textbf{structure 1} 
 			\item Description des données de chaque colonne: type, nom et données erronées + stockage dans une \textbf{structure 2}.
 		\end{itemize}		 		
 	\end{frame}
@@ -46,11 +50,11 @@
 	\end{frame}
 	
 	\begin{frame}
-		\textbf{API 2 :} Analyse descriptive des données\\
+		\textbf{API 2 :} Analyse descriptives des données\\
 		\begin{itemize}
-			\item \textbf{Données :} Données d'une colonne
-			\item \textbf{Retour :} Informations statistiques et représentations graphiques
-			\item \textbf{ADD quantitatives continues :} Discrétisation des valeurs
+			\item \textbf{Données à analyser:} Données d'une colonne (Avec un possible filtrage).
+			\item \textbf{Retours de l'analyse :} Informations statistiques et représentations graphiques.
+			\item \textbf{ADD quantitatives continues :} Discrétisation des valeurs avant les retours.
 		\end{itemize}	
 	\end{frame}
 	
@@ -62,21 +66,21 @@
 		\textbf{Interface web}\\
 		\textit{Gestion des flux :}
 		\begin{itemize}
-			\item Flux d'exéction : Branchements et arrêts de l'application
-			\item Flux de données : Rôle d'interface pour communiquer les données
+			\item \textbf{Flux d'exécution :} Gestion des branchements et arrêts de l'application en cas d'erreur(s).
+			\item \textbf{Flux de données :} Rôle d'interface pour communiquer les données entre les différents modules
 		\end{itemize} \pause
 		 \vspace{1cm}
 		 
 		\textit{Fenêtre choix fichier :}
 		\begin{itemize}
-			\item Choix du fichier :Parcours de l'arborescence de fichiers - Drag \& Drop.
+			\item \textbf{Choix du fichier :} Parcours de l'arborescence de fichiers - Drag\&Drop.
 		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}
 		\textit{Fenêtre rôle et choix colonne :}
 		\begin{itemize}
-		\item Nom des colonnes - Nombre de lignes et colonnes - Échantillon - Navigation.
+		\item Affiche sous forme d'un tableau : nom des colonnes - nombre de lignes et de colonnes - un échantillon grâce à une navigation.
 		\item Affichage des données erronés + description.
 		\item Sélection et envoi d'une colonne de mesures pour analyse. 
 		\end{itemize} \pause
@@ -86,7 +90,7 @@
 		\begin{itemize}
 		\item Affichage des résultats d'analyse descriptive : informations statistiques de l'API 2 + représentations graphiques pour visualiser les données.
 		\item Fonctionnalité de retour en arrière pour analyser une nouvelle colonne.
-		\item Téléchargement des résultats au format \lstinline!.csv!
+		\item Fonctionnalité de téléchargement des résultats au format \lstinline!.csv!
 		\end{itemize}
 	\end{frame}
 	
