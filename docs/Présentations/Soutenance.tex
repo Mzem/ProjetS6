@@ -41,7 +41,7 @@
 		\textit{Analyse contenu fichier :}
 		\begin{itemize}
 			\item Lecture des données du fichier ligne par ligne + stockage de ces données dans une \textbf{structure 1} 
-			\item Description des données de chaque colonne: type, nom et données erronées + stockage dans une \textbf{structure 2}.
+			\item Description des données de chaque colonne : type, nom et données erronées + stockage dans une \textbf{structure 2}.
 		\end{itemize}		 		
 	\end{frame}
 	
@@ -96,13 +96,14 @@
 	
 	\section{Outils, langages de programmation} 
 		\begin{frame} 
-			\textbf{Contraintes}
+			\textbf{Contraintes :} sur le produit :
 			\begin{enumerate}
-				\item Le produit doit fournir une application web.
-				\item Le produit doit être développé avec un langage de programmation compatible avec l’analyse de données.
-				\item Le produit doit fournir des API pour le chargement et l’analyse de données.
+				\item Fournir une application web.
+				\item Développé avec un langage de programmation compatible avec l’analyse de données.
+				\item Fournir des API pour le chargement et l’analyse de données.
 			\end{enumerate}
-			~\\
+			~\\~\\
+			\pause
 			\textbf{Outils et langages de programmation}
 			\begin{itemize}
 				\item \textbf{Python :} adapté pour l’ADD et le développement d’applications web
@@ -117,9 +118,40 @@
 	
 	\section{Fonctionnement de l'application}
 		\begin{frame}
-			Malek (3:30)
+			\textbf{Fichier CSV :} contenu structuré établi par le client : décrit par des colonnes aux types prédéfini
+			\begin{center}\vspace{-1.2em}\footnotesize\begin{longtable}{|>{\centering}m{4cm}|>{\centering}m{1cm}|>{\centering}m{1cm}|>{\centering}m{2cm}|>{\centering\arraybackslash}m{2cm}|}			
+				\hline \multicolumn{1}{|c|}{\textbf{timestamp}} & \multicolumn{1}{c|}{\textbf{parent}} & \multicolumn{1}{ c|}{\textbf{enfant}} & \multicolumn{1}{c|}{\textbf{mesure 1}} & {\textbf{mesure 2}} \\
+				\hline 	January 1st 2017, 15:00:00.000 & 102 & 95 & 26644.235 & 176.253\\
+				\hline
+			\end{longtable}\end{center}
+			\pause
+			~\\
+			API chargement de données gère des fichiers CSV quelconques :
+			\begin{itemize}
+				\item Lignes avec données en moins ou en trop
+				\item Colonnes désordonnées
+				\item Délimiteur quelconque
+			\end{itemize}
 		\end{frame}
-	
+		
+		\begin{frame}
+			\textbf{Interface web :} gère l'interaction avec l'utilisateur
+			\begin{enumerate}
+				\item Importation du fichier CSV
+				\item Visualisation du contenu + erreurs
+				\item Application de filtres + attribution rôles colonnes
+				\item Envoi d'une colonne pour l'analyse
+				\item Affichage des résultats de l'analyse : graphes et valeurs statistiques
+				\item Téléchargement des résultats de l'analyse
+			\end{enumerate}
+			~\\~\\
+			\pause
+			\textbf{APIs :} réutilisables par le client, gèrent le traitement des données
+			\begin{itemize}
+				\item \textbf{Chargement de données :} préparation du contenu du fichier pour l'affichage
+				\item \textbf{Analyse descriptive des données :} analyse des colonnes du fichier
+			\end{itemize}
+		\end{frame}
 	
 	\section{Bilan technique}
 		\subsection*{Points délicats}
