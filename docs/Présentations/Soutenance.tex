@@ -1,7 +1,7 @@
 \input{../tex/preambuleSlides}
 \usepackage{../tex/myInfolines}
 \usepackage{longtable,array}
-\title{Présentation Cahier des Charges}
+\title{Présentation projet}
 
 \begin{document}
 
@@ -13,10 +13,18 @@
 		\begin{frame}
 			Projet de L3 informatique UVSQ, remis par DCbrain.\\~\\
 		\begin{itemize}
-		\item Projet découlant d'un thème: le \textbf{Big Data}.\vspace{0.4cm}
-		\item Analyse descriptives de données pour répondre au problème du \textbf{Big Data}.\vspace{0.4cm}
-		\item Utilisation de graphe de flux par DCbrain pour visualiser le réseau (détections d'erreurs, optimisation).\vspace{0.4cm}
-		\item \textbf{Objectif :} Fournir application web, outils permettent de charger des données, de les visualiser et les analyser.
+		\item Projet découlant d'un thème: le \textbf{Big Data}.
+		\item Analyse descriptive de données comme solution.
+		\item Utilisation de graphe de flux par DCbrain pour visualiser le réseau.\vspace{1em}
+		\pause
+		\begin{exampleblock}{Graphe de flux : d'un réseau électrique :}
+		\begin{itemize}
+		\item Nœuds : des connections
+		\item Arcs : canaux pour acheminer l'électricité (câbles)
+		\end{itemize}
+		\end{exampleblock}
+		\vspace{1em}
+		\item \textbf{Objectif :} Fournir application web, outils de chargement des données, visualiser et analyser.
 		\end{itemize}
 		\end{frame}
 	
@@ -37,9 +45,9 @@
 		\textbf{API 1 :} Chargement des données\\
 		\textit{Vérification format fichier :}
 		\begin{itemize}
-			\item Format csv
-			\item Ouverture en lecture
-			\item Texte brut ou formaté
+			\item Format CSV (valeurs séparées par des virgules).
+			\item Accessible en lecture
+			\item Texte brut non formaté
 		\end{itemize} \pause
 		\vspace{1cm}
 		\textit{Analyse contenu fichier :}
@@ -93,8 +101,8 @@
 		\textit{Fenêtre résultats ADD :}
 		\begin{itemize}
 		\item Affichage des résultats d'analyse descriptive : informations statistiques + représentations graphiques.
-		\item Fonctionnalité de retour en arrière pour analyser une nouvelle colonne.
-		\item Fonctionnalité de téléchargement des résultats au format \lstinline!.csv!
+		\item Retour en arrière pour analyser une nouvelle colonne.
+		\item Téléchargement des résultats au format \lstinline!.csv!
 		\end{itemize}
 	\end{frame}
 	
@@ -122,7 +130,7 @@
 	
 	\section{Fonctionnement de l'application}
 		\begin{frame}
-			\textbf{Fichier CSV :} contenu structuré établi par le client : décrit par des colonnes aux types prédéfini
+			\textbf{Fichier CSV :} contenu structuré établi par le client : décrit par des colonnes aux types prédéfinis
 			\begin{center}\vspace{-1.2em}\footnotesize\begin{longtable}{|>{\centering}m{4cm}|>{\centering}m{1cm}|>{\centering}m{1cm}|>{\centering}m{2cm}|>{\centering\arraybackslash}m{2cm}|}			
 				\hline \multicolumn{1}{|c|}{\textbf{timestamp}} & \multicolumn{1}{c|}{\textbf{parent}} & \multicolumn{1}{ c|}{\textbf{enfant}} & \multicolumn{1}{c|}{\textbf{mesure 1}} & {\textbf{mesure 2}} \\
 				\hline 	January 1st 2017, 15:00:00.000 & 102 & 95 & 26644.235 & 176.253\\
